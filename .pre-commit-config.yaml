@@ -36,3 +36,9 @@ repos:
             entry: python -m pytest
             pass_filenames: false
             always_run: true
+    - repo: https://github.com/syntaqx/git-hooks
+      rev: v0.0.16
+      hooks:
+          - id: circleci-config-validate
+          - id: shellcheck
+          - id: shfmt
