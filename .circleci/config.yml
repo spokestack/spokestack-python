@@ -8,6 +8,7 @@ jobs:
 
         steps:
             - checkout
+            - run: sudo apt-get install portaudio19-dev python3-pyaudio
             - restore_cache:
                   keys:
                       - build-{{checksum "requirements.txt"}}

@@ -24,3 +24,5 @@ pytest-cov
 pytest-watch
 pytest-mock
 coveralls
+# library
+pyaudio
