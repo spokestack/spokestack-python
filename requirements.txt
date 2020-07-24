@@ -49,7 +49,9 @@ typing-extensions==3.7.4.2  # via mypy
 virtualenv==20.0.27       # via pre-commit
 watchdog==0.10.3          # via pytest-watch
 wcwidth==0.2.5            # via pytest
+wheel==0.34.2             # via -r requirements.in
 zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
+# setuptools

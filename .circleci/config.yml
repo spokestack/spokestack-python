@@ -4,18 +4,17 @@ jobs:
     build:
         working_directory: ~/repo
         docker:
-            - image: circleci/python:3.7.2
+            - image: circleci/python:3.7
 
         steps:
             - checkout
-            - run: sudo apt install swig
             - restore_cache:
                   keys:
                       - build-{{checksum "requirements.txt"}}
             - run: python3 -m venv ~/venv
             - run: |
                   source ~/venv/bin/activate
-                  pip install --upgrade pip pip-tools setuptools wheel
+                  pip install --upgrade pip pip-tools
                   pip install -r requirements.txt
             - save_cache:
                   key: build-{{checksum "requirements.txt"}}
@@ -27,7 +26,19 @@ jobs:
                   flake8
             - run: |
                   source ~/venv/bin/activate
+                  ls -1 */__init__.py | sed -E 's|/.*||' | xargs black
+            - run: |
+                  source ~/venv/bin/activate
+                  ls -1 */__init__.py | sed -E 's|/.*||' | xargs mypy
+            - run: |
+                  source ~/venv/bin/activate
                   python -m pytest
+            - run: |
+                  source ~/venv/bin/activate
+                  python -m coveralls
+            - run: |
+                  source ~/venv/bin/activate
+                  python setup.py build_ext -i
 workflows:
     version: 2
 

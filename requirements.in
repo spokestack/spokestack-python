@@ -10,6 +10,8 @@
 pip-tools
 pre-commit
 mypy
+setuptools
+wheel
 # style
 black
 isort

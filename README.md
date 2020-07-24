@@ -1,14 +1,49 @@
 # spokestack-python
 
+## Status
+
+[![CircleCI](https://circleci.com/gh/pylon/streamp3.svg?style=shield)](https://circleci.com/gh/spokestack/spokestack-python)
+[![PyPI version](https://badge.fury.io/py/spokestack.svg)](https://badge.fury.io/py/spokestack)
+[![Coverage Status](https://coveralls.io/repos/github/spokestack/spokestack-python/badge.svg?branch=wr-init)](https://coveralls.io/github/spokestack/spokestack-python?branch=wr-init)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Instructions
+## Get Started
+
+Add voice capability to your projects with one line.
+
+    pip install spokestack
+
+## Development
+
+### Setup
+
+We use `pyenv` for virtual environments. Below you will find the step-by-step commands to install a virtual environment.
+
+    pyenv install 3.7.6
+    pyenv virtualenv 3.7.6 spokestack
+    pip install -r requirements.txt
 
 ### TFLite Interpreter
 
-Install TFLite Interpreter for your platform
-[TFLite Interpreter Only](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter)
+In addition to the Python dependencies, you will need to install the TFLite Interpreter. You can install it for your platform by following the instructions at [TFLite Interpreter](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+**Note:** this is not the full [Tensorflow](https://www.tensorflow.org/) package.
 
-#### MacOS Python 3.7 Example
+## Deployment
 
-    pip install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-macosx_10_14_x86_64.whl
+This project is distributed using [PyPI](https://pypi.org/). The following is the command to build for installation.
+
+    python setup.py sdist bdist_wheel
+
+[Twine](https://twine.readthedocs.io/en/latest/) is used to upload the wheel and source distribution.
+
+    twine upload dist/*
+
+## License
+
+Copyright 2020 Spokestack, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

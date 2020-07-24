@@ -4,10 +4,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="spokestack-will-rice",
+    name="spokestack",
     version="0.0.1",
     author="Spokestack",
-    author_email="will@spokestack.io",
+    author_email="support@spokestack.io",
     description="Spokestack Library for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,8 +15,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Apache 2.0 Software License",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
 )
