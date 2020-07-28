@@ -36,6 +36,7 @@ jobs:
                   python -m pytest
             - run: |
                   source ~/venv/bin/activate
+                  python -m pytest --cov=spokestack
                   python -m coveralls
             - run: |
                   source ~/venv/bin/activate
