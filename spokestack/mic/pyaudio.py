@@ -4,48 +4,82 @@ device microphone
 """
 import pyaudio  # type: ignore
 
-from spokestack.config import SpeechConfig
-
 
 class PyAudioMicrophoneInput:
+    """ This class retrieves audio from an input device
+
+    :param sample_rate: desired sample rate for input
+    :type sample_rate: int
+    :param frame_width: desired frame width for input
+    :type frame_width: int
+    :param exception_on_overflow: produce exception for input overflow
+    :type exception_on_overflow: bool
     """
-    Retrieve microphone input with PyAudio
 
-    Args:
-        config (SpeechConfig): configuration paramaters
-    """
-
-    def __init__(self, config: SpeechConfig) -> None:
-
-        self.config = config
-        self.frame_size = int(config.sample_rate / 1000 * config.frame_width)
-        self.audio = pyaudio.PyAudio()
-
-    def build(self) -> None:
-        device = self.audio.get_default_input_device_info()
-        self._stream = self.audio.open(
+    def __init__(
+        self, sample_rate: int, frame_width: int, exception_on_overflow: bool = True
+    ) -> None:
+        self._sample_rate = sample_rate
+        self._frame_size = int(sample_rate / 1000 * frame_width)
+        self._execption_on_overflow = exception_on_overflow
+        self._audio = pyaudio.PyAudio()
+        device = self._audio.get_default_input_device_info()
+        self._stream = self._audio.open(
             input=True,
             input_device_index=device["index"],
             format=pyaudio.paInt16,
+            frames_per_buffer=self._frame_size,
             channels=1,
-            rate=self.config.sample_rate,
+            rate=self._sample_rate,
             start=False,
         )
 
-    def read(self) -> bytes:
-        return self._stream.read(self.frame_size, exception_on_overflow=False)
+    def __call__(self) -> bytes:
+        """ Reads a single frame of audio
+
+        :return: single frame of audio
+        :rtype: bytes
+        """
+        return self._stream.read(
+            self._frame_size, exception_on_overflow=self._execption_on_overflow
+        )
 
     def start(self) -> None:
+        """ Starts the audio stream """
         self._stream.start_stream()
 
     def stop(self) -> None:
+        """ Stops the audio stream """
         self._stream.stop_stream()
 
-    def is_active(self) -> bool:
+    def close(self) -> None:
+        """ Closes the audio stream """
+        self._stream.close()
+
+    @property
+    def active(self) -> bool:
+        """ Stream active property
+
+        :return: 'True' if stream is active, 'False' otherwise
+        :rtype: bool
+        """
         return self._stream.is_active()
 
-    def is_stopped(self) -> bool:
+    @property
+    def stopped(self) -> bool:
+        """ Stream stopped property
+
+        :return: 'True' if stream is stopped, 'False' otherwise
+        :rtype: bool
+        """
         return self._stream.is_stopped()
 
-    def close(self) -> None:
-        self._stream.close()
+    @property
+    def sample_rate(self):
+        """ The sample rate of the audio stream """
+        return self._sample_rate
+
+    @property
+    def frame_size(self):
+        """ The frame size of the audio stream """
+        return self._frame_size

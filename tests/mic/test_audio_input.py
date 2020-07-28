@@ -1,25 +1,23 @@
 """
 Mock tests for microphone input
 """
-from unittest import mock
+from unittest.mock import patch
 
 from spokestack.mic.pyaudio import PyAudioMicrophoneInput
-from spokestack.config import SpeechConfig
 
 
-def test_audio_input():
-
-    params = {"sample_rate": 16000, "frame_width": 10}
-    config = SpeechConfig(params)
-    mic = PyAudioMicrophoneInput(config)
-    mic.audio = mock.MagicMock()
-    mic.build()
+@patch("spokestack.mic.pyaudio.pyaudio")
+def test_audio_input(mock_class):
+    """ Test for microphone input """
+    config = {"sample_rate": 16000, "frame_width": 10}
+    mic = PyAudioMicrophoneInput(**config)
+    mic._audio.open.assert_called()
     # start audio stream
     mic.start()
-    assert mic.is_active()
+    assert mic.active
     # read a single frame
-    frame = mic.read()
-    assert frame
+    _ = mic()
+    mic._stream.read.assert_called()
     # stop audio stream
     mic.stop()
-    assert mic.is_stopped()
+    assert mic.stopped

@@ -26,3 +26,4 @@ pytest-mock
 coveralls
 # library
 pyaudio
+numpy
