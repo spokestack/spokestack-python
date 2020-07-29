@@ -8,6 +8,7 @@ jobs:
 
         steps:
             - checkout
+            - run: sudo apt-get install portaudio19-dev
             - restore_cache:
                   keys:
                       - build-{{checksum "requirements.txt"}}
@@ -32,9 +33,7 @@ jobs:
                   ls -1 */__init__.py | sed -E 's|/.*||' | xargs mypy
             - run: |
                   source ~/venv/bin/activate
-                  python -m pytest
-            - run: |
-                  source ~/venv/bin/activate
+                  python -m pytest --cov=spokestack
                   python -m coveralls
             - run: |
                   source ~/venv/bin/activate
