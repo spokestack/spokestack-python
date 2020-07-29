@@ -33,9 +33,6 @@ jobs:
                   ls -1 */__init__.py | sed -E 's|/.*||' | xargs mypy
             - run: |
                   source ~/venv/bin/activate
-                  python -m pytest
-            - run: |
-                  source ~/venv/bin/activate
                   python -m pytest --cov=spokestack
                   python -m coveralls
             - run: |

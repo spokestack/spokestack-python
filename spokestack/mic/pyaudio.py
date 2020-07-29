@@ -21,7 +21,7 @@ class PyAudioMicrophoneInput:
     ) -> None:
         self._sample_rate = sample_rate
         self._frame_size = int(sample_rate / 1000 * frame_width)
-        self._execption_on_overflow = exception_on_overflow
+        self._exeception_on_overflow = exception_on_overflow
         self._audio = pyaudio.PyAudio()
         device = self._audio.get_default_input_device_info()
         self._stream = self._audio.open(
@@ -34,14 +34,14 @@ class PyAudioMicrophoneInput:
             start=False,
         )
 
-    def __call__(self) -> bytes:
+    def read(self) -> bytes:
         """ Reads a single frame of audio
 
         :return: single frame of audio
         :rtype: bytes
         """
         return self._stream.read(
-            self._frame_size, exception_on_overflow=self._execption_on_overflow
+            self._frame_size, exception_on_overflow=self._exeception_on_overflow
         )
 
     def start(self) -> None:
@@ -57,7 +57,7 @@ class PyAudioMicrophoneInput:
         self._stream.close()
 
     @property
-    def active(self) -> bool:
+    def is_active(self) -> bool:
         """ Stream active property
 
         :return: 'True' if stream is active, 'False' otherwise
@@ -66,20 +66,10 @@ class PyAudioMicrophoneInput:
         return self._stream.is_active()
 
     @property
-    def stopped(self) -> bool:
+    def is_stopped(self) -> bool:
         """ Stream stopped property
 
         :return: 'True' if stream is stopped, 'False' otherwise
         :rtype: bool
         """
         return self._stream.is_stopped()
-
-    @property
-    def sample_rate(self):
-        """ The sample rate of the audio stream """
-        return self._sample_rate
-
-    @property
-    def frame_size(self):
-        """ The frame size of the audio stream """
-        return self._frame_size
