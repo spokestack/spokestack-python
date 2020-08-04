@@ -6,14 +6,12 @@ import pyaudio  # type: ignore
 
 
 class PyAudioMicrophoneInput:
-    """ This class retrieves audio from an input device
+    """This class retrieves audio from an input device
 
-    :param sample_rate: desired sample rate for input
-    :type sample_rate: int
-    :param frame_width: desired frame width for input
-    :type frame_width: int
-    :param exception_on_overflow: produce exception for input overflow
-    :type exception_on_overflow: bool
+    Args:
+        sample_rate (int): desired sample rate for input
+        frame_width (int): desired frame width for input
+        exception_on_overflow (bool): produce exception for input overflow
     """
 
     def __init__(
@@ -21,7 +19,7 @@ class PyAudioMicrophoneInput:
     ) -> None:
         self._sample_rate = sample_rate
         self._frame_size = int(sample_rate / 1000 * frame_width)
-        self._exeception_on_overflow = exception_on_overflow
+        self._exception_on_overflow = exception_on_overflow
         self._audio = pyaudio.PyAudio()
         device = self._audio.get_default_input_device_info()
         self._stream = self._audio.open(
@@ -35,13 +33,13 @@ class PyAudioMicrophoneInput:
         )
 
     def read(self) -> bytes:
-        """ Reads a single frame of audio
+        """Reads a single frame of audio
 
-        :return: single frame of audio
-        :rtype: bytes
+        Returns:
+            bytes: single frame of audio
         """
         return self._stream.read(
-            self._frame_size, exception_on_overflow=self._exeception_on_overflow
+            self._frame_size, exception_on_overflow=self._exception_on_overflow
         )
 
     def start(self) -> None:
@@ -58,18 +56,18 @@ class PyAudioMicrophoneInput:
 
     @property
     def is_active(self) -> bool:
-        """ Stream active property
+        """Stream active property
 
-        :return: 'True' if stream is active, 'False' otherwise
-        :rtype: bool
+        Returns:
+            bool: 'True' if stream is active, 'False' otherwise
         """
         return self._stream.is_active()
 
     @property
     def is_stopped(self) -> bool:
-        """ Stream stopped property
+        """Stream stopped property
 
-        :return: 'True' if stream is stopped, 'False' otherwise
-        :rtype: bool
+        Returns:
+            bool: 'True' if stream is stopped, 'False' otherwise
         """
         return self._stream.is_stopped()
