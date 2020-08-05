@@ -5,9 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>
-            Voice Activity Detection (VAD) &mdash; spokestack documentation
-        </title>
+        <title>spokestack.vad package &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -36,7 +34,11 @@
             title="Speech Context"
             href="spokestack.context.html"
         />
-        <link rel="prev" title="Microphone Input" href="spokestack.mic.html" />
+        <link
+            rel="prev"
+            title="spokestack.mic package"
+            href="spokestack.mic.html"
+        />
     </head>
 
     <body class="wy-body-for-nav">
@@ -89,19 +91,56 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.mic.html"
-                                    >Microphone Input</a
+                                    >spokestack.mic package</a
                                 >
                             </li>
                             <li class="toctree-l1 current">
                                 <a class="current reference internal" href="#"
-                                    >Voice Activity Detection (VAD)</a
+                                    >spokestack.vad package</a
                                 >
+                                <ul>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#submodules"
+                                            >Submodules</a
+                                        >
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.vad.webrtc"
+                                            >spokestack.vad.webrtc module</a
+                                        >
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.vad"
+                                            >Module contents</a
+                                        >
+                                    </li>
+                                </ul>
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.context.html"
                                     >Speech Context</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.wakeword.html"
+                                    >spokestack.wakeword package</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.models.html"
+                                    >spokestack.models package</a
                                 >
                             </li>
                         </ul>
@@ -130,7 +169,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>Voice Activity Detection (VAD)</li>
+                                <li>spokestack.vad package</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -153,201 +192,250 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="module-spokestack.vad.webrtc"
+                                    id="spokestack-vad-package"
                                 >
-                                    <span
-                                        id="voice-activity-detection-vad"
-                                    ></span>
                                     <h1>
-                                        Voice Activity Detection (VAD)<a
+                                        spokestack.vad package<a
                                             class="headerlink"
-                                            href="#module-spokestack.vad.webrtc"
+                                            href="#spokestack-vad-package"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <p>
-                                        This module contains the webrtc
-                                        component for voice activity detection
-                                        (vad)
-                                    </p>
-                                    <dl class="py class">
-                                        <dt
-                                            id="spokestack.vad.webrtc.VoiceActivityDetector"
-                                        >
-                                            <em class="property">class </em
-                                            ><code
-                                                class="sig-prename descclassname"
-                                                >spokestack.vad.webrtc.</code
-                                            ><code class="sig-name descname"
-                                                >VoiceActivityDetector</code
-                                            ><span class="sig-paren">(</span
-                                            ><em class="sig-param"
-                                                ><span class="n"
-                                                    >sample_rate</span
-                                                ></em
-                                            >,
-                                            <em class="sig-param"
-                                                ><span class="n"
-                                                    >frame_width</span
-                                                ></em
-                                            >,
-                                            <em class="sig-param"
-                                                ><span class="n"
-                                                    >vad_rise_delay</span
-                                                ></em
-                                            >,
-                                            <em class="sig-param"
-                                                ><span class="n"
-                                                    >vad_fall_delay</span
-                                                ></em
-                                            >,
-                                            <em class="sig-param"
-                                                ><span class="n">mode</span
-                                                ><span class="o">=</span
-                                                ><span class="default_value"
-                                                    >0</span
-                                                ></em
-                                            ><span class="sig-paren">)</span
-                                            ><a
-                                                class="reference internal"
-                                                href="_modules/spokestack/vad/webrtc.html#VoiceActivityDetector"
-                                                ><span class="viewcode-link"
-                                                    >[source]</span
-                                                ></a
-                                            ><a
+                                    <div class="section" id="submodules">
+                                        <h2>
+                                            Submodules<a
                                                 class="headerlink"
-                                                href="#spokestack.vad.webrtc.VoiceActivityDetector"
-                                                title="Permalink to this definition"
+                                                href="#submodules"
+                                                title="Permalink to this headline"
                                                 >¶</a
                                             >
-                                        </dt>
-                                        <dd>
-                                            <p>
-                                                Bases:
-                                                <code
-                                                    class="xref py py-class docutils literal notranslate"
-                                                    ><span class="pre"
-                                                        >object</span
-                                                    ></code
+                                        </h2>
+                                    </div>
+                                    <div
+                                        class="section"
+                                        id="module-spokestack.vad.webrtc"
+                                    >
+                                        <span
+                                            id="spokestack-vad-webrtc-module"
+                                        ></span>
+                                        <h2>
+                                            spokestack.vad.webrtc module<a
+                                                class="headerlink"
+                                                href="#module-spokestack.vad.webrtc"
+                                                title="Permalink to this headline"
+                                                >¶</a
+                                            >
+                                        </h2>
+                                        <p>
+                                            This module contains the webrtc
+                                            component for voice activity
+                                            detection (vad)
+                                        </p>
+                                        <dl class="py class">
+                                            <dt
+                                                id="spokestack.vad.webrtc.VoiceActivityDetector"
+                                            >
+                                                <em class="property">class </em
+                                                ><code
+                                                    class="sig-prename descclassname"
+                                                    >spokestack.vad.webrtc.</code
+                                                ><code class="sig-name descname"
+                                                    >VoiceActivityDetector</code
+                                                ><span class="sig-paren">(</span
+                                                ><em class="sig-param"
+                                                    ><span class="n"
+                                                        >sample_rate</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >frame_width</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >vad_rise_delay</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >vad_fall_delay</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n">mode</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >0</span
+                                                    ></em
+                                                ><span class="sig-paren">)</span
+                                                ><a
+                                                    class="reference internal"
+                                                    href="_modules/spokestack/vad/webrtc.html#VoiceActivityDetector"
+                                                    ><span class="viewcode-link"
+                                                        >[source]</span
+                                                    ></a
+                                                ><a
+                                                    class="headerlink"
+                                                    href="#spokestack.vad.webrtc.VoiceActivityDetector"
+                                                    title="Permalink to this definition"
+                                                    >¶</a
                                                 >
-                                            </p>
-                                            <p>
-                                                This class detects the presence
-                                                of voice in a frame of audio.
-                                            </p>
-                                            <dl class="field-list simple">
-                                                <dt class="field-odd">
-                                                    Parameters
-                                                </dt>
-                                                <dd class="field-odd">
-                                                    <ul class="simple">
-                                                        <li>
-                                                            <p>
-                                                                <strong
-                                                                    >sample_rate</strong
-                                                                >
-                                                                (<em>int</em>) –
-                                                                sample rate of
-                                                                the audio (Hz)
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p>
-                                                                <strong
-                                                                    >frame_width</strong
-                                                                >
-                                                                (<em>int</em>) –
-                                                                width of the
-                                                                audio frame: 10,
-                                                                20, or 30 (ms)
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p>
-                                                                <strong
-                                                                    >vad_rise_delay</strong
-                                                                >
-                                                                (<em>int</em>) –
-                                                                rising edge
-                                                                delay (ms)
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p>
-                                                                <strong
-                                                                    >vad_fall_delay</strong
-                                                                >
-                                                                (<em>int</em>) –
-                                                                falling edge
-                                                                delay (ms)
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p>
-                                                                <strong
-                                                                    >mode</strong
-                                                                >
-                                                                (<em>int</em>) –
-                                                                named constant
-                                                                to set mode for
-                                                                vad
-                                                            </p>
-                                                        </li>
-                                                    </ul>
-                                                </dd>
-                                            </dl>
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.vad.webrtc.VoiceActivityDetector.reset"
-                                                >
+                                            </dt>
+                                            <dd>
+                                                <p>
+                                                    Bases:
                                                     <code
-                                                        class="sig-name descname"
-                                                        >reset</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/vad/webrtc.html#VoiceActivityDetector.reset"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.vad.webrtc.VoiceActivityDetector.reset"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
+                                                        class="xref py py-class docutils literal notranslate"
+                                                        ><span class="pre"
+                                                            >object</span
+                                                        ></code
                                                     >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        Resets the current state
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
+                                                </p>
+                                                <p>
+                                                    This class detects the
+                                                    presence of voice in a frame
+                                                    of audio.
+                                                </p>
+                                                <dl class="field-list simple">
+                                                    <dt class="field-odd">
+                                                        Parameters
+                                                    </dt>
+                                                    <dd class="field-odd">
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >sample_rate</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – sample
+                                                                    rate of the
+                                                                    audio (Hz)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >frame_width</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – width of
+                                                                    the audio
+                                                                    frame: 10,
+                                                                    20, or 30
+                                                                    (ms)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >vad_rise_delay</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – rising
+                                                                    edge delay
+                                                                    (ms)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >vad_fall_delay</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – falling
+                                                                    edge delay
+                                                                    (ms)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >mode</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – named
+                                                                    constant to
+                                                                    set mode for
+                                                                    vad
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.vad.webrtc.VoiceActivityDetector.reset"
                                                     >
-                                                        <dt class="field-odd">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-                                        </dd>
-                                    </dl>
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >reset</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/vad/webrtc.html#VoiceActivityDetector.reset"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.vad.webrtc.VoiceActivityDetector.reset"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>
+                                                            Resets the current
+                                                            state
+                                                        </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div
+                                        class="section"
+                                        id="module-spokestack.vad"
+                                    >
+                                        <span id="module-contents"></span>
+                                        <h2>
+                                            Module contents<a
+                                                class="headerlink"
+                                                href="#module-spokestack.vad"
+                                                title="Permalink to this headline"
+                                                >¶</a
+                                            >
+                                        </h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -372,7 +460,7 @@
                                 <a
                                     href="spokestack.mic.html"
                                     class="btn btn-neutral float-left"
-                                    title="Microphone Input"
+                                    title="spokestack.mic package"
                                     accesskey="p"
                                     rel="prev"
                                     ><span

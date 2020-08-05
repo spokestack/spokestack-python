@@ -6,7 +6,7 @@
 [![PyPI version](https://badge.fury.io/py/spokestack.svg)](https://badge.fury.io/py/spokestack)
 [![Coverage Status](https://coveralls.io/repos/github/spokestack/spokestack-python/badge.svg?branch=master)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Documentation Status](https://readthedocs.org/projects/spokestack-python/badge/?version=latest)](https://spokestack-python.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/spokestack/badge/?version=latest)](https://spokestack.readthedocs.io/en/latest/?badge=latest)
 
 ## Get Started
 
@@ -36,7 +36,7 @@ In addition to the Python dependencies, you will need to install the TFLite Inte
 From the root project directory:
 
     cd docs
-    sphinx-apidoc -f -o docs/source ../spokestack
+    sphinx-apidoc -f -o source ../spokestack
     make clean && make html
 
 ## Deployment
