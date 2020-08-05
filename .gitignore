@@ -71,3 +71,6 @@ ENV/
 # pytest
 /.pytest_cache/
 .benchmarks
+
+# sphinx
+docs/source/_*
