@@ -28,9 +28,3 @@ coveralls
 pyaudio
 webrtcvad
 numpy
-# docs
-sphinx
-sphinx-autobuild
-sphinx-autodoc-typehints
-sphinx-rtd-theme
-sphinxcontrib-napoleon

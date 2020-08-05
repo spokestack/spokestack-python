@@ -14,7 +14,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath("../../spokestack"))
-
+autodoc_mock_imports = ["pyaudio", "webrtcvad"]
 
 # -- Project information -----------------------------------------------------
 
@@ -23,6 +23,7 @@ copyright = "2020, Spokestack"
 author = "Spokestack"
 
 # -- General configuration ---------------------------------------------------
+
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
