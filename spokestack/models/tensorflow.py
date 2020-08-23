@@ -25,18 +25,21 @@ class TFLiteModel:
         self._output_details = self._interpreter.get_output_details()
         self._interpreter.allocate_tensors()
 
-    def __call__(self, inputs: List[np.ndarray]) -> List[np.ndarray]:
+    def __call__(self, inputs: Any) -> List[np.ndarray]:
         """ Foward pass of the TFLite model
 
         Args:
-            inputs (List[np.ndarray]): inputs to the TFLite model
+            inputs (Any): inputs to the TFLite model
 
         Returns: outputs of TFLite model
 
         """
 
-        for detail, i in zip(self.input_details, inputs):
-            self._interpreter.set_tensor(detail["index"], i)
+        if isinstance(inputs, list):
+            for detail, i in zip(self._input_details, inputs):
+                self._interpreter.set_tensor(detail["index"], i)
+        else:
+            self._interpreter.set_tensor(self._input_details[0]["index"], inputs)
 
         self._interpreter.invoke()
 
@@ -62,7 +65,3 @@ class TFLiteModel:
 
         """
         return self._output_details
-
-    def reset(self) -> None:
-        """ Resets the variables for the TFLite model """
-        self._interpreter.reset_all_variables()

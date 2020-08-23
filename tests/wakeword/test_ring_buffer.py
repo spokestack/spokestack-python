@@ -33,7 +33,7 @@ def test_read_write():
     assert buffer.is_full
 
     # full write
-    with pytest.raises(OverflowError):
+    with pytest.raises(IndexError):
         buffer.write(np.ones((1, 1)))
 
     for i in range(buffer.capacity):
@@ -115,7 +115,7 @@ def test_reset():
     assert buffer.read() == np.ones((1, 1)) * 2
 
 
-def test_array():
+def test_read_all():
     buffer = RingBuffer([3, 1])
     values = []
     for i in range(buffer.capacity):
@@ -126,4 +126,4 @@ def test_array():
     assert not buffer.is_empty
     assert buffer.is_full
 
-    assert buffer.to_array().all() == np.array(values).all()
+    assert buffer.read_all().all() == np.array(values).all()

@@ -58,7 +58,6 @@ class RingBuffer:
 
         """
         self._write = self._read
-        assert self.is_empty
         return self
 
     def fill(self, value: np.ndarray):
@@ -96,7 +95,7 @@ class RingBuffer:
 
         """
         if self.is_full:
-            raise OverflowError("Buffer is full")
+            raise IndexError("Buffer is full")
 
         self._buffer[self._write] = item
         self._write = (self._write + 1) % self._max_length
@@ -110,16 +109,21 @@ class RingBuffer:
         if self.is_empty:
             raise IndexError("Buffer is empty")
 
-        # pull item from current tail index
         item = self._buffer[self._read : self._read + 1]
-        # calc new tail index
         self._read = (self._read + 1) % self._max_length
         return item
 
-    def to_array(self) -> np.ndarray:
+    def read_all(self) -> np.ndarray:
         """ Dumps the entire contents of the buffer to an array
 
         Returns: Array with full contents of the buffer
 
         """
-        return self._buffer[: self.capacity]
+
+        self.rewind()
+        full = np.empty_like(self._buffer[: self.capacity])
+        i = 0
+        while not self.is_empty:
+            full[i] = self.read()
+            i += 1
+        return full.astype(np.float32)

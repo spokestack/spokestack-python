@@ -16,25 +16,23 @@ def test_inputs(_mock):
 
     # test single input
     one = np.zeros((1, 1))
-    _ = model([one])
-    model.reset()
+    _ = model(one)
 
     # test multi input
     one = np.zeros((1, 1))
     _ = model(inputs=[one, one])
 
     assert model.output_details
-    model.reset()
 
 
 def test_outputs():
     model = mock.MagicMock(return_value=[np.zeros((1, 1))])
     one = np.zeros((1, 1))
-    outputs = model([one])
+    outputs = model(one)
     assert len(outputs) == 1
 
     # test multi-output
     model = mock.MagicMock(return_value=[np.zeros((1, 1)), np.zeros((1, 1))])
     one = np.zeros((1, 1))
-    outputs = model([one])
+    outputs = model(one)
     assert len(outputs) > 1

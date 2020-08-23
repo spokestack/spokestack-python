@@ -28,4 +28,3 @@ coveralls
 pyaudio
 webrtcvad
 numpy
-scipy
