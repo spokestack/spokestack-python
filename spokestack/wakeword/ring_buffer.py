@@ -1,6 +1,7 @@
 """
 This module implements the RingBuffer class
 """
+from typing import Union
 
 import numpy as np  # type: ignore
 
@@ -9,8 +10,10 @@ class RingBuffer:
     """ ring buffer """
 
     def __init__(self, shape: list, dtype=np.float32) -> None:
-        shape[0] += 1
-        self._buffer = np.empty(shape=shape, dtype=dtype)
+        self._dtype = dtype
+        self._shape = shape
+        self._shape[0] += 1
+        self._buffer = np.empty(shape=self._shape, dtype=self._dtype)
         self._read: int = 0
         self._write: int = 0
         self._max_length = self._buffer.shape[0]
@@ -60,17 +63,17 @@ class RingBuffer:
         self._write = self._read
         return self
 
-    def fill(self, value: np.ndarray):
+    def fill(self, value: Union[int, float]):
         """ Fills the with a specific value
 
         Args:
-            value (np.ndarray): Fill value for the buffer
+            value (int or float): Fill value for the buffer
 
         Returns: self
 
         """
-        while not self.is_full:
-            self.write(value)
+        self._buffer.fill(value)
+        self._read = (self._write + 1) % self._max_length
         return self
 
     def seek(self, steps: int):
@@ -121,9 +124,7 @@ class RingBuffer:
         """
 
         self.rewind()
-        full = np.empty_like(self._buffer[: self.capacity])
-        i = 0
+        current = []
         while not self.is_empty:
-            full[i] = self.read()
-            i += 1
-        return full.astype(np.float32)
+            current.append(self.read())
+        return np.concatenate(current).astype(self._dtype)

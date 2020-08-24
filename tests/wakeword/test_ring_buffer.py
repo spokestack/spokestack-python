@@ -96,23 +96,23 @@ def test_seek():
 
 def test_reset():
     buffer = RingBuffer([4, 1])
-    buffer.fill(np.ones((1, 1)))
+    buffer.fill(1)
     assert not buffer.is_empty
     assert buffer.is_full
 
     for i in range(buffer.capacity):
-        assert buffer.read() == np.ones((1, 1))
+        assert buffer.read() == np.ones((1, 1), np.float32)
 
     buffer.rewind()
     buffer.seek(1)
-    buffer.fill(np.ones((1, 1)) * 2)
+    buffer.fill(1)
     assert not buffer.is_empty
     assert buffer.is_full
 
     for i in range(buffer.capacity - 1):
         assert buffer.read() == np.ones((1, 1))
 
-    assert buffer.read() == np.ones((1, 1)) * 2
+    assert buffer.read() == np.ones((1, 1))
 
 
 def test_read_all():

@@ -25,7 +25,7 @@ class TFLiteModel:
         self._output_details = self._interpreter.get_output_details()
         self._interpreter.allocate_tensors()
 
-    def __call__(self, inputs: Any) -> List[np.ndarray]:
+    def __call__(self, *args) -> List[np.ndarray]:
         """ Foward pass of the TFLite model
 
         Args:
@@ -35,11 +35,8 @@ class TFLiteModel:
 
         """
 
-        if isinstance(inputs, list):
-            for detail, i in zip(self._input_details, inputs):
-                self._interpreter.set_tensor(detail["index"], i)
-        else:
-            self._interpreter.set_tensor(self._input_details[0]["index"], inputs)
+        for detail, arg in zip(self._input_details, args):
+            self._interpreter.set_tensor(detail["index"], arg)
 
         self._interpreter.invoke()
 

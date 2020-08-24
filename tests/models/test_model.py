@@ -20,7 +20,7 @@ def test_inputs(_mock):
 
     # test multi input
     one = np.zeros((1, 1))
-    _ = model(inputs=[one, one])
+    _ = model(one, one)
 
     assert model.output_details
 

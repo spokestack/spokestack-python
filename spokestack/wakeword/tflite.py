@@ -69,15 +69,14 @@ class WakewordDetector:
         self._hann_window = np.hanning(self.window_size)
 
         self.sample_window: RingBuffer = RingBuffer(shape=[self.window_size])
-        self.fft_frame = np.empty((1, int(self.window_size / 2 + 1)), np.float32)
         self.frame_window: RingBuffer = RingBuffer(
             shape=[self.mel_length, self.mel_width]
         )
         self.encode_window: RingBuffer = RingBuffer(
             shape=[self.encode_length, self.encode_width]
         )
-        self.frame_window.fill(np.zeros((1, self.mel_width), np.float32))
-        self.encode_window.fill(np.zeros((1, self.encode_width), np.float32))
+        self.frame_window.fill(0.0)
+        self.encode_window.fill(0.0)
         self.filter_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "filter.tflite")
         )
@@ -113,9 +112,11 @@ class WakewordDetector:
 
     def _sample(self, context: SpeechContext, frame) -> None:
 
-        frame /= 2 ** 15 - 1
+        frame = frame.astype(np.float32) / (2 ** 15 - 1)
         frame = np.clip(frame, -1.0, 1.0)
-        frame = np.append(frame[0], frame[1:] - self.pre_emphasis * frame[:-1])
+        prev_sample = frame[-1]
+        frame -= self.pre_emphasis * np.append(self._prev_sample, frame[:-1])
+        self._prev_sample = prev_sample
 
         for sample in frame:
 
@@ -129,14 +130,12 @@ class WakewordDetector:
     def _analyze(self, context: SpeechContext) -> None:
         frame = self.sample_window.read_all()
         frame = np.fft.rfft(frame * self._hann_window, n=self.window_size)
-        frame = np.abs(frame)
+        frame = np.abs(frame).astype(np.float32)
+        self._filter(context, frame)
 
-        self.fft_frame[0] = frame
-
-        self._filter(context)
-
-    def _filter(self, context: SpeechContext) -> None:
-        frame = self.filter_model(self.fft_frame)[0]
+    def _filter(self, context: SpeechContext, frame) -> None:
+        frame = np.expand_dims(frame, 0)
+        frame = self.filter_model(frame)[0]
         self.frame_window.rewind().seek(1)
         self.frame_window.write(frame)
         self._encode(context)
@@ -144,7 +143,7 @@ class WakewordDetector:
     def _encode(self, context: SpeechContext) -> None:
         frame = self.frame_window.read_all()
         frame = np.expand_dims(frame, 0)
-        frame, self.state = self.encode_model([frame, self.state])
+        frame, self.state = self.encode_model(frame, self.state)
 
         self.encode_window.rewind().seek(1)
         self.encode_window.write(frame)
@@ -163,8 +162,7 @@ class WakewordDetector:
     def reset(self) -> None:
         """ Resets the currect WakewordDetector state """
         self.sample_window.reset()
-        self.frame_window.reset().fill(np.zeros((1, self.mel_width), np.float32))
-        self.encode_window.reset().fill(np.zeros((1, self.encode_width), np.float32))
+        self.frame_window.reset().fill(0.0)
+        self.encode_window.reset().fill(0.0)
         self.state[:] = 0.0
-        self.fft_frame[:] = 0.0
         self._posterior_max = 0.0
