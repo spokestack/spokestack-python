@@ -28,3 +28,4 @@ coveralls
 pyaudio
 webrtcvad
 numpy
+websocket
