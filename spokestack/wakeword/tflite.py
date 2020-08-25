@@ -5,6 +5,7 @@ the presence of keywords in an audio stream
 import os
 
 import numpy as np  # type: ignore
+from numpy import hanning
 
 from spokestack.context import SpeechContext
 from spokestack.models.tensorflow import TFLiteModel
@@ -52,14 +53,14 @@ class WakewordDetector:
         self.detect_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "detect.tflite")
         )
-        self.window_size: int = int(
-            (self.filter_model.input_details[0]["shape"] - 1) * 2
-        )
-        self._hann_window = np.hanning(self.window_size)
-        self.mel_length: int = self.encode_model.input_details[0]["shape"][0]
-        self.mel_width: int = self.encode_model.input_details[0]["shape"][1]
-        self.encode_length: int = self.detect_model.input_details[0]["shape"][0]
-        self.encode_width: int = self.detect_model.input_details[0]["shape"][1]
+        self.window_size: int = (
+            self.filter_model.input_details[0]["shape"][-1] - 1
+        ) * 2
+        self._hann_window = hanning(self.window_size)
+        self.mel_length: int = self.encode_model.input_details[0]["shape"][1]
+        self.mel_width: int = self.encode_model.input_details[0]["shape"][-1]
+        self.encode_length: int = self.detect_model.input_details[0]["shape"][1]
+        self.encode_width: int = self.detect_model.input_details[0]["shape"][-1]
 
         self.sample_window: RingBuffer = RingBuffer(shape=[self.window_size])
         self.frame_window: RingBuffer = RingBuffer(

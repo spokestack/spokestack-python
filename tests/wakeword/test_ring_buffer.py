@@ -125,4 +125,7 @@ def test_read_all():
     assert not buffer.is_empty
     assert buffer.is_full
 
-    assert buffer.read_all().all() == np.array(values).all()
+    all = buffer.read_all()
+    assert buffer.is_empty
+    assert not buffer.is_full
+    assert all.all() == np.array(values).all()
