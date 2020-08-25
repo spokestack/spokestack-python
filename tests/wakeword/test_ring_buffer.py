@@ -103,8 +103,7 @@ def test_reset():
     for i in range(buffer.capacity):
         assert buffer.read() == np.ones((1, 1), np.float32)
 
-    buffer.rewind()
-    buffer.seek(1)
+    buffer.reset()
     buffer.fill(1)
     assert not buffer.is_empty
     assert buffer.is_full

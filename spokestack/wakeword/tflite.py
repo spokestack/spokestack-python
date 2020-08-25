@@ -17,14 +17,8 @@ class WakewordDetector:
     Args:
             pre_emphasis (float): The value of the pre-emmphasis filter
             sample_rate (int): The number of audio samples per second of audio (kHz)
-            fft_window_size (int): Size of the sliding window for STFT calculation
             fft_window_type (str): Window type: any that scipy.signal.get_window accepts
             fft_hop_length (int): Audio sliding window for STFT calculation (ms)
-            mel_frame_length (int): Frame length of the mel spectrogram (samples)
-            mel_frame_width (int): The number of features in the mel spectrogram
-            wake_encode_length (int): The length of the encoder output sliding
-                                      window (ms)
-            wake_encode_width (int): The number of features in each encoded frame
             model_dir (str): Path to the directory containing .tflite models
             posterior_threshold (float): Probability threshold for if a wakeword
                                          was detected
@@ -34,49 +28,20 @@ class WakewordDetector:
         self,
         pre_emphasis: float = 0.0,
         sample_rate: int = 16000,
-        fft_window_size: int = 512,
         fft_window_type: str = "hann",
         fft_hop_length: int = 10,
-        mel_frame_length: int = 10,
-        mel_frame_width: int = 40,
-        wake_encode_length: int = 1000,
-        wake_encode_width: int = 128,
         model_dir: str = "",
         posterior_threshold: float = 0.5,
     ) -> None:
 
         self.pre_emphasis: float = pre_emphasis
         self.sample_rate: int = sample_rate
-        self.window_size: int = fft_window_size
-
-        if self.window_size % 2 != 0:
-            raise ValueError("fft_window_size must be divisible by 2")
-
         self.window_type: str = fft_window_type
         if self.window_type != "hann":
             raise ValueError("fft_window_type must be hann")
 
         self.hop_length: int = int(fft_hop_length * sample_rate / 1000)
-        self.mel_length: int = int(
-            mel_frame_length * sample_rate / 1000 / self.hop_length
-        )
-        self.mel_width: int = mel_frame_width
-        self.encode_length: int = int(
-            wake_encode_length * sample_rate / 1000 / self.hop_length
-        )
-        self.encode_width: int = wake_encode_width
-        self.state_width: int = wake_encode_width
-        self._hann_window = np.hanning(self.window_size)
 
-        self.sample_window: RingBuffer = RingBuffer(shape=[self.window_size])
-        self.frame_window: RingBuffer = RingBuffer(
-            shape=[self.mel_length, self.mel_width]
-        )
-        self.encode_window: RingBuffer = RingBuffer(
-            shape=[self.encode_length, self.encode_width]
-        )
-        self.frame_window.fill(0.0)
-        self.encode_window.fill(0.0)
         self.filter_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "filter.tflite")
         )
@@ -87,6 +52,24 @@ class WakewordDetector:
         self.detect_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "detect.tflite")
         )
+        self.window_size: int = int(
+            (self.filter_model.input_details[0]["shape"] - 1) * 2
+        )
+        self._hann_window = np.hanning(self.window_size)
+        self.mel_length: int = self.encode_model.input_details[0]["shape"][0]
+        self.mel_width: int = self.encode_model.input_details[0]["shape"][1]
+        self.encode_length: int = self.detect_model.input_details[0]["shape"][0]
+        self.encode_width: int = self.detect_model.input_details[0]["shape"][1]
+
+        self.sample_window: RingBuffer = RingBuffer(shape=[self.window_size])
+        self.frame_window: RingBuffer = RingBuffer(
+            shape=[self.mel_length, self.mel_width]
+        )
+        self.encode_window: RingBuffer = RingBuffer(
+            shape=[self.encode_length, self.encode_width]
+        )
+        self.frame_window.fill(0.0)
+        self.encode_window.fill(0.0)
         self._posterior_threshold: float = posterior_threshold
         self._posterior_max: float = 0.0
         self._prev_sample: float = 0.0
