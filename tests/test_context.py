@@ -3,7 +3,7 @@ This module contains tests for SpeechContext
 """
 from collections import deque
 
-import numpy as np
+import numpy as np  # type: ignore
 
 from spokestack.context import SpeechContext
 

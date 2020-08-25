@@ -81,14 +81,14 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.mic.html"
-                                    >Microphone Input</a
+                                    >spokestack.mic package</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.vad.html"
-                                    >Voice Activity Detection (VAD)</a
+                                    >spokestack.vad package</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -96,6 +96,20 @@
                                     class="reference internal"
                                     href="spokestack.context.html"
                                     >Speech Context</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.wakeword.html"
+                                    >spokestack.wakeword package</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.models.html"
+                                    >spokestack.models package</a
                                 >
                             </li>
                         </ul>
@@ -144,13 +158,16 @@
                                     <a href="#A"><strong>A</strong></a>
                                     | <a href="#B"><strong>B</strong></a> |
                                     <a href="#C"><strong>C</strong></a> |
+                                    <a href="#F"><strong>F</strong></a> |
                                     <a href="#I"><strong>I</strong></a> |
                                     <a href="#M"><strong>M</strong></a> |
+                                    <a href="#O"><strong>O</strong></a> |
                                     <a href="#P"><strong>P</strong></a> |
                                     <a href="#R"><strong>R</strong></a> |
                                     <a href="#S"><strong>S</strong></a> |
                                     <a href="#T"><strong>T</strong></a> |
-                                    <a href="#V"><strong>V</strong></a>
+                                    <a href="#V"><strong>V</strong></a> |
+                                    <a href="#W"><strong>W</strong></a>
                                 </div>
                                 <h2 id="A">A</h2>
                                 <table
@@ -171,6 +188,10 @@
                                                         >append_buffer()
                                                         (spokestack.context.SpeechContext
                                                         method)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.append_buffer"
+                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -197,6 +218,10 @@
                                                         >buffer()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.buffer"
+                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -219,10 +244,22 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.capacity"
+                                                        >capacity()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        property)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.clear_buffer"
                                                         >clear_buffer()
                                                         (spokestack.context.SpeechContext
                                                         method)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.clear_buffer"
+                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -248,6 +285,36 @@
                                                         >confidence()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.confidence"
+                                                        >[1]</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h2 id="F">F</h2>
+                                <table
+                                    style="width: 100%;"
+                                    class="indextable genindextable"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.fill"
+                                                        >fill()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        method)</a
                                                     >
                                                 </li>
                                             </ul>
@@ -270,10 +337,22 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.models.html#spokestack.models.tensorflow.TFLiteModel.input_details"
+                                                        >input_details()
+                                                        (spokestack.models.tensorflow.TFLiteModel
+                                                        property)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.is_active"
                                                         >is_active()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.is_active"
+                                                        >[1]</a
                                                     >
 
                                                     <ul>
@@ -297,10 +376,30 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.is_empty"
+                                                        >is_empty()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        property)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.is_full"
+                                                        >is_full()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        property)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.is_speech"
                                                         >is_speech()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.is_speech"
+                                                        >[1]</a
                                                     >
                                                 </li>
                                                 <li>
@@ -335,8 +434,24 @@
                                                     <ul>
                                                         <li>
                                                             <a
+                                                                href="spokestack.html#module-spokestack"
+                                                                >spokestack</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
                                                                 href="spokestack.context.html#module-spokestack.context"
                                                                 >spokestack.context</a
+                                                            >,
+                                                            <a
+                                                                href="spokestack.html#module-spokestack.context"
+                                                                >[1]</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.mic.html#module-spokestack.mic"
+                                                                >spokestack.mic</a
                                                             >
                                                         </li>
                                                         <li>
@@ -347,11 +462,73 @@
                                                         </li>
                                                         <li>
                                                             <a
+                                                                href="spokestack.models.html#module-spokestack.models"
+                                                                >spokestack.models</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.models.html#module-spokestack.models.tensorflow"
+                                                                >spokestack.models.tensorflow</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.vad.html#module-spokestack.vad"
+                                                                >spokestack.vad</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
                                                                 href="spokestack.vad.html#module-spokestack.vad.webrtc"
                                                                 >spokestack.vad.webrtc</a
                                                             >
                                                         </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword"
+                                                                >spokestack.wakeword</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword.ring_buffer"
+                                                                >spokestack.wakeword.ring_buffer</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword.tflite"
+                                                                >spokestack.wakeword.tflite</a
+                                                            >
+                                                        </li>
                                                     </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h2 id="O">O</h2>
+                                <table
+                                    style="width: 100%;"
+                                    class="indextable genindextable"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.models.html#spokestack.models.tensorflow.TFLiteModel.output_details"
+                                                        >output_details()
+                                                        (spokestack.models.tensorflow.TFLiteModel
+                                                        property)</a
+                                                    >
                                                 </li>
                                             </ul>
                                         </td>
@@ -404,6 +581,60 @@
                                                         (spokestack.mic.pyaudio.PyAudioMicrophoneInput
                                                         method)</a
                                                     >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.read"
+                                                                >(spokestack.wakeword.ring_buffer.RingBuffer
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.read_all"
+                                                        >read_all()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.context.html#spokestack.context.SpeechContext.reset"
+                                                        >reset()
+                                                        (spokestack.context.SpeechContext
+                                                        method)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.reset"
+                                                        >[1]</a
+                                                    >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.reset"
+                                                                >(spokestack.vad.webrtc.VoiceActivityDetector
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.reset"
+                                                                >(spokestack.wakeword.ring_buffer.RingBuffer
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordDetector.reset"
+                                                                >(spokestack.wakeword.tflite.WakewordDetector
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                             </ul>
                                         </td>
@@ -416,21 +647,18 @@
                                             <ul>
                                                 <li>
                                                     <a
-                                                        href="spokestack.context.html#spokestack.context.SpeechContext.reset"
-                                                        >reset()
-                                                        (spokestack.context.SpeechContext
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.rewind"
+                                                        >rewind()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
                                                         method)</a
                                                     >
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.reset"
-                                                                >(spokestack.vad.webrtc.VoiceActivityDetector
-                                                                method)</a
-                                                            >
-                                                        </li>
-                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer"
+                                                        >RingBuffer (class in
+                                                        spokestack.wakeword.ring_buffer)</a
+                                                    >
                                                 </li>
                                             </ul>
                                         </td>
@@ -452,10 +680,34 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.seek"
+                                                        >seek()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext"
                                                         >SpeechContext (class in
                                                         spokestack.context)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext"
+                                                        >[1]</a
                                                     >
+                                                </li>
+                                                <li>
+                                                    spokestack
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.html#module-spokestack"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li>
                                                     spokestack.context
@@ -464,6 +716,22 @@
                                                         <li>
                                                             <a
                                                                 href="spokestack.context.html#module-spokestack.context"
+                                                                >module</a
+                                                            >,
+                                                            <a
+                                                                href="spokestack.html#module-spokestack.context"
+                                                                >[1]</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    spokestack.mic
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.mic.html#module-spokestack.mic"
                                                                 >module</a
                                                             >
                                                         </li>
@@ -481,6 +749,30 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                <li>
+                                                    spokestack.models
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.models.html#module-spokestack.models"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    spokestack.models.tensorflow
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.models.html#module-spokestack.models.tensorflow"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </td>
                                         <td
@@ -491,12 +783,60 @@
                                         >
                                             <ul>
                                                 <li>
+                                                    spokestack.vad
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.vad.html#module-spokestack.vad"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
                                                     spokestack.vad.webrtc
 
                                                     <ul>
                                                         <li>
                                                             <a
                                                                 href="spokestack.vad.html#module-spokestack.vad.webrtc"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    spokestack.wakeword
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    spokestack.wakeword.ring_buffer
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword.ring_buffer"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    spokestack.wakeword.tflite
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#module-spokestack.wakeword.tflite"
                                                                 >module</a
                                                             >
                                                         </li>
@@ -538,10 +878,30 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.models.html#spokestack.models.tensorflow.TFLiteModel"
+                                                        >TFLiteModel (class in
+                                                        spokestack.models.tensorflow)</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.transcript"
                                                         >transcript()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
+                                                    >,
+                                                    <a
+                                                        href="spokestack.html#spokestack.context.SpeechContext.transcript"
+                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -568,6 +928,49 @@
                                                         >VoiceActivityDetector
                                                         (class in
                                                         spokestack.vad.webrtc)</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h2 id="W">W</h2>
+                                <table
+                                    style="width: 100%;"
+                                    class="indextable genindextable"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordDetector"
+                                                        >WakewordDetector (class
+                                                        in
+                                                        spokestack.wakeword.tflite)</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.write"
+                                                        >write()
+                                                        (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        method)</a
                                                     >
                                                 </li>
                                             </ul>
