@@ -23,6 +23,7 @@ def test_inputs(_mock):
     _ = model(one, one)
 
     assert model.output_details
+    assert model.input_details
 
 
 def test_outputs():
