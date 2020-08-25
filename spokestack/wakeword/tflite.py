@@ -46,8 +46,6 @@ class WakewordTrigger:
         self.encode_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "encode.tflite")
         )
-        # initialize the first state input for autoregressive encoder model
-        self.state = np.zeros(self.encode_model.input_details[1]["shape"], np.float32)
         self.detect_model: TFLiteModel = TFLiteModel(
             model_path=os.path.join(model_dir, "detect.tflite")
         )
@@ -57,8 +55,18 @@ class WakewordTrigger:
         # which makes the window size (post_fft_size - 1) * 2
         self._window_size = (self.filter_model.input_details[0]["shape"][-1] - 1) * 2
         self._fft_window = np.hanning(self._window_size)
+
+        # retrieve the mel_length and mel_width based on the encoder model metadata
+        # these allocate the buffer to the correct size
         self.mel_length: int = self.encode_model.input_details[0]["shape"][1]
         self.mel_width: int = self.encode_model.input_details[0]["shape"][-1]
+
+        # initialize the first state input for autoregressive encoder model
+        # retrieve the encode_length and encode_width from the model detect_model
+        # metadata. We get the dimensions from the detect_model inputs because the
+        # encode_model runs autoregressively and outputs a single encoded sample.
+        # the detect_model input is a collection of these samples.
+        self.state = np.zeros(self.encode_model.input_details[1]["shape"], np.float32)
         self.encode_length: int = self.detect_model.input_details[0]["shape"][1]
         self.encode_width: int = self.detect_model.input_details[0]["shape"][-1]
 
@@ -69,17 +77,19 @@ class WakewordTrigger:
         self.encode_window: RingBuffer = RingBuffer(
             shape=[self.encode_length, self.encode_width]
         )
-        # initialize frame window with zeros
+
+        # initialize the frame and encode windows with zeros
+        # this minimizes the delay caused by filling the buffer
         self.frame_window.fill(0.0)
-        # initialize encoder window with zeros
         self.encode_window.fill(0.0)
+
         self._posterior_threshold: float = posterior_threshold
         self._posterior_max: float = 0.0
         self._prev_sample: float = 0.0
         self._is_speech: bool = False
 
     def __call__(self, context: SpeechContext, frame) -> None:
-        """ Entry point of the detector
+        """ Entry point of the trigger
 
         Args:
             context (SpeechContext): current state of the speech pipeline
@@ -101,67 +111,70 @@ class WakewordTrigger:
             self.reset()
 
     def _sample(self, context: SpeechContext, frame) -> None:
-        # normalize incoming audio to (-1.0, 1.0)
+        # convert the PCM-16 audio to float32 in (-1.0, 1.0)
         frame = frame.astype(np.float32) / (2 ** 15 - 1)
-        # ensure range does not exceed (-1.0, 1.0)
         frame = np.clip(frame, -1.0, 1.0)
-        # pull out a single value from the frame
+
+        # pull out a single value from the frame and apply pre-emphasis
+        # with the previous sample then cache the previous sample
+        # to be use in the next iteration
         prev_sample = frame[-1]
-        # apply pre-emphasis with the previous sample
         frame -= self.pre_emphasis * np.append(self._prev_sample, frame[:-1])
-        # cache the previous sample to be use in the next iteration
         self._prev_sample = prev_sample
 
+        # fill the sample window to analyze speech containing samples
+        # after each window fill the buffer advances by the hop length
+        # to produce an overlapping window
         for sample in frame:
             self.sample_window.write(sample)
-            # fill the sample window
             if self.sample_window.is_full:
-                # run analyze if speech detected in the vad
                 if context.is_speech:
                     self._analyze(context)
-                # prepare the sample window for the next iteration
                 self.sample_window.rewind().seek(self.hop_length)
 
     def _analyze(self, context: SpeechContext) -> None:
-        # read the full contents of the sample window
+        # read the full contents of the sample window to calculate a single frame
+        # of the STFT by applying the DFT to a real-valued input and
+        # polarize the output by computing the absolute value
         frame = self.sample_window.read_all()
-        # apply real valued fft
         frame = np.fft.rfft(frame * self._fft_window, n=self._window_size)
-        # polarize and cast from float64 to float32
         frame = np.abs(frame).astype(np.float32)
+
         # compute mel spectrogram
         self._filter(context, frame)
 
     def _filter(self, context: SpeechContext, frame) -> None:
-        # add the batch dimension
+        # add the batch dimension and compute the mel spectrogram with filter model
         frame = np.expand_dims(frame, 0)
-        # compute the mel spectrogram with filter model
         frame = self.filter_model(frame)[0]
-        # write to the frame window
+
+        # advance the window by 1 and write mel frame to the frame buffer
         self.frame_window.rewind().seek(1)
         self.frame_window.write(frame)
+
         # encode the mel spectrogram
         self._encode(context)
 
     def _encode(self, context: SpeechContext) -> None:
-        # read the full contents of the frame window
-        frame = self.frame_window.read_all()
-        # add batch dimension
-        frame = np.expand_dims(frame, 0)
+        # read the full contents of the frame window and add the batch dimension
         # run the encoder and save the output state for autoregression
+        frame = self.frame_window.read_all()
+        frame = np.expand_dims(frame, 0)
         frame, self.state = self.encode_model(frame, self.state)
+
         # accumulate encoded samples until size of detection window
         self.encode_window.rewind().seek(1)
         self.encode_window.write(frame)
         self._detect(context)
 
     def _detect(self, context: SpeechContext) -> None:
-        # read the full contents of the encode window
+        # read the full contents of the encode window and add the batch dimension
+        # calculate a scalar probability of if the frame contains the wakeword
+        # with the detect model
         frame = self.encode_window.read_all()
-        # add the batch dimension
         frame = np.expand_dims(frame, 0)
-        # get scalar probability of wakeword
         posterior = self.detect_model(frame)[0][0][0]
+
         if posterior > self._posterior_threshold:
             context.is_active = True
         if posterior > self._posterior_max:
