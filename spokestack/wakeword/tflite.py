@@ -135,7 +135,7 @@ class WakewordTrigger:
     def _analyze(self, context: SpeechContext) -> None:
         # read the full contents of the sample window to calculate a single frame
         # of the STFT by applying the DFT to a real-valued input and
-        # polarize the output by computing the absolute value
+        # taking the magnitude of the complex DFT
         frame = self.sample_window.read_all()
         frame = np.fft.rfft(frame * self._fft_window, n=self._window_size)
         frame = np.abs(frame).astype(np.float32)
