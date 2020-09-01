@@ -13,7 +13,18 @@ from websocket import WebSocket  # type: ignore
 
 
 class CloudClient:
-    """ spokestack cloud client """
+    """ Spokestack client for cloud based speech to text
+
+        Args:
+            socket_url (str): url for socket connection
+            key_id (str): identity from spokestack api credentials
+            key_secret (str): secret key from spokestack api credentials
+            audio_format (str): format of input audio
+            sample_rate (int): audio sample rate (kHz)
+            language (str): language for recognition
+            limit (int): Limit of messages per api response
+            idle_timeout (Any): Time before client timeout. Defaults to None
+    """
 
     def __init__(
         self,
@@ -26,6 +37,7 @@ class CloudClient:
         limit: int = 10,
         idle_timeout: Any = None,
     ) -> None:
+
         self._body: str = json.dumps(
             {
                 "format": audio_format,
@@ -93,14 +105,17 @@ class CloudClient:
 
     @property
     def is_connected(self) -> bool:
+        """ status of the socket connection """
         if self._socket:
             return True
         return False
 
     def close(self) -> None:
+        """ closes socket """
         self._socket.close()
 
     def connect(self) -> None:
+        """ connects to websocket """
         if self._socket:
             pass
         else:
@@ -108,6 +123,7 @@ class CloudClient:
             self._socket.connect(f"{self._socket_url}/v1/asr/websocket")
 
     def initialize(self) -> None:
+        """ sends/receives the initial api request """
         if not self._socket:
             raise ConnectionError("Not Connected")
 
@@ -123,24 +139,27 @@ class CloudClient:
             raise APIError(self._response)
 
     def disconnect(self) -> None:
+        """ disconnects client socket connection """
         if self._socket:
             self.close()
         self._socket = None
 
     def send(self, frame):
+        """ sends a single frame of binary audio """
         if self._socket:
             self._socket.send_binary(frame)
         else:
             raise ConnectionError("Not Connected")
 
     def end(self):
+        """ sends empty string in binary to indicate last frame """
         if self._socket:
-            # empty string to indicate last frame
             self._socket.send_binary(b"")
         else:
             raise ConnectionError("Not Connected")
 
     def receive(self):
+        """ receives the api response """
         if self._socket:
             timeout = self._socket.timeout
             try:
@@ -156,27 +175,32 @@ class CloudClient:
 
     @property
     def response(self) -> dict:
+        """ current response message"""
         return self._response
 
     @property
     def is_final(self) -> bool:
+        """ status of most recent sever response """
         return self._is_final
 
     @property
     def idle_timeout(self) -> Any:
+        """ property for maximum idle time """
         return self._idle_timeout
 
     @property
     def idle_count(self) -> int:
+        """ current counter of idle time """
         return self._idle_count
 
     @idle_count.setter
     def idle_count(self, value: int):
+        """ sets the idle counter"""
         self._idle_count = value
 
 
 class APIError(Exception):
-    """ Spokestack """
+    """ Spokestack api error pass through """
 
     def __init__(self, response) -> None:
         super().__init__(response["error"])

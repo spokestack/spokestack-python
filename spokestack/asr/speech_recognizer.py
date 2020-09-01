@@ -1,5 +1,6 @@
 """
-This module contains the recognizer for cloud based ASR
+This module contains the recognizer for cloud based ASR in
+the speech pipeline
 """
 
 import numpy as np  # type: ignore
@@ -9,7 +10,16 @@ from spokestack.context import SpeechContext
 
 
 class CloudSpeechRecognizer:
-    """ speech recognizer """
+    """ Speech recognizer for use in the speech pipeline
+
+    Args:
+        spokestack_id (str): identity under spokestack api credentials
+        spokestack_secret (str): secret key from spokestack api credentials
+        language (str): language recognized
+        sample_rate (int): audio sample rate (kHz)
+        frame_width (int): frame width of the audio (ms)
+        idle_timeout (int): the number of iterations before the connection times out
+    """
 
     def __init__(
         self,
@@ -20,6 +30,7 @@ class CloudSpeechRecognizer:
         frame_width: int = 10,
         idle_timeout: int = 5000,
     ) -> None:
+
         self._client: CloudClient = CloudClient(
             spokestack_id,
             spokestack_secret,
@@ -69,6 +80,7 @@ class CloudSpeechRecognizer:
         self._client.end()
 
     def reset(self) -> None:
+        """ resets client connection """
         if self._client.is_connected:
             self._client.disconnect()
 
@@ -76,4 +88,5 @@ class CloudSpeechRecognizer:
         self._is_active = False
 
     def close(self) -> None:
+        """ closes client connection """
         self._client.close()
