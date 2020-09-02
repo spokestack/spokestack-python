@@ -19,6 +19,8 @@ docopt==0.6.2             # via coveralls, pytest-watch
 filelock==3.0.12          # via virtualenv
 flake8==3.8.3             # via -r requirements.in, flake8-mypy
 flake8-mypy==17.8.0       # via -r requirements.in
+gevent==20.6.2            # via websocket
+greenlet==0.4.16          # via gevent, websocket
 identify==1.4.25          # via pre-commit
 idna==2.10                # via requests
 importlib-metadata==1.7.0  # via flake8, pluggy, pre-commit, pytest, virtualenv
@@ -58,8 +60,11 @@ virtualenv==20.0.27       # via pre-commit
 watchdog==0.10.3          # via pytest-watch
 wcwidth==0.2.5            # via pytest
 webrtcvad==2.0.10         # via -r requirements.in
+websocket==0.2.1          # via -r requirements.in
 wheel==0.34.2             # via -r requirements.in
 zipp==3.1.0               # via importlib-metadata
+zope.event==4.4           # via gevent
+zope.interface==5.1.0     # via gevent
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
