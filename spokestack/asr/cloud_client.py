@@ -135,8 +135,9 @@ class CloudClient:
 
     def disconnect(self) -> None:
         """ disconnects client socket connection """
-        self._socket.close()
-        self._socket = None
+        if self._socket:
+            self._socket.close()
+            self._socket = None
 
     def send(self, frame: np.ndarray):
         """ sends a single frame of audio

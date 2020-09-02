@@ -257,3 +257,111 @@ def test_type_conversions(_mock):
     client.initialize()
     with pytest.raises(TypeError):
         _ = client(audio.astype(np.complex64))[0]
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_is_connected(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    client.connect()
+    assert client.is_connected
+    client.disconnect()
+    assert not client.is_connected
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_initialize(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    client.connect()
+    assert client.is_connected
+    client._socket.recv.return_value = json.dumps(
+        {"error": None, "final": False, "hypotheses": [], "status": "ok"}
+    )
+    client.initialize()
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_disconnect(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+
+    assert not client.is_connected
+    client.connect()
+    assert client.is_connected
+    client.disconnect()
+    assert not client.is_connected
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_end(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    client.connect()
+    client._socket.recv.side_effect = [
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": True,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+    ]
+
+    client.initialize()
+    client.end()
+    client.receive()
+    assert client.is_final
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_response(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    response = {
+        "error": None,
+        "final": False,
+        "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+        "status": "ok",
+    }
+    client.connect()
+    client._socket.recv.return_value = json.dumps(response)
+    client.receive()
+    assert client.response == response
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_is_final(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    client.connect()
+    client._socket.recv.return_value = json.dumps(
+        {
+            "error": None,
+            "final": True,
+            "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+            "status": "ok",
+        }
+    )
+    client.receive()
+    assert client.is_final
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_idle_timeout(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="", idle_timeout=500)
+    assert client.idle_timeout == 500
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_idle_count(_mock):
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    assert client.idle_count == 0
+
+    for i in range(5):
+        client.idle_count += 1
+
+    assert client.idle_count == 5
