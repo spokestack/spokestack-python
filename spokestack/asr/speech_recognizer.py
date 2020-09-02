@@ -41,6 +41,13 @@ class CloudSpeechRecognizer:
         self._is_active = False
 
     def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
+        """ Entry point of the recognizer
+
+        Args:
+            context (SpeechContext): current state of the speech pipeline
+            frame (np.ndarray): single frame of audio
+
+        """
 
         if context.is_active and not self._is_active:
             self._begin()
@@ -81,12 +88,10 @@ class CloudSpeechRecognizer:
 
     def reset(self) -> None:
         """ resets client connection """
-        if self._client.is_connected:
-            self._client.disconnect()
-
         self._client.idle_count = 0
         self._is_active = False
+        self.close()
 
     def close(self) -> None:
         """ closes client connection """
-        self._client.close()
+        self._client.disconnect()

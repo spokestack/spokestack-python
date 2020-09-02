@@ -55,8 +55,6 @@ def test_send_audio(_mock):
         client.send(frame)
     client.end()
 
-    client.close()
-
 
 @mock.patch("spokestack.asr.cloud_client.WebSocket")
 def test_reponse_event(_mock):
@@ -118,38 +116,45 @@ def test_reponse_event(_mock):
 def test_call(_mock):
     client = CloudClient(socket_url="", key_id="", key_secret="", idle_timeout=5000)
     client.connect()
-    client._socket.recv.return_value = json.dumps(
-        {
-            "error": None,
-            "final": True,
-            "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
-            "status": "ok",
-        }
-    )
+    client._socket.recv.side_effect = [
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": True,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+    ]
     client.initialize()
     audio = np.random.rand(160 * 50).astype(np.int16)
 
     transcript = client(audio)[0]
-    assert transcript == "this is a test"
-
-
-@mock.patch("spokestack.asr.cloud_client.WebSocket")
-def test_call_timeout(_mock):
-    client = CloudClient(socket_url="", key_id="", key_secret="", idle_timeout=5000)
-    client.connect()
-    client._socket.recv.return_value = json.dumps(
-        {
-            "error": None,
-            "final": False,
-            "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
-            "status": "ok",
-        }
-    )
-    client.initialize()
-    audio = np.random.rand(160 * 50).astype(np.int16)
-
-    _ = client(audio)[0]
-    assert not client.is_connected
+    assert transcript == {"confidence": 0.5, "transcript": "this is a test"}
 
 
 @mock.patch("spokestack.asr.cloud_client.WebSocket")
@@ -184,3 +189,71 @@ def test_bad_recv(_mock):
     client.initialize()
     client._socket.recv.return_value = json.dumps({})
     client.receive()
+
+
+@mock.patch("spokestack.asr.cloud_client.WebSocket")
+def test_type_conversions(_mock):
+    dummpy_inputs = [
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        json.dumps(
+            {
+                "error": None,
+                "final": True,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+    ]
+    client = CloudClient(socket_url="", key_id="", key_secret="")
+    client.connect()
+    client._socket.recv.side_effect = dummpy_inputs
+
+    client.initialize()
+    audio = np.zeros((100), np.float32)
+
+    # as np.float32
+    transcript = client(audio)[0]
+    assert transcript == {"confidence": 0.5, "transcript": "this is a test"}
+
+    # as bytes
+    client.connect()
+    client._socket.recv.side_effect = dummpy_inputs
+    client.initialize()
+    transcript = client(audio.tobytes())[0]
+    assert transcript == {"confidence": 0.5, "transcript": "this is a test"}
+
+    # as int16
+    client.connect()
+    client._socket.recv.side_effect = dummpy_inputs
+    client.initialize()
+    transcript = client(audio.astype(np.int16))[0]
+    assert transcript == {"confidence": 0.5, "transcript": "this is a test"}
+
+    # as float64
+    client.connect()
+    client._socket.recv.side_effect = dummpy_inputs
+    client.initialize()
+    transcript = client(audio.astype(np.float64))[0]
+    assert transcript == {"confidence": 0.5, "transcript": "this is a test"}
+
+    # as invalid
+    client.connect()
+    client._socket.recv.side_effect = dummpy_inputs
+    client.initialize()
+    with pytest.raises(TypeError):
+        _ = client(audio.astype(np.complex64))[0]

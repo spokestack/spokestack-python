@@ -6,7 +6,7 @@ import base64
 import hashlib
 import hmac
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 import numpy as np  # type: ignore
 from websocket import WebSocket  # type: ignore
@@ -35,7 +35,7 @@ class CloudClient:
         sample_rate: int = 16000,
         language: str = "en",
         limit: int = 10,
-        idle_timeout: Any = None,
+        idle_timeout: Union[float, None] = None,
     ) -> None:
 
         self._body: str = json.dumps(
@@ -66,18 +66,30 @@ class CloudClient:
         self._idle_timeout = idle_timeout
         self._idle_count: int = 0
 
-    def __call__(self, audio: np.ndarray, n_best: int = 1) -> List[str]:
+    def __call__(self, audio: Union[bytes, np.ndarray], limit: int = 1) -> List[str]:
         """ Audio to text interface for the cloud client
 
         Args:
-            audio (np.ndarray): np.int16 array of audio
-            n_best (int): number of predictions to return
+            audio (bytes|np.ndarray): input audio can be in the form of
+                                      bytes or np.float, np.int16 array with
+                                      conversions handled. other types with produce
+                                      a TypeError
+            limit (int): number of predictions to return
 
-        Returns: n_best list of transcripts
+        Returns: list of transcripts, and their confidence values of size limit
 
         """
+        if isinstance(audio, bytes):
+            audio = np.frombuffer(audio, np.int16)
+        elif np.issubdtype(audio.dtype, np.int16):
+            audio = audio
+        elif np.issubdtype(audio.dtype, np.floating):
+            # convert and rescale to PCM-16
+            audio = (audio * (2 ** 15 - 1)).astype(np.int16)
+        else:
+            raise TypeError("invalid_audio")
 
-        chunk_size = 2 * int(0.01 * self._sample_rate)
+        chunk_size = self._sample_rate
         self.connect()
         self.initialize()
 
@@ -88,20 +100,11 @@ class CloudClient:
 
         self.end()
         while not self._is_final:
-            if self._idle_timeout and (self._idle_count > self._idle_timeout):
-                break
-            else:
-                self.receive()
-                self._idle_count += 1
+            self.receive()
         self.disconnect()
 
-        transcripts = []
-        hypotheses = self._response.get("hypotheses")
-        if hypotheses:
-            for hypothesis in hypotheses[:n_best]:
-                transcripts.append(hypothesis.get("transcript"))
-
-        return transcripts
+        hypotheses = self._response.get("hypotheses", [])
+        return hypotheses[:limit]
 
     @property
     def is_connected(self) -> bool:
@@ -110,15 +113,9 @@ class CloudClient:
             return True
         return False
 
-    def close(self) -> None:
-        """ closes socket """
-        self._socket.close()
-
     def connect(self) -> None:
         """ connects to websocket """
-        if self._socket:
-            pass
-        else:
+        if self._socket is None:
             self._socket = WebSocket()
             self._socket.connect(f"{self._socket_url}/v1/asr/websocket")
 
@@ -140,14 +137,17 @@ class CloudClient:
 
     def disconnect(self) -> None:
         """ disconnects client socket connection """
-        if self._socket:
-            self.close()
         self._socket = None
 
-    def send(self, frame):
-        """ sends a single frame of binary audio """
+    def send(self, frame: np.ndarray):
+        """ sends a single frame of audio
+
+        Args:
+            frame (np.ndarray):
+
+        """
         if self._socket:
-            self._socket.send_binary(frame)
+            self._socket.send_binary(frame.tobytes())
         else:
             raise ConnectionError("Not Connected")
 
@@ -200,7 +200,11 @@ class CloudClient:
 
 
 class APIError(Exception):
-    """ Spokestack api error pass through """
+    """ Spokestack api error pass through
 
-    def __init__(self, response) -> None:
+    Args:
+        response (dict): message from the api service
+    """
+
+    def __init__(self, response: dict) -> None:
         super().__init__(response["error"])
