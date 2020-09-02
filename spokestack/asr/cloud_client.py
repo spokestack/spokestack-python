@@ -81,12 +81,10 @@ class CloudClient:
         """
         if isinstance(audio, bytes):
             audio = np.frombuffer(audio, np.int16)
-        elif np.issubdtype(audio.dtype, np.int16):
-            audio = audio
         elif np.issubdtype(audio.dtype, np.floating):
             # convert and rescale to PCM-16
             audio = (audio * (2 ** 15 - 1)).astype(np.int16)
-        else:
+        elif not np.issubdtype(audio.dtype, np.int16):
             raise TypeError("invalid_audio")
 
         chunk_size = self._sample_rate
@@ -137,13 +135,14 @@ class CloudClient:
 
     def disconnect(self) -> None:
         """ disconnects client socket connection """
+        self._socket.close()
         self._socket = None
 
     def send(self, frame: np.ndarray):
         """ sends a single frame of audio
 
         Args:
-            frame (np.ndarray):
+            frame (np.ndarray): segment of PCM-16 encoded audio
 
         """
         if self._socket:
