@@ -81,7 +81,7 @@ class WakewordTrigger:
         # initialize the frame and encode windows with zeros
         # this minimizes the delay caused by filling the buffer
         self.frame_window.fill(0.0)
-        self.encode_window.fill(0.0)
+        self.encode_window.fill(-1.0)
 
         self._posterior_threshold: float = posterior_threshold
         self._posterior_max: float = 0.0
@@ -184,6 +184,6 @@ class WakewordTrigger:
         """ Resets the currect WakewordDetector state """
         self.sample_window.reset()
         self.frame_window.reset().fill(0.0)
-        self.encode_window.reset().fill(0.0)
+        self.encode_window.reset().fill(-1.0)
         self.state[:] = 0.0
         self._posterior_max = 0.0
