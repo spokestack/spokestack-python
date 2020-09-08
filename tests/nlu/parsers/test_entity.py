@@ -1,0 +1,11 @@
+"""
+This module contains the tests for the entity parser
+"""
+from spokestack.nlu.parsers import entity
+
+
+def test_entity():
+    metadata = {}
+    raw_value = "im a real entity"
+    parsed = entity.parse(metadata, raw_value)
+    assert parsed == raw_value

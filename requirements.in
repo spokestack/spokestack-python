@@ -23,9 +23,11 @@ pytest-benchmark
 pytest-cov
 pytest-watch
 pytest-mock
+pyfakefs
 coveralls
 # library
 pyaudio
 webrtcvad
 numpy
 websocket
+tokenizers
