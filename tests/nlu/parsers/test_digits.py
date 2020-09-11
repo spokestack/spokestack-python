@@ -177,3 +177,10 @@ def test_metadata_violation():
     metadata = {"count": 1}
     parsed = digits.parse(metadata, raw_value)
     assert not parsed
+
+
+def test_empty():
+    metadata = {"count": 1}
+    raw_value = "words"
+    parsed = digits.parse(metadata, raw_value)
+    assert not parsed

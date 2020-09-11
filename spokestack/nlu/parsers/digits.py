@@ -59,6 +59,6 @@ def _parse_single(token: str, next_token: Union[str, None]) -> str:
         return "0" * exponent
     else:
         try:
-            return str(token)
+            return str(int(token))
         except ValueError:
             return ""
