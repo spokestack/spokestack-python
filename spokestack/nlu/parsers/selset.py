@@ -1,5 +1,9 @@
 """
-This module contains the logic to parse selsets from NLU results
+This module contains the logic to parse selsets from NLU results. Selsets contain a name
+along with one or more aliases. This allows one to map any of the listed aliases
+into a single word. For example, you have a slot for "lights" with the aliases including
+bulbs, light, beam, lamp, etc. When modeled as a selset, this slot will always be
+parsed as "light".
 """
 from typing import Any, Dict, Union
 

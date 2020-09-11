@@ -1,5 +1,7 @@
 """
-This module contains the logic to parse entities from NLU results
+This module contains the logic to parse entities from NLU results. The entity parser
+is a pass through for string values to allow custom logic to resolve the entities.
+For example, the entity can be used as a keyword in a database search.
 """
 from typing import Any, Dict
 

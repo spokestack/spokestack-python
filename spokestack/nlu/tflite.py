@@ -1,5 +1,7 @@
 """
-This module contains the class to serve TFLite NLU models
+This module contains the class for using TFLite NLU models. In this case, an NLU model
+is a TFLite model which takes in an utterance and returns an intent along with
+any slots that are associated with that intent.
 """
 import json
 import os
@@ -36,12 +38,15 @@ class TFLiteNLU:
         self._warm_up()
 
     def __call__(self, utterance: str) -> Dict[str, Any]:
-        """ Forward Pass
+        """ Classifies a string utterance into an intent and identifies any associated
+            slots contained in the utterance. The slots get parsed based on type and
+            then returned along with a confidence value.
 
         Args:
             utterance (str): string that needs to be understood
 
-        Returns: intents, slots, and model confidence
+        Returns Dict[str, Any]: A dictionary of the indentified intent, along with
+                                raw, parsed slots and model confidence in prediction
 
         """
         inputs, input_ids = self._encode(utterance)
@@ -51,19 +56,39 @@ class TFLiteNLU:
         # slice off special tokens: [CLS], [SEP]
         tags = tags[: len(input_ids) - 2]
         input_ids = input_ids[1:-1]
-
         # retrieve slots from the tagged postions and decode slots back
         # into original values
-        slots = [token_id for token_id, tag in zip(input_ids, tags) if tag != "o"]
-        slots = self._tokenizer.decode(slots)
+        slots = [
+            [token_id, tag[2:]] for token_id, tag in zip(input_ids, tags) if tag != "o"
+        ]
+        slot_map: dict = {}
+        for token, tag in slots:
+            existing = slot_map.get(tag)
+            if existing:
+                slot_map[tag].append(token)
+            else:
+                slot_map.update({tag: [token]})
+
+        for key, value in slot_map.items():
+            slot_map[key] = self._tokenizer.decode(value)
 
         # attempt to resolve tagged tokens into slots and
         # collect the successful ones
-        slot_meta = self._intent_meta[intent]["slots"]
-        parsed_slots = []
-        for meta in slot_meta:
-            parsed_slots.append(self._parse_slots(meta, slots))
-
+        slot_meta = {
+            meta.pop("name"): meta for meta in self._intent_meta[intent]["slots"]
+        }
+        parsed_slots = {}
+        for key in slot_meta:
+            parsed = self._parse_slots(slot_meta[key], slot_map[key])
+            parsed_slots.update(
+                {
+                    key: {
+                        "name": key,
+                        "parsed_value": parsed,
+                        "raw_value": slot_map[key],
+                    }
+                }
+            )
         return {
             "utterance": utterance,
             "intent": intent,
@@ -99,18 +124,19 @@ class TFLiteNLU:
         # labels to be decoded with an integer to string mapping
         # we derive the confidence from the highest probability
         intent_posterior, tag_posterior = outputs
-        intents = self._decode_intent(intent_posterior)
+        intents, confidence = self._decode_intent(intent_posterior)
         tags = self._decode_tags(tag_posterior)
-        confidence = np.max(intent_posterior)
         return intents, tags, confidence
 
     def _decode_tags(self, posterior):
-        tags = np.argmax(posterior, -1)[0]
+        posterior = np.squeeze(posterior, 0)
+        tags = np.argmax(posterior, -1)
         return [self._tag_decoder.get(tag) for tag in tags]
 
     def _decode_intent(self, posterior):
-        intent = np.argmax(posterior, -1)[0]
-        return self._intent_decoder.get(intent)
+        posterior = np.squeeze(posterior, 0)
+        intent = np.argmax(posterior, -1)
+        return self._intent_decoder.get(intent), posterior[intent]
 
     def _parse_slots(self, slot_meta, slots):
         slot_type = slot_meta["type"]

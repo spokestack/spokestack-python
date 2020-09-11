@@ -1,13 +1,18 @@
 """
-This module contains the logic to parse digits from NLU results
+This module contains the parser that converts the string reppresentation
+of a sequence of digits into the corresponding sequence of digits. These digits may
+be in the form of english cardinal representations of numbers, along with some
+homophones. The digits can be hypenated or unhypenated from twenty through ninety-nine.
+The unhypenated numbers get joined automatically. The use of unhypenated numbers
+introduces ambiguity. For example, "sixty five thousand" could be parsed as "605000" or
+"65000". Our parser will output the latter. However, this can be an issue with values
+such as "sixty five thousand one" which parses as "650001". This limitation will
+most likely be acceptable for most multi-digit use cases such as telephone numbers,
+social security numbers, etc.
 """
-import re
 from typing import Any, Dict, Union
 
-from spokestack.nlu.parsers import maps
-
-
-DIGIT_SPLIT_RE = re.compile("[-,()\\s]+")
+from spokestack.nlu.parsers import DIGIT_SPLIT_RE, maps
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> str:
@@ -30,7 +35,12 @@ def parse(metadata: Dict[str, Any], raw_value: str) -> str:
             next_token = tokens[i + 1]
         value = _parse_single(token, next_token)
         values.append(value)
-    return "".join(values[:count])
+
+    combined = "".join(values)
+    if count:
+        if len(combined) != count:
+            return ""
+    return combined
 
 
 def _parse_single(token: str, next_token: Union[str, None]) -> str:
@@ -46,6 +56,9 @@ def _parse_single(token: str, next_token: Union[str, None]) -> str:
         return str(maps.ENG_DIV10[token] * 10)
     elif token in maps.ENG_EXP10:
         exponent = maps.ENG_EXP10[token]
-        return "".zfill(exponent)
+        return "0" * exponent
     else:
-        return ""
+        try:
+            return str(token)
+        except ValueError:
+            return ""

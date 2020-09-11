@@ -1,14 +1,19 @@
 """
-This module contains the logic to parse integers from NLU results
+This module contains the logic to parse integers from NLU results. Integers can be
+in the form of words (ie. one, two, three) or numbers (ie. 1, 2, 3). Either form
+will resolve to Python's built-in 'int' type. The metadata must contain a range
+key containg the minimum and maximum values for the expected integer range. It is
+important to note the difference between digits and integers. Integers are
+counting numbers: 2 apples, a table for two. In contrast, digits
+can be used for sequences of numbers like phone numbers or social security numbers.
 """
 from typing import Any, Dict, Union
 
-from spokestack.nlu.parsers import maps
-from spokestack.nlu.parsers.digits import DIGIT_SPLIT_RE
+from spokestack.nlu.parsers import DIGIT_SPLIT_RE, maps
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> Union[int, None]:
-    """ Parser for Integer slots
+    """ Integer Parser
 
     Args:
         metadata (Dict[str, Any]): metadata for the integer slot
@@ -27,8 +32,7 @@ def parse(metadata: Dict[str, Any], raw_value: str) -> Union[int, None]:
             parsed = int(token)
             parsed_values.append(parsed)
         except ValueError:
-            reduced = _parse_reduce(token, parsed_values)
-            if not reduced:
+            if not _parse_reduce(token, parsed_values):
                 return None
 
     result = sum(parsed_values)
@@ -61,7 +65,7 @@ def _collapse(multiplier, so_far):
         else:
             total += number
     if not total > 0:
-        total = 1
+        total = max(total, 1)
     collapsed.append(total * multiplier)
     return collapsed
 
