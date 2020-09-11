@@ -2,7 +2,7 @@
 This module contains the logic to parse integers from NLU results. Integers can be
 in the form of words (ie. one, two, three) or numbers (ie. 1, 2, 3). Either form
 will resolve to Python's built-in 'int' type. The metadata must contain a range
-key containg the minimum and maximum values for the expected integer range. It is
+key containing the minimum and maximum values for the expected integer range. It is
 important to note the difference between digits and integers. Integers are
 counting numbers: 2 apples, a table for two. In contrast, digits
 can be used for sequences of numbers like phone numbers or social security numbers.
@@ -64,8 +64,7 @@ def _collapse(multiplier, so_far):
             collapsed.append(number)
         else:
             total += number
-    if not total > 0:
-        total = max(total, 1)
+    total = max(total, 1)
     collapsed.append(total * multiplier)
     return collapsed
 

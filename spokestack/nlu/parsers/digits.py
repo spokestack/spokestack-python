@@ -1,14 +1,14 @@
 """
-This module contains the parser that converts the string reppresentation
+This module contains the parser that converts the string representation
 of a sequence of digits into the corresponding sequence of digits. These digits may
 be in the form of english cardinal representations of numbers, along with some
-homophones. The digits can be hypenated or unhypenated from twenty through ninety-nine.
-The unhypenated numbers get joined automatically. The use of unhypenated numbers
-introduces ambiguity. For example, "sixty five thousand" could be parsed as "605000" or
-"65000". Our parser will output the latter. However, this can be an issue with values
-such as "sixty five thousand one" which parses as "650001". This limitation will
-most likely be acceptable for most multi-digit use cases such as telephone numbers,
-social security numbers, etc.
+homophones. The digits can be hyphenated or unhyphenated from twenty through
+ninety-nine. The unhyphenated numbers get joined automatically. The use of
+unhyphenated numbers introduces ambiguity. For example, "sixty five thousand" could
+be parsed as "605000" or "65000". Our parser will output the latter. However, this
+can be an issue with values such as "sixty five thousand one" which parses as "650001".
+This limitation will most likely be acceptable for most multi-digit use cases such as
+telephone numbers, social security numbers, etc.
 """
 from typing import Any, Dict, Union
 

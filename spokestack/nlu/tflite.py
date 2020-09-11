@@ -35,17 +35,21 @@ class TFLiteNLU:
         self._intent_meta = {
             intent.pop("name"): intent for intent in self._metadata["intents"]
         }
+        self._slot_meta = {}
+        for intent in self._intent_meta:
+            for slot in self._intent_meta[intent]["slots"]:
+                self._slot_meta[slot.pop("name")] = slot
         self._warm_up()
 
     def __call__(self, utterance: str) -> Dict[str, Any]:
         """ Classifies a string utterance into an intent and identifies any associated
             slots contained in the utterance. The slots get parsed based on type and
-            then returned along with a confidence value.
+            then returned along with the intent and its associated confidence value.
 
         Args:
             utterance (str): string that needs to be understood
 
-        Returns Dict[str, Any]: A dictionary of the indentified intent, along with
+        Returns Dict[str, Any]: A dictionary of the identified intent, along with
                                 raw, parsed slots and model confidence in prediction
 
         """
@@ -59,36 +63,31 @@ class TFLiteNLU:
         # retrieve slots from the tagged postions and decode slots back
         # into original values
         slots = [
-            [token_id, tag[2:]] for token_id, tag in zip(input_ids, tags) if tag != "o"
+            (token_id, tag[2:]) for token_id, tag in zip(input_ids, tags) if tag != "o"
         ]
         slot_map: dict = {}
-        for token, tag in slots:
+        for (token, tag) in slots:
+            print(tag)
             existing = slot_map.get(tag)
             if existing:
                 slot_map[tag].append(token)
             else:
-                slot_map.update({tag: [token]})
+                slot_map[tag] = [token]
 
         for key, value in slot_map.items():
             slot_map[key] = self._tokenizer.decode(value)
 
         # attempt to resolve tagged tokens into slots and
         # collect the successful ones
-        slot_meta = {
-            meta.pop("name"): meta for meta in self._intent_meta[intent]["slots"]
-        }
         parsed_slots = {}
-        for key in slot_meta:
-            parsed = self._parse_slots(slot_meta[key], slot_map[key])
-            parsed_slots.update(
-                {
-                    key: {
-                        "name": key,
-                        "parsed_value": parsed,
-                        "raw_value": slot_map[key],
-                    }
-                }
-            )
+        for key in slot_map:
+            parsed = self._parse_slots(self._slot_meta[key], slot_map[key])
+            parsed_slots[key] = {
+                "name": key,
+                "parsed_value": parsed,
+                "raw_value": slot_map[key],
+            }
+
         return {
             "utterance": utterance,
             "intent": intent,

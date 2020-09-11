@@ -77,7 +77,6 @@ def test_classify_with_slots(_mock_tokenizer, _mock_model, fs):
     utterance = "this is only a test"
     model._encode = mock.MagicMock(return_value=[[utterance], [0, 1, 2, 3, 4, 0]])
     outputs = model(utterance)
-    print(outputs)
     assert outputs["utterance"] == utterance
     assert 0.0 <= outputs["confidence"] <= 1.0
     assert outputs["slots"]
