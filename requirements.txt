@@ -41,6 +41,7 @@ py==1.9.0                 # via pytest
 py-cpuinfo==7.0.0         # via pytest-benchmark
 pyaudio==0.2.11           # via -r requirements.in
 pycodestyle==2.6.0        # via flake8
+pyfakefs==4.1.0           # via -r requirements.in
 pyflakes==2.2.0           # via flake8
 pyparsing==2.4.7          # via packaging
 pytest==5.4.3             # via -r requirements.in, pytest-benchmark, pytest-cov, pytest-mock, pytest-watch
@@ -52,6 +53,7 @@ pyyaml==5.3.1             # via pre-commit
 regex==2020.7.14          # via black
 requests==2.24.0          # via coveralls
 six==1.15.0               # via packaging, pip-tools, virtualenv
+tokenizers==0.8.1         # via -r requirements.in
 toml==0.10.1              # via black, pre-commit
 typed-ast==1.4.1          # via black, mypy
 typing-extensions==3.7.4.2  # via mypy
