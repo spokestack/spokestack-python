@@ -67,9 +67,7 @@ class TFLiteNLU:
         ]
         slot_map: dict = {}
         for (token, tag) in slots:
-            print(tag)
-            existing = slot_map.get(tag)
-            if existing:
+            if tag in slot_map:
                 slot_map[tag].append(token)
             else:
                 slot_map[tag] = [token]
