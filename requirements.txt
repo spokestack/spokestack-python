@@ -14,6 +14,7 @@ click==7.1.2              # via black, pip-tools
 colorama==0.4.3           # via pytest-watch
 coverage==5.2             # via coveralls, pytest-cov
 coveralls==2.1.1          # via -r requirements.in
+cython==0.29.21           # via streamp3
 distlib==0.3.1            # via virtualenv
 docopt==0.6.2             # via coveralls, pytest-watch
 filelock==3.0.12          # via virtualenv
@@ -51,8 +52,9 @@ pytest-mock==3.2.0        # via -r requirements.in
 pytest-watch==4.2.0       # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 regex==2020.7.14          # via black
-requests==2.24.0          # via coveralls
+requests==2.24.0          # via -r requirements.in, coveralls
 six==1.15.0               # via packaging, pip-tools, virtualenv
+streamp3==0.1.7           # via -r requirements.in
 tokenizers==0.8.1         # via -r requirements.in
 toml==0.10.1              # via black, pre-commit
 typed-ast==1.4.1          # via black, mypy
