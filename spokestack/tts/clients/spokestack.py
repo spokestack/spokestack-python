@@ -5,11 +5,12 @@ import base64
 import hashlib
 import hmac
 import json
+from typing import Any, Iterator
 
 import requests
 
 
-MODES = {
+_MODES = {
     "ssml": "synthesizeSSML",
     "markdown": "synthesizeMarkdown",
     "text": "synthesizeText",
@@ -20,28 +21,31 @@ class TextToSpeechClient:
     """ Spokestack Text to Speech Client
 
     Args:
-        key_id (str):
-        key_secret (str):
-        url (str):
+        key_id (str): identity from spokestack api credentials
+        key_secret (str): secret key from spokestack api credentials
+        url (str): spokestack api url
     """
 
-    def __init__(self, key_id: str, key_secret: str, url: str) -> None:
+    def __init__(
+        self, key_id: str, key_secret: str, url: str = "https://api.spokestack.io/v1"
+    ) -> None:
 
         self._key_id = key_id
         self._key = key_secret.encode("utf-8")
         self._url = url
 
-    def synthesize_speech(
-        self, utterance: str, mode: str = "text", voice: str = "demo-male"
-    ) -> bytes:
+    def synthesize(
+        self, utterance: str, mode: str = "text", voice: str = "demo-male",
+    ) -> Iterator[bytes]:
         """ Converts the given utterance to speech
 
         Args:
-            utterance (str):
-            mode (str):
-            voice (str):
+            utterance (str): string that needs to be rendered as speech.
+            mode (str): synthesis mode to use with utterance. text, ssml, markdown.
+            voice (str): name of the tts voice.
 
-        Returns: Encoded Audio
+        Returns:
+            (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes
 
         """
         body = self._build_body(utterance, mode, voice)
@@ -52,15 +56,21 @@ class TextToSpeechClient:
             "Authorization": f"Spokestack {self._key_id}:{signature}",
             "Content-Type": "application/json",
         }
+        response: Any = requests.post(self._url, headers=headers, data=body)
 
-        response = requests.post(self._url, headers=headers, data=body).json()
+        if response.status_code != 200:
+            raise Exception(response.reason)
 
+        response = response.json()
         if "errors" in response:
             raise TTSError(response["errors"])
 
-        response = requests.get(response["data"][MODES[mode]]["url"])
+        response = requests.get(response["data"][_MODES[mode]]["url"], stream=True)
 
-        return response.content
+        if response.status_code != 200:
+            raise Exception(response.reason)
+
+        return response.iter_content(chunk_size=None)
 
     def _build_body(self, message, mode, voice):
         if mode == "ssml":

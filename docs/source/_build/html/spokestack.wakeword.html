@@ -92,13 +92,6 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
-                                    href="spokestack.mic.html"
-                                    >spokestack.mic package</a
-                                >
-                            </li>
-                            <li class="toctree-l1">
-                                <a
-                                    class="reference internal"
                                     href="spokestack.vad.html"
                                     >spokestack.vad package</a
                                 >
@@ -383,10 +376,14 @@
                                                                     <strong
                                                                         >value</strong
                                                                     >
-                                                                    (<em>np.ndarray</em>)
-                                                                    – Fill value
-                                                                    for the
-                                                                    buffer
+                                                                    (<em>int</em
+                                                                    ><em>
+                                                                        or </em
+                                                                    ><em
+                                                                        >float</em
+                                                                    >) – Fill
+                                                                    value for
+                                                                    the buffer
                                                                 </p>
                                                             </dd>
                                                         </dl>
@@ -857,14 +854,14 @@
                                         </p>
                                         <dl class="py class">
                                             <dt
-                                                id="spokestack.wakeword.tflite.WakewordDetector"
+                                                id="spokestack.wakeword.tflite.WakewordTrigger"
                                             >
                                                 <em class="property">class </em
                                                 ><code
                                                     class="sig-prename descclassname"
                                                     >spokestack.wakeword.tflite.</code
                                                 ><code class="sig-name descname"
-                                                    >WakewordDetector</code
+                                                    >WakewordTrigger</code
                                                 ><span class="sig-paren">(</span
                                                 ><em class="sig-param"
                                                     ><span class="n"
@@ -880,14 +877,6 @@
                                                     ><span class="o">=</span
                                                     ><span class="default_value"
                                                         >16000</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >fft_window_size</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >512</span
                                                     ></em
                                                 >,
                                                 <em class="sig-param"
@@ -908,38 +897,6 @@
                                                 >,
                                                 <em class="sig-param"
                                                     ><span class="n"
-                                                        >mel_frame_length</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >10</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >mel_frame_width</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >40</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >wake_encode_length</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >1000</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >wake_encode_width</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >128</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
                                                         >model_dir</span
                                                     ><span class="o">=</span
                                                     ><span class="default_value"
@@ -956,13 +913,13 @@
                                                 ><span class="sig-paren">)</span
                                                 ><a
                                                     class="reference internal"
-                                                    href="_modules/spokestack/wakeword/tflite.html#WakewordDetector"
+                                                    href="_modules/spokestack/wakeword/tflite.html#WakewordTrigger"
                                                     ><span class="viewcode-link"
                                                         >[source]</span
                                                     ></a
                                                 ><a
                                                     class="headerlink"
-                                                    href="#spokestack.wakeword.tflite.WakewordDetector"
+                                                    href="#spokestack.wakeword.tflite.WakewordTrigger"
                                                     title="Permalink to this definition"
                                                     >¶</a
                                                 >
@@ -1015,27 +972,15 @@
                                                             <li>
                                                                 <p>
                                                                     <strong
-                                                                        >fft_window_size</strong
-                                                                    >
-                                                                    (<em>int</em>)
-                                                                    – Size of
-                                                                    the sliding
-                                                                    window for
-                                                                    STFT
-                                                                    calculation
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
                                                                         >fft_window_type</strong
                                                                     >
                                                                     (<em>str</em>)
-                                                                    – Window
-                                                                    type: any
-                                                                    that
-                                                                    scipy.signal.get_window
-                                                                    accepts
+                                                                    – The type
+                                                                    of fft
+                                                                    window.
+                                                                    (only
+                                                                    support for
+                                                                    hann)
                                                                 </p>
                                                             </li>
                                                             <li>
@@ -1050,58 +995,6 @@
                                                                     STFT
                                                                     calculation
                                                                     (ms)
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >mel_frame_length</strong
-                                                                    >
-                                                                    (<em>int</em>)
-                                                                    – Frame
-                                                                    length of
-                                                                    the mel
-                                                                    spectrogram
-                                                                    (samples)
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >mel_frame_width</strong
-                                                                    >
-                                                                    (<em>int</em>)
-                                                                    – The number
-                                                                    of features
-                                                                    in the mel
-                                                                    spectrogram
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >wake_encode_length</strong
-                                                                    >
-                                                                    (<em>int</em>)
-                                                                    – The length
-                                                                    of the
-                                                                    encoder
-                                                                    output
-                                                                    sliding
-                                                                    window (ms)
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >wake_encode_width</strong
-                                                                    >
-                                                                    (<em>int</em>)
-                                                                    – The number
-                                                                    of features
-                                                                    in each
-                                                                    encoded
-                                                                    frame
                                                                 </p>
                                                             </li>
                                                             <li>
@@ -1137,7 +1030,7 @@
                                                 </dl>
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.wakeword.tflite.WakewordDetector.reset"
+                                                        id="spokestack.wakeword.tflite.WakewordTrigger.reset"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -1148,14 +1041,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/wakeword/tflite.html#WakewordDetector.reset"
+                                                            href="_modules/spokestack/wakeword/tflite.html#WakewordTrigger.reset"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.wakeword.tflite.WakewordDetector.reset"
+                                                            href="#spokestack.wakeword.tflite.WakewordTrigger.reset"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
