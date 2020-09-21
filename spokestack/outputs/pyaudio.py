@@ -4,7 +4,7 @@ This module contains the class for using speaker outputs with pyaudio
 import pyaudio  # type: ignore
 
 
-class PyAudioSpeakerOutput:
+class PyAudioOutput:
     """ Outputs audio to the default system output
 
     Args:
