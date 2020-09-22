@@ -42,7 +42,8 @@ From the root project directory:
 ## Deployment
 
 This project is distributed using [PyPI](https://pypi.org/). The following is the command to build for installation.
-
+    
+    python setup.py clean --all; rm -r ./dist
     python setup.py sdist bdist_wheel
 
 [Twine](https://twine.readthedocs.io/en/latest/) is used to upload the wheel and source distribution.
