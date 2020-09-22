@@ -31,3 +31,5 @@ webrtcvad
 numpy
 websocket
 tokenizers
+requests
+streamp3

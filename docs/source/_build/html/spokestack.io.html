@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>spokestack.mic package &mdash; spokestack documentation</title>
+        <title>spokestack.io package &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -29,12 +29,6 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
-        <link
-            rel="next"
-            title="spokestack.vad package"
-            href="spokestack.vad.html"
-        />
-        <link rel="prev" title="spokestack" href="index.html" />
     </head>
 
     <body class="wy-body-for-nav">
@@ -82,35 +76,7 @@
                         role="navigation"
                         aria-label="main navigation"
                     >
-                        <ul class="current">
-                            <li class="toctree-l1 current">
-                                <a class="current reference internal" href="#"
-                                    >spokestack.mic package</a
-                                >
-                                <ul>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
-                                            href="#submodules"
-                                            >Submodules</a
-                                        >
-                                    </li>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
-                                            href="#module-spokestack.mic.pyaudio"
-                                            >spokestack.mic.pyaudio module</a
-                                        >
-                                    </li>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
-                                            href="#module-spokestack.mic"
-                                            >Module contents</a
-                                        >
-                                    </li>
-                                </ul>
-                            </li>
+                        <ul>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
@@ -165,11 +131,11 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.mic package</li>
+                                <li>spokestack.io package</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
-                                        href="_sources/spokestack.mic.rst.txt"
+                                        href="_sources/spokestack.io.rst.txt"
                                         rel="nofollow"
                                     >
                                         View page source</a
@@ -186,14 +152,11 @@
                             itemtype="http://schema.org/Article"
                         >
                             <div itemprop="articleBody">
-                                <div
-                                    class="section"
-                                    id="spokestack-mic-package"
-                                >
+                                <div class="section" id="spokestack-io-package">
                                     <h1>
-                                        spokestack.mic package<a
+                                        spokestack.io package<a
                                             class="headerlink"
-                                            href="#spokestack-mic-package"
+                                            href="#spokestack-io-package"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
@@ -210,33 +173,33 @@
                                     </div>
                                     <div
                                         class="section"
-                                        id="module-spokestack.mic.pyaudio"
+                                        id="module-spokestack.io.pyaudio"
                                     >
                                         <span
-                                            id="spokestack-mic-pyaudio-module"
+                                            id="spokestack-io-pyaudio-module"
                                         ></span>
                                         <h2>
-                                            spokestack.mic.pyaudio module<a
+                                            spokestack.io.pyaudio module<a
                                                 class="headerlink"
-                                                href="#module-spokestack.mic.pyaudio"
+                                                href="#module-spokestack.io.pyaudio"
                                                 title="Permalink to this headline"
                                                 >¶</a
                                             >
                                         </h2>
                                         <p>
-                                            This module uses pyaudio to receive
-                                            input from a device microphone
+                                            This module uses pyaudio for input
+                                            and output processing
                                         </p>
                                         <dl class="py class">
                                             <dt
-                                                id="spokestack.mic.pyaudio.PyAudioMicrophoneInput"
+                                                id="spokestack.io.pyaudio.PyAudioInput"
                                             >
                                                 <em class="property">class </em
                                                 ><code
                                                     class="sig-prename descclassname"
-                                                    >spokestack.mic.pyaudio.</code
+                                                    >spokestack.io.pyaudio.</code
                                                 ><code class="sig-name descname"
-                                                    >PyAudioMicrophoneInput</code
+                                                    >PyAudioInput</code
                                                 ><span class="sig-paren">(</span
                                                 ><em class="sig-param"
                                                     ><span class="n"
@@ -258,13 +221,13 @@
                                                 ><span class="sig-paren">)</span
                                                 ><a
                                                     class="reference internal"
-                                                    href="_modules/spokestack/mic/pyaudio.html#PyAudioMicrophoneInput"
+                                                    href="_modules/spokestack/io/pyaudio.html#PyAudioInput"
                                                     ><span class="viewcode-link"
                                                         >[source]</span
                                                     ></a
                                                 ><a
                                                     class="headerlink"
-                                                    href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput"
+                                                    href="#spokestack.io.pyaudio.PyAudioInput"
                                                     title="Permalink to this definition"
                                                     >¶</a
                                                 >
@@ -298,6 +261,7 @@
                                                                     – desired
                                                                     sample rate
                                                                     for input
+                                                                    (Hz)
                                                                 </p>
                                                             </li>
                                                             <li>
@@ -309,6 +273,7 @@
                                                                     – desired
                                                                     frame width
                                                                     for input
+                                                                    (ms)
                                                                 </p>
                                                             </li>
                                                             <li>
@@ -328,7 +293,7 @@
                                                 </dl>
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.close"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.close"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -339,14 +304,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/mic/pyaudio.html#PyAudioMicrophoneInput.close"
+                                                            href="_modules/spokestack/io/pyaudio.html#PyAudioInput.close"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.close"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.close"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -383,7 +348,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.is_active"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.is_active"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -392,7 +357,7 @@
                                                             >is_active</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.is_active"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.is_active"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -437,7 +402,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.is_stopped"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.is_stopped"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -446,7 +411,7 @@
                                                             >is_stopped</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.is_stopped"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.is_stopped"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -491,7 +456,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.read"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.read"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -502,14 +467,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/mic/pyaudio.html#PyAudioMicrophoneInput.read"
+                                                            href="_modules/spokestack/io/pyaudio.html#PyAudioInput.read"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.read"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.read"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -551,7 +516,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.start"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.start"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -562,14 +527,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/mic/pyaudio.html#PyAudioMicrophoneInput.start"
+                                                            href="_modules/spokestack/io/pyaudio.html#PyAudioInput.start"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.start"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.start"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -606,7 +571,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.mic.pyaudio.PyAudioMicrophoneInput.stop"
+                                                        id="spokestack.io.pyaudio.PyAudioInput.stop"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -617,14 +582,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/mic/pyaudio.html#PyAudioMicrophoneInput.stop"
+                                                            href="_modules/spokestack/io/pyaudio.html#PyAudioInput.stop"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.mic.pyaudio.PyAudioMicrophoneInput.stop"
+                                                            href="#spokestack.io.pyaudio.PyAudioInput.stop"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -660,16 +625,181 @@
                                                 </dl>
                                             </dd>
                                         </dl>
+
+                                        <dl class="py class">
+                                            <dt
+                                                id="spokestack.io.pyaudio.PyAudioOutput"
+                                            >
+                                                <em class="property">class </em
+                                                ><code
+                                                    class="sig-prename descclassname"
+                                                    >spokestack.io.pyaudio.</code
+                                                ><code class="sig-name descname"
+                                                    >PyAudioOutput</code
+                                                ><span class="sig-paren">(</span
+                                                ><em class="sig-param"
+                                                    ><span class="n"
+                                                        >num_channels</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >1</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >sample_rate</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >24000</span
+                                                    ></em
+                                                ><span class="sig-paren">)</span
+                                                ><a
+                                                    class="reference internal"
+                                                    href="_modules/spokestack/io/pyaudio.html#PyAudioOutput"
+                                                    ><span class="viewcode-link"
+                                                        >[source]</span
+                                                    ></a
+                                                ><a
+                                                    class="headerlink"
+                                                    href="#spokestack.io.pyaudio.PyAudioOutput"
+                                                    title="Permalink to this definition"
+                                                    >¶</a
+                                                >
+                                            </dt>
+                                            <dd>
+                                                <p>
+                                                    Bases:
+                                                    <code
+                                                        class="xref py py-class docutils literal notranslate"
+                                                        ><span class="pre"
+                                                            >object</span
+                                                        ></code
+                                                    >
+                                                </p>
+                                                <p>
+                                                    Outputs audio to the default
+                                                    system output
+                                                </p>
+                                                <dl class="field-list simple">
+                                                    <dt class="field-odd">
+                                                        Parameters
+                                                    </dt>
+                                                    <dd class="field-odd">
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >num_channels</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – number of
+                                                                    audio
+                                                                    channels
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >sample_rate</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – sample
+                                                                    rate of the
+                                                                    audio (Hz)
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.io.pyaudio.PyAudioOutput.write"
+                                                    >
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >write</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><em class="sig-param"
+                                                            ><span class="n"
+                                                                >frame</span
+                                                            ></em
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/io/pyaudio.html#PyAudioOutput.write"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.io.pyaudio.PyAudioOutput.write"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>
+                                                            Writes a single
+                                                            frame of audio to
+                                                            output
+                                                        </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Parameters
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <strong
+                                                                        >frame</strong
+                                                                    >
+                                                                    (<em>bytes</em>)
+                                                                    – a single
+                                                                    frame of
+                                                                    audio
+                                                                </p>
+                                                            </dd>
+                                                            <dt
+                                                                class="field-even"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-even"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </dl>
                                     </div>
                                     <div
                                         class="section"
-                                        id="module-spokestack.mic"
+                                        id="module-spokestack.io"
                                     >
                                         <span id="module-contents"></span>
                                         <h2>
                                             Module contents<a
                                                 class="headerlink"
-                                                href="#module-spokestack.mic"
+                                                href="#module-spokestack.io"
                                                 title="Permalink to this headline"
                                                 >¶</a
                                             >
@@ -679,36 +809,6 @@
                             </div>
                         </div>
                         <footer>
-                            <div
-                                class="rst-footer-buttons"
-                                role="navigation"
-                                aria-label="footer navigation"
-                            >
-                                <a
-                                    href="spokestack.vad.html"
-                                    class="btn btn-neutral float-right"
-                                    title="spokestack.vad package"
-                                    accesskey="n"
-                                    rel="next"
-                                    >Next
-                                    <span
-                                        class="fa fa-arrow-circle-right"
-                                    ></span
-                                ></a>
-
-                                <a
-                                    href="index.html"
-                                    class="btn btn-neutral float-left"
-                                    title="spokestack"
-                                    accesskey="p"
-                                    rel="prev"
-                                    ><span
-                                        class="fa fa-arrow-circle-left"
-                                    ></span>
-                                    Previous</a
-                                >
-                            </div>
-
                             <hr />
 
                             <div role="contentinfo">

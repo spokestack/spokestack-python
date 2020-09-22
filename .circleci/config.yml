@@ -8,7 +8,7 @@ jobs:
 
         steps:
             - checkout
-            - run: sudo apt-get install portaudio19-dev
+            - run: sudo apt-get install portaudio19-dev libmp3lame-dev
             - restore_cache:
                   keys:
                       - build-{{checksum "requirements.txt"}}

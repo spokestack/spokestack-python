@@ -1,13 +1,21 @@
-spokestack.mic package
+spokestack.tts package
 ======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   spokestack.tts.clients
 
 Submodules
 ----------
 
-spokestack.mic.pyaudio module
+spokestack.tts.manager module
 -----------------------------
 
-.. automodule:: spokestack.mic.pyaudio
+.. automodule:: spokestack.tts.manager
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +24,7 @@ spokestack.mic.pyaudio module
 Module contents
 ---------------
 
-.. automodule:: spokestack.mic
+.. automodule:: spokestack.tts
    :members:
    :undoc-members:
    :show-inheritance:

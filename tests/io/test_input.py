@@ -3,12 +3,12 @@ Mock tests for microphone input
 """
 from unittest.mock import patch
 
-from spokestack.mic.pyaudio import PyAudioMicrophoneInput
+from spokestack.io.pyaudio import PyAudioInput
 
 
-@patch("spokestack.mic.pyaudio.pyaudio")
+@patch("spokestack.io.pyaudio.pyaudio")
 def test_audio_input(mock_class):
-    mic = PyAudioMicrophoneInput(sample_rate=16000, frame_width=10)
+    mic = PyAudioInput(sample_rate=16000, frame_width=10)
     mic._audio.open.assert_called()
     # start audio stream
     mic.start()

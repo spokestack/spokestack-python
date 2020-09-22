@@ -71,3 +71,9 @@ ENV/
 # pytest
 /.pytest_cache/
 .benchmarks
+
+.DS_STORE
+examples/
+.editorconfig
+.idea/
+.vscode

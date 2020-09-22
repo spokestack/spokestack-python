@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>spokestack.mic.pyaudio &mdash; spokestack documentation</title>
+        <title>spokestack.io.pyaudio &mdash; spokestack documentation</title>
 
         <link
             rel="stylesheet"
@@ -91,13 +91,6 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
-                                    href="../../../spokestack.mic.html"
-                                    >spokestack.mic package</a
-                                >
-                            </li>
-                            <li class="toctree-l1">
-                                <a
-                                    class="reference internal"
                                     href="../../../spokestack.vad.html"
                                     >spokestack.vad package</a
                                 >
@@ -154,7 +147,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.mic.pyaudio</li>
+                                <li>spokestack.io.pyaudio</li>
 
                                 <li class="wy-breadcrumbs-aside"></li>
                             </ul>
@@ -168,29 +161,27 @@
                             itemtype="http://schema.org/Article"
                         >
                             <div itemprop="articleBody">
-                                <h1>Source code for spokestack.mic.pyaudio</h1>
+                                <h1>Source code for spokestack.io.pyaudio</h1>
                                 <div class="highlight">
                                     <pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This module uses pyaudio to receive input from a</span>
-<span class="sd">device microphone</span>
+<span class="sd">This module uses pyaudio for input and output processing</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">pyaudio</span>  <span class="c1"># type: ignore</span>
 
 
-<div class="viewcode-block" id="PyAudioMicrophoneInput"><a class="viewcode-back" href="../../../spokestack.mic.html#spokestack.mic.pyaudio.PyAudioMicrophoneInput">[docs]</a><span class="k">class</span> <span class="nc">PyAudioMicrophoneInput</span><span class="p">:</span>
+<div class="viewcode-block" id="PyAudioInput"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput">[docs]</a><span class="k">class</span> <span class="nc">PyAudioInput</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;This class retrieves audio from an input device</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        sample_rate (int): desired sample rate for input</span>
-<span class="sd">        frame_width (int): desired frame width for input</span>
+<span class="sd">        sample_rate (int): desired sample rate for input (Hz)</span>
+<span class="sd">        frame_width (int): desired frame width for input (ms)</span>
 <span class="sd">        exception_on_overflow (bool): produce exception for input overflow</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">exception_on_overflow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_frame_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sample_rate</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">frame_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_exception_on_overflow</span> <span class="o">=</span> <span class="n">exception_on_overflow</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_audio</span> <span class="o">=</span> <span class="n">pyaudio</span><span class="o">.</span><span class="n">PyAudio</span><span class="p">()</span>
@@ -201,11 +192,11 @@
             <span class="nb">format</span><span class="o">=</span><span class="n">pyaudio</span><span class="o">.</span><span class="n">paInt16</span><span class="p">,</span>
             <span class="n">frames_per_buffer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_size</span><span class="p">,</span>
             <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">rate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">,</span>
+            <span class="n">rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span>
             <span class="n">start</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="PyAudioMicrophoneInput.read"><a class="viewcode-back" href="../../../spokestack.mic.html#spokestack.mic.pyaudio.PyAudioMicrophoneInput.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="PyAudioInput.read"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Reads a single frame of audio</span>
 
 <span class="sd">        Returns:</span>
@@ -215,15 +206,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_frame_size</span><span class="p">,</span> <span class="n">exception_on_overflow</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_exception_on_overflow</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PyAudioMicrophoneInput.start"><a class="viewcode-back" href="../../../spokestack.mic.html#spokestack.mic.pyaudio.PyAudioMicrophoneInput.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyAudioInput.start"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Starts the audio stream &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">start_stream</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PyAudioMicrophoneInput.stop"><a class="viewcode-back" href="../../../spokestack.mic.html#spokestack.mic.pyaudio.PyAudioMicrophoneInput.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyAudioInput.stop"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Stops the audio stream &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">stop_stream</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PyAudioMicrophoneInput.close"><a class="viewcode-back" href="../../../spokestack.mic.html#spokestack.mic.pyaudio.PyAudioMicrophoneInput.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyAudioInput.close"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Closes the audio stream &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -244,6 +235,35 @@
 <span class="sd">            bool: &#39;True&#39; if stream is stopped, &#39;False&#39; otherwise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyAudioOutput"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioOutput">[docs]</a><span class="k">class</span> <span class="nc">PyAudioOutput</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Outputs audio to the default system output</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_channels (int): number of audio channels</span>
+<span class="sd">        sample_rate (int): sample rate of the audio (Hz)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">audio</span> <span class="o">=</span> <span class="n">pyaudio</span><span class="o">.</span><span class="n">PyAudio</span><span class="p">()</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">get_default_output_device_info</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+            <span class="n">output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">input_device_index</span><span class="o">=</span><span class="n">device</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">],</span>
+            <span class="nb">format</span><span class="o">=</span><span class="n">pyaudio</span><span class="o">.</span><span class="n">paInt16</span><span class="p">,</span>
+            <span class="n">channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">,</span>
+            <span class="n">rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="PyAudioOutput.write"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioOutput.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Writes a single frame of audio to output</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frame (bytes): a single frame of audio</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span></div></div>
 </pre>
                                 </div>
                             </div>
