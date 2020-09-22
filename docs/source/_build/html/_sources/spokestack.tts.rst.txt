@@ -1,30 +1,14 @@
-spokestack.tts package
+Text to Speech (TTS)
 ======================
 
-Subpackages
+Clients
 -----------
 
 .. toctree::
-   :maxdepth: 4
+    spokestack.tts.clients
 
-   spokestack.tts.clients
-
-Submodules
-----------
-
-spokestack.tts.manager module
+Manager
 -----------------------------
 
 .. automodule:: spokestack.tts.manager
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.tts
-   :members:
-   :undoc-members:
-   :show-inheritance:

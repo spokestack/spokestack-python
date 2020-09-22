@@ -5,7 +5,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>spokestack.asr package &mdash; spokestack documentation</title>
+        <title>
+            Automatic Speech Recognition (ASR) &mdash; spokestack documentation
+        </title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -29,6 +31,16 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
+        <link
+            rel="next"
+            title="Natural Language Understanding (NLU)"
+            href="spokestack.nlu.html"
+        />
+        <link
+            rel="prev"
+            title="Spokestack"
+            href="spokestack.tts.clients.html"
+        />
     </head>
 
     <body class="wy-body-for-nav">
@@ -76,12 +88,19 @@
                         role="navigation"
                         aria-label="main navigation"
                     >
-                        <ul>
+                        <ul class="current">
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -95,14 +114,51 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                                <ul>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.asr.cloud_client"
+                                            >spokestack.asr.cloud_client
+                                            module</a
+                                        >
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.asr.speech_recognizer"
+                                            >spokestack.asr.speech_recognizer
+                                            module</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -131,7 +187,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.asr package</li>
+                                <li>Automatic Speech Recognition (ASR)</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -154,26 +210,16 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="spokestack-asr-package"
+                                    id="automatic-speech-recognition-asr"
                                 >
                                     <h1>
-                                        spokestack.asr package<a
+                                        Automatic Speech Recognition (ASR)<a
                                             class="headerlink"
-                                            href="#spokestack-asr-package"
+                                            href="#automatic-speech-recognition-asr"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <div class="section" id="submodules">
-                                        <h2>
-                                            Submodules<a
-                                                class="headerlink"
-                                                href="#submodules"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                     <div
                                         class="section"
                                         id="module-spokestack.asr.cloud_client"
@@ -226,15 +272,6 @@
                                                 >
                                             </dt>
                                             <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >Exception</span
-                                                        ></code
-                                                    >
-                                                </p>
                                                 <p>
                                                     Spokestack api error pass
                                                     through
@@ -336,15 +373,6 @@
                                                 >
                                             </dt>
                                             <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
                                                 <p>
                                                     Spokestack client for cloud
                                                     based speech to text
@@ -1072,15 +1100,6 @@
                                             </dt>
                                             <dd>
                                                 <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
-                                                <p>
                                                     Speech recognizer for use in
                                                     the speech pipeline
                                                 </p>
@@ -1277,24 +1296,40 @@
                                             </dd>
                                         </dl>
                                     </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.asr"
-                                    >
-                                        <span id="module-contents"></span>
-                                        <h2>
-                                            Module contents<a
-                                                class="headerlink"
-                                                href="#module-spokestack.asr"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <footer>
+                            <div
+                                class="rst-footer-buttons"
+                                role="navigation"
+                                aria-label="footer navigation"
+                            >
+                                <a
+                                    href="spokestack.nlu.html"
+                                    class="btn btn-neutral float-right"
+                                    title="Natural Language Understanding (NLU)"
+                                    accesskey="n"
+                                    rel="next"
+                                    >Next
+                                    <span
+                                        class="fa fa-arrow-circle-right"
+                                    ></span
+                                ></a>
+
+                                <a
+                                    href="spokestack.tts.clients.html"
+                                    class="btn btn-neutral float-left"
+                                    title="Spokestack"
+                                    accesskey="p"
+                                    rel="prev"
+                                    ><span
+                                        class="fa fa-arrow-circle-left"
+                                    ></span>
+                                    Previous</a
+                                >
+                            </div>
+
                             <hr />
 
                             <div role="contentinfo">

@@ -80,8 +80,15 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -95,14 +102,35 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -155,7 +183,6 @@
                                     <a href="#E"><strong>E</strong></a> |
                                     <a href="#F"><strong>F</strong></a> |
                                     <a href="#I"><strong>I</strong></a> |
-                                    <a href="#L"><strong>L</strong></a> |
                                     <a href="#M"><strong>M</strong></a> |
                                     <a href="#O"><strong>O</strong></a> |
                                     <a href="#P"><strong>P</strong></a> |
@@ -199,10 +226,6 @@
                                                         >append_buffer()
                                                         (spokestack.context.SpeechContext
                                                         method)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.append_buffer"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -229,10 +252,6 @@
                                                         >buffer()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.buffer"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                             </ul>
@@ -267,31 +286,28 @@
                                                         >clear_buffer()
                                                         (spokestack.context.SpeechContext
                                                         method)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.clear_buffer"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                                 <li>
                                                     <a
-                                                        href="spokestack.tts.html#spokestack.tts.manager.close"
-                                                        >close() (in module
-                                                        spokestack.tts.manager)</a
+                                                        href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
+                                                        >close()
+                                                        (spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                        method)</a
                                                     >
 
                                                     <ul>
                                                         <li>
                                                             <a
-                                                                href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
-                                                                >(spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                                href="spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.close"
+                                                                >(spokestack.io.pyaudio.PyAudioInput
                                                                 method)</a
                                                             >
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href="spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.close"
-                                                                >(spokestack.io.pyaudio.PyAudioInput
+                                                                href="spokestack.tts.html#spokestack.tts.manager.TextToSpeechManager.close"
+                                                                >(spokestack.tts.manager.TextToSpeechManager
                                                                 method)</a
                                                             >
                                                         </li>
@@ -327,10 +343,6 @@
                                                         >confidence()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.confidence"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                                 <li>
@@ -475,10 +487,6 @@
                                                         >is_active()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.is_active"
-                                                        >[1]</a
                                                     >
 
                                                     <ul>
@@ -538,10 +546,6 @@
                                                         >is_speech()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.is_speech"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                                 <li>
@@ -550,31 +554,6 @@
                                                         >is_stopped()
                                                         (spokestack.io.pyaudio.PyAudioInput
                                                         property)</a
-                                                    >
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <h2 id="L">L</h2>
-                                <table
-                                    style="width: 100%;"
-                                    class="indextable genindextable"
-                                >
-                                    <tr>
-                                        <td
-                                            style="
-                                                width: 33%;
-                                                vertical-align: top;
-                                            "
-                                        >
-                                            <ul>
-                                                <li>
-                                                    <a
-                                                        href="spokestack.html#spokestack.utils.load_json"
-                                                        >load_json() (in module
-                                                        spokestack.utils)</a
                                                     >
                                                 </li>
                                             </ul>
@@ -601,18 +580,6 @@
                                                     <ul>
                                                         <li>
                                                             <a
-                                                                href="spokestack.html#module-spokestack"
-                                                                >spokestack</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.asr.html#module-spokestack.asr"
-                                                                >spokestack.asr</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 href="spokestack.asr.html#module-spokestack.asr.cloud_client"
                                                                 >spokestack.asr.cloud_client</a
                                                             >
@@ -627,16 +594,6 @@
                                                             <a
                                                                 href="spokestack.context.html#module-spokestack.context"
                                                                 >spokestack.context</a
-                                                            >,
-                                                            <a
-                                                                href="spokestack.html#module-spokestack.context"
-                                                                >[1]</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.io.html#module-spokestack.io"
-                                                                >spokestack.io</a
                                                             >
                                                         </li>
                                                         <li>
@@ -647,26 +604,8 @@
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href="spokestack.models.html#module-spokestack.models"
-                                                                >spokestack.models</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 href="spokestack.models.html#module-spokestack.models.tensorflow"
                                                                 >spokestack.models.tensorflow</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.nlu.html#module-spokestack.nlu"
-                                                                >spokestack.nlu</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers"
-                                                                >spokestack.nlu.parsers</a
                                                             >
                                                         </li>
                                                         <li>
@@ -689,12 +628,6 @@
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.maps"
-                                                                >spokestack.nlu.parsers.maps</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.selset"
                                                                 >spokestack.nlu.parsers.selset</a
                                                             >
@@ -703,18 +636,6 @@
                                                             <a
                                                                 href="spokestack.nlu.html#module-spokestack.nlu.tflite"
                                                                 >spokestack.nlu.tflite</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.tts.html#module-spokestack.tts"
-                                                                >spokestack.tts</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.tts.clients.html#module-spokestack.tts.clients"
-                                                                >spokestack.tts.clients</a
                                                             >
                                                         </li>
                                                         <li>
@@ -731,26 +652,8 @@
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href="spokestack.html#module-spokestack.utils"
-                                                                >spokestack.utils</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.vad.html#module-spokestack.vad"
-                                                                >spokestack.vad</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 href="spokestack.vad.html#module-spokestack.vad.webrtc"
                                                                 >spokestack.vad.webrtc</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.wakeword.html#module-spokestack.wakeword"
-                                                                >spokestack.wakeword</a
                                                             >
                                                         </li>
                                                         <li>
@@ -894,13 +797,6 @@
                                                     <ul>
                                                         <li>
                                                             <a
-                                                                href="spokestack.tts.html#spokestack.tts.manager.SequenceIO.read"
-                                                                >(spokestack.tts.manager.SequenceIO
-                                                                method)</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
                                                                 href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.read"
                                                                 >(spokestack.wakeword.ring_buffer.RingBuffer
                                                                 method)</a
@@ -938,10 +834,6 @@
                                                                 href="spokestack.context.html#spokestack.context.SpeechContext.reset"
                                                                 >(spokestack.context.SpeechContext
                                                                 method)</a
-                                                            >,
-                                                            <a
-                                                                href="spokestack.html#spokestack.context.SpeechContext.reset"
-                                                                >[1]</a
                                                             >
                                                         </li>
                                                         <li>
@@ -1045,35 +937,7 @@
                                                         href="spokestack.context.html#spokestack.context.SpeechContext"
                                                         >SpeechContext (class in
                                                         spokestack.context)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext"
-                                                        >[1]</a
                                                     >
-                                                </li>
-                                                <li>
-                                                    spokestack
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.html#module-spokestack"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.asr
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.asr.html#module-spokestack.asr"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                                 <li>
                                                     spokestack.asr.cloud_client
@@ -1107,22 +971,6 @@
                                                             <a
                                                                 href="spokestack.context.html#module-spokestack.context"
                                                                 >module</a
-                                                            >,
-                                                            <a
-                                                                href="spokestack.html#module-spokestack.context"
-                                                                >[1]</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.io
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.io.html#module-spokestack.io"
-                                                                >module</a
                                                             >
                                                         </li>
                                                     </ul>
@@ -1140,48 +988,12 @@
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    spokestack.models
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.models.html#module-spokestack.models"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
                                                     spokestack.models.tensorflow
 
                                                     <ul>
                                                         <li>
                                                             <a
                                                                 href="spokestack.models.html#module-spokestack.models.tensorflow"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.nlu
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.nlu.html#module-spokestack.nlu"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.nlu.parsers
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers"
                                                                 >module</a
                                                             >
                                                         </li>
@@ -1233,18 +1045,6 @@
                                         >
                                             <ul>
                                                 <li>
-                                                    spokestack.nlu.parsers.maps
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.maps"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
                                                     spokestack.nlu.parsers.selset
 
                                                     <ul>
@@ -1263,30 +1063,6 @@
                                                         <li>
                                                             <a
                                                                 href="spokestack.nlu.html#module-spokestack.nlu.tflite"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.tts
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.tts.html#module-spokestack.tts"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.tts.clients
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.tts.clients.html#module-spokestack.tts.clients"
                                                                 >module</a
                                                             >
                                                         </li>
@@ -1317,48 +1093,12 @@
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    spokestack.utils
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.html#module-spokestack.utils"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.vad
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.vad.html#module-spokestack.vad"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
                                                     spokestack.vad.webrtc
 
                                                     <ul>
                                                         <li>
                                                             <a
                                                                 href="spokestack.vad.html#module-spokestack.vad.webrtc"
-                                                                >module</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    spokestack.wakeword
-
-                                                    <ul>
-                                                        <li>
-                                                            <a
-                                                                href="spokestack.wakeword.html#module-spokestack.wakeword"
                                                                 >module</a
                                                             >
                                                         </li>
@@ -1485,10 +1225,6 @@
                                                         >transcript()
                                                         (spokestack.context.SpeechContext
                                                         property)</a
-                                                    >,
-                                                    <a
-                                                        href="spokestack.html#spokestack.context.SpeechContext.transcript"
-                                                        >[1]</a
                                                     >
                                                 </li>
                                                 <li>

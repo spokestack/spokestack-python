@@ -1,30 +1,14 @@
-spokestack.wakeword package
+Wakeword
 ===========================
 
-Submodules
-----------
-
-spokestack.wakeword.ring\_buffer module
+Ring Buffer
 ---------------------------------------
 
 .. automodule:: spokestack.wakeword.ring_buffer
    :members:
-   :undoc-members:
-   :show-inheritance:
 
-spokestack.wakeword.tflite module
+TFLite Model
 ---------------------------------
 
 .. automodule:: spokestack.wakeword.tflite
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.wakeword
-   :members:
-   :undoc-members:
-   :show-inheritance:

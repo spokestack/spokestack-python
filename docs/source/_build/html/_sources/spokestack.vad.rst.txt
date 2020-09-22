@@ -1,22 +1,8 @@
-spokestack.vad package
+Voice Activity Detection (VAD)
 ======================
 
-Submodules
-----------
-
-spokestack.vad.webrtc module
+WebRTC
 ----------------------------
 
 .. automodule:: spokestack.vad.webrtc
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.vad
-   :members:
-   :undoc-members:
-   :show-inheritance:

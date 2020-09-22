@@ -1,10 +1,4 @@
-spokestack.nlu.parsers package
-==============================
-
-Submodules
-----------
-
-spokestack.nlu.parsers.digits module
+Digits
 ------------------------------------
 
 .. automodule:: spokestack.nlu.parsers.digits
@@ -12,7 +6,7 @@ spokestack.nlu.parsers.digits module
    :undoc-members:
    :show-inheritance:
 
-spokestack.nlu.parsers.entity module
+Entity
 ------------------------------------
 
 .. automodule:: spokestack.nlu.parsers.entity
@@ -20,7 +14,7 @@ spokestack.nlu.parsers.entity module
    :undoc-members:
    :show-inheritance:
 
-spokestack.nlu.parsers.integer module
+Integer
 -------------------------------------
 
 .. automodule:: spokestack.nlu.parsers.integer
@@ -28,27 +22,10 @@ spokestack.nlu.parsers.integer module
    :undoc-members:
    :show-inheritance:
 
-spokestack.nlu.parsers.maps module
-----------------------------------
-
-.. automodule:: spokestack.nlu.parsers.maps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-spokestack.nlu.parsers.selset module
+Selset
 ------------------------------------
 
 .. automodule:: spokestack.nlu.parsers.selset
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.nlu.parsers
    :members:
    :undoc-members:
    :show-inheritance:

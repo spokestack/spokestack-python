@@ -7,10 +7,12 @@ spokestack
 ==================
 
 .. toctree::
-   :maxdepth: 6
 
-   spokestack.mic
+   spokestack.io
    spokestack.vad
    spokestack.context
    spokestack.wakeword
    spokestack.models
+   spokestack.tts
+   spokestack.asr
+   spokestack.nlu

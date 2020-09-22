@@ -5,9 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>
-            spokestack.wakeword package &mdash; spokestack documentation
-        </title>
+        <title>Wakeword &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,11 +29,7 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
-        <link
-            rel="next"
-            title="spokestack.models package"
-            href="spokestack.models.html"
-        />
+        <link rel="next" title="Models" href="spokestack.models.html" />
         <link
             rel="prev"
             title="Speech Context"
@@ -92,8 +86,15 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -105,37 +106,21 @@
                             </li>
                             <li class="toctree-l1 current">
                                 <a class="current reference internal" href="#"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                                 <ul>
                                     <li class="toctree-l2">
                                         <a
                                             class="reference internal"
-                                            href="#submodules"
-                                            >Submodules</a
-                                        >
-                                    </li>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
                                             href="#module-spokestack.wakeword.ring_buffer"
-                                            >spokestack.wakeword.ring_buffer
-                                            module</a
+                                            >Ring Buffer</a
                                         >
                                     </li>
                                     <li class="toctree-l2">
                                         <a
                                             class="reference internal"
                                             href="#module-spokestack.wakeword.tflite"
-                                            >spokestack.wakeword.tflite
-                                            module</a
-                                        >
-                                    </li>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
-                                            href="#module-spokestack.wakeword"
-                                            >Module contents</a
+                                            >TFLite Model</a
                                         >
                                     </li>
                                 </ul>
@@ -144,7 +129,28 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -173,7 +179,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.wakeword package</li>
+                                <li>Wakeword</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -194,38 +200,22 @@
                             itemtype="http://schema.org/Article"
                         >
                             <div itemprop="articleBody">
-                                <div
-                                    class="section"
-                                    id="spokestack-wakeword-package"
-                                >
+                                <div class="section" id="wakeword">
                                     <h1>
-                                        spokestack.wakeword package<a
+                                        Wakeword<a
                                             class="headerlink"
-                                            href="#spokestack-wakeword-package"
+                                            href="#wakeword"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <div class="section" id="submodules">
-                                        <h2>
-                                            Submodules<a
-                                                class="headerlink"
-                                                href="#submodules"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                     <div
                                         class="section"
                                         id="module-spokestack.wakeword.ring_buffer"
                                     >
-                                        <span
-                                            id="spokestack-wakeword-ring-buffer-module"
-                                        ></span>
+                                        <span id="ring-buffer"></span>
                                         <h2>
-                                            spokestack.wakeword.ring_buffer
-                                            module<a
+                                            Ring Buffer<a
                                                 class="headerlink"
                                                 href="#module-spokestack.wakeword.ring_buffer"
                                                 title="Permalink to this headline"
@@ -267,15 +257,6 @@
                                                 >
                                             </dt>
                                             <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
                                                 <p>ring buffer</p>
                                                 <dl class="py method">
                                                     <dt
@@ -836,11 +817,9 @@
                                         class="section"
                                         id="module-spokestack.wakeword.tflite"
                                     >
-                                        <span
-                                            id="spokestack-wakeword-tflite-module"
-                                        ></span>
+                                        <span id="tflite-model"></span>
                                         <h2>
-                                            spokestack.wakeword.tflite module<a
+                                            TFLite Model<a
                                                 class="headerlink"
                                                 href="#module-spokestack.wakeword.tflite"
                                                 title="Permalink to this headline"
@@ -925,15 +904,6 @@
                                                 >
                                             </dt>
                                             <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
                                                 <p>
                                                     Detects the presence of a
                                                     wakeword in the audio input
@@ -1086,20 +1056,6 @@
                                             </dd>
                                         </dl>
                                     </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.wakeword"
-                                    >
-                                        <span id="module-contents"></span>
-                                        <h2>
-                                            Module contents<a
-                                                class="headerlink"
-                                                href="#module-spokestack.wakeword"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1112,7 +1068,7 @@
                                 <a
                                     href="spokestack.models.html"
                                     class="btn btn-neutral float-right"
-                                    title="spokestack.models package"
+                                    title="Models"
                                     accesskey="n"
                                     rel="next"
                                     >Next
