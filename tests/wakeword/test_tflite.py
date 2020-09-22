@@ -58,7 +58,7 @@ def test_detect_vad_active(_mock):
         detector(context, test_frame)
         assert not context.is_active
 
-    detector.reset()
+    detector.close()
 
 
 @mock.patch("spokestack.wakeword.tflite.TFLiteModel", new_callable=ModelFactory)

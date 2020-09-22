@@ -1,4 +1,4 @@
-import setuptools
+import setuptools  # type: ignore
 
 
 with open("README.md", "r") as fh:
@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="spokestack",
-    version="0.0.1",
+    version="0.0.3",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",

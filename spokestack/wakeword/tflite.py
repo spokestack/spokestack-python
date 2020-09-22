@@ -26,7 +26,7 @@ class WakewordTrigger:
 
     def __init__(
         self,
-        pre_emphasis: float = 0.0,
+        pre_emphasis: float = 0.97,
         sample_rate: int = 16000,
         fft_window_type: str = "hann",
         fft_hop_length: int = 10,
@@ -98,6 +98,7 @@ class WakewordTrigger:
         Returns: None
 
         """
+
         # detect vad edges for wakeword deactivation
         vad_fall = self._is_speech and not context.is_speech
         self._is_speech = context.is_speech
@@ -177,6 +178,7 @@ class WakewordTrigger:
 
         if posterior > self._posterior_threshold:
             context.is_active = True
+            context.event("activate")
         if posterior > self._posterior_max:
             self._posterior_max = posterior
 
@@ -187,3 +189,7 @@ class WakewordTrigger:
         self.encode_window.reset().fill(-1.0)
         self.state[:] = 0.0
         self._posterior_max = 0.0
+
+    def close(self) -> None:
+        """ Close interface for use in the pipeline """
+        self.reset()

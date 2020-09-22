@@ -1,9 +1,9 @@
 """
 This module contains a context class to manage
-state between members of the procesing pipeline
+state between members of the processing pipeline
 """
 from collections import deque
-from typing import Deque
+from typing import Callable, Deque
 
 
 class SpeechContext:
@@ -14,12 +14,13 @@ class SpeechContext:
     """
 
     def __init__(self, **kwargs) -> None:
-        self._speech: bool = False
-        self._active: bool = False
-        self._managed: bool = False
+        self._is_speech: bool = False
+        self._is_active: bool = False
+        self._is_managed: bool = False
         self._transcript: str = ""
         self._confidence: float = 0.0
-        self._buffer: deque = deque()
+        self._handlers: dict = {}
+        self._buffer: deque = deque(maxlen=512)
 
     @property
     def buffer(self) -> Deque[bytes]:
@@ -42,6 +43,27 @@ class SpeechContext:
         """ Empties the current buffer. """
         self._buffer.clear()
 
+    def add_handler(self, name: str, function: Callable) -> None:
+        """ Adds a handler to the context
+
+        Args:
+            name (str): The name of the event handler
+            function (Callable): event handler function
+
+        """
+        self._handlers[name] = function
+
+    def event(self, name: str) -> None:
+        """ Calls the event handler
+
+        Args:
+            name (str): The name of the event handler
+
+        """
+        handler = self._handlers.get(name)
+        if handler:
+            handler(self)
+
     @property
     def is_speech(self) -> bool:
         """This property is to manage if speech is present in the current state
@@ -50,7 +72,7 @@ class SpeechContext:
         Returns:
             bool: 'True' if is_speech set to 'True', 'False' otherwise
         """
-        return self._speech
+        return self._is_speech
 
     @is_speech.setter
     def is_speech(self, value: bool) -> None:
@@ -59,7 +81,7 @@ class SpeechContext:
         Args:
             value (bool): sets is_speech to passed argument
         """
-        self._speech = value
+        self._is_speech = value
 
     @property
     def is_active(self) -> bool:
@@ -68,7 +90,7 @@ class SpeechContext:
         Returns:
             bool: 'True' if context is active, 'False' otherwise.
         """
-        return self._active
+        return self._is_active
 
     @is_active.setter
     def is_active(self, value: bool) -> None:
@@ -77,7 +99,25 @@ class SpeechContext:
         Args:
             value (bool): Boolean to set context activity
         """
-        self._active = value
+        self._is_active = value
+
+    @property
+    def is_managed(self) -> bool:
+        """ Whether the context is being managed internally
+
+        Returns:
+            bool: 'True' if is_managed set to 'True', 'False' otherwise
+        """
+        return self._is_managed
+
+    @is_managed.setter
+    def is_managed(self, value: bool) -> None:
+        """This method is the setter for the is_managed property.
+
+        Args:
+            value (bool): sets is_managed to passed argument
+        """
+        self._is_managed = value
 
     @property
     def transcript(self) -> str:
@@ -119,6 +159,7 @@ class SpeechContext:
         """Resets the context state"""
         self.is_speech = False
         self.is_active = False
+        self.is_managed = False
         self.transcript = ""
         self.confidence = 0.0
         self.clear_buffer()

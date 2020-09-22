@@ -3,6 +3,7 @@ This module contains the webrtc component for
 voice activity detection (vad)
 """
 
+import numpy as np  # type: ignore
 import webrtcvad  # type: ignore
 
 from spokestack.context import SpeechContext
@@ -28,10 +29,10 @@ class VoiceActivityDetector:
 
     def __init__(
         self,
-        sample_rate: int,
-        frame_width: int,
-        vad_rise_delay: int,
-        vad_fall_delay: int,
+        sample_rate: int = 16000,
+        frame_width: int = 20,
+        vad_rise_delay: int = 0,
+        vad_fall_delay: int = 0,
         mode: int = QUALITY,
     ) -> None:
 
@@ -44,15 +45,16 @@ class VoiceActivityDetector:
         self._run_value: int = 0
         self._run_length: int = 0
 
-    def __call__(self, context: SpeechContext, frame: bytes) -> None:
+    def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
         """Processes a single frame of audio to detemine if voice is present
 
         Args:
             context (SpeechContext): State based information that needs to be shared
             between pieces of the pipeline
-            frame (bytes): Single frame of audio from an input source
+            frame (np.ndarray): Single frame of PCM-16 audio from an input source
 
         """
+        frame = frame.tobytes()
         result: bool = self._vad.is_speech(frame, self._sample_rate)
 
         raw = result > 0
@@ -72,3 +74,7 @@ class VoiceActivityDetector:
         """ Resets the current state """
         self._run_value = 0
         self._run_length = 0
+
+    def close(self) -> None:
+        """ Close interface for use in pipeline """
+        self.reset()

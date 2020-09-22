@@ -15,10 +15,10 @@ def test_vad_is_triggered(mock_class):
     detector = VoiceActivityDetector(
         sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=0
     )
-    frame = np.zeros(160, np.int16).tobytes()
+    frame = np.zeros(160, np.int16)
     detector(context, frame)
     assert context.is_speech
-    detector.reset()
+    detector.close()
 
 
 @patch("webrtcvad.Vad.is_speech", return_value=True)
@@ -28,12 +28,13 @@ def test_vad_rise_delay(mock_class):
         sample_rate=16000, frame_width=10, vad_rise_delay=30, vad_fall_delay=0
     )
     for i in range(3):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         if i < 2:
             assert not context.is_speech
         else:
             assert context.is_speech
+    detector.close()
 
 
 def test_vad_fall_triggered():
@@ -42,19 +43,20 @@ def test_vad_fall_triggered():
         sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=20
     )
     with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert context.is_speech
 
     with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert context.is_speech
 
     with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert context.is_speech
+    detector.close()
 
 
 def test_vad_fall_untriggered():
@@ -63,16 +65,17 @@ def test_vad_fall_untriggered():
         sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=20
     )
     with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert context.is_speech
 
     with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert context.is_speech
 
     with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16).tobytes()
+        frame = np.zeros(160, np.int16)
         detector(context, frame)
         assert not context.is_speech
+    detector.close()

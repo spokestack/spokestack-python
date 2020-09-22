@@ -1,5 +1,5 @@
 Automatic Speech Recognition (ASR)
-======================
+===================================
 
 spokestack.asr.cloud_client module
 -----------------------------------

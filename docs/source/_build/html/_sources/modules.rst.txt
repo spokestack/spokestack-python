@@ -1,6 +1,0 @@
-spokestack
-==========
-
-.. toctree::
-
-   spokestack

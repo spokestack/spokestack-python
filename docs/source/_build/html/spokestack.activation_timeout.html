@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Spokestack &mdash; spokestack documentation</title>
+        <title>Activation Timeout &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,14 +31,10 @@
         <link rel="search" title="Search" href="search.html" />
         <link
             rel="next"
-            title="Automatic Speech Recognition (ASR)"
-            href="spokestack.asr.html"
+            title="Speech Pipeline"
+            href="spokestack.pipeline.html"
         />
-        <link
-            rel="prev"
-            title="Text to Speech (TTS)"
-            href="spokestack.tts.html"
-        />
+        <link rel="prev" title="Digits" href="spokestack.nlu.parsers.html" />
     </head>
 
     <body class="wy-body-for-nav">
@@ -122,37 +118,12 @@
                                     >Models</a
                                 >
                             </li>
-                            <li class="toctree-l1 current">
+                            <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.tts.html"
                                     >Text to Speech (TTS)</a
                                 >
-                                <ul class="current">
-                                    <li class="toctree-l2 current">
-                                        <a
-                                            class="reference internal"
-                                            href="spokestack.tts.html#clients"
-                                            >Clients</a
-                                        >
-                                        <ul class="current">
-                                            <li class="toctree-l3 current">
-                                                <a
-                                                    class="current reference internal"
-                                                    href="#"
-                                                    >Spokestack</a
-                                                >
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="toctree-l2">
-                                        <a
-                                            class="reference internal"
-                                            href="spokestack.tts.html#module-spokestack.tts.manager"
-                                            >Manager</a
-                                        >
-                                    </li>
-                                </ul>
                             </li>
                             <li class="toctree-l1">
                                 <a
@@ -168,10 +139,8 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
-                            <li class="toctree-l1">
-                                <a
-                                    class="reference internal"
-                                    href="spokestack.activation_timeout.html"
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#"
                                     >Activation Timeout</a
                                 >
                             </li>
@@ -208,18 +177,11 @@
                                     &raquo;
                                 </li>
 
-                                <li>
-                                    <a href="spokestack.tts.html"
-                                        >Text to Speech (TTS)</a
-                                    >
-                                    &raquo;
-                                </li>
-
-                                <li>Spokestack</li>
+                                <li>Activation Timeout</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
-                                        href="_sources/spokestack.tts.clients.rst.txt"
+                                        href="_sources/spokestack.activation_timeout.rst.txt"
                                         rel="nofollow"
                                     >
                                         View page source</a
@@ -238,117 +200,73 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="module-spokestack.tts.clients.spokestack"
+                                    id="module-spokestack.activation_timeout"
                                 >
-                                    <span id="spokestack"></span>
+                                    <span id="activation-timeout"></span>
                                     <h1>
-                                        Spokestack<a
+                                        Activation Timeout<a
                                             class="headerlink"
-                                            href="#module-spokestack.tts.clients.spokestack"
+                                            href="#module-spokestack.activation_timeout"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
                                     <p>
-                                        This module contains the Spokestack
-                                        client for text to speech
+                                        This module manages the timeout for
+                                        speech pipeline activation.
                                     </p>
-                                    <dl class="py exception">
-                                        <dt
-                                            id="spokestack.tts.clients.spokestack.TTSError"
-                                        >
-                                            <em class="property">exception </em
-                                            ><code
-                                                class="sig-prename descclassname"
-                                                >spokestack.tts.clients.spokestack.</code
-                                            ><code class="sig-name descname"
-                                                >TTSError</code
-                                            ><span class="sig-paren">(</span
-                                            ><em class="sig-param"
-                                                ><span class="n"
-                                                    >response</span
-                                                ></em
-                                            ><span class="sig-paren">)</span
-                                            ><a
-                                                class="reference internal"
-                                                href="_modules/spokestack/tts/clients/spokestack.html#TTSError"
-                                                ><span class="viewcode-link"
-                                                    >[source]</span
-                                                ></a
-                                            ><a
-                                                class="headerlink"
-                                                href="#spokestack.tts.clients.spokestack.TTSError"
-                                                title="Permalink to this definition"
-                                                >¶</a
-                                            >
-                                        </dt>
-                                        <dd>
-                                            <p>
-                                                Bases:
-                                                <code
-                                                    class="xref py py-class docutils literal notranslate"
-                                                    ><span class="pre"
-                                                        >Exception</span
-                                                    ></code
-                                                >
-                                            </p>
-                                            <p>Text to speech error wrapper</p>
-                                        </dd>
-                                    </dl>
-
                                     <dl class="py class">
                                         <dt
-                                            id="spokestack.tts.clients.spokestack.TextToSpeechClient"
+                                            id="spokestack.activation_timeout.ActivationTimeout"
                                         >
                                             <em class="property">class </em
                                             ><code
                                                 class="sig-prename descclassname"
-                                                >spokestack.tts.clients.spokestack.</code
+                                                >spokestack.activation_timeout.</code
                                             ><code class="sig-name descname"
-                                                >TextToSpeechClient</code
+                                                >ActivationTimeout</code
                                             ><span class="sig-paren">(</span
                                             ><em class="sig-param"
                                                 ><span class="n"
-                                                    >key_id</span
+                                                    >frame_width</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >20</span
                                                 ></em
                                             >,
                                             <em class="sig-param"
                                                 ><span class="n"
-                                                    >key_secret</span
+                                                    >min_active</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >500</span
                                                 ></em
                                             >,
                                             <em class="sig-param"
-                                                ><span class="n">url</span
+                                                ><span class="n"
+                                                    >max_active</span
                                                 ><span class="o">=</span
                                                 ><span class="default_value"
-                                                    >'https://api.spokestack.io/v1'</span
+                                                    >5000</span
                                                 ></em
                                             ><span class="sig-paren">)</span
                                             ><a
                                                 class="reference internal"
-                                                href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient"
+                                                href="_modules/spokestack/activation_timeout.html#ActivationTimeout"
                                                 ><span class="viewcode-link"
                                                     >[source]</span
                                                 ></a
                                             ><a
                                                 class="headerlink"
-                                                href="#spokestack.tts.clients.spokestack.TextToSpeechClient"
+                                                href="#spokestack.activation_timeout.ActivationTimeout"
                                                 title="Permalink to this definition"
                                                 >¶</a
                                             >
                                         </dt>
                                         <dd>
                                             <p>
-                                                Bases:
-                                                <code
-                                                    class="xref py py-class docutils literal notranslate"
-                                                    ><span class="pre"
-                                                        >object</span
-                                                    ></code
-                                                >
-                                            </p>
-                                            <p>
-                                                Spokestack Text to Speech Client
+                                                Speech pipeline activation
+                                                timeout
                                             </p>
                                             <dl class="field-list simple">
                                                 <dt class="field-odd">
@@ -359,33 +277,33 @@
                                                         <li>
                                                             <p>
                                                                 <strong
-                                                                    >key_id</strong
+                                                                    >frame_width</strong
                                                                 >
-                                                                (<em>str</em>) –
-                                                                identity from
-                                                                spokestack api
-                                                                credentials
+                                                                (<em>int</em>) –
+                                                                frame width of
+                                                                the audio (ms)
                                                             </p>
                                                         </li>
                                                         <li>
                                                             <p>
                                                                 <strong
-                                                                    >key_secret</strong
+                                                                    >min_active</strong
                                                                 >
-                                                                (<em>str</em>) –
-                                                                secret key from
-                                                                spokestack api
-                                                                credentials
+                                                                (<em>int</em>) –
+                                                                the minimum
+                                                                length of an
+                                                                activation (ms)
                                                             </p>
                                                         </li>
                                                         <li>
                                                             <p>
                                                                 <strong
-                                                                    >url</strong
+                                                                    >max_active</strong
                                                                 >
-                                                                (<em>str</em>) –
-                                                                spokestack api
-                                                                url
+                                                                (<em>int</em>) –
+                                                                the maximum
+                                                                length of an
+                                                                activation (ms)
                                                             </p>
                                                         </li>
                                                     </ul>
@@ -393,127 +311,152 @@
                                             </dl>
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
+                                                    id="spokestack.activation_timeout.ActivationTimeout.close"
                                                 >
                                                     <code
                                                         class="sig-name descname"
-                                                        >synthesize</code
+                                                        >close</code
                                                     ><span class="sig-paren"
                                                         >(</span
-                                                    ><em class="sig-param"
-                                                        ><span class="n"
-                                                            >utterance</span
-                                                        ></em
-                                                    >,
-                                                    <em class="sig-param"
-                                                        ><span class="n"
-                                                            >mode</span
-                                                        ><span class="o">=</span
-                                                        ><span
-                                                            class="default_value"
-                                                            >'text'</span
-                                                        ></em
-                                                    >,
-                                                    <em class="sig-param"
-                                                        ><span class="n"
-                                                            >voice</span
-                                                        ><span class="o">=</span
-                                                        ><span
-                                                            class="default_value"
-                                                            >'demo-male'</span
-                                                        ></em
                                                     ><span class="sig-paren"
                                                         >)</span
                                                     ><a
                                                         class="reference internal"
-                                                        href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient.synthesize"
+                                                        href="_modules/spokestack/activation_timeout.html#ActivationTimeout.close"
                                                         ><span
                                                             class="viewcode-link"
                                                             >[source]</span
                                                         ></a
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
+                                                        href="#spokestack.activation_timeout.ActivationTimeout.close"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
                                                     <p>
-                                                        Converts the given
-                                                        utterance to speech
+                                                        Sets active length to
+                                                        zero
                                                     </p>
                                                     <dl
                                                         class="field-list simple"
                                                     >
                                                         <dt class="field-odd">
-                                                            Parameters
+                                                            Return type
                                                         </dt>
                                                         <dd class="field-odd">
-                                                            <ul class="simple">
-                                                                <li>
-                                                                    <p>
-                                                                        <strong
-                                                                            >utterance</strong
-                                                                        >
-                                                                        (<em>str</em>)
-                                                                        – string
-                                                                        that
-                                                                        needs to
-                                                                        be
-                                                                        rendered
-                                                                        as
-                                                                        speech.
-                                                                    </p>
-                                                                </li>
-                                                                <li>
-                                                                    <p>
-                                                                        <strong
-                                                                            >mode</strong
-                                                                        >
-                                                                        (<em>str</em>)
-                                                                        –
-                                                                        synthesis
-                                                                        mode to
-                                                                        use with
-                                                                        utterance.
-                                                                        text,
-                                                                        ssml,
-                                                                        markdown.
-                                                                    </p>
-                                                                </li>
-                                                                <li>
-                                                                    <p>
-                                                                        <strong
-                                                                            >voice</strong
-                                                                        >
-                                                                        (<em>str</em>)
-                                                                        – name
-                                                                        of the
-                                                                        tts
-                                                                        voice.
-                                                                    </p>
-                                                                </li>
-                                                            </ul>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Returns
-                                                        </dt>
-                                                        <dd class="field-even">
                                                             <p>
-                                                                Encoded audio
-                                                                response in the
-                                                                form of a
-                                                                sequence of
-                                                                bytes
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
                                                             </p>
                                                         </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.activation_timeout.ActivationTimeout.deactivate"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >deactivate</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><em class="sig-param"
+                                                        ><span class="n"
+                                                            >context</span
+                                                        ></em
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/activation_timeout.html#ActivationTimeout.deactivate"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.activation_timeout.ActivationTimeout.deactivate"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Deactivates the speech
+                                                        pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
                                                         <dt class="field-odd">
                                                             Return type
                                                         </dt>
                                                         <dd class="field-odd">
                                                             <p>
-                                                                (Iterator[bytes])
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.activation_timeout.ActivationTimeout.reset"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >reset</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/activation_timeout.html#ActivationTimeout.reset"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.activation_timeout.ActivationTimeout.reset"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>Resets active length</p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
                                                             </p>
                                                         </dd>
                                                     </dl>
@@ -531,9 +474,9 @@
                                 aria-label="footer navigation"
                             >
                                 <a
-                                    href="spokestack.asr.html"
+                                    href="spokestack.pipeline.html"
                                     class="btn btn-neutral float-right"
-                                    title="Automatic Speech Recognition (ASR)"
+                                    title="Speech Pipeline"
                                     accesskey="n"
                                     rel="next"
                                     >Next
@@ -543,9 +486,9 @@
                                 ></a>
 
                                 <a
-                                    href="spokestack.tts.html"
+                                    href="spokestack.nlu.parsers.html"
                                     class="btn btn-neutral float-left"
-                                    title="Text to Speech (TTS)"
+                                    title="Digits"
                                     accesskey="p"
                                     rel="prev"
                                     ><span

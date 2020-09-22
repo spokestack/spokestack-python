@@ -51,3 +51,15 @@ def test_context():
     assert not context.transcript
     assert context.confidence == 0.0
     assert len(context.buffer) == 0
+
+
+def test_handler():
+    def on_speech(context):
+        context.transcript = "event handled"
+
+    context = SpeechContext()
+    context.add_handler("recognize", on_speech)
+
+    context.event("recognize")
+
+    assert context.transcript == "event handled"

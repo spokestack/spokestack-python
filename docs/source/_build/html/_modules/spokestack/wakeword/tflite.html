@@ -146,6 +146,20 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -224,7 +238,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">pre_emphasis</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">pre_emphasis</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.97</span><span class="p">,</span>
         <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
         <span class="n">fft_window_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hann&quot;</span><span class="p">,</span>
         <span class="n">fft_hop_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
@@ -296,6 +310,7 @@
 <span class="sd">        Returns: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1"># detect vad edges for wakeword deactivation</span>
         <span class="n">vad_fall</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span>
@@ -375,6 +390,7 @@
 
         <span class="k">if</span> <span class="n">posterior</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_threshold</span><span class="p">:</span>
             <span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;activate&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">posterior</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span> <span class="o">=</span> <span class="n">posterior</span>
 
@@ -384,7 +400,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_window</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">encode_window</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span> <span class="o">=</span> <span class="mf">0.0</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span> <span class="o">=</span> <span class="mf">0.0</span></div>
+
+<div class="viewcode-block" id="WakewordTrigger.close"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordTrigger.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Close interface for use in the pipeline &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div></div>
 </pre>
                                 </div>
                             </div>

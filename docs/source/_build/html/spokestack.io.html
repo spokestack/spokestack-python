@@ -146,6 +146,20 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -517,7 +531,8 @@
                                                             >
                                                                 <p>
                                                                     single frame
-                                                                    of audio
+                                                                    of PCM-16
+                                                                    audio
                                                                 </p>
                                                             </dd>
                                                             <dt
@@ -528,7 +543,9 @@
                                                             <dd
                                                                 class="field-even"
                                                             >
-                                                                <p>bytes</p>
+                                                                <p>
+                                                                    np.ndarray
+                                                                </p>
                                                             </dd>
                                                         </dl>
                                                     </dd>

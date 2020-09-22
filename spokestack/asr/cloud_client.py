@@ -62,7 +62,7 @@ class CloudClient:
             "status": None,
         }
         self._sample_rate: int = sample_rate
-        self._is_final: bool = False
+        self._is_final: bool = True
         self._idle_timeout = idle_timeout
         self._idle_count: int = 0
 

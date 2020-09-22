@@ -16,3 +16,5 @@ spokestack
    spokestack.tts
    spokestack.asr
    spokestack.nlu
+   spokestack.activation_timeout
+   spokestack.pipeline
