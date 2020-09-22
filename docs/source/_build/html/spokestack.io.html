@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>spokestack.io package &mdash; spokestack documentation</title>
+        <title>IO &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -29,6 +29,12 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
+        <link
+            rel="next"
+            title="Voice Activity Detection (VAD)"
+            href="spokestack.vad.html"
+        />
+        <link rel="prev" title="spokestack" href="index.html" />
     </head>
 
     <body class="wy-body-for-nav">
@@ -76,12 +82,26 @@
                         role="navigation"
                         aria-label="main navigation"
                     >
-                        <ul>
+                        <ul class="current">
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#"
+                                    >IO</a
+                                >
+                                <ul>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.io.pyaudio"
+                                            >spokestack.io.pyaudio</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -95,14 +115,35 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -131,7 +172,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.io package</li>
+                                <li>IO</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -152,34 +193,22 @@
                             itemtype="http://schema.org/Article"
                         >
                             <div itemprop="articleBody">
-                                <div class="section" id="spokestack-io-package">
+                                <div class="section" id="io">
                                     <h1>
-                                        spokestack.io package<a
+                                        IO<a
                                             class="headerlink"
-                                            href="#spokestack-io-package"
+                                            href="#io"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <div class="section" id="submodules">
-                                        <h2>
-                                            Submodules<a
-                                                class="headerlink"
-                                                href="#submodules"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                     <div
                                         class="section"
                                         id="module-spokestack.io.pyaudio"
                                     >
-                                        <span
-                                            id="spokestack-io-pyaudio-module"
-                                        ></span>
+                                        <span id="spokestack-io-pyaudio"></span>
                                         <h2>
-                                            spokestack.io.pyaudio module<a
+                                            spokestack.io.pyaudio<a
                                                 class="headerlink"
                                                 href="#module-spokestack.io.pyaudio"
                                                 title="Permalink to this headline"
@@ -233,15 +262,6 @@
                                                 >
                                             </dt>
                                             <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
                                                 <p>
                                                     This class retrieves audio
                                                     from an input device
@@ -668,15 +688,6 @@
                                             </dt>
                                             <dd>
                                                 <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
-                                                <p>
                                                     Outputs audio to the default
                                                     system output
                                                 </p>
@@ -791,24 +802,40 @@
                                             </dd>
                                         </dl>
                                     </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.io"
-                                    >
-                                        <span id="module-contents"></span>
-                                        <h2>
-                                            Module contents<a
-                                                class="headerlink"
-                                                href="#module-spokestack.io"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <footer>
+                            <div
+                                class="rst-footer-buttons"
+                                role="navigation"
+                                aria-label="footer navigation"
+                            >
+                                <a
+                                    href="spokestack.vad.html"
+                                    class="btn btn-neutral float-right"
+                                    title="Voice Activity Detection (VAD)"
+                                    accesskey="n"
+                                    rel="next"
+                                    >Next
+                                    <span
+                                        class="fa fa-arrow-circle-right"
+                                    ></span
+                                ></a>
+
+                                <a
+                                    href="index.html"
+                                    class="btn btn-neutral float-left"
+                                    title="spokestack"
+                                    accesskey="p"
+                                    rel="prev"
+                                    ><span
+                                        class="fa fa-arrow-circle-left"
+                                    ></span>
+                                    Previous</a
+                                >
+                            </div>
+
                             <hr />
 
                             <div role="contentinfo">

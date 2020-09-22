@@ -1,22 +1,8 @@
-spokestack.io package
+IO
 =====================
 
-Submodules
-----------
-
-spokestack.io.pyaudio module
+spokestack.io.pyaudio
 ----------------------------
 
 .. automodule:: spokestack.io.pyaudio
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.io
-   :members:
-   :undoc-members:
-   :show-inheritance:

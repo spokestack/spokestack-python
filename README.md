@@ -36,13 +36,12 @@ In addition to the Python dependencies, you will need to install the TFLite Inte
 From the root project directory:
 
     cd docs
-    sphinx-apidoc -f -o source ../spokestack
     make clean && make html
 
 ## Deployment
 
 This project is distributed using [PyPI](https://pypi.org/). The following is the command to build for installation.
-    
+
     python setup.py clean --all; rm -r ./dist
     python setup.py sdist bdist_wheel
 

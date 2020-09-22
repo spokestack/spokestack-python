@@ -29,11 +29,7 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
-        <link
-            rel="next"
-            title="spokestack.vad package"
-            href="spokestack.vad.html"
-        />
+        <link rel="next" title="IO" href="spokestack.io.html" />
     </head>
 
     <body class="wy-body-for-nav">
@@ -85,8 +81,15 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -100,14 +103,35 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -168,30 +192,32 @@
                                             <li class="toctree-l1">
                                                 <a
                                                     class="reference internal"
-                                                    href="spokestack.vad.html"
-                                                    >spokestack.vad package</a
+                                                    href="spokestack.io.html"
+                                                    >IO</a
                                                 >
                                                 <ul>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
-                                                            href="spokestack.vad.html#submodules"
-                                                            >Submodules</a
+                                                            href="spokestack.io.html#module-spokestack.io.pyaudio"
+                                                            >spokestack.io.pyaudio</a
                                                         >
                                                     </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l1">
+                                                <a
+                                                    class="reference internal"
+                                                    href="spokestack.vad.html"
+                                                    >Voice Activity Detection
+                                                    (VAD)</a
+                                                >
+                                                <ul>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
                                                             href="spokestack.vad.html#module-spokestack.vad.webrtc"
-                                                            >spokestack.vad.webrtc
-                                                            module</a
-                                                        >
-                                                    </li>
-                                                    <li class="toctree-l2">
-                                                        <a
-                                                            class="reference internal"
-                                                            href="spokestack.vad.html#module-spokestack.vad"
-                                                            >Module contents</a
+                                                            >WebRTC</a
                                                         >
                                                     </li>
                                                 </ul>
@@ -207,38 +233,21 @@
                                                 <a
                                                     class="reference internal"
                                                     href="spokestack.wakeword.html"
-                                                    >spokestack.wakeword
-                                                    package</a
+                                                    >Wakeword</a
                                                 >
                                                 <ul>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
-                                                            href="spokestack.wakeword.html#submodules"
-                                                            >Submodules</a
-                                                        >
-                                                    </li>
-                                                    <li class="toctree-l2">
-                                                        <a
-                                                            class="reference internal"
                                                             href="spokestack.wakeword.html#module-spokestack.wakeword.ring_buffer"
-                                                            >spokestack.wakeword.ring_buffer
-                                                            module</a
+                                                            >Ring Buffer</a
                                                         >
                                                     </li>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
                                                             href="spokestack.wakeword.html#module-spokestack.wakeword.tflite"
-                                                            >spokestack.wakeword.tflite
-                                                            module</a
-                                                        >
-                                                    </li>
-                                                    <li class="toctree-l2">
-                                                        <a
-                                                            class="reference internal"
-                                                            href="spokestack.wakeword.html#module-spokestack.wakeword"
-                                                            >Module contents</a
+                                                            >TFLite Model</a
                                                         >
                                                     </li>
                                                 </ul>
@@ -247,17 +256,9 @@
                                                 <a
                                                     class="reference internal"
                                                     href="spokestack.models.html"
-                                                    >spokestack.models
-                                                    package</a
+                                                    >Models</a
                                                 >
                                                 <ul>
-                                                    <li class="toctree-l2">
-                                                        <a
-                                                            class="reference internal"
-                                                            href="spokestack.models.html#submodules"
-                                                            >Submodules</a
-                                                        >
-                                                    </li>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
@@ -266,11 +267,126 @@
                                                             module</a
                                                         >
                                                     </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l1">
+                                                <a
+                                                    class="reference internal"
+                                                    href="spokestack.tts.html"
+                                                    >Text to Speech (TTS)</a
+                                                >
+                                                <ul>
                                                     <li class="toctree-l2">
                                                         <a
                                                             class="reference internal"
-                                                            href="spokestack.models.html#module-spokestack.models"
-                                                            >Module contents</a
+                                                            href="spokestack.tts.html#clients"
+                                                            >Clients</a
+                                                        >
+                                                        <ul>
+                                                            <li
+                                                                class="toctree-l3"
+                                                            >
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.tts.clients.html"
+                                                                    >Spokestack</a
+                                                                >
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l2">
+                                                        <a
+                                                            class="reference internal"
+                                                            href="spokestack.tts.html#module-spokestack.tts.manager"
+                                                            >Manager</a
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l1">
+                                                <a
+                                                    class="reference internal"
+                                                    href="spokestack.asr.html"
+                                                    >Automatic Speech
+                                                    Recognition (ASR)</a
+                                                >
+                                                <ul>
+                                                    <li class="toctree-l2">
+                                                        <a
+                                                            class="reference internal"
+                                                            href="spokestack.asr.html#module-spokestack.asr.cloud_client"
+                                                            >spokestack.asr.cloud_client
+                                                            module</a
+                                                        >
+                                                    </li>
+                                                    <li class="toctree-l2">
+                                                        <a
+                                                            class="reference internal"
+                                                            href="spokestack.asr.html#module-spokestack.asr.speech_recognizer"
+                                                            >spokestack.asr.speech_recognizer
+                                                            module</a
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l1">
+                                                <a
+                                                    class="reference internal"
+                                                    href="spokestack.nlu.html"
+                                                    >Natural Language
+                                                    Understanding (NLU)</a
+                                                >
+                                                <ul>
+                                                    <li class="toctree-l2">
+                                                        <a
+                                                            class="reference internal"
+                                                            href="spokestack.nlu.html#parsers"
+                                                            >Parsers</a
+                                                        >
+                                                        <ul>
+                                                            <li
+                                                                class="toctree-l3"
+                                                            >
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.nlu.parsers.html"
+                                                                    >Digits</a
+                                                                >
+                                                            </li>
+                                                            <li
+                                                                class="toctree-l3"
+                                                            >
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.entity"
+                                                                    >Entity</a
+                                                                >
+                                                            </li>
+                                                            <li
+                                                                class="toctree-l3"
+                                                            >
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.integer"
+                                                                    >Integer</a
+                                                                >
+                                                            </li>
+                                                            <li
+                                                                class="toctree-l3"
+                                                            >
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.nlu.parsers.html#module-spokestack.nlu.parsers.selset"
+                                                                    >Selset</a
+                                                                >
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l2">
+                                                        <a
+                                                            class="reference internal"
+                                                            href="spokestack.nlu.html#module-spokestack.nlu.tflite"
+                                                            >TFLite Model</a
                                                         >
                                                     </li>
                                                 </ul>
@@ -287,9 +403,9 @@
                                 aria-label="footer navigation"
                             >
                                 <a
-                                    href="spokestack.vad.html"
+                                    href="spokestack.io.html"
                                     class="btn btn-neutral float-right"
-                                    title="spokestack.vad package"
+                                    title="IO"
                                     accesskey="n"
                                     rel="next"
                                     >Next

@@ -1,30 +1,15 @@
-spokestack.nlu package
+Natural Language Understanding (NLU)
 ======================
 
-Subpackages
+Parsers
 -----------
 
 .. toctree::
-   :maxdepth: 4
 
    spokestack.nlu.parsers
 
-Submodules
-----------
-
-spokestack.nlu.tflite module
+TFLite Model
 ----------------------------
 
 .. automodule:: spokestack.nlu.tflite
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: spokestack.nlu
-   :members:
-   :undoc-members:
-   :show-inheritance:

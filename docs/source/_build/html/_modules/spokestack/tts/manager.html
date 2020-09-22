@@ -91,8 +91,15 @@
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
+                                    href="../../../spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
                                     href="../../../spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -106,14 +113,35 @@
                                 <a
                                     class="reference internal"
                                     href="../../../spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="../../../spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -196,13 +224,12 @@
         <span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">synthesize</span><span class="p">(</span><span class="n">utterance</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">)</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">SequenceIO</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">MP3Decoder</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="close"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.close">[docs]</a><span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Closes the client and output. &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="kc">None</span></div>
+<div class="viewcode-block" id="TextToSpeechManager.close"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.TextToSpeechManager.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Closes the client and output. &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="kc">None</span></div></div>
 
 
 <div class="viewcode-block" id="SequenceIO"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.SequenceIO">[docs]</a><span class="k">class</span> <span class="nc">SequenceIO</span><span class="p">:</span>
@@ -211,11 +238,11 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SequenceIO.read"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.SequenceIO.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span></div></div>
+            <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span></div>
 </pre>
                                 </div>
                             </div>

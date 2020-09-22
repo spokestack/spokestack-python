@@ -5,9 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>
-            spokestack.tts.clients package &mdash; spokestack documentation
-        </title>
+        <title>Spokestack &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,6 +29,16 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
+        <link
+            rel="next"
+            title="Automatic Speech Recognition (ASR)"
+            href="spokestack.asr.html"
+        />
+        <link
+            rel="prev"
+            title="Text to Speech (TTS)"
+            href="spokestack.tts.html"
+        />
     </head>
 
     <body class="wy-body-for-nav">
@@ -78,12 +86,19 @@
                         role="navigation"
                         aria-label="main navigation"
                     >
-                        <ul>
+                        <ul class="current">
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -97,14 +112,60 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1 current">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                                <ul class="current">
+                                    <li class="toctree-l2 current">
+                                        <a
+                                            class="reference internal"
+                                            href="spokestack.tts.html#clients"
+                                            >Clients</a
+                                        >
+                                        <ul class="current">
+                                            <li class="toctree-l3 current">
+                                                <a
+                                                    class="current reference internal"
+                                                    href="#"
+                                                    >Spokestack</a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="spokestack.tts.html#module-spokestack.tts.manager"
+                                            >Manager</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
                                 >
                             </li>
                         </ul>
@@ -133,7 +194,14 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.tts.clients package</li>
+                                <li>
+                                    <a href="spokestack.tts.html"
+                                        >Text to Speech (TTS)</a
+                                    >
+                                    &raquo;
+                                </li>
+
+                                <li>Spokestack</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -156,364 +224,323 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="spokestack-tts-clients-package"
+                                    id="module-spokestack.tts.clients.spokestack"
                                 >
+                                    <span id="spokestack"></span>
                                     <h1>
-                                        spokestack.tts.clients package<a
+                                        Spokestack<a
                                             class="headerlink"
-                                            href="#spokestack-tts-clients-package"
+                                            href="#module-spokestack.tts.clients.spokestack"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <div class="section" id="submodules">
-                                        <h2>
-                                            Submodules<a
+                                    <p>
+                                        This module contains the Spokestack
+                                        client for text to speech
+                                    </p>
+                                    <dl class="py exception">
+                                        <dt
+                                            id="spokestack.tts.clients.spokestack.TTSError"
+                                        >
+                                            <em class="property">exception </em
+                                            ><code
+                                                class="sig-prename descclassname"
+                                                >spokestack.tts.clients.spokestack.</code
+                                            ><code class="sig-name descname"
+                                                >TTSError</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >response</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/tts/clients/spokestack.html#TTSError"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#submodules"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.tts.clients.spokestack.TTSError"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.tts.clients.spokestack"
-                                    >
-                                        <span
-                                            id="spokestack-tts-clients-spokestack-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.tts.clients.spokestack
-                                            module<a
-                                                class="headerlink"
-                                                href="#module-spokestack.tts.clients.spokestack"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                        <p>
-                                            This module contains the Spokestack
-                                            client for text to speech
-                                        </p>
-                                        <dl class="py exception">
-                                            <dt
-                                                id="spokestack.tts.clients.spokestack.TTSError"
-                                            >
-                                                <em class="property"
-                                                    >exception </em
-                                                ><code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.tts.clients.spokestack.</code
-                                                ><code class="sig-name descname"
-                                                    >TTSError</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >response</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/tts/clients/spokestack.html#TTSError"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.tts.clients.spokestack.TTSError"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
+                                        </dt>
+                                        <dd>
+                                            <p>
+                                                Bases:
+                                                <code
+                                                    class="xref py py-class docutils literal notranslate"
+                                                    ><span class="pre"
+                                                        >Exception</span
+                                                    ></code
                                                 >
-                                            </dt>
-                                            <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >Exception</span
-                                                        ></code
-                                                    >
-                                                </p>
-                                                <p>
-                                                    Text to speech error wrapper
-                                                </p>
-                                            </dd>
-                                        </dl>
+                                            </p>
+                                            <p>Text to speech error wrapper</p>
+                                        </dd>
+                                    </dl>
 
-                                        <dl class="py class">
-                                            <dt
-                                                id="spokestack.tts.clients.spokestack.TextToSpeechClient"
-                                            >
-                                                <em class="property">class </em
-                                                ><code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.tts.clients.spokestack.</code
-                                                ><code class="sig-name descname"
-                                                    >TextToSpeechClient</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >key_id</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >key_secret</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n">url</span
-                                                    ><span class="o">=</span
-                                                    ><span class="default_value"
-                                                        >'https://api.spokestack.io/v1'</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.tts.clients.spokestack.TextToSpeechClient"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
-                                                >
-                                            </dt>
-                                            <dd>
-                                                <p>
-                                                    Bases:
-                                                    <code
-                                                        class="xref py py-class docutils literal notranslate"
-                                                        ><span class="pre"
-                                                            >object</span
-                                                        ></code
-                                                    >
-                                                </p>
-                                                <p>
-                                                    Spokestack Text to Speech
-                                                    Client
-                                                </p>
-                                                <dl class="field-list simple">
-                                                    <dt class="field-odd">
-                                                        Parameters
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >key_id</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – identity
-                                                                    from
-                                                                    spokestack
-                                                                    api
-                                                                    credentials
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >key_secret</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – secret key
-                                                                    from
-                                                                    spokestack
-                                                                    api
-                                                                    credentials
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >url</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – spokestack
-                                                                    api url
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </dd>
-                                                </dl>
-                                                <dl class="py method">
-                                                    <dt
-                                                        id="spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
-                                                    >
-                                                        <code
-                                                            class="sig-name descname"
-                                                            >synthesize</code
-                                                        ><span class="sig-paren"
-                                                            >(</span
-                                                        ><em class="sig-param"
-                                                            ><span class="n"
-                                                                >utterance</span
-                                                            ></em
-                                                        >,
-                                                        <em class="sig-param"
-                                                            ><span class="n"
-                                                                >mode</span
-                                                            ><span class="o"
-                                                                >=</span
-                                                            ><span
-                                                                class="default_value"
-                                                                >'text'</span
-                                                            ></em
-                                                        >,
-                                                        <em class="sig-param"
-                                                            ><span class="n"
-                                                                >voice</span
-                                                            ><span class="o"
-                                                                >=</span
-                                                            ><span
-                                                                class="default_value"
-                                                                >'demo-male'</span
-                                                            ></em
-                                                        ><span class="sig-paren"
-                                                            >)</span
-                                                        ><a
-                                                            class="reference internal"
-                                                            href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient.synthesize"
-                                                            ><span
-                                                                class="viewcode-link"
-                                                                >[source]</span
-                                                            ></a
-                                                        ><a
-                                                            class="headerlink"
-                                                            href="#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
-                                                            title="Permalink to this definition"
-                                                            >¶</a
-                                                        >
-                                                    </dt>
-                                                    <dd>
-                                                        <p>
-                                                            Converts the given
-                                                            utterance to speech
-                                                        </p>
-                                                        <dl
-                                                            class="field-list simple"
-                                                        >
-                                                            <dt
-                                                                class="field-odd"
-                                                            >
-                                                                Parameters
-                                                            </dt>
-                                                            <dd
-                                                                class="field-odd"
-                                                            >
-                                                                <ul
-                                                                    class="simple"
-                                                                >
-                                                                    <li>
-                                                                        <p>
-                                                                            <strong
-                                                                                >utterance</strong
-                                                                            >
-                                                                            (<em>str</em>)
-                                                                            –
-                                                                            string
-                                                                            that
-                                                                            needs
-                                                                            to
-                                                                            be
-                                                                            rendered
-                                                                            as
-                                                                            speech.
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>
-                                                                            <strong
-                                                                                >mode</strong
-                                                                            >
-                                                                            (<em>str</em>)
-                                                                            –
-                                                                            synthesis
-                                                                            mode
-                                                                            to
-                                                                            use
-                                                                            with
-                                                                            utterance.
-                                                                            text,
-                                                                            ssml,
-                                                                            markdown.
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>
-                                                                            <strong
-                                                                                >voice</strong
-                                                                            >
-                                                                            (<em>str</em>)
-                                                                            –
-                                                                            name
-                                                                            of
-                                                                            the
-                                                                            tts
-                                                                            voice.
-                                                                        </p>
-                                                                    </li>
-                                                                </ul>
-                                                            </dd>
-                                                            <dt
-                                                                class="field-even"
-                                                            >
-                                                                Returns
-                                                            </dt>
-                                                            <dd
-                                                                class="field-even"
-                                                            >
-                                                                <p>
-                                                                    Encoded
-                                                                    audio
-                                                                    response in
-                                                                    the form of
-                                                                    a sequence
-                                                                    of bytes
-                                                                </p>
-                                                            </dd>
-                                                            <dt
-                                                                class="field-odd"
-                                                            >
-                                                                Return type
-                                                            </dt>
-                                                            <dd
-                                                                class="field-odd"
-                                                            >
-                                                                <p>
-                                                                    (Iterator[bytes])
-                                                                </p>
-                                                            </dd>
-                                                        </dl>
-                                                    </dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.tts.clients"
-                                    >
-                                        <span id="module-contents"></span>
-                                        <h2>
-                                            Module contents<a
+                                    <dl class="py class">
+                                        <dt
+                                            id="spokestack.tts.clients.spokestack.TextToSpeechClient"
+                                        >
+                                            <em class="property">class </em
+                                            ><code
+                                                class="sig-prename descclassname"
+                                                >spokestack.tts.clients.spokestack.</code
+                                            ><code class="sig-name descname"
+                                                >TextToSpeechClient</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >key_id</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >key_secret</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n">url</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >'https://api.spokestack.io/v1'</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#module-spokestack.tts.clients"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.tts.clients.spokestack.TextToSpeechClient"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                    </div>
+                                        </dt>
+                                        <dd>
+                                            <p>
+                                                Bases:
+                                                <code
+                                                    class="xref py py-class docutils literal notranslate"
+                                                    ><span class="pre"
+                                                        >object</span
+                                                    ></code
+                                                >
+                                            </p>
+                                            <p>
+                                                Spokestack Text to Speech Client
+                                            </p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >key_id</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                identity from
+                                                                spokestack api
+                                                                credentials
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >key_secret</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                secret key from
+                                                                spokestack api
+                                                                credentials
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >url</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                spokestack api
+                                                                url
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                            </dl>
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >synthesize</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><em class="sig-param"
+                                                        ><span class="n"
+                                                            >utterance</span
+                                                        ></em
+                                                    >,
+                                                    <em class="sig-param"
+                                                        ><span class="n"
+                                                            >mode</span
+                                                        ><span class="o">=</span
+                                                        ><span
+                                                            class="default_value"
+                                                            >'text'</span
+                                                        ></em
+                                                    >,
+                                                    <em class="sig-param"
+                                                        ><span class="n"
+                                                            >voice</span
+                                                        ><span class="o">=</span
+                                                        ><span
+                                                            class="default_value"
+                                                            >'demo-male'</span
+                                                        ></em
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/tts/clients/spokestack.html#TextToSpeechClient.synthesize"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Converts the given
+                                                        utterance to speech
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Parameters
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <ul class="simple">
+                                                                <li>
+                                                                    <p>
+                                                                        <strong
+                                                                            >utterance</strong
+                                                                        >
+                                                                        (<em>str</em>)
+                                                                        – string
+                                                                        that
+                                                                        needs to
+                                                                        be
+                                                                        rendered
+                                                                        as
+                                                                        speech.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        <strong
+                                                                            >mode</strong
+                                                                        >
+                                                                        (<em>str</em>)
+                                                                        –
+                                                                        synthesis
+                                                                        mode to
+                                                                        use with
+                                                                        utterance.
+                                                                        text,
+                                                                        ssml,
+                                                                        markdown.
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p>
+                                                                        <strong
+                                                                            >voice</strong
+                                                                        >
+                                                                        (<em>str</em>)
+                                                                        – name
+                                                                        of the
+                                                                        tts
+                                                                        voice.
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </dd>
+                                                        <dt class="field-even">
+                                                            Returns
+                                                        </dt>
+                                                        <dd class="field-even">
+                                                            <p>
+                                                                Encoded audio
+                                                                response in the
+                                                                form of a
+                                                                sequence of
+                                                                bytes
+                                                            </p>
+                                                        </dd>
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                (Iterator[bytes])
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
                                 </div>
                             </div>
                         </div>
                         <footer>
+                            <div
+                                class="rst-footer-buttons"
+                                role="navigation"
+                                aria-label="footer navigation"
+                            >
+                                <a
+                                    href="spokestack.asr.html"
+                                    class="btn btn-neutral float-right"
+                                    title="Automatic Speech Recognition (ASR)"
+                                    accesskey="n"
+                                    rel="next"
+                                    >Next
+                                    <span
+                                        class="fa fa-arrow-circle-right"
+                                    ></span
+                                ></a>
+
+                                <a
+                                    href="spokestack.tts.html"
+                                    class="btn btn-neutral float-left"
+                                    title="Text to Speech (TTS)"
+                                    accesskey="p"
+                                    rel="prev"
+                                    ><span
+                                        class="fa fa-arrow-circle-left"
+                                    ></span>
+                                    Previous</a
+                                >
+                            </div>
+
                             <hr />
 
                             <div role="contentinfo">

@@ -5,9 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>
-            spokestack.nlu.parsers package &mdash; spokestack documentation
-        </title>
+        <title>Digits &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,6 +29,11 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
+        <link
+            rel="prev"
+            title="Natural Language Understanding (NLU)"
+            href="spokestack.nlu.html"
+        />
     </head>
 
     <body class="wy-body-for-nav">
@@ -78,12 +81,19 @@
                         role="navigation"
                         aria-label="main navigation"
                     >
-                        <ul>
+                        <ul class="current">
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.vad.html"
-                                    >spokestack.vad package</a
+                                    >Voice Activity Detection (VAD)</a
                                 >
                             </li>
                             <li class="toctree-l1">
@@ -97,15 +107,82 @@
                                 <a
                                     class="reference internal"
                                     href="spokestack.wakeword.html"
-                                    >spokestack.wakeword package</a
+                                    >Wakeword</a
                                 >
                             </li>
                             <li class="toctree-l1">
                                 <a
                                     class="reference internal"
                                     href="spokestack.models.html"
-                                    >spokestack.models package</a
+                                    >Models</a
                                 >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1 current">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
+                                >
+                                <ul class="current">
+                                    <li class="toctree-l2 current">
+                                        <a
+                                            class="reference internal"
+                                            href="spokestack.nlu.html#parsers"
+                                            >Parsers</a
+                                        >
+                                        <ul class="current">
+                                            <li class="toctree-l3 current">
+                                                <a
+                                                    class="current reference internal"
+                                                    href="#"
+                                                    >Digits</a
+                                                >
+                                            </li>
+                                            <li class="toctree-l3">
+                                                <a
+                                                    class="reference internal"
+                                                    href="#module-spokestack.nlu.parsers.entity"
+                                                    >Entity</a
+                                                >
+                                            </li>
+                                            <li class="toctree-l3">
+                                                <a
+                                                    class="reference internal"
+                                                    href="#module-spokestack.nlu.parsers.integer"
+                                                    >Integer</a
+                                                >
+                                            </li>
+                                            <li class="toctree-l3">
+                                                <a
+                                                    class="reference internal"
+                                                    href="#module-spokestack.nlu.parsers.selset"
+                                                    >Selset</a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="spokestack.nlu.html#module-spokestack.nlu.tflite"
+                                            >TFLite Model</a
+                                        >
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -133,7 +210,14 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.nlu.parsers package</li>
+                                <li>
+                                    <a href="spokestack.nlu.html"
+                                        >Natural Language Understanding (NLU)</a
+                                    >
+                                    &raquo;
+                                </li>
+
+                                <li>Digits</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
@@ -156,546 +240,477 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="spokestack-nlu-parsers-package"
+                                    id="module-spokestack.nlu.parsers.digits"
                                 >
+                                    <span id="digits"></span>
                                     <h1>
-                                        spokestack.nlu.parsers package<a
+                                        Digits<a
                                             class="headerlink"
-                                            href="#spokestack-nlu-parsers-package"
+                                            href="#module-spokestack.nlu.parsers.digits"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
-                                    <div class="section" id="submodules">
-                                        <h2>
-                                            Submodules<a
+                                    <p>
+                                        This module contains the parser that
+                                        converts the string representation of a
+                                        sequence of digits into the
+                                        corresponding sequence of digits. These
+                                        digits may be in the form of english
+                                        cardinal representations of numbers,
+                                        along with some homophones. The digits
+                                        can be hyphenated or unhyphenated from
+                                        twenty through ninety-nine. The
+                                        unhyphenated numbers get joined
+                                        automatically. The use of unhyphenated
+                                        numbers introduces ambiguity. For
+                                        example, “sixty five thousand” could be
+                                        parsed as “605000” or “65000”. Our
+                                        parser will output the latter. However,
+                                        this can be an issue with values such as
+                                        “sixty five thousand one” which parses
+                                        as “650001”. This limitation will most
+                                        likely be acceptable for most
+                                        multi-digit use cases such as telephone
+                                        numbers, social security numbers, etc.
+                                    </p>
+                                    <dl class="py function">
+                                        <dt
+                                            id="spokestack.nlu.parsers.digits.parse"
+                                        >
+                                            <code
+                                                class="sig-prename descclassname"
+                                                >spokestack.nlu.parsers.digits.</code
+                                            ><code class="sig-name descname"
+                                                >parse</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >metadata</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >raw_value</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/nlu/parsers/digits.html#parse"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#submodules"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.nlu.parsers.digits.parse"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers.digits"
-                                    >
-                                        <span
-                                            id="spokestack-nlu-parsers-digits-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.nlu.parsers.digits
-                                            module<a
+                                        </dt>
+                                        <dd>
+                                            <p>Digit Parser</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >metadata</strong
+                                                                >
+                                                                (<em>Dict</em
+                                                                ><em>[</em
+                                                                ><em>str</em
+                                                                ><em>, </em
+                                                                ><em>Any</em
+                                                                ><em>]</em>) –
+                                                                digit slot
+                                                                metadata
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >raw_value</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                value tagged by
+                                                                the model
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                                <dt class="field-even">
+                                                    Returns
+                                                </dt>
+                                                <dd class="field-even">
+                                                    <p>string parsed digits</p>
+                                                </dd>
+                                                <dt class="field-odd">
+                                                    Return type
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <p>(str)</p>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div
+                                    class="section"
+                                    id="module-spokestack.nlu.parsers.entity"
+                                >
+                                    <span id="entity"></span>
+                                    <h1>
+                                        Entity<a
+                                            class="headerlink"
+                                            href="#module-spokestack.nlu.parsers.entity"
+                                            title="Permalink to this headline"
+                                            >¶</a
+                                        >
+                                    </h1>
+                                    <p>
+                                        This module contains the logic to parse
+                                        entities from NLU results. The entity
+                                        parser is a pass through for string
+                                        values to allow custom logic to resolve
+                                        the entities. For example, the entity
+                                        can be used as a keyword in a database
+                                        search.
+                                    </p>
+                                    <dl class="py function">
+                                        <dt
+                                            id="spokestack.nlu.parsers.entity.parse"
+                                        >
+                                            <code
+                                                class="sig-prename descclassname"
+                                                >spokestack.nlu.parsers.entity.</code
+                                            ><code class="sig-name descname"
+                                                >parse</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >metadata</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >raw_value</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/nlu/parsers/entity.html#parse"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#module-spokestack.nlu.parsers.digits"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.nlu.parsers.entity.parse"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                        <p>
-                                            This module contains the parser that
-                                            converts the string representation
-                                            of a sequence of digits into the
-                                            corresponding sequence of digits.
-                                            These digits may be in the form of
-                                            english cardinal representations of
-                                            numbers, along with some homophones.
-                                            The digits can be hyphenated or
-                                            unhyphenated from twenty through
-                                            ninety-nine. The unhyphenated
-                                            numbers get joined automatically.
-                                            The use of unhyphenated numbers
-                                            introduces ambiguity. For example,
-                                            “sixty five thousand” could be
-                                            parsed as “605000” or “65000”. Our
-                                            parser will output the latter.
-                                            However, this can be an issue with
-                                            values such as “sixty five thousand
-                                            one” which parses as “650001”. This
-                                            limitation will most likely be
-                                            acceptable for most multi-digit use
-                                            cases such as telephone numbers,
-                                            social security numbers, etc.
-                                        </p>
-                                        <dl class="py function">
-                                            <dt
-                                                id="spokestack.nlu.parsers.digits.parse"
-                                            >
-                                                <code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.nlu.parsers.digits.</code
-                                                ><code class="sig-name descname"
-                                                    >parse</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >metadata</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >raw_value</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/nlu/parsers/digits.html#parse"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.nlu.parsers.digits.parse"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
-                                                >
-                                            </dt>
-                                            <dd>
-                                                <p>Digit Parser</p>
-                                                <dl class="field-list simple">
-                                                    <dt class="field-odd">
-                                                        Parameters
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >metadata</strong
-                                                                    >
-                                                                    (<em
-                                                                        >Dict</em
-                                                                    ><em>[</em
-                                                                    ><em>str</em
-                                                                    ><em>, </em
-                                                                    ><em>Any</em
-                                                                    ><em>]</em>)
-                                                                    – digit slot
-                                                                    metadata
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >raw_value</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – value
-                                                                    tagged by
-                                                                    the model
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </dd>
-                                                    <dt class="field-even">
-                                                        Returns
-                                                    </dt>
-                                                    <dd class="field-even">
-                                                        <p>
-                                                            string parsed digits
-                                                        </p>
-                                                    </dd>
-                                                    <dt class="field-odd">
-                                                        Return type
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <p>(str)</p>
-                                                    </dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers.entity"
-                                    >
-                                        <span
-                                            id="spokestack-nlu-parsers-entity-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.nlu.parsers.entity
-                                            module<a
+                                        </dt>
+                                        <dd>
+                                            <p>Entity Parser</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >metadata</strong
+                                                                >
+                                                                (<em>Dict</em
+                                                                ><em>[</em
+                                                                ><em>str</em
+                                                                ><em>, </em
+                                                                ><em>Any</em
+                                                                ><em>]</em>) –
+                                                                metadata for
+                                                                entity slot
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >raw_value</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                tagged entity
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                                <dt class="field-even">
+                                                    Returns
+                                                </dt>
+                                                <dd class="field-even">
+                                                    <p>tagged entity</p>
+                                                </dd>
+                                                <dt class="field-odd">
+                                                    Return type
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <p>(str)</p>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div
+                                    class="section"
+                                    id="module-spokestack.nlu.parsers.integer"
+                                >
+                                    <span id="integer"></span>
+                                    <h1>
+                                        Integer<a
+                                            class="headerlink"
+                                            href="#module-spokestack.nlu.parsers.integer"
+                                            title="Permalink to this headline"
+                                            >¶</a
+                                        >
+                                    </h1>
+                                    <p>
+                                        This module contains the logic to parse
+                                        integers from NLU results. Integers can
+                                        be in the form of words (ie. one, two,
+                                        three) or numbers (ie. 1, 2, 3). Either
+                                        form will resolve to Python’s built-in
+                                        ‘int’ type. The metadata must contain a
+                                        range key containing the minimum and
+                                        maximum values for the expected integer
+                                        range. It is important to note the
+                                        difference between digits and integers.
+                                        Integers are counting numbers: 2 apples,
+                                        a table for two. In contrast, digits can
+                                        be used for sequences of numbers like
+                                        phone numbers or social security
+                                        numbers.
+                                    </p>
+                                    <dl class="py function">
+                                        <dt
+                                            id="spokestack.nlu.parsers.integer.parse"
+                                        >
+                                            <code
+                                                class="sig-prename descclassname"
+                                                >spokestack.nlu.parsers.integer.</code
+                                            ><code class="sig-name descname"
+                                                >parse</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >metadata</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >raw_value</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/nlu/parsers/integer.html#parse"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#module-spokestack.nlu.parsers.entity"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.nlu.parsers.integer.parse"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                        <p>
-                                            This module contains the logic to
-                                            parse entities from NLU results. The
-                                            entity parser is a pass through for
-                                            string values to allow custom logic
-                                            to resolve the entities. For
-                                            example, the entity can be used as a
-                                            keyword in a database search.
-                                        </p>
-                                        <dl class="py function">
-                                            <dt
-                                                id="spokestack.nlu.parsers.entity.parse"
-                                            >
-                                                <code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.nlu.parsers.entity.</code
-                                                ><code class="sig-name descname"
-                                                    >parse</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >metadata</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >raw_value</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/nlu/parsers/entity.html#parse"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.nlu.parsers.entity.parse"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
-                                                >
-                                            </dt>
-                                            <dd>
-                                                <p>Entity Parser</p>
-                                                <dl class="field-list simple">
-                                                    <dt class="field-odd">
-                                                        Parameters
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >metadata</strong
-                                                                    >
-                                                                    (<em
-                                                                        >Dict</em
-                                                                    ><em>[</em
-                                                                    ><em>str</em
-                                                                    ><em>, </em
-                                                                    ><em>Any</em
-                                                                    ><em>]</em>)
-                                                                    – metadata
-                                                                    for entity
-                                                                    slot
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >raw_value</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – tagged
-                                                                    entity
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </dd>
-                                                    <dt class="field-even">
-                                                        Returns
-                                                    </dt>
-                                                    <dd class="field-even">
-                                                        <p>tagged entity</p>
-                                                    </dd>
-                                                    <dt class="field-odd">
-                                                        Return type
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <p>(str)</p>
-                                                    </dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers.integer"
-                                    >
-                                        <span
-                                            id="spokestack-nlu-parsers-integer-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.nlu.parsers.integer
-                                            module<a
+                                        </dt>
+                                        <dd>
+                                            <p>Integer Parser</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >metadata</strong
+                                                                >
+                                                                (<em>Dict</em
+                                                                ><em>[</em
+                                                                ><em>str</em
+                                                                ><em>, </em
+                                                                ><em>Any</em
+                                                                ><em>]</em>) –
+                                                                metadata for the
+                                                                integer slot
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >raw_value</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                value tagged by
+                                                                the model
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                                <dt class="field-even">
+                                                    Returns
+                                                </dt>
+                                                <dd class="field-even">
+                                                    <p>
+                                                        integer if parsable,
+                                                        None if invalid
+                                                    </p>
+                                                </dd>
+                                                <dt class="field-odd">
+                                                    Return type
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <p>Union[int, None]</p>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div
+                                    class="section"
+                                    id="module-spokestack.nlu.parsers.selset"
+                                >
+                                    <span id="selset"></span>
+                                    <h1>
+                                        Selset<a
+                                            class="headerlink"
+                                            href="#module-spokestack.nlu.parsers.selset"
+                                            title="Permalink to this headline"
+                                            >¶</a
+                                        >
+                                    </h1>
+                                    <p>
+                                        This module contains the logic to parse
+                                        selsets from NLU results. Selsets
+                                        contain a name along with one or more
+                                        aliases. This allows one to map any of
+                                        the listed aliases into a single word.
+                                        For example, if a selset’s name is
+                                        “light”, and its aliases are bulbs,
+                                        light, beam, lamp, etc., occurrences of
+                                        any alias will be parsed as light
+                                    </p>
+                                    <dl class="py function">
+                                        <dt
+                                            id="spokestack.nlu.parsers.selset.parse"
+                                        >
+                                            <code
+                                                class="sig-prename descclassname"
+                                                >spokestack.nlu.parsers.selset.</code
+                                            ><code class="sig-name descname"
+                                                >parse</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >metadata</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >raw_value</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/nlu/parsers/selset.html#parse"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
                                                 class="headerlink"
-                                                href="#module-spokestack.nlu.parsers.integer"
-                                                title="Permalink to this headline"
+                                                href="#spokestack.nlu.parsers.selset.parse"
+                                                title="Permalink to this definition"
                                                 >¶</a
                                             >
-                                        </h2>
-                                        <p>
-                                            This module contains the logic to
-                                            parse integers from NLU results.
-                                            Integers can be in the form of words
-                                            (ie. one, two, three) or numbers
-                                            (ie. 1, 2, 3). Either form will
-                                            resolve to Python’s built-in ‘int’
-                                            type. The metadata must contain a
-                                            range key containing the minimum and
-                                            maximum values for the expected
-                                            integer range. It is important to
-                                            note the difference between digits
-                                            and integers. Integers are counting
-                                            numbers: 2 apples, a table for two.
-                                            In contrast, digits can be used for
-                                            sequences of numbers like phone
-                                            numbers or social security numbers.
-                                        </p>
-                                        <dl class="py function">
-                                            <dt
-                                                id="spokestack.nlu.parsers.integer.parse"
-                                            >
-                                                <code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.nlu.parsers.integer.</code
-                                                ><code class="sig-name descname"
-                                                    >parse</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >metadata</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >raw_value</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/nlu/parsers/integer.html#parse"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.nlu.parsers.integer.parse"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
-                                                >
-                                            </dt>
-                                            <dd>
-                                                <p>Integer Parser</p>
-                                                <dl class="field-list simple">
-                                                    <dt class="field-odd">
-                                                        Parameters
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >metadata</strong
-                                                                    >
-                                                                    (<em
-                                                                        >Dict</em
-                                                                    ><em>[</em
-                                                                    ><em>str</em
-                                                                    ><em>, </em
-                                                                    ><em>Any</em
-                                                                    ><em>]</em>)
-                                                                    – metadata
-                                                                    for the
-                                                                    integer slot
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >raw_value</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – value
-                                                                    tagged by
-                                                                    the model
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </dd>
-                                                    <dt class="field-even">
-                                                        Returns
-                                                    </dt>
-                                                    <dd class="field-even">
-                                                        <p>
-                                                            integer if parsable,
-                                                            None if invalid
-                                                        </p>
-                                                    </dd>
-                                                    <dt class="field-odd">
-                                                        Return type
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <p>Union[int, None]</p>
-                                                    </dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers.maps"
-                                    >
-                                        <span
-                                            id="spokestack-nlu-parsers-maps-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.nlu.parsers.maps module<a
-                                                class="headerlink"
-                                                href="#module-spokestack.nlu.parsers.maps"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                        <p>
-                                            This module contains mappings to
-                                            convert numbers in words to
-                                            integers. ie. five -&gt; 5
-                                        </p>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers.selset"
-                                    >
-                                        <span
-                                            id="spokestack-nlu-parsers-selset-module"
-                                        ></span>
-                                        <h2>
-                                            spokestack.nlu.parsers.selset
-                                            module<a
-                                                class="headerlink"
-                                                href="#module-spokestack.nlu.parsers.selset"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                        <p>
-                                            This module contains the logic to
-                                            parse selsets from NLU results.
-                                            Selsets contain a name along with
-                                            one or more aliases. This allows one
-                                            to map any of the listed aliases
-                                            into a single word. For example, if
-                                            a selset’s name is “light”, and its
-                                            aliases are bulbs, light, beam,
-                                            lamp, etc., occurrences of any alias
-                                            will be parsed as light
-                                        </p>
-                                        <dl class="py function">
-                                            <dt
-                                                id="spokestack.nlu.parsers.selset.parse"
-                                            >
-                                                <code
-                                                    class="sig-prename descclassname"
-                                                    >spokestack.nlu.parsers.selset.</code
-                                                ><code class="sig-name descname"
-                                                    >parse</code
-                                                ><span class="sig-paren">(</span
-                                                ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >metadata</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
-                                                    ><span class="n"
-                                                        >raw_value</span
-                                                    ></em
-                                                ><span class="sig-paren">)</span
-                                                ><a
-                                                    class="reference internal"
-                                                    href="_modules/spokestack/nlu/parsers/selset.html#parse"
-                                                    ><span class="viewcode-link"
-                                                        >[source]</span
-                                                    ></a
-                                                ><a
-                                                    class="headerlink"
-                                                    href="#spokestack.nlu.parsers.selset.parse"
-                                                    title="Permalink to this definition"
-                                                    >¶</a
-                                                >
-                                            </dt>
-                                            <dd>
-                                                <p>Selset Parser</p>
-                                                <dl class="field-list simple">
-                                                    <dt class="field-odd">
-                                                        Parameters
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >metadata</strong
-                                                                    >
-                                                                    (<em
-                                                                        >Dict</em
-                                                                    ><em>[</em
-                                                                    ><em>str</em
-                                                                    ><em>, </em
-                                                                    ><em>Any</em
-                                                                    ><em>]</em>)
-                                                                    – slot
-                                                                    metadata
-                                                                </p>
-                                                            </li>
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >raw_value</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – value
-                                                                    tagged by
-                                                                    the model
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </dd>
-                                                    <dt class="field-even">
-                                                        Returns
-                                                    </dt>
-                                                    <dd class="field-even">
-                                                        <p>
-                                                            selset or None if
-                                                            invalid
-                                                        </p>
-                                                    </dd>
-                                                    <dt class="field-odd">
-                                                        Return type
-                                                    </dt>
-                                                    <dd class="field-odd">
-                                                        <p>Union[str, None]</p>
-                                                    </dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div
-                                        class="section"
-                                        id="module-spokestack.nlu.parsers"
-                                    >
-                                        <span id="module-contents"></span>
-                                        <h2>
-                                            Module contents<a
-                                                class="headerlink"
-                                                href="#module-spokestack.nlu.parsers"
-                                                title="Permalink to this headline"
-                                                >¶</a
-                                            >
-                                        </h2>
-                                    </div>
+                                        </dt>
+                                        <dd>
+                                            <p>Selset Parser</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >metadata</strong
+                                                                >
+                                                                (<em>Dict</em
+                                                                ><em>[</em
+                                                                ><em>str</em
+                                                                ><em>, </em
+                                                                ><em>Any</em
+                                                                ><em>]</em>) –
+                                                                slot metadata
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >raw_value</strong
+                                                                >
+                                                                (<em>str</em>) –
+                                                                value tagged by
+                                                                the model
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                                <dt class="field-even">
+                                                    Returns
+                                                </dt>
+                                                <dd class="field-even">
+                                                    <p>
+                                                        selset or None if
+                                                        invalid
+                                                    </p>
+                                                </dd>
+                                                <dt class="field-odd">
+                                                    Return type
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <p>Union[str, None]</p>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
                                 </div>
                             </div>
                         </div>
                         <footer>
+                            <div
+                                class="rst-footer-buttons"
+                                role="navigation"
+                                aria-label="footer navigation"
+                            >
+                                <a
+                                    href="spokestack.nlu.html"
+                                    class="btn btn-neutral float-left"
+                                    title="Natural Language Understanding (NLU)"
+                                    accesskey="p"
+                                    rel="prev"
+                                    ><span
+                                        class="fa fa-arrow-circle-left"
+                                    ></span>
+                                    Previous</a
+                                >
+                            </div>
+
                             <hr />
 
                             <div role="contentinfo">
