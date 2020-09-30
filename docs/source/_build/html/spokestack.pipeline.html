@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Speech Context &mdash; spokestack documentation</title>
+        <title>Speech Pipeline &mdash; spokestack documentation</title>
 
         <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
         <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -29,11 +29,10 @@
 
         <link rel="index" title="Index" href="genindex.html" />
         <link rel="search" title="Search" href="search.html" />
-        <link rel="next" title="Wakeword" href="spokestack.wakeword.html" />
         <link
             rel="prev"
-            title="Voice Activity Detection (VAD)"
-            href="spokestack.vad.html"
+            title="Activation Timeout"
+            href="spokestack.activation_timeout.html"
         />
     </head>
 
@@ -97,8 +96,10 @@
                                     >Voice Activity Detection (VAD)</a
                                 >
                             </li>
-                            <li class="toctree-l1 current">
-                                <a class="current reference internal" href="#"
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.context.html"
                                     >Speech Context</a
                                 >
                             </li>
@@ -144,10 +145,8 @@
                                     >Activation Timeout</a
                                 >
                             </li>
-                            <li class="toctree-l1">
-                                <a
-                                    class="reference internal"
-                                    href="spokestack.pipeline.html"
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#"
                                     >Speech Pipeline</a
                                 >
                             </li>
@@ -177,11 +176,11 @@
                                     &raquo;
                                 </li>
 
-                                <li>Speech Context</li>
+                                <li>Speech Pipeline</li>
 
                                 <li class="wy-breadcrumbs-aside">
                                     <a
-                                        href="_sources/spokestack.context.rst.txt"
+                                        href="_sources/spokestack.pipeline.rst.txt"
                                         rel="nofollow"
                                     >
                                         View page source</a
@@ -200,34 +199,44 @@
                             <div itemprop="articleBody">
                                 <div
                                     class="section"
-                                    id="module-spokestack.context"
+                                    id="module-spokestack.pipeline"
                                 >
-                                    <span id="speech-context"></span>
+                                    <span id="speech-pipeline"></span>
                                     <h1>
-                                        Speech Context<a
+                                        Speech Pipeline<a
                                             class="headerlink"
-                                            href="#module-spokestack.context"
+                                            href="#module-spokestack.pipeline"
                                             title="Permalink to this headline"
                                             >¶</a
                                         >
                                     </h1>
                                     <p>
-                                        This module contains a context class to
-                                        manage state between members of the
-                                        processing pipeline
+                                        This module contains the speech pipeline
+                                        which manages the components for
+                                        processing speech.
                                     </p>
                                     <dl class="py class">
                                         <dt
-                                            id="spokestack.context.SpeechContext"
+                                            id="spokestack.pipeline.SpeechPipeline"
                                         >
                                             <em class="property">class </em
                                             ><code
                                                 class="sig-prename descclassname"
-                                                >spokestack.context.</code
+                                                >spokestack.pipeline.</code
                                             ><code class="sig-name descname"
-                                                >SpeechContext</code
+                                                >SpeechPipeline</code
                                             ><span class="sig-paren">(</span
                                             ><em class="sig-param"
+                                                ><span class="n"
+                                                    >input_source</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >stages</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
                                                 ><span class="o">**</span
                                                 ><span class="n"
                                                     >kwargs</span
@@ -235,73 +244,352 @@
                                             ><span class="sig-paren">)</span
                                             ><a
                                                 class="reference internal"
-                                                href="_modules/spokestack/context.html#SpeechContext"
+                                                href="_modules/spokestack/pipeline.html#SpeechPipeline"
                                                 ><span class="viewcode-link"
                                                     >[source]</span
                                                 ></a
                                             ><a
                                                 class="headerlink"
-                                                href="#spokestack.context.SpeechContext"
+                                                href="#spokestack.pipeline.SpeechPipeline"
                                                 title="Permalink to this definition"
                                                 >¶</a
                                             >
                                         </dt>
                                         <dd>
                                             <p>
-                                                Class for managing context of
-                                                the speech pipeline.
+                                                Pipeline for managing speech
+                                                components.
                                             </p>
                                             <dl class="field-list simple">
                                                 <dt class="field-odd">
                                                     Parameters
                                                 </dt>
                                                 <dd class="field-odd">
-                                                    <p>
-                                                        <strong
-                                                            >**kwargs</strong
-                                                        >
-                                                        –
-                                                    </p>
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >input_source</strong
+                                                                >
+                                                                – source of
+                                                                audio input
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >stages</strong
+                                                                >
+                                                                – components
+                                                                desired in the
+                                                                pipeline
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >**kwargs</strong
+                                                                >
+                                                                – additional
+                                                                keyword
+                                                                arguments
+                                                            </p>
+                                                        </li>
+                                                    </ul>
                                                 </dd>
                                             </dl>
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.context.SpeechContext.add_handler"
+                                                    id="spokestack.pipeline.SpeechPipeline.activate"
                                                 >
                                                     <code
                                                         class="sig-name descname"
-                                                        >add_handler</code
+                                                        >activate</code
                                                     ><span class="sig-paren"
                                                         >(</span
-                                                    ><em class="sig-param"
-                                                        ><span class="n"
-                                                            >name</span
-                                                        ></em
-                                                    >,
-                                                    <em class="sig-param"
-                                                        ><span class="n"
-                                                            >function</span
-                                                        ></em
                                                     ><span class="sig-paren"
                                                         >)</span
                                                     ><a
                                                         class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.add_handler"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.activate"
                                                         ><span
                                                             class="viewcode-link"
                                                             >[source]</span
                                                         ></a
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.add_handler"
+                                                        href="#spokestack.pipeline.SpeechPipeline.activate"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
                                                     <p>
-                                                        Adds a handler to the
-                                                        context
+                                                        Activates the pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.cleanup"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >cleanup</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.cleanup"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.cleanup"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Resets all attributes to
+                                                        default configuration
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.close"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >close</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.close"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.close"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Closes the running
+                                                        pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.context"
+                                                >
+                                                    <em class="property"
+                                                        >property </em
+                                                    ><code
+                                                        class="sig-name descname"
+                                                        >context</code
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.context"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>Current context</p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <a
+                                                                    class="reference internal"
+                                                                    href="spokestack.context.html#spokestack.context.SpeechContext"
+                                                                    title="spokestack.context.SpeechContext"
+                                                                    ><code
+                                                                        class="xref py py-class docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >SpeechContext</span
+                                                                        ></code
+                                                                    ></a
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.deactivate"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >deactivate</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.deactivate"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.deactivate"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Deactivates the pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.event"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >event</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><em class="sig-param"
+                                                        ><span class="n"
+                                                            >function</span
+                                                        ><span class="o">=</span
+                                                        ><span
+                                                            class="default_value"
+                                                            >None</span
+                                                        ></em
+                                                    >,
+                                                    <em class="sig-param"
+                                                        ><span class="n"
+                                                            >name</span
+                                                        ><span class="o">=</span
+                                                        ><span
+                                                            class="default_value"
+                                                            >None</span
+                                                        ></em
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.event"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.event"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Registers an event
+                                                        handler
                                                     </p>
                                                     <dl
                                                         class="field-list simple"
@@ -314,315 +602,33 @@
                                                                 <li>
                                                                     <p>
                                                                         <strong
-                                                                            >name</strong
+                                                                            >function</strong
                                                                         >
-                                                                        (<em>str</em>)
-                                                                        – The
-                                                                        name of
-                                                                        the
-                                                                        event
+                                                                        – event
                                                                         handler
                                                                     </p>
                                                                 </li>
                                                                 <li>
                                                                     <p>
                                                                         <strong
-                                                                            >function</strong
+                                                                            >name</strong
                                                                         >
-                                                                        (<em>Callable</em>)
-                                                                        – event
+                                                                        – name
+                                                                        of event
                                                                         handler
-                                                                        function
                                                                     </p>
                                                                 </li>
                                                             </ul>
                                                         </dd>
                                                         <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.append_buffer"
-                                                >
-                                                    <code
-                                                        class="sig-name descname"
-                                                        >append_buffer</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><em class="sig-param"
-                                                        ><span class="n"
-                                                            >frame</span
-                                                        ></em
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.append_buffer"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.append_buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This method adds audio
-                                                        to the context buffer.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Parameters
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                <strong
-                                                                    >frame</strong
-                                                                >
-                                                                (<em>bytes</em>)
-                                                                – a frame of
-                                                                audio
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.buffer"
-                                                >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
-                                                        class="sig-name descname"
-                                                        >buffer</code
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This property holds the
-                                                        audio.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
                                                             Returns
                                                         </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                a deque of audio
-                                                                frames
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>Deque[bytes]</p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.clear_buffer"
-                                                >
-                                                    <code
-                                                        class="sig-name descname"
-                                                        >clear_buffer</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.clear_buffer"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.clear_buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        Empties the current
-                                                        buffer.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.confidence"
-                                                >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
-                                                        class="sig-name descname"
-                                                        >confidence</code
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.confidence"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This property contains
-                                                        the confidence of a
-                                                        classification result.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Returns
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                model confidence
-                                                                of
-                                                                classification
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>float</p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.event"
-                                                >
-                                                    <code
-                                                        class="sig-name descname"
-                                                        >event</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><em class="sig-param"
-                                                        ><span class="n"
-                                                            >name</span
-                                                        ></em
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.event"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.event"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        Calls the event handler
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Parameters
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                <strong
-                                                                    >name</strong
-                                                                >
-                                                                (<em>str</em>) –
-                                                                The name of the
-                                                                event handler
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
                                                         <dd class="field-even">
                                                             <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
+                                                                Default event
+                                                                handler if a
+                                                                function not
+                                                                specified
                                                             </p>
                                                         </dd>
                                                     </dl>
@@ -631,52 +637,7 @@
 
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.context.SpeechContext.is_active"
-                                                >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
-                                                        class="sig-name descname"
-                                                        >is_active</code
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.is_active"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This property manages
-                                                        activity of the context.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Returns
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                ‘True’ if
-                                                                context is
-                                                                active, ‘False’
-                                                                otherwise.
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>bool</p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.is_managed"
+                                                    id="spokestack.pipeline.SpeechPipeline.is_managed"
                                                 >
                                                     <em class="property"
                                                         >property </em
@@ -685,36 +646,29 @@
                                                         >is_managed</code
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.is_managed"
+                                                        href="#spokestack.pipeline.SpeechPipeline.is_managed"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
-                                                    <p>
-                                                        Whether the context is
-                                                        being managed internally
-                                                    </p>
+                                                    <p>Management state</p>
                                                     <dl
                                                         class="field-list simple"
                                                     >
                                                         <dt class="field-odd">
-                                                            Returns
+                                                            Return type
                                                         </dt>
                                                         <dd class="field-odd">
                                                             <p>
-                                                                ‘True’ if
-                                                                is_managed set
-                                                                to ‘True’,
-                                                                ‘False’
-                                                                otherwise
+                                                                <code
+                                                                    class="xref py py-class docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >bool</span
+                                                                    ></code
+                                                                >
                                                             </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>bool</p>
                                                         </dd>
                                                     </dl>
                                                 </dd>
@@ -722,46 +676,38 @@
 
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.context.SpeechContext.is_speech"
+                                                    id="spokestack.pipeline.SpeechPipeline.is_running"
                                                 >
                                                     <em class="property"
                                                         >property </em
                                                     ><code
                                                         class="sig-name descname"
-                                                        >is_speech</code
+                                                        >is_running</code
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.is_speech"
+                                                        href="#spokestack.pipeline.SpeechPipeline.is_running"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
-                                                    <p>
-                                                        This property is to
-                                                        manage if speech is
-                                                        present in the current
-                                                        state or not.
-                                                    </p>
+                                                    <p>State of the pipeline</p>
                                                     <dl
                                                         class="field-list simple"
                                                     >
                                                         <dt class="field-odd">
-                                                            Returns
+                                                            Return type
                                                         </dt>
                                                         <dd class="field-odd">
                                                             <p>
-                                                                ‘True’ if
-                                                                is_speech set to
-                                                                ‘True’, ‘False’
-                                                                otherwise
+                                                                <code
+                                                                    class="xref py py-class docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >bool</span
+                                                                    ></code
+                                                                >
                                                             </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>bool</p>
                                                         </dd>
                                                     </dl>
                                                 </dd>
@@ -769,32 +715,33 @@
 
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.context.SpeechContext.reset"
+                                                    id="spokestack.pipeline.SpeechPipeline.pause"
                                                 >
                                                     <code
                                                         class="sig-name descname"
-                                                        >reset</code
+                                                        >pause</code
                                                     ><span class="sig-paren"
                                                         >(</span
                                                     ><span class="sig-paren"
                                                         >)</span
                                                     ><a
                                                         class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.reset"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.pause"
                                                         ><span
                                                             class="viewcode-link"
                                                             >[source]</span
                                                         ></a
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.reset"
+                                                        href="#spokestack.pipeline.SpeechPipeline.pause"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
                                                     <p>
-                                                        Resets the context state
+                                                        Stops audio input until
+                                                        resume is called
                                                     </p>
                                                     <dl
                                                         class="field-list simple"
@@ -819,44 +766,253 @@
 
                                             <dl class="py method">
                                                 <dt
-                                                    id="spokestack.context.SpeechContext.transcript"
+                                                    id="spokestack.pipeline.SpeechPipeline.resume"
                                                 >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
+                                                    <code
                                                         class="sig-name descname"
-                                                        >transcript</code
+                                                        >resume</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.resume"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
                                                     ><a
                                                         class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.transcript"
+                                                        href="#spokestack.pipeline.SpeechPipeline.resume"
                                                         title="Permalink to this definition"
                                                         >¶</a
                                                     >
                                                 </dt>
                                                 <dd>
                                                     <p>
-                                                        This property is the
-                                                        text representation of
-                                                        the audio buffer
+                                                        Resumes audio input
+                                                        after a pause
                                                     </p>
                                                     <dl
                                                         class="field-list simple"
                                                     >
                                                         <dt class="field-odd">
-                                                            Returns
+                                                            Return type
                                                         </dt>
                                                         <dd class="field-odd">
                                                             <p>
-                                                                the value of the
-                                                                transcript
-                                                                property
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
                                                             </p>
                                                         </dd>
-                                                        <dt class="field-even">
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.run"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >run</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.run"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.run"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Runs the pipeline to
+                                                        process speech and
+                                                        cleans up after stop is
+                                                        called
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
                                                             Return type
                                                         </dt>
-                                                        <dd class="field-even">
-                                                            <p>str</p>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.start"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >start</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.start"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.start"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Starts input source of
+                                                        the pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.step"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >step</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.step"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.step"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        Process a single frame
+                                                        with the pipeline
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.pipeline.SpeechPipeline.stop"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >stop</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/pipeline.html#SpeechPipeline.stop"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.pipeline.SpeechPipeline.stop"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>Halts the pipeline</p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
                                                         </dd>
                                                     </dl>
                                                 </dd>
@@ -873,21 +1029,9 @@
                                 aria-label="footer navigation"
                             >
                                 <a
-                                    href="spokestack.wakeword.html"
-                                    class="btn btn-neutral float-right"
-                                    title="Wakeword"
-                                    accesskey="n"
-                                    rel="next"
-                                    >Next
-                                    <span
-                                        class="fa fa-arrow-circle-right"
-                                    ></span
-                                ></a>
-
-                                <a
-                                    href="spokestack.vad.html"
+                                    href="spokestack.activation_timeout.html"
                                     class="btn btn-neutral float-left"
-                                    title="Voice Activity Detection (VAD)"
+                                    title="Activation Timeout"
                                     accesskey="p"
                                     rel="prev"
                                     ><span

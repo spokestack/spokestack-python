@@ -1,9 +1,8 @@
 """
 This module contains a context class to manage
-state between members of the procesing pipeline
+state between members of the processing pipeline
 """
-from collections import deque
-from typing import Deque
+from typing import Callable
 
 
 class SpeechContext:
@@ -13,34 +12,33 @@ class SpeechContext:
         **kwargs
     """
 
-    def __init__(self, **kwargs) -> None:
-        self._speech: bool = False
-        self._active: bool = False
-        self._managed: bool = False
+    def __init__(self) -> None:
+        self._is_speech: bool = False
+        self._is_active: bool = False
         self._transcript: str = ""
         self._confidence: float = 0.0
-        self._buffer: deque = deque()
+        self._handlers: dict = {}
 
-    @property
-    def buffer(self) -> Deque[bytes]:
-        """This property holds the audio.
-
-        Returns:
-            Deque[bytes]: a deque of audio frames
-        """
-        return self._buffer
-
-    def append_buffer(self, frame: bytes) -> None:
-        """This method adds audio to the context buffer.
+    def add_handler(self, name: str, function: Callable) -> None:
+        """ Adds a handler to the context
 
         Args:
-            frame (bytes): a frame of audio
-        """
-        self._buffer.append(frame)
+            name (str): The name of the event handler
+            function (Callable): event handler function
 
-    def clear_buffer(self) -> None:
-        """ Empties the current buffer. """
-        self._buffer.clear()
+        """
+        self._handlers[name] = function
+
+    def event(self, name: str) -> None:
+        """ Calls the event handler
+
+        Args:
+            name (str): The name of the event handler
+
+        """
+        handler = self._handlers.get(name)
+        if handler:
+            handler(self)
 
     @property
     def is_speech(self) -> bool:
@@ -50,7 +48,7 @@ class SpeechContext:
         Returns:
             bool: 'True' if is_speech set to 'True', 'False' otherwise
         """
-        return self._speech
+        return self._is_speech
 
     @is_speech.setter
     def is_speech(self, value: bool) -> None:
@@ -59,7 +57,7 @@ class SpeechContext:
         Args:
             value (bool): sets is_speech to passed argument
         """
-        self._speech = value
+        self._is_speech = value
 
     @property
     def is_active(self) -> bool:
@@ -68,7 +66,7 @@ class SpeechContext:
         Returns:
             bool: 'True' if context is active, 'False' otherwise.
         """
-        return self._active
+        return self._is_active
 
     @is_active.setter
     def is_active(self, value: bool) -> None:
@@ -77,7 +75,12 @@ class SpeechContext:
         Args:
             value (bool): Boolean to set context activity
         """
-        self._active = value
+        is_active = self._is_active
+        self._is_active = value
+        if value and not is_active:
+            self.event("activate")
+        elif not value and is_active:
+            self.event("deactivate")
 
     @property
     def transcript(self) -> str:
@@ -121,4 +124,3 @@ class SpeechContext:
         self.is_active = False
         self.transcript = ""
         self.confidence = 0.0
-        self.clear_buffer()

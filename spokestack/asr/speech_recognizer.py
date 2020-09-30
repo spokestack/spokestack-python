@@ -27,7 +27,7 @@ class CloudSpeechRecognizer:
         spokestack_secret: str = "",
         language: str = "en",
         sample_rate: int = 16000,
-        frame_width: int = 10,
+        frame_width: int = 20,
         idle_timeout: int = 5000,
     ) -> None:
 
@@ -57,7 +57,7 @@ class CloudSpeechRecognizer:
             self._receive(context)
         elif self._is_active:
             self._commit()
-        elif not self._is_final:
+        elif not self._client.is_final:
             self._receive(context)
         elif self._client.idle_count < self._client.idle_timeout:
             self._client.idle_count += 1
@@ -80,7 +80,14 @@ class CloudSpeechRecognizer:
             hypothesis = hypotheses[0]
             context.transcript = hypothesis["transcript"]
             context.confidence = hypothesis["confidence"]
-        self._is_final = self._client.response.get("final")
+            if context.transcript:
+                context.event("partial_recognize")
+
+        if self._client.is_final:
+            if context.transcript:
+                context.event("recognize")
+            else:
+                context.event("timeout")
 
     def _commit(self) -> None:
         self._is_active = False

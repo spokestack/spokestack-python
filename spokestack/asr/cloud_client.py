@@ -57,12 +57,11 @@ class CloudClient:
 
         self._response: Dict[str, Any] = {
             "error": None,
-            "final": False,
+            "final": True,
             "hypotheses": [],
             "status": None,
         }
         self._sample_rate: int = sample_rate
-        self._is_final: bool = False
         self._idle_timeout = idle_timeout
         self._idle_count: int = 0
 
@@ -97,7 +96,7 @@ class CloudClient:
             self.receive()
 
         self.end()
-        while not self._is_final:
+        while not self._response["final"]:
             self.receive()
         self.disconnect()
 
@@ -129,7 +128,6 @@ class CloudClient:
         }
         self._socket.send(json.dumps(message))
         self._response = json.loads(self._socket.recv())
-        self._is_final = False
         if not self._response["status"] == "ok":
             raise APIError(self._response)
 
@@ -166,7 +164,6 @@ class CloudClient:
                 self._socket.timeout = 0
                 response = self._socket.recv()
                 self._response = json.loads(response)
-                self._is_final = self._response["final"]
             except Exception:
                 pass
             self._socket.timeout = timeout
@@ -181,7 +178,7 @@ class CloudClient:
     @property
     def is_final(self) -> bool:
         """ status of most recent sever response """
-        return self._is_final
+        return self._response["final"]
 
     @property
     def idle_timeout(self) -> Any:

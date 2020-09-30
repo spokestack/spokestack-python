@@ -146,6 +146,20 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -226,7 +240,7 @@
         <span class="n">spokestack_secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
         <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
-        <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
         <span class="n">idle_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -256,7 +270,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_receive</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_commit</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_final</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">is_final</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_receive</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">idle_count</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">idle_timeout</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">idle_count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -279,7 +293,9 @@
             <span class="n">hypothesis</span> <span class="o">=</span> <span class="n">hypotheses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">context</span><span class="o">.</span><span class="n">transcript</span> <span class="o">=</span> <span class="n">hypothesis</span><span class="p">[</span><span class="s2">&quot;transcript&quot;</span><span class="p">]</span>
             <span class="n">context</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="n">hypothesis</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_final</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;final&quot;</span><span class="p">)</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;partial_recognize&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;final&quot;</span><span class="p">):</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;recognize&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span> <span class="o">=</span> <span class="kc">False</span>

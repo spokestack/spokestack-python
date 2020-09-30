@@ -1,6 +1,7 @@
 """
 This module uses pyaudio for input and output processing
 """
+import numpy as np  # type: ignore
 import pyaudio  # type: ignore
 
 
@@ -30,15 +31,16 @@ class PyAudioInput:
             start=False,
         )
 
-    def read(self) -> bytes:
+    def read(self) -> np.array:
         """Reads a single frame of audio
 
         Returns:
-            bytes: single frame of audio
+            np.ndarray: single frame of PCM-16 audio
         """
-        return self._stream.read(
+        frame = self._stream.read(
             self._frame_size, exception_on_overflow=self._exception_on_overflow
         )
+        return np.frombuffer(frame, np.int16)
 
     def start(self) -> None:
         """ Starts the audio stream """

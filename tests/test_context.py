@@ -1,28 +1,12 @@
 """
 This module contains tests for SpeechContext
 """
-from collections import deque
-
-import numpy as np  # type: ignore
 
 from spokestack.context import SpeechContext
 
 
 def test_context():
     context = SpeechContext()
-
-    # test buffer
-    assert isinstance(context.buffer, deque)
-
-    # test append buffer
-    assert len(context.buffer) == 0
-    frame = np.zeros(160, np.int16)
-    context.append_buffer(frame)
-    assert len(context.buffer) > 0
-
-    # test clear buffer
-    context.clear_buffer()
-    assert len(context.buffer) == 0
 
     # test is_speech
     assert not context.is_speech
@@ -50,4 +34,15 @@ def test_context():
     assert not context.is_active
     assert not context.transcript
     assert context.confidence == 0.0
-    assert len(context.buffer) == 0
+
+
+def test_handler():
+    def on_speech(context):
+        context.transcript = "event handled"
+
+    context = SpeechContext()
+    context.add_handler("recognize", on_speech)
+
+    context.event("recognize")
+
+    assert context.transcript == "event handled"

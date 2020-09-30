@@ -98,6 +98,7 @@ class WakewordTrigger:
         Returns: None
 
         """
+
         # detect vad edges for wakeword deactivation
         vad_fall = self._is_speech and not context.is_speech
         self._is_speech = context.is_speech
@@ -187,3 +188,7 @@ class WakewordTrigger:
         self.encode_window.reset().fill(-1.0)
         self.state[:] = 0.0
         self._posterior_max = 0.0
+
+    def close(self) -> None:
+        """ Close interface for use in the pipeline """
+        self.reset()

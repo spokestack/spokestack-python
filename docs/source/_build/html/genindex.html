@@ -133,6 +133,20 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -207,8 +221,18 @@
                                             <ul>
                                                 <li>
                                                     <a
-                                                        href="spokestack.asr.html#spokestack.asr.cloud_client.APIError"
-                                                        >APIError</a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.activate"
+                                                        >activate()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.activation_timeout.html#spokestack.activation_timeout.ActivationTimeout"
+                                                        >ActivationTimeout
+                                                        (class in
+                                                        spokestack.activation_timeout)</a
                                                     >
                                                 </li>
                                             </ul>
@@ -220,6 +244,20 @@
                                             "
                                         >
                                             <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.context.html#spokestack.context.SpeechContext.add_handler"
+                                                        >add_handler()
+                                                        (spokestack.context.SpeechContext
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.asr.html#spokestack.asr.cloud_client.APIError"
+                                                        >APIError</a
+                                                    >
+                                                </li>
                                                 <li>
                                                     <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.append_buffer"
@@ -282,6 +320,14 @@
                                                 </li>
                                                 <li>
                                                     <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.cleanup"
+                                                        >cleanup()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.context.html#spokestack.context.SpeechContext.clear_buffer"
                                                         >clear_buffer()
                                                         (spokestack.context.SpeechContext
@@ -290,13 +336,20 @@
                                                 </li>
                                                 <li>
                                                     <a
-                                                        href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
+                                                        href="spokestack.activation_timeout.html#spokestack.activation_timeout.ActivationTimeout.close"
                                                         >close()
-                                                        (spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                        (spokestack.activation_timeout.ActivationTimeout
                                                         method)</a
                                                     >
 
                                                     <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
+                                                                >(spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                                method)</a
+                                                            >
+                                                        </li>
                                                         <li>
                                                             <a
                                                                 href="spokestack.io.html#spokestack.io.pyaudio.PyAudioInput.close"
@@ -306,8 +359,29 @@
                                                         </li>
                                                         <li>
                                                             <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.close"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
                                                                 href="spokestack.tts.html#spokestack.tts.manager.TextToSpeechManager.close"
                                                                 >(spokestack.tts.manager.TextToSpeechManager
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.close"
+                                                                >(spokestack.vad.webrtc.VoiceActivityDetector
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordTrigger.close"
+                                                                >(spokestack.wakeword.tflite.WakewordTrigger
                                                                 method)</a
                                                             >
                                                         </li>
@@ -353,6 +427,14 @@
                                                         method)</a
                                                     >
                                                 </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.context"
+                                                        >context()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        property)</a
+                                                    >
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -364,6 +446,33 @@
                                     class="indextable genindextable"
                                 >
                                     <tr>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.activation_timeout.html#spokestack.activation_timeout.ActivationTimeout.deactivate"
+                                                        >deactivate()
+                                                        (spokestack.activation_timeout.ActivationTimeout
+                                                        method)</a
+                                                    >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.deactivate"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
                                         <td
                                             style="
                                                 width: 33%;
@@ -404,6 +513,33 @@
                                                         (spokestack.asr.cloud_client.CloudClient
                                                         method)</a
                                                     >
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td
+                                            style="
+                                                width: 33%;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.context.html#spokestack.context.SpeechContext.event"
+                                                        >event()
+                                                        (spokestack.context.SpeechContext
+                                                        method)</a
+                                                    >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.event"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                             </ul>
                                         </td>
@@ -499,6 +635,14 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.asr.html#spokestack.asr.cloud_client.CloudClient.is_connected"
+                                                        >is_connected()
+                                                        (spokestack.asr.cloud_client.CloudClient
+                                                        property)</a
+                                                    >
+                                                </li>
                                             </ul>
                                         </td>
                                         <td
@@ -508,14 +652,6 @@
                                             "
                                         >
                                             <ul>
-                                                <li>
-                                                    <a
-                                                        href="spokestack.asr.html#spokestack.asr.cloud_client.CloudClient.is_connected"
-                                                        >is_connected()
-                                                        (spokestack.asr.cloud_client.CloudClient
-                                                        property)</a
-                                                    >
-                                                </li>
                                                 <li>
                                                     <a
                                                         href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.is_empty"
@@ -537,6 +673,32 @@
                                                         href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.is_full"
                                                         >is_full()
                                                         (spokestack.wakeword.ring_buffer.RingBuffer
+                                                        property)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.context.html#spokestack.context.SpeechContext.is_managed"
+                                                        >is_managed()
+                                                        (spokestack.context.SpeechContext
+                                                        property)</a
+                                                    >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.is_managed"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                property)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.is_running"
+                                                        >is_running()
+                                                        (spokestack.pipeline.SpeechPipeline
                                                         property)</a
                                                     >
                                                 </li>
@@ -578,6 +740,12 @@
                                                     module
 
                                                     <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.activation_timeout.html#module-spokestack.activation_timeout"
+                                                                >spokestack.activation_timeout</a
+                                                            >
+                                                        </li>
                                                         <li>
                                                             <a
                                                                 href="spokestack.asr.html#module-spokestack.asr.cloud_client"
@@ -636,6 +804,12 @@
                                                             <a
                                                                 href="spokestack.nlu.html#module-spokestack.nlu.tflite"
                                                                 >spokestack.nlu.tflite</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#module-spokestack.pipeline"
+                                                                >spokestack.pipeline</a
                                                             >
                                                         </li>
                                                         <li>
@@ -756,6 +930,14 @@
                                             <ul>
                                                 <li>
                                                     <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.pause"
+                                                        >pause()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.io.html#spokestack.io.pyaudio.PyAudioInput"
                                                         >PyAudioInput (class in
                                                         spokestack.io.pyaudio)</a
@@ -822,13 +1004,20 @@
                                                 </li>
                                                 <li>
                                                     <a
-                                                        href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.reset"
+                                                        href="spokestack.activation_timeout.html#spokestack.activation_timeout.ActivationTimeout.reset"
                                                         >reset()
-                                                        (spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                        (spokestack.activation_timeout.ActivationTimeout
                                                         method)</a
                                                     >
 
                                                     <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.asr.html#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.reset"
+                                                                >(spokestack.asr.speech_recognizer.CloudSpeechRecognizer
+                                                                method)</a
+                                                            >
+                                                        </li>
                                                         <li>
                                                             <a
                                                                 href="spokestack.context.html#spokestack.context.SpeechContext.reset"
@@ -878,6 +1067,14 @@
                                                 </li>
                                                 <li>
                                                     <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.resume"
+                                                        >resume()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
                                                         href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.rewind"
                                                         >rewind()
                                                         (spokestack.wakeword.ring_buffer.RingBuffer
@@ -889,6 +1086,14 @@
                                                         href="spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer"
                                                         >RingBuffer (class in
                                                         spokestack.wakeword.ring_buffer)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.run"
+                                                        >run()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
                                                     >
                                                 </li>
                                             </ul>
@@ -938,6 +1143,26 @@
                                                         >SpeechContext (class in
                                                         spokestack.context)</a
                                                     >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline"
+                                                        >SpeechPipeline (class
+                                                        in
+                                                        spokestack.pipeline)</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    spokestack.activation_timeout
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.activation_timeout.html#module-spokestack.activation_timeout"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li>
                                                     spokestack.asr.cloud_client
@@ -1069,6 +1294,18 @@
                                                     </ul>
                                                 </li>
                                                 <li>
+                                                    spokestack.pipeline
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#module-spokestack.pipeline"
+                                                                >module</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
                                                     spokestack.tts.clients.spokestack
 
                                                     <ul>
@@ -1135,6 +1372,24 @@
                                                         (spokestack.io.pyaudio.PyAudioInput
                                                         method)</a
                                                     >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.start"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.step"
+                                                        >step()
+                                                        (spokestack.pipeline.SpeechPipeline
+                                                        method)</a
+                                                    >
                                                 </li>
                                                 <li>
                                                     <a
@@ -1143,6 +1398,16 @@
                                                         (spokestack.io.pyaudio.PyAudioInput
                                                         method)</a
                                                     >
+
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                href="spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.stop"
+                                                                >(spokestack.pipeline.SpeechPipeline
+                                                                method)</a
+                                                            >
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li>
                                                     <a

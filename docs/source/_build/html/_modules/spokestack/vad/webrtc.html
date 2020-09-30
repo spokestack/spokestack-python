@@ -144,6 +144,20 @@
                                     >Natural Language Understanding (NLU)</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -197,6 +211,7 @@
 <span class="sd">voice activity detection (vad)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
 <span class="kn">import</span> <span class="nn">webrtcvad</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
@@ -222,10 +237,10 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">vad_rise_delay</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">vad_fall_delay</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
+        <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="n">vad_rise_delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">vad_fall_delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">QUALITY</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -238,15 +253,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Processes a single frame of audio to detemine if voice is present</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            context (SpeechContext): State based information that needs to be shared</span>
 <span class="sd">            between pieces of the pipeline</span>
-<span class="sd">            frame (bytes): Single frame of audio from an input source</span>
+<span class="sd">            frame (np.ndarray): Single frame of PCM-16 audio from an input source</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
         <span class="n">result</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vad</span><span class="o">.</span><span class="n">is_speech</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">)</span>
 
         <span class="n">raw</span> <span class="o">=</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span>
@@ -265,7 +281,11 @@
 <div class="viewcode-block" id="VoiceActivityDetector.reset"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Resets the current state &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span> <span class="o">=</span> <span class="mi">0</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="VoiceActivityDetector.close"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Close interface for use in pipeline &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div></div>
 </pre>
                                 </div>
                             </div>

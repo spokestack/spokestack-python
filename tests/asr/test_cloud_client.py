@@ -178,16 +178,19 @@ def test_api_error(_mock):
 def test_bad_recv(_mock):
     client = CloudClient(socket_url="", key_id="", key_secret="", idle_timeout=5000)
     client.connect()
-    client._socket.recv.return_value = json.dumps(
-        {
-            "error": None,
-            "final": False,
-            "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
-            "status": "ok",
-        }
-    )
+    client._socket.recv.side_effect = [
+        json.dumps(
+            {
+                "error": None,
+                "final": False,
+                "hypotheses": [{"confidence": 0.5, "transcript": "this is a test"}],
+                "status": "ok",
+            }
+        ),
+        # bad response
+        {},
+    ]
     client.initialize()
-    client._socket.recv.return_value = json.dumps({})
     client.receive()
 
 
