@@ -82,8 +82,6 @@ class CloudSpeechRecognizer:
             context.confidence = hypothesis["confidence"]
             if context.transcript:
                 context.event("partial_recognize")
-            else:
-                context.event("timeout")
 
         if self._client.is_final:
             if context.transcript:
