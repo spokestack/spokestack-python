@@ -80,9 +80,16 @@ class CloudSpeechRecognizer:
             hypothesis = hypotheses[0]
             context.transcript = hypothesis["transcript"]
             context.confidence = hypothesis["confidence"]
-            context.event("partial_recognize")
-        if self._client.response.get("final"):
-            context.event("recognize")
+            if context.transcript:
+                context.event("partial_recognize")
+            else:
+                context.event("timeout")
+
+        if self._client.is_final:
+            if context.transcript:
+                context.event("recognize")
+            else:
+                context.event("timeout")
 
     def _commit(self) -> None:
         self._is_active = False

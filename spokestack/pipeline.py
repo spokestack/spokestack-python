@@ -15,28 +15,17 @@ class SpeechPipeline:
         **kwargs: additional keyword arguments
     """
 
-    def __init__(self, input_source, stages, **kwargs) -> None:
-        self._context = SpeechContext(**kwargs)
+    def __init__(self, input_source, stages) -> None:
+        self._context = SpeechContext()
         self._input_source = input_source
         self._stages: list = stages
         self._is_running = False
-        self._is_managed = False
         self._is_paused = False
 
     def _dispatch(self) -> None:
-        is_managed = self._context.is_managed
-        if self._is_managed and not is_managed:
-            for stage in self._stages:
-                stage.reset()
-        self._is_managed = is_managed
-
-        if self._is_paused:
-            pass
-        else:
-            frame = self._input_source.read()
-            for stage in self._stages:
-                if not self._is_managed:
-                    stage(self._context, frame)
+        frame = self._input_source.read()
+        for stage in self._stages:
+            stage(self._context, frame)
 
     def close(self) -> None:
         """ Closes the running pipeline """
@@ -58,18 +47,18 @@ class SpeechPipeline:
 
     def stop(self) -> None:
         """ Halts the pipeline """
-        if self._is_running:
-            self._is_running = False
+        self._is_running = False
+        self._input_source.stop()
 
     def pause(self) -> None:
         """ Stops audio input until resume is called """
         self._is_paused = True
-        self._is_running = False
+        self._input_source.stop()
 
     def resume(self) -> None:
         """ Resumes audio input after a pause """
         self._is_paused = False
-        self._is_running = True
+        self._input_source.start()
 
     def run(self) -> None:
         """ Runs the pipeline to process speech and cleans up after stop is called """
@@ -80,7 +69,8 @@ class SpeechPipeline:
     def step(self) -> None:
         """ Process a single frame with the pipeline """
         self._context.event("step")
-        self._dispatch()
+        if not self._is_paused:
+            self._dispatch()
 
     def cleanup(self) -> None:
         """ Resets all attributes to default configuration """
@@ -108,22 +98,12 @@ class SpeechPipeline:
                 name or function.__name__.replace("on_", ""), function
             )
         else:
-            return lambda function: self.event(function, name=name)
+            return lambda function: self.event(function, name)
 
     @property
     def is_running(self) -> bool:
         """ State of the pipeline """
         return self._is_running
-
-    @property
-    def is_managed(self) -> bool:
-        """ Management state """
-        return self._is_managed
-
-    @is_managed.setter
-    def is_managed(self, value) -> None:
-        """ Sets the internal management state """
-        self._is_managed = value
 
     @property
     def context(self) -> SpeechContext:

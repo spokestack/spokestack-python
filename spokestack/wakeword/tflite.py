@@ -26,7 +26,7 @@ class WakewordTrigger:
 
     def __init__(
         self,
-        pre_emphasis: float = 0.97,
+        pre_emphasis: float = 0.0,
         sample_rate: int = 16000,
         fft_window_type: str = "hann",
         fft_hop_length: int = 10,
@@ -178,7 +178,6 @@ class WakewordTrigger:
 
         if posterior > self._posterior_threshold:
             context.is_active = True
-            context.event("activate")
         if posterior > self._posterior_max:
             self._posterior_max = posterior
 

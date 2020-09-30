@@ -2,8 +2,7 @@
 This module contains a context class to manage
 state between members of the processing pipeline
 """
-from collections import deque
-from typing import Callable, Deque
+from typing import Callable
 
 
 class SpeechContext:
@@ -13,35 +12,12 @@ class SpeechContext:
         **kwargs
     """
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self) -> None:
         self._is_speech: bool = False
         self._is_active: bool = False
-        self._is_managed: bool = False
         self._transcript: str = ""
         self._confidence: float = 0.0
         self._handlers: dict = {}
-        self._buffer: deque = deque(maxlen=512)
-
-    @property
-    def buffer(self) -> Deque[bytes]:
-        """This property holds the audio.
-
-        Returns:
-            Deque[bytes]: a deque of audio frames
-        """
-        return self._buffer
-
-    def append_buffer(self, frame: bytes) -> None:
-        """This method adds audio to the context buffer.
-
-        Args:
-            frame (bytes): a frame of audio
-        """
-        self._buffer.append(frame)
-
-    def clear_buffer(self) -> None:
-        """ Empties the current buffer. """
-        self._buffer.clear()
 
     def add_handler(self, name: str, function: Callable) -> None:
         """ Adds a handler to the context
@@ -99,25 +75,12 @@ class SpeechContext:
         Args:
             value (bool): Boolean to set context activity
         """
+        is_active = self._is_active
         self._is_active = value
-
-    @property
-    def is_managed(self) -> bool:
-        """ Whether the context is being managed internally
-
-        Returns:
-            bool: 'True' if is_managed set to 'True', 'False' otherwise
-        """
-        return self._is_managed
-
-    @is_managed.setter
-    def is_managed(self, value: bool) -> None:
-        """This method is the setter for the is_managed property.
-
-        Args:
-            value (bool): sets is_managed to passed argument
-        """
-        self._is_managed = value
+        if value and not is_active:
+            self.event("activate")
+        elif not value and is_active:
+            self.event("deactivate")
 
     @property
     def transcript(self) -> str:
@@ -159,7 +122,5 @@ class SpeechContext:
         """Resets the context state"""
         self.is_speech = False
         self.is_active = False
-        self.is_managed = False
         self.transcript = ""
         self.confidence = 0.0
-        self.clear_buffer()

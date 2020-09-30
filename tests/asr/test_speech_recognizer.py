@@ -126,3 +126,43 @@ def test_reset():
 
     assert not recognizer._is_active
     assert not recognizer._client.is_connected
+
+
+def test_empty_transcript():
+    context = SpeechContext()
+    recognizer = CloudSpeechRecognizer()
+    recognizer._client._socket = mock.MagicMock()
+
+    recognizer._client._socket.recv.return_value = json.dumps(
+        {
+            "error": None,
+            "final": False,
+            "hypotheses": [{"confidence": 0.5, "transcript": ""}],
+            "status": "ok",
+        }
+    )
+
+    frame = np.random.rand(160).astype(np.int16)
+
+    # run through all the steps
+    context.is_active = True
+    recognizer(context, frame)
+    recognizer(context, frame)
+    context.is_active = False
+    recognizer(context, frame)
+
+    recognizer._client._socket.recv.return_value = json.dumps(
+        {
+            "error": None,
+            "final": True,
+            "hypotheses": [{"confidence": 0.5, "transcript": ""}],
+            "status": "ok",
+        }
+    )
+    # process the final frame with the final transcript
+    recognizer(context, frame)
+
+    assert not context.transcript
+    assert context.confidence == 0.5
+
+    recognizer.close()

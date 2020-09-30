@@ -95,18 +95,6 @@ def test_events():
     assert pipeline.context.transcript == "event triggered"
 
 
-def test_managed_getter_setter():
-    stages = [
-        mock.MagicMock(),
-        mock.MagicMock(),
-        mock.MagicMock(),
-    ]
-    pipeline = SpeechPipeline(mock.MagicMock(), stages=stages)
-
-    pipeline.is_managed = True
-    assert pipeline.is_managed
-
-
 def test_run():
     stages = [
         mock.MagicMock(),
@@ -136,12 +124,11 @@ def test_pause_resume():
 
     pipeline.step()
     pipeline.pause()
-    assert not pipeline.is_running
+    pipeline._input_source.stop.assert_called()
 
     # verify it does nothing
     pipeline.step()
-    assert not pipeline.is_running
 
     pipeline.resume()
-    assert pipeline.is_running
+    pipeline._input_source.start.assert_called()
     pipeline.close()

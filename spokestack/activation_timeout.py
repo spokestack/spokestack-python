@@ -29,11 +29,11 @@ class ActivationTimeout:
         """
         vad_fall = self._is_speech and not context.is_speech
         self._is_speech = context.is_speech
-        if context.is_active and self._active_length > self._min_active:
-            if vad_fall or self._active_length > self._max_active:
-                self.deactivate(context)
-                context.event("timeout")
-        self._active_length += 1
+        if context.is_active:
+            self._active_length += 1
+            if self._active_length > self._min_active:
+                if vad_fall or self._active_length > self._max_active:
+                    self.deactivate(context)
 
     def deactivate(self, context: SpeechContext) -> None:
         """ Deactivates the speech pipeline """
