@@ -4,7 +4,12 @@ TFLite model base class
 from typing import Any, List
 
 import numpy as np  # type: ignore
-import tflite_runtime.interpreter as tflite  # type: ignore
+
+
+try:
+    import tflite_runtime.interpreter as tflite  # type: ignore
+except ModuleNotFoundError:
+    import tensorflow.lite as tflite  # type: ignore
 
 
 class TFLiteModel:
@@ -26,7 +31,7 @@ class TFLiteModel:
         self._interpreter.allocate_tensors()
 
     def __call__(self, *args) -> List[np.ndarray]:
-        """ Foward pass of the TFLite model
+        """ Forward pass of the TFLite model
 
         Args:
             inputs (Any): inputs to the TFLite model
