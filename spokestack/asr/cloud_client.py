@@ -16,9 +16,9 @@ class CloudClient:
     """ Spokestack client for cloud based speech to text
 
         Args:
-            socket_url (str): url for socket connection
             key_id (str): identity from spokestack api credentials
             key_secret (str): secret key from spokestack api credentials
+            socket_url (str): url for socket connection
             audio_format (str): format of input audio
             sample_rate (int): audio sample rate (kHz)
             language (str): language for recognition
@@ -28,9 +28,9 @@ class CloudClient:
 
     def __init__(
         self,
-        socket_url: str,
         key_id: str,
         key_secret: str,
+        socket_url: str = "wss://api.spokestack.io",
         audio_format: str = "PCM16LE",
         sample_rate: int = 16000,
         language: str = "en",
