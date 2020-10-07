@@ -32,9 +32,9 @@ class CloudSpeechRecognizer:
     ) -> None:
 
         self._client: CloudClient = CloudClient(
-            spokestack_id,
-            spokestack_secret,
-            language,
+            key_id=spokestack_id,
+            key_secret=spokestack_secret,
+            language=language,
             sample_rate=sample_rate,
             idle_timeout=int(idle_timeout / frame_width),
         )
