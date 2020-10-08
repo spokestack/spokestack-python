@@ -46,7 +46,7 @@ class VoiceActivityDetector:
         self._run_length: int = 0
 
     def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
-        """Processes a single frame of audio to detemine if voice is present
+        """ Processes a single frame of audio to determine if voice is present
 
         Args:
             context (SpeechContext): State based information that needs to be shared
@@ -78,3 +78,30 @@ class VoiceActivityDetector:
     def close(self) -> None:
         """ Close interface for use in pipeline """
         self.reset()
+
+
+class VoiceActivityTrigger:
+    """ Voice Activity Detector trigger pipeline component """
+
+    def __init__(self) -> None:
+        self._is_speech = False
+
+    def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
+        """ Activates speech context whenever speech is detected
+
+        Args:
+            context (SpeechContext): State based information that needs to be shared
+            between pieces of the pipeline
+            frame (np.ndarray): Single frame of PCM-16 audio from an input source
+
+        """
+        if context.is_speech != self._is_speech:
+            if context.is_speech:
+                context.is_active = True
+            self._is_speech = context.is_speech
+
+    def close(self) -> None:
+        self.reset()
+
+    def reset(self) -> None:
+        self._is_speech = False

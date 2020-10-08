@@ -6,7 +6,7 @@ from unittest.mock import patch
 import numpy as np
 
 from spokestack.context import SpeechContext
-from spokestack.vad.webrtc import VoiceActivityDetector
+from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
 
 @patch("webrtcvad.Vad.is_speech", return_value=True)
@@ -79,3 +79,19 @@ def test_vad_fall_untriggered():
         detector(context, frame)
         assert not context.is_speech
     detector.close()
+
+
+def test_voice_activity_trigger():
+    context = SpeechContext()
+    trigger = VoiceActivityTrigger()
+
+    frame = np.zeros(160, np.int16)
+
+    trigger(context, frame)
+    assert not context.is_active
+
+    context.is_speech = True
+    trigger(context, frame)
+    assert context.is_active
+
+    trigger.close()
