@@ -6,13 +6,14 @@ any slots that are associated with that intent.
 import json
 import os
 from importlib import import_module
-from typing import Any, Dict, List, Tuple
+from typing import List, Tuple
 
 import numpy as np  # type: ignore
 from tokenizers import BertWordPieceTokenizer  # type: ignore
 
 from spokestack import utils
 from spokestack.models.tensorflow import TFLiteModel
+from spokestack.nlu.result import Result
 
 
 class TFLiteNLU:
@@ -41,7 +42,7 @@ class TFLiteNLU:
                 self._slot_meta[slot.pop("name")] = slot
         self._warm_up()
 
-    def __call__(self, utterance: str) -> Dict[str, Any]:
+    def __call__(self, utterance: str) -> Result:
         """ Classifies a string utterance into an intent and identifies any associated
             slots contained in the utterance. The slots get parsed based on type and
             then returned along with the intent and its associated confidence value.
@@ -49,8 +50,8 @@ class TFLiteNLU:
         Args:
             utterance (str): string that needs to be understood
 
-        Returns Dict[str, Any]: A dictionary of the identified intent, along with
-                                raw, parsed slots and model confidence in prediction
+        Returns (Result): A class with properties for the identified intent, along with
+                        raw, parsed slots and model confidence in prediction
 
         """
         inputs, input_ids = self._encode(utterance)
@@ -60,7 +61,7 @@ class TFLiteNLU:
         # slice off special tokens: [CLS], [SEP]
         tags = tags[: len(input_ids) - 2]
         input_ids = input_ids[1:-1]
-        # retrieve slots from the tagged postions and decode slots back
+        # retrieve slots from the tagged positions and decode slots back
         # into original values
         slots = [
             (token_id, tag[2:]) for token_id, tag in zip(input_ids, tags) if tag != "o"
@@ -85,13 +86,12 @@ class TFLiteNLU:
                 "parsed_value": parsed,
                 "raw_value": slot_map[key],
             }
-
-        return {
-            "utterance": utterance,
-            "intent": intent,
-            "confidence": confidence,
-            "slots": parsed_slots,
-        }
+        return Result(
+            utterance=utterance,
+            intent=intent,
+            confidence=confidence,
+            slots=parsed_slots,
+        )
 
     def _warm_up(self) -> None:
         # make an array the same size as the inputs to warm the

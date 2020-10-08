@@ -36,9 +36,9 @@ def test_classify_without_slots(_mock_tokenizer, _mock_model, fs):
 
     utterance = "this is only a test"
     outputs = model(utterance)
-    assert outputs["utterance"] == utterance
-    assert 0.0 <= outputs["confidence"] <= 1.0
-    assert not outputs["slots"]
+    assert outputs.utterance == utterance
+    assert 0.0 <= outputs.confidence <= 1.0
+    assert not outputs.slots
 
 
 @mock.patch("spokestack.nlu.tflite.BertWordPieceTokenizer")
@@ -77,9 +77,9 @@ def test_classify_with_slots(_mock_tokenizer, _mock_model, fs):
     utterance = "this is only a test"
     model._encode = mock.MagicMock(return_value=[[utterance], [0, 1, 2, 3, 4, 0]])
     outputs = model(utterance)
-    assert outputs["utterance"] == utterance
-    assert 0.0 <= outputs["confidence"] <= 1.0
-    assert outputs["slots"]
+    assert outputs.utterance == utterance
+    assert 0.0 <= outputs.confidence <= 1.0
+    assert outputs.slots
 
 
 @mock.patch("spokestack.nlu.tflite.BertWordPieceTokenizer")
@@ -142,10 +142,10 @@ def test_classify_with_multiple_slots(_mock_tokenizer, _mock_model, fs):
     model._encode = mock.MagicMock(return_value=[[utterance], [0, 0, 0, 1, 0, 3, 4, 0]])
     outputs = model(utterance)
 
-    assert outputs["utterance"] == utterance
-    assert outputs["intent"] == "command.test"
-    assert 0.0 <= outputs["confidence"] <= 1.0
-    assert outputs["slots"] == {
+    assert outputs.utterance == utterance
+    assert outputs.intent == "command.test"
+    assert 0.0 <= outputs.confidence <= 1.0
+    assert outputs.slots == {
         "test": {"name": "test", "parsed_value": "test", "raw_value": "test"},
         "number": {
             "name": "number",
