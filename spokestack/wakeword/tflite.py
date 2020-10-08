@@ -2,6 +2,7 @@
 This module contains the class for detecting
 the presence of keywords in an audio stream
 """
+import logging
 import os
 
 import numpy as np  # type: ignore
@@ -9,6 +10,9 @@ import numpy as np  # type: ignore
 from spokestack.context import SpeechContext
 from spokestack.models.tensorflow import TFLiteModel
 from spokestack.wakeword.ring_buffer import RingBuffer
+
+
+_LOG = logging.getLogger(__name__)
 
 
 class WakewordTrigger:
@@ -109,6 +113,8 @@ class WakewordTrigger:
 
         # reset on vad fall deactivation
         if vad_fall:
+            if not context.is_active:
+                _LOG.info(f"wake: {self._posterior_max}")
             self.reset()
 
     def _sample(self, context: SpeechContext, frame) -> None:
@@ -178,6 +184,7 @@ class WakewordTrigger:
 
         if posterior > self._posterior_threshold:
             context.is_active = True
+            _LOG.info(f"wake: {self._posterior_max}")
         if posterior > self._posterior_max:
             self._posterior_max = posterior
 
