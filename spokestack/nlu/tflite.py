@@ -40,7 +40,6 @@ class TFLiteNLU:
         for intent in self._intent_meta:
             for slot in self._intent_meta[intent]["slots"]:
                 self._slot_meta[slot.pop("name")] = slot
-        self._result = Result()
         self._warm_up()
 
     def __call__(self, utterance: str) -> Result:
@@ -58,10 +57,6 @@ class TFLiteNLU:
         inputs, input_ids = self._encode(utterance)
         outputs = self._model(inputs)
         intent, tags, confidence = self._decode(outputs)
-
-        self._result.intent = intent
-        self._result.utterance = utterance
-        self._result.confidence = confidence
 
         # slice off special tokens: [CLS], [SEP]
         tags = tags[: len(input_ids) - 2]
@@ -91,8 +86,12 @@ class TFLiteNLU:
                 "parsed_value": parsed,
                 "raw_value": slot_map[key],
             }
-        self._result.slots = parsed_slots
-        return self._result
+        return Result(
+            utterance=utterance,
+            intent=intent,
+            confidence=confidence,
+            slots=parsed_slots,
+        )
 
     def _warm_up(self) -> None:
         # make an array the same size as the inputs to warm the
