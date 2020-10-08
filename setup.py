@@ -20,4 +20,13 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.7",
+    install_requires=[
+        "pyaudio",
+        "webrtcvad",
+        "numpy",
+        "websocket",
+        "tokenizers",
+        "requests",
+        "streamp3",
+    ],
 )
