@@ -5,13 +5,22 @@ from typing import Any, Dict
 
 
 class Result:
-    """ Convenience wrapper for NLU Results"""
+    """ Convenience wrapper for NLU Results
 
-    def __init__(self, **kwargs) -> None:
-        self._utterance: str = kwargs.pop("utterance")
-        self._intent: str = kwargs.pop("intent")
-        self._confidence: float = kwargs.pop("confidence")
-        self._slots: Dict[str, Any] = kwargs.pop("slots")
+        Args:
+            utterance (str): original input string
+            intent (str): detected user intention
+            confidence (float): model confidence in intent prediction
+            slots (Dict[str, Any]): specific tokens needed by intent and
+                                    type information necessary for parsing
+
+    """
+
+    def __init__(self, utterance, intent, confidence, slots) -> None:
+        self._utterance: str = utterance
+        self._intent: str = intent
+        self._confidence: float = confidence
+        self._slots: Dict[str, Any] = slots
 
     @property
     def utterance(self) -> str:
