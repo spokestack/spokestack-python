@@ -182,11 +182,11 @@ class WakewordTrigger:
         frame = np.expand_dims(frame, 0)
         posterior = self.detect_model(frame)[0][0][0]
 
+        if posterior > self._posterior_max:
+            self._posterior_max = posterior
         if posterior > self._posterior_threshold:
             context.is_active = True
             _LOG.info(f"wake: {self._posterior_max}")
-        if posterior > self._posterior_max:
-            self._posterior_max = posterior
 
     def reset(self) -> None:
         """ Resets the currect WakewordDetector state """
