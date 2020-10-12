@@ -4,6 +4,7 @@ is a TFLite model which takes in an utterance and returns an intent along with
 any slots that are associated with that intent.
 """
 import json
+import logging
 import os
 from importlib import import_module
 from typing import List, Tuple
@@ -14,6 +15,9 @@ from tokenizers import BertWordPieceTokenizer  # type: ignore
 from spokestack import utils
 from spokestack.models.tensorflow import TFLiteModel
 from spokestack.nlu.result import Result
+
+
+_LOG = logging.getLogger(__name__)
 
 
 class TFLiteNLU:
@@ -60,12 +64,16 @@ class TFLiteNLU:
 
         # slice off special tokens: [CLS], [SEP]
         tags = tags[: len(input_ids) - 2]
+        _LOG.debug(f"{tags}")
         input_ids = input_ids[1:-1]
+        _LOG.debug(f"{input_ids}")
         # retrieve slots from the tagged positions and decode slots back
         # into original values
         slots = [
             (token_id, tag[2:]) for token_id, tag in zip(input_ids, tags) if tag != "o"
         ]
+        _LOG.debug(f"{slots}")
+
         slot_map: dict = {}
         for (token, tag) in slots:
             if tag in slot_map:
@@ -86,6 +94,7 @@ class TFLiteNLU:
                 "parsed_value": parsed,
                 "raw_value": slot_map[key],
             }
+        _LOG.debug(f"parsed slots: {parsed_slots}")
         return Result(
             utterance=utterance,
             intent=intent,
@@ -123,6 +132,9 @@ class TFLiteNLU:
         intent_posterior, tag_posterior = outputs
         intents, confidence = self._decode_intent(intent_posterior)
         tags = self._decode_tags(tag_posterior)
+        _LOG.debug(f"decoded tags: {tags}")
+        _LOG.debug(f"decoded intent: {intents}")
+        _LOG.debug(f"confidence: {confidence}")
         return intents, tags, confidence
 
     def _decode_tags(self, posterior):

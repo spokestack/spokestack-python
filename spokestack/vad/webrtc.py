@@ -2,6 +2,7 @@
 This module contains the webrtc component for
 voice activity detection (vad)
 """
+import logging
 
 import numpy as np  # type: ignore
 import webrtcvad  # type: ignore
@@ -13,6 +14,8 @@ QUALITY = 0
 LOW_BITRATE = 1
 AGGRESSIVE = 2
 VERY_AGGRESSIVE = 3
+
+_LOG = logging.getLogger(__name__)
 
 
 class VoiceActivityDetector:
@@ -67,8 +70,10 @@ class VoiceActivityDetector:
         if self._run_value != context.is_speech:
             if self._run_value and self._run_length >= self._rise_length:
                 context.is_speech = True
+                _LOG.info("vad: true")
             if not self._run_value and self._run_length >= self._fall_length:
                 context.is_speech = False
+                _LOG.info("vad: false")
 
     def reset(self) -> None:
         """ Resets the current state """

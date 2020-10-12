@@ -2,11 +2,15 @@
 This module contains the recognizer for cloud based ASR in
 the speech pipeline
 """
+import logging
 
 import numpy as np  # type: ignore
 
 from spokestack.asr.cloud_client import CloudClient
 from spokestack.context import SpeechContext
+
+
+_LOG = logging.getLogger(__name__)
 
 
 class CloudSpeechRecognizer:
@@ -52,11 +56,14 @@ class CloudSpeechRecognizer:
         if context.is_active and not self._is_active:
             self._begin()
             self._send(frame)
+            _LOG.debug("ready for speech")
         elif context.is_active:
             self._send(frame)
             self._receive(context)
+            _LOG.debug("begin speech")
         elif self._is_active:
             self._commit()
+            _LOG.debug("end speech")
         elif not self._client.is_final:
             self._receive(context)
         elif self._client.idle_count < self._client.idle_timeout:
@@ -86,8 +93,10 @@ class CloudSpeechRecognizer:
         if self._client.is_final:
             if context.transcript:
                 context.event("recognize")
+                _LOG.debug("recognize event")
             else:
                 context.event("timeout")
+                _LOG.debug("timeout event")
 
     def _commit(self) -> None:
         self._is_active = False
