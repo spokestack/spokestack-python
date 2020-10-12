@@ -36,6 +36,7 @@ class WakewordTrigger:
         fft_hop_length: int = 10,
         model_dir: str = "",
         posterior_threshold: float = 0.5,
+        **kwargs,
     ) -> None:
 
         self.pre_emphasis: float = pre_emphasis

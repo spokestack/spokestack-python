@@ -15,7 +15,11 @@ class PyAudioInput:
     """
 
     def __init__(
-        self, sample_rate: int, frame_width: int, exception_on_overflow: bool = True
+        self,
+        sample_rate: int,
+        frame_width: int,
+        exception_on_overflow: bool = True,
+        **kwargs
     ) -> None:
         self._frame_size = int(sample_rate / 1000 * frame_width)
         self._exception_on_overflow = exception_on_overflow

@@ -37,6 +37,7 @@ class VoiceActivityDetector:
         vad_rise_delay: int = 0,
         vad_fall_delay: int = 0,
         mode: int = QUALITY,
+        **kwargs
     ) -> None:
 
         self._sample_rate: int = sample_rate

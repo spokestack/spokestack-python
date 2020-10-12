@@ -33,6 +33,7 @@ class CloudSpeechRecognizer:
         sample_rate: int = 16000,
         frame_width: int = 20,
         idle_timeout: int = 5000,
+        **kwargs,
     ) -> None:
 
         self._client: CloudClient = CloudClient(
