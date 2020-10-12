@@ -2,15 +2,15 @@
 This module contains a context class to manage
 state between members of the processing pipeline
 """
+import logging
 from typing import Callable
 
 
-class SpeechContext:
-    """Class for managing context of the speech pipeline.
+_LOG = logging.getLogger(__name__)
 
-    Args:
-        **kwargs
-    """
+
+class SpeechContext:
+    """ Class for managing context of the speech pipeline. """
 
     def __init__(self) -> None:
         self._is_speech: bool = False
@@ -79,8 +79,10 @@ class SpeechContext:
         self._is_active = value
         if value and not is_active:
             self.event("activate")
+            _LOG.info("activate event")
         elif not value and is_active:
             self.event("deactivate")
+            _LOG.info("deactivate event")
 
     @property
     def transcript(self) -> str:
