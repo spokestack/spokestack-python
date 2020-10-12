@@ -24,7 +24,7 @@ setuptools.setup(
         "pyaudio",
         "webrtcvad",
         "numpy",
-        "websocket_client",
+        "websocket",
         "tokenizers",
         "requests",
         "streamp3",
