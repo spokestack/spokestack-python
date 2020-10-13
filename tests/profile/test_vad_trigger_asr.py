@@ -9,6 +9,7 @@ from spokestack.profile.vad_trigger_asr import VoiceActivityTriggerSpokestackASR
 @mock.patch("spokestack.profile.vad_trigger_asr.PyAudioInput")
 @mock.patch("spokestack.profile.vad_trigger_asr.SpeechPipeline")
 def test_activate(*args):
-    pipeline = VoiceActivityTriggerSpokestackASR().create("", "")
+    profile = VoiceActivityTriggerSpokestackASR()
+    pipeline = profile.create("", "")
     pipeline.start()
     pipeline.run()

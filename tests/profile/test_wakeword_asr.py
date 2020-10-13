@@ -10,6 +10,7 @@ from spokestack.profile.wakeword_asr import WakewordSpokestackASR
 @mock.patch("spokestack.profile.wakeword_asr.WakewordTrigger")
 @mock.patch("spokestack.profile.wakeword_asr.SpeechPipeline")
 def test_activate(*args):
-    pipeline = WakewordSpokestackASR().create("", "")
+    profile = WakewordSpokestackASR()
+    pipeline = profile.create("", "")
     pipeline.start()
     pipeline.run()
