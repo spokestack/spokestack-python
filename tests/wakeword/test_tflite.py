@@ -72,6 +72,7 @@ def test_detect_inactive_vad_deactivate(_mock):
         detector(context, test_frame)
         context.is_speech = False
         assert not context.is_active
+    detector(context, test_frame)
 
 
 @mock.patch("spokestack.wakeword.tflite.TFLiteModel", new_callable=ModelFactory)

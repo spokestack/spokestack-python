@@ -13,7 +13,9 @@ class ActivationTimeout:
         max_active (int): the maximum length of an activation (ms)
     """
 
-    def __init__(self, frame_width=20, min_active=500, max_active=5000) -> None:
+    def __init__(
+        self, frame_width=20, min_active=500, max_active=5000, **kwargs
+    ) -> None:
 
         self._min_active = min_active / frame_width
         self._max_active = max_active / frame_width
