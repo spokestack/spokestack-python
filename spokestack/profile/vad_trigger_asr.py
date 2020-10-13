@@ -8,30 +8,30 @@ from spokestack.pipeline import SpeechPipeline
 from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
 
-class VoiceActivityTriggerASR:
-    """ VAD Trigger ASR
+class VoiceActivityTriggerSpokestackASR:
+    """ VAD Trigger ASR """
 
-    Args:
-            spokestack_id (str):
-            spokestack_secret (str):
-            sample_rate (int):
-            frame_width (int):
-            vad_rise_delay (int):
-            vad_fall_delay (int):
-            idle_timeout (int):
-            mode (int):
-
-    """
-
-    def __init__(
+    def create(
         self,
         spokestack_id: str,
         spokestack_secret: str,
         sample_rate: int = 16000,
         frame_width: int = 20,
         **kwargs
-    ) -> None:
-        self._pipeline = SpeechPipeline(
+    ) -> SpeechPipeline:
+        """
+
+        Args:
+            spokestack_id (str): spokestack API id.
+            spokestack_secret (str): Spokestack API secret.
+            sample_rate (int): sample rate of the audio (Hz).
+            frame_width (int): width of the audio frame: 10, 20, or 30 (ms).
+
+        Returns:
+            SpeechPipeline instance with profile configuration.
+
+        """
+        pipeline = SpeechPipeline(
             input_source=PyAudioInput(
                 sample_rate=sample_rate, frame_width=frame_width, **kwargs
             ),
@@ -50,10 +50,4 @@ class VoiceActivityTriggerASR:
                 ),
             ],
         )
-
-    def run(self) -> None:
-        """ Runs the configured pipeline. """
-        self._pipeline.run()
-
-    def start(self) -> None:
-        self._pipeline.start()
+        return pipeline
