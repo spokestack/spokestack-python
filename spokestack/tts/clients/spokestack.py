@@ -5,9 +5,11 @@ import base64
 import hashlib
 import hmac
 import json
-from typing import Any, Iterator
+from typing import Any
 
 import requests
+
+from spokestack.tts.clients.response import TextToSpeechResponse
 
 
 _MODES = {
@@ -24,19 +26,25 @@ class TextToSpeechClient:
         key_id (str): identity from spokestack api credentials
         key_secret (str): secret key from spokestack api credentials
         url (str): spokestack api url
+        stream (bool): if the response should be streamed
     """
 
     def __init__(
-        self, key_id: str, key_secret: str, url: str = "https://api.spokestack.io/v1"
+        self,
+        key_id: str,
+        key_secret: str,
+        url: str = "https://api.spokestack.io/v1",
+        stream: bool = True,
     ) -> None:
 
         self._key_id = key_id
         self._key = key_secret.encode("utf-8")
         self._url = url
+        self._stream = stream
 
     def synthesize(
         self, utterance: str, mode: str = "text", voice: str = "demo-male",
-    ) -> Iterator[bytes]:
+    ) -> TextToSpeechResponse:
         """ Converts the given utterance to speech
 
         Args:
@@ -45,7 +53,7 @@ class TextToSpeechClient:
             voice (str): name of the tts voice.
 
         Returns:
-            (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes
+            (TextToSpeechResponse): tts response
 
         """
         body = self._build_body(utterance, mode, voice)
@@ -65,12 +73,14 @@ class TextToSpeechClient:
         if "errors" in response:
             raise TTSError(response["errors"])
 
-        response = requests.get(response["data"][_MODES[mode]]["url"], stream=True)
+        response = requests.get(
+            response["data"][_MODES[mode]]["url"], stream=self._stream
+        )
 
         if response.status_code != 200:
             raise Exception(response.reason)
 
-        return response.iter_content(chunk_size=None)
+        return TextToSpeechResponse(response)
 
     def _build_body(self, message, mode, voice):
         if mode == "ssml":

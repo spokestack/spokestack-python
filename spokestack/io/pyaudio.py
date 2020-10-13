@@ -3,6 +3,10 @@ This module uses pyaudio for input and output processing
 """
 import numpy as np  # type: ignore
 import pyaudio  # type: ignore
+from streamp3 import MP3Decoder  # type: ignore
+
+from spokestack.io.utils import SequenceIO
+from spokestack.tts.clients.spokestack import TextToSpeechResponse
 
 
 class PyAudioInput:
@@ -96,11 +100,13 @@ class PyAudioOutput:
             rate=sample_rate,
         )
 
-    def write(self, frame: bytes) -> None:
-        """ Writes a single frame of audio to output
+    def write(self, response: TextToSpeechResponse) -> None:
+        """ Writes a TTS response to an output
 
         Args:
-            frame (bytes): a single frame of audio
+            response (TextToSpeechResponse): a tts response
 
         """
-        self._output.write(frame)
+        stream = SequenceIO(response.iter_content())
+        for frame in MP3Decoder(stream):
+            self._output.write(frame)
