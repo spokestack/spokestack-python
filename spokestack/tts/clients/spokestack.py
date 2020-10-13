@@ -88,7 +88,8 @@ class TextToSpeechClient:
 
         return response["data"][_MODES[mode]]["url"]
 
-    def _build_body(self, message, mode, voice):
+    @staticmethod
+    def _build_body(message, mode, voice):
         if mode == "ssml":
             return json.dumps(
                 {
