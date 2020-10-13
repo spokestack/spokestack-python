@@ -48,24 +48,8 @@ class TextToSpeechClient:
             (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes
 
         """
-        body = self._build_body(utterance, mode, voice)
-        signature = base64.b64encode(
-            hmac.new(self._key, body.encode("utf-8"), hashlib.sha256).digest()
-        ).decode("utf-8")
-        headers = {
-            "Authorization": f"Spokestack {self._key_id}:{signature}",
-            "Content-Type": "application/json",
-        }
-        response: Any = requests.post(self._url, headers=headers, data=body)
-
-        if response.status_code != 200:
-            raise Exception(response.reason)
-
-        response = response.json()
-        if "errors" in response:
-            raise TTSError(response["errors"])
-
-        response = requests.get(response["data"][_MODES[mode]]["url"], stream=True)
+        audio_url = self.synthesize_url(utterance, mode, voice)
+        response = requests.get(audio_url, stream=True)
 
         if response.status_code != 200:
             raise Exception(response.reason)
