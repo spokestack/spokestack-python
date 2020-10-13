@@ -11,8 +11,8 @@ from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 class VoiceActivityTriggerSpokestackASR:
     """ VAD Trigger ASR """
 
+    @staticmethod
     def create(
-        self,
         spokestack_id: str,
         spokestack_secret: str,
         sample_rate: int = 16000,

@@ -12,8 +12,8 @@ from spokestack.wakeword.tflite import WakewordTrigger
 class WakewordSpokestackASR:
     """ TFLite wakeword with Spokestack speech recognition. """
 
+    @staticmethod
     def create(
-        self,
         spokestack_id: str,
         spokestack_secret: str,
         sample_rate: int = 16000,
