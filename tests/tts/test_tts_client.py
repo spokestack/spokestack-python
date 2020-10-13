@@ -58,6 +58,19 @@ def test_synthesize_markdown():
         assert response == test
 
 
+def test_synthesize_url():
+    client = TextToSpeechClient("", "", "")
+
+    with mock.patch("spokestack.tts.clients.spokestack.requests") as patched:
+        mock_url = "https://test"
+        patched.post.return_value = MockResponse(
+            status_code=200,
+            return_value={"data": {"synthesizeText": {"url": mock_url}}},
+        )
+        response = client.synthesize_url("# test utterance", mode="text")
+        assert response == mock_url
+
+
 def test_synthesize_invalid_mode():
     client = TextToSpeechClient("", "", "")
 

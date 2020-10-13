@@ -48,6 +48,27 @@ class TextToSpeechClient:
             (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes
 
         """
+        audio_url = self.synthesize_url(utterance, mode, voice)
+        response = requests.get(audio_url, stream=True)
+
+        if response.status_code != 200:
+            raise Exception(response.reason)
+
+        return response.iter_content(chunk_size=None)
+
+    def synthesize_url(
+        self, utterance: str, mode: str = "text", voice: str = "demo-male",
+    ) -> str:
+        """ Converts the given uttrance to speech accessible by a URL.
+
+        Args:
+            utterance (str): string that needs to be rendered as speech.
+            mode (str): synthesis mode to use with utterance. text, ssml, markdown.
+            voice (str): name of the tts voice.
+
+        Returns: URL of the audio clip
+
+        """
         body = self._build_body(utterance, mode, voice)
         signature = base64.b64encode(
             hmac.new(self._key, body.encode("utf-8"), hashlib.sha256).digest()
@@ -65,14 +86,10 @@ class TextToSpeechClient:
         if "errors" in response:
             raise TTSError(response["errors"])
 
-        response = requests.get(response["data"][_MODES[mode]]["url"], stream=True)
+        return response["data"][_MODES[mode]]["url"]
 
-        if response.status_code != 200:
-            raise Exception(response.reason)
-
-        return response.iter_content(chunk_size=None)
-
-    def _build_body(self, message, mode, voice):
+    @staticmethod
+    def _build_body(message, mode, voice):
         if mode == "ssml":
             return json.dumps(
                 {
