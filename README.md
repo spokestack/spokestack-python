@@ -10,6 +10,16 @@
 
 ## Get Started
 
+### System Dependencies
+
+#### macOS
+
+    brew install lame portaudio
+
+#### Debian/Ubuntu
+
+    sudo apt-get install portaudio19-dev libmp3lame-dev
+
 Add voice capability to your projects with one line.
 
     pip install spokestack
