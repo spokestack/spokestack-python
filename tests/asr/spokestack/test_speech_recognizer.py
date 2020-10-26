@@ -6,7 +6,7 @@ from unittest import mock
 
 import numpy as np  # type: ignore
 
-from spokestack.asr.speech_recognizer import CloudSpeechRecognizer
+from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.context import SpeechContext
 
 

@@ -33,3 +33,4 @@ websocket
 tokenizers
 requests
 streamp3
+google-cloud-speech

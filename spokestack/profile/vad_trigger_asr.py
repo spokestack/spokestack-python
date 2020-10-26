@@ -2,7 +2,7 @@
 Pipeline profile with vad trigger and asr
 """
 from spokestack.activation_timeout import ActivationTimeout
-from spokestack.asr.speech_recognizer import CloudSpeechRecognizer
+from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.io.pyaudio import PyAudioInput
 from spokestack.pipeline import SpeechPipeline
 from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger

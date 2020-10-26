@@ -6,7 +6,7 @@ import logging
 
 import numpy as np  # type: ignore
 
-from spokestack.asr.cloud_client import CloudClient
+from spokestack.asr.spokestack.cloud_client import CloudClient
 from spokestack.context import SpeechContext
 
 
