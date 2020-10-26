@@ -263,6 +263,27 @@
 <span class="sd">            (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">audio_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">synthesize_url</span><span class="p">(</span><span class="n">utterance</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">audio_url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TextToSpeechClient.synthesize_url"><a class="viewcode-back" href="../../../../spokestack.tts.clients.html#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize_url">[docs]</a>    <span class="k">def</span> <span class="nf">synthesize_url</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;demo-male&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Converts the given uttrance to speech accessible by a URL.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            utterance (str): string that needs to be rendered as speech.</span>
+<span class="sd">            mode (str): synthesis mode to use with utterance. text, ssml, markdown.</span>
+<span class="sd">            voice (str): name of the tts voice.</span>
+
+<span class="sd">        Returns: URL of the audio clip</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_body</span><span class="p">(</span><span class="n">utterance</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">)</span>
         <span class="n">signature</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span>
             <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">,</span> <span class="n">body</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
@@ -280,14 +301,10 @@
         <span class="k">if</span> <span class="s2">&quot;errors&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">TTSError</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">])</span>
 
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">]][</span><span class="s2">&quot;url&quot;</span><span class="p">],</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">]][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span></div>
 
-        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_build_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_build_body</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;ssml&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
                 <span class="p">{</span>
@@ -344,9 +361,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

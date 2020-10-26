@@ -212,15 +212,20 @@
 <span class="sd">any slots that are associated with that intent.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
 <span class="kn">from</span> <span class="nn">tokenizers</span> <span class="kn">import</span> <span class="n">BertWordPieceTokenizer</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">spokestack</span> <span class="kn">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">spokestack.models.tensorflow</span> <span class="kn">import</span> <span class="n">TFLiteModel</span>
+<span class="kn">from</span> <span class="nn">spokestack.nlu.result</span> <span class="kn">import</span> <span class="n">Result</span>
+
+
+<span class="n">_LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TFLiteNLU"><a class="viewcode-back" href="../../../spokestack.nlu.html#spokestack.nlu.tflite.TFLiteNLU">[docs]</a><span class="k">class</span> <span class="nc">TFLiteNLU</span><span class="p">:</span>
@@ -249,7 +254,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_slot_meta</span><span class="p">[</span><span class="n">slot</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">slot</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_warm_up</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Classifies a string utterance into an intent and identifies any associated</span>
 <span class="sd">            slots contained in the utterance. The slots get parsed based on type and</span>
 <span class="sd">            then returned along with the intent and its associated confidence value.</span>
@@ -257,8 +262,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            utterance (str): string that needs to be understood</span>
 
-<span class="sd">        Returns Dict[str, Any]: A dictionary of the identified intent, along with</span>
-<span class="sd">                                raw, parsed slots and model confidence in prediction</span>
+<span class="sd">        Returns (Result): A class with properties for the identified intent, along with</span>
+<span class="sd">                        raw, parsed slots and model confidence in prediction</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">inputs</span><span class="p">,</span> <span class="n">input_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encode</span><span class="p">(</span><span class="n">utterance</span><span class="p">)</span>
@@ -267,12 +272,16 @@
 
         <span class="c1"># slice off special tokens: [CLS], [SEP]</span>
         <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tags</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">input_ids</span> <span class="o">=</span> <span class="n">input_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1"># retrieve slots from the tagged postions and decode slots back</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">input_ids</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># retrieve slots from the tagged positions and decode slots back</span>
         <span class="c1"># into original values</span>
         <span class="n">slots</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="n">tag</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="k">for</span> <span class="n">token_id</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span> <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;o&quot;</span>
         <span class="p">]</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">slots</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="n">slot_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">slots</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">slot_map</span><span class="p">:</span>
@@ -293,13 +302,13 @@
                 <span class="s2">&quot;parsed_value&quot;</span><span class="p">:</span> <span class="n">parsed</span><span class="p">,</span>
                 <span class="s2">&quot;raw_value&quot;</span><span class="p">:</span> <span class="n">slot_map</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
             <span class="p">}</span>
-
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;utterance&quot;</span><span class="p">:</span> <span class="n">utterance</span><span class="p">,</span>
-            <span class="s2">&quot;intent&quot;</span><span class="p">:</span> <span class="n">intent</span><span class="p">,</span>
-            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
-            <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="n">parsed_slots</span><span class="p">,</span>
-        <span class="p">}</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;parsed slots: </span><span class="si">{</span><span class="n">parsed_slots</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span>
+            <span class="n">utterance</span><span class="o">=</span><span class="n">utterance</span><span class="p">,</span>
+            <span class="n">intent</span><span class="o">=</span><span class="n">intent</span><span class="p">,</span>
+            <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="n">slots</span><span class="o">=</span><span class="n">parsed_slots</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_warm_up</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># make an array the same size as the inputs to warm the</span>
@@ -331,6 +340,9 @@
         <span class="n">intent_posterior</span><span class="p">,</span> <span class="n">tag_posterior</span> <span class="o">=</span> <span class="n">outputs</span>
         <span class="n">intents</span><span class="p">,</span> <span class="n">confidence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_intent</span><span class="p">(</span><span class="n">intent_posterior</span><span class="p">)</span>
         <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_tags</span><span class="p">(</span><span class="n">tag_posterior</span><span class="p">)</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;decoded tags: </span><span class="si">{</span><span class="n">tags</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;decoded intent: </span><span class="si">{</span><span class="n">intents</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;confidence: </span><span class="si">{</span><span class="n">confidence</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">intents</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">confidence</span>
 
     <span class="k">def</span> <span class="nf">_decode_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posterior</span><span class="p">):</span>
@@ -356,9 +368,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

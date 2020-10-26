@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="spokestack",
-    version="0.0.7",
+    version="0.0.8",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",
@@ -19,7 +19,7 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
         "pyaudio",
         "webrtcvad",

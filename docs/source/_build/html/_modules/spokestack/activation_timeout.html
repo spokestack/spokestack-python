@@ -223,7 +223,9 @@
 <span class="sd">        max_active (int): the maximum length of an activation (ms)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_active</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">max_active</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">frame_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_active</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">max_active</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_min_active</span> <span class="o">=</span> <span class="n">min_active</span> <span class="o">/</span> <span class="n">frame_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_active</span> <span class="o">=</span> <span class="n">max_active</span> <span class="o">/</span> <span class="n">frame_width</span>
@@ -239,11 +241,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vad_fall</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span>
-        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_active</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">vad_fall</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_active</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">deactivate</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-                <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_active</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">vad_fall</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_length</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_active</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">deactivate</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ActivationTimeout.deactivate"><a class="viewcode-back" href="../../spokestack.activation_timeout.html#spokestack.activation_timeout.ActivationTimeout.deactivate">[docs]</a>    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Deactivates the speech pipeline &quot;&quot;&quot;</span>
@@ -265,9 +267,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

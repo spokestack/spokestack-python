@@ -139,16 +139,24 @@
                                     <li class="toctree-l2">
                                         <a
                                             class="reference internal"
-                                            href="#module-spokestack.asr.cloud_client"
-                                            >spokestack.asr.cloud_client
+                                            href="#module-spokestack.asr.spokestack.cloud_client"
+                                            >spokestack.asr.spokestack.cloud_client
                                             module</a
                                         >
                                     </li>
                                     <li class="toctree-l2">
                                         <a
                                             class="reference internal"
-                                            href="#module-spokestack.asr.speech_recognizer"
-                                            >spokestack.asr.speech_recognizer
+                                            href="#module-spokestack.asr.spokestack.speech_recognizer"
+                                            >spokestack.asr.spokestack.speech_recognizer
+                                            module</a
+                                        >
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a
+                                            class="reference internal"
+                                            href="#module-spokestack.asr.google.speech_recognizer"
+                                            >spokestack.asr.google.speech_recognizer
                                             module</a
                                         >
                                     </li>
@@ -236,15 +244,16 @@
                                     </h1>
                                     <div
                                         class="section"
-                                        id="module-spokestack.asr.cloud_client"
+                                        id="module-spokestack.asr.spokestack.cloud_client"
                                     >
                                         <span
-                                            id="spokestack-asr-cloud-client-module"
+                                            id="spokestack-asr-spokestack-cloud-client-module"
                                         ></span>
                                         <h2>
-                                            spokestack.asr.cloud_client module<a
+                                            spokestack.asr.spokestack.cloud_client
+                                            module<a
                                                 class="headerlink"
-                                                href="#module-spokestack.asr.cloud_client"
+                                                href="#module-spokestack.asr.spokestack.cloud_client"
                                                 title="Permalink to this headline"
                                                 >¶</a
                                             >
@@ -257,13 +266,13 @@
                                         </p>
                                         <dl class="py exception">
                                             <dt
-                                                id="spokestack.asr.cloud_client.APIError"
+                                                id="spokestack.asr.spokestack.cloud_client.APIError"
                                             >
                                                 <em class="property"
                                                     >exception </em
                                                 ><code
                                                     class="sig-prename descclassname"
-                                                    >spokestack.asr.cloud_client.</code
+                                                    >spokestack.asr.spokestack.cloud_client.</code
                                                 ><code class="sig-name descname"
                                                     >APIError</code
                                                 ><span class="sig-paren">(</span
@@ -274,13 +283,13 @@
                                                 ><span class="sig-paren">)</span
                                                 ><a
                                                     class="reference internal"
-                                                    href="_modules/spokestack/asr/cloud_client.html#APIError"
+                                                    href="_modules/spokestack/asr/spokestack/cloud_client.html#APIError"
                                                     ><span class="viewcode-link"
                                                         >[source]</span
                                                     ></a
                                                 ><a
                                                     class="headerlink"
-                                                    href="#spokestack.asr.cloud_client.APIError"
+                                                    href="#spokestack.asr.spokestack.cloud_client.APIError"
                                                     title="Permalink to this definition"
                                                     >¶</a
                                                 >
@@ -310,21 +319,16 @@
 
                                         <dl class="py class">
                                             <dt
-                                                id="spokestack.asr.cloud_client.CloudClient"
+                                                id="spokestack.asr.spokestack.cloud_client.CloudClient"
                                             >
                                                 <em class="property">class </em
                                                 ><code
                                                     class="sig-prename descclassname"
-                                                    >spokestack.asr.cloud_client.</code
+                                                    >spokestack.asr.spokestack.cloud_client.</code
                                                 ><code class="sig-name descname"
                                                     >CloudClient</code
                                                 ><span class="sig-paren">(</span
                                                 ><em class="sig-param"
-                                                    ><span class="n"
-                                                        >socket_url</span
-                                                    ></em
-                                                >,
-                                                <em class="sig-param"
                                                     ><span class="n"
                                                         >key_id</span
                                                     ></em
@@ -332,6 +336,14 @@
                                                 <em class="sig-param"
                                                     ><span class="n"
                                                         >key_secret</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >socket_url</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >'wss://api.spokestack.io'</span
                                                     ></em
                                                 >,
                                                 <em class="sig-param"
@@ -375,13 +387,13 @@
                                                 ><span class="sig-paren">)</span
                                                 ><a
                                                     class="reference internal"
-                                                    href="_modules/spokestack/asr/cloud_client.html#CloudClient"
+                                                    href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient"
                                                     ><span class="viewcode-link"
                                                         >[source]</span
                                                     ></a
                                                 ><a
                                                     class="headerlink"
-                                                    href="#spokestack.asr.cloud_client.CloudClient"
+                                                    href="#spokestack.asr.spokestack.cloud_client.CloudClient"
                                                     title="Permalink to this definition"
                                                     >¶</a
                                                 >
@@ -397,17 +409,6 @@
                                                     </dt>
                                                     <dd class="field-odd">
                                                         <ul class="simple">
-                                                            <li>
-                                                                <p>
-                                                                    <strong
-                                                                        >socket_url</strong
-                                                                    >
-                                                                    (<em>str</em>)
-                                                                    – url for
-                                                                    socket
-                                                                    connection
-                                                                </p>
-                                                            </li>
                                                             <li>
                                                                 <p>
                                                                     <strong
@@ -432,6 +433,17 @@
                                                                     spokestack
                                                                     api
                                                                     credentials
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >socket_url</strong
+                                                                    >
+                                                                    (<em>str</em>)
+                                                                    – url for
+                                                                    socket
+                                                                    connection
                                                                 </p>
                                                             </li>
                                                             <li>
@@ -496,7 +508,7 @@
                                                 </dl>
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.connect"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.connect"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -507,14 +519,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.connect"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.connect"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.connect"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.connect"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -551,7 +563,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.disconnect"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.disconnect"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -562,14 +574,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.disconnect"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.disconnect"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.disconnect"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.disconnect"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -606,7 +618,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.end"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.end"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -617,14 +629,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.end"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.end"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.end"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.end"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -640,7 +652,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.idle_count"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.idle_count"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -649,7 +661,7 @@
                                                             >idle_count</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.idle_count"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.idle_count"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -686,7 +698,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.idle_timeout"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.idle_timeout"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -695,7 +707,7 @@
                                                             >idle_timeout</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.idle_timeout"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.idle_timeout"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -732,7 +744,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.initialize"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.initialize"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -743,14 +755,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.initialize"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.initialize"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.initialize"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.initialize"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -787,7 +799,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.is_connected"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.is_connected"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -796,7 +808,7 @@
                                                             >is_connected</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.is_connected"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.is_connected"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -833,7 +845,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.is_final"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.is_final"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -842,7 +854,7 @@
                                                             >is_final</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.is_final"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.is_final"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -880,7 +892,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.receive"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.receive"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -891,14 +903,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.receive"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.receive"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.receive"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.receive"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -913,7 +925,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.response"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.response"
                                                     >
                                                         <em class="property"
                                                             >property </em
@@ -922,7 +934,7 @@
                                                             >response</code
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.response"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.response"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -959,7 +971,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.cloud_client.CloudClient.send"
+                                                        id="spokestack.asr.spokestack.cloud_client.CloudClient.send"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -974,14 +986,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/cloud_client.html#CloudClient.send"
+                                                            href="_modules/spokestack/asr/spokestack/cloud_client.html#CloudClient.send"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.cloud_client.CloudClient.send"
+                                                            href="#spokestack.asr.spokestack.cloud_client.CloudClient.send"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -1021,16 +1033,16 @@
                                     </div>
                                     <div
                                         class="section"
-                                        id="module-spokestack.asr.speech_recognizer"
+                                        id="module-spokestack.asr.spokestack.speech_recognizer"
                                     >
                                         <span
-                                            id="spokestack-asr-speech-recognizer-module"
+                                            id="spokestack-asr-spokestack-speech-recognizer-module"
                                         ></span>
                                         <h2>
-                                            spokestack.asr.speech_recognizer
+                                            spokestack.asr.spokestack.speech_recognizer
                                             module<a
                                                 class="headerlink"
-                                                href="#module-spokestack.asr.speech_recognizer"
+                                                href="#module-spokestack.asr.spokestack.speech_recognizer"
                                                 title="Permalink to this headline"
                                                 >¶</a
                                             >
@@ -1042,12 +1054,12 @@
                                         </p>
                                         <dl class="py class">
                                             <dt
-                                                id="spokestack.asr.speech_recognizer.CloudSpeechRecognizer"
+                                                id="spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer"
                                             >
                                                 <em class="property">class </em
                                                 ><code
                                                     class="sig-prename descclassname"
-                                                    >spokestack.asr.speech_recognizer.</code
+                                                    >spokestack.asr.spokestack.speech_recognizer.</code
                                                 ><code class="sig-name descname"
                                                     >CloudSpeechRecognizer</code
                                                 ><span class="sig-paren">(</span
@@ -1098,16 +1110,22 @@
                                                     ><span class="default_value"
                                                         >5000</span
                                                     ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="o">**</span
+                                                    ><span class="n"
+                                                        >kwargs</span
+                                                    ></em
                                                 ><span class="sig-paren">)</span
                                                 ><a
                                                     class="reference internal"
-                                                    href="_modules/spokestack/asr/speech_recognizer.html#CloudSpeechRecognizer"
+                                                    href="_modules/spokestack/asr/spokestack/speech_recognizer.html#CloudSpeechRecognizer"
                                                     ><span class="viewcode-link"
                                                         >[source]</span
                                                     ></a
                                                 ><a
                                                     class="headerlink"
-                                                    href="#spokestack.asr.speech_recognizer.CloudSpeechRecognizer"
+                                                    href="#spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer"
                                                     title="Permalink to this definition"
                                                     >¶</a
                                                 >
@@ -1200,7 +1218,7 @@
                                                 </dl>
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
+                                                        id="spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer.close"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -1211,14 +1229,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/speech_recognizer.html#CloudSpeechRecognizer.close"
+                                                            href="_modules/spokestack/asr/spokestack/speech_recognizer.html#CloudSpeechRecognizer.close"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.close"
+                                                            href="#spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer.close"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -1255,7 +1273,7 @@
 
                                                 <dl class="py method">
                                                     <dt
-                                                        id="spokestack.asr.speech_recognizer.CloudSpeechRecognizer.reset"
+                                                        id="spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer.reset"
                                                     >
                                                         <code
                                                             class="sig-name descname"
@@ -1266,14 +1284,14 @@
                                                             >)</span
                                                         ><a
                                                             class="reference internal"
-                                                            href="_modules/spokestack/asr/speech_recognizer.html#CloudSpeechRecognizer.reset"
+                                                            href="_modules/spokestack/asr/spokestack/speech_recognizer.html#CloudSpeechRecognizer.reset"
                                                             ><span
                                                                 class="viewcode-link"
                                                                 >[source]</span
                                                             ></a
                                                         ><a
                                                             class="headerlink"
-                                                            href="#spokestack.asr.speech_recognizer.CloudSpeechRecognizer.reset"
+                                                            href="#spokestack.asr.spokestack.speech_recognizer.CloudSpeechRecognizer.reset"
                                                             title="Permalink to this definition"
                                                             >¶</a
                                                         >
@@ -1283,6 +1301,242 @@
                                                             resets client
                                                             connection
                                                         </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div
+                                        class="section"
+                                        id="module-spokestack.asr.google.speech_recognizer"
+                                    >
+                                        <span
+                                            id="spokestack-asr-google-speech-recognizer-module"
+                                        ></span>
+                                        <h2>
+                                            spokestack.asr.google.speech_recognizer
+                                            module<a
+                                                class="headerlink"
+                                                href="#module-spokestack.asr.google.speech_recognizer"
+                                                title="Permalink to this headline"
+                                                >¶</a
+                                            >
+                                        </h2>
+                                        <p>
+                                            This module contains the google asr
+                                            speech recognizer
+                                        </p>
+                                        <dl class="py class">
+                                            <dt
+                                                id="spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer"
+                                            >
+                                                <em class="property">class </em
+                                                ><code
+                                                    class="sig-prename descclassname"
+                                                    >spokestack.asr.google.speech_recognizer.</code
+                                                ><code class="sig-name descname"
+                                                    >GoogleSpeechRecognizer</code
+                                                ><span class="sig-paren">(</span
+                                                ><em class="sig-param"
+                                                    ><span class="n"
+                                                        >cred_path</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >language</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >'en-US'</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >sample_rate</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >16000</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="o">**</span
+                                                    ><span class="n"
+                                                        >kwargs</span
+                                                    ></em
+                                                ><span class="sig-paren">)</span
+                                                ><a
+                                                    class="reference internal"
+                                                    href="_modules/spokestack/asr/google/speech_recognizer.html#GoogleSpeechRecognizer"
+                                                    ><span class="viewcode-link"
+                                                        >[source]</span
+                                                    ></a
+                                                ><a
+                                                    class="headerlink"
+                                                    href="#spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer"
+                                                    title="Permalink to this definition"
+                                                    >¶</a
+                                                >
+                                            </dt>
+                                            <dd>
+                                                <p>
+                                                    Transforms speech into text
+                                                    using Google’s ASR.
+                                                </p>
+                                                <dl class="field-list simple">
+                                                    <dt class="field-odd">
+                                                        Parameters
+                                                    </dt>
+                                                    <dd class="field-odd">
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >cred_path</strong
+                                                                    >
+                                                                    (<em>str</em>)
+                                                                    – path to
+                                                                    google
+                                                                    credentials
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >language</strong
+                                                                    >
+                                                                    (<em>str</em>)
+                                                                    – language
+                                                                    of input
+                                                                    audio
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >sample_rate</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – sample
+                                                                    rate of the
+                                                                    input audio
+                                                                    (Hz)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >**kwargs</strong
+                                                                    >
+                                                                    (<em>optional</em>)
+                                                                    – additional
+                                                                    keyword
+                                                                    arguments
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer.close"
+                                                    >
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >close</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/asr/google/speech_recognizer.html#GoogleSpeechRecognizer.close"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer.close"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>closes recognizer</p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer.reset"
+                                                    >
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >reset</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/asr/google/speech_recognizer.html#GoogleSpeechRecognizer.reset"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer.reset"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>resets recognizer</p>
                                                         <dl
                                                             class="field-list simple"
                                                         >
@@ -1347,9 +1601,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

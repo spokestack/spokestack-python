@@ -226,13 +226,6 @@
                                                 >spokestack.context.</code
                                             ><code class="sig-name descname"
                                                 >SpeechContext</code
-                                            ><span class="sig-paren">(</span
-                                            ><em class="sig-param"
-                                                ><span class="o">**</span
-                                                ><span class="n"
-                                                    >kwargs</span
-                                                ></em
-                                            ><span class="sig-paren">)</span
                                             ><a
                                                 class="reference internal"
                                                 href="_modules/spokestack/context.html#SpeechContext"
@@ -251,19 +244,6 @@
                                                 Class for managing context of
                                                 the speech pipeline.
                                             </p>
-                                            <dl class="field-list simple">
-                                                <dt class="field-odd">
-                                                    Parameters
-                                                </dt>
-                                                <dd class="field-odd">
-                                                    <p>
-                                                        <strong
-                                                            >**kwargs</strong
-                                                        >
-                                                        –
-                                                    </p>
-                                                </dd>
-                                            </dl>
                                             <dl class="py method">
                                                 <dt
                                                     id="spokestack.context.SpeechContext.add_handler"
@@ -341,168 +321,6 @@
                                                             Return type
                                                         </dt>
                                                         <dd class="field-even">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.append_buffer"
-                                                >
-                                                    <code
-                                                        class="sig-name descname"
-                                                        >append_buffer</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><em class="sig-param"
-                                                        ><span class="n"
-                                                            >frame</span
-                                                        ></em
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.append_buffer"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.append_buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This method adds audio
-                                                        to the context buffer.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Parameters
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                <strong
-                                                                    >frame</strong
-                                                                >
-                                                                (<em>bytes</em>)
-                                                                – a frame of
-                                                                audio
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>
-                                                                <code
-                                                                    class="docutils literal notranslate"
-                                                                    ><span
-                                                                        class="pre"
-                                                                        >None</span
-                                                                    ></code
-                                                                >
-                                                            </p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.buffer"
-                                                >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
-                                                        class="sig-name descname"
-                                                        >buffer</code
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        This property holds the
-                                                        audio.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Returns
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                a deque of audio
-                                                                frames
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>Deque[bytes]</p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.clear_buffer"
-                                                >
-                                                    <code
-                                                        class="sig-name descname"
-                                                        >clear_buffer</code
-                                                    ><span class="sig-paren"
-                                                        >(</span
-                                                    ><span class="sig-paren"
-                                                        >)</span
-                                                    ><a
-                                                        class="reference internal"
-                                                        href="_modules/spokestack/context.html#SpeechContext.clear_buffer"
-                                                        ><span
-                                                            class="viewcode-link"
-                                                            >[source]</span
-                                                        ></a
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.clear_buffer"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        Empties the current
-                                                        buffer.
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-odd">
                                                             <p>
                                                                 <code
                                                                     class="docutils literal notranslate"
@@ -662,52 +480,6 @@
                                                                 context is
                                                                 active, ‘False’
                                                                 otherwise.
-                                                            </p>
-                                                        </dd>
-                                                        <dt class="field-even">
-                                                            Return type
-                                                        </dt>
-                                                        <dd class="field-even">
-                                                            <p>bool</p>
-                                                        </dd>
-                                                    </dl>
-                                                </dd>
-                                            </dl>
-
-                                            <dl class="py method">
-                                                <dt
-                                                    id="spokestack.context.SpeechContext.is_managed"
-                                                >
-                                                    <em class="property"
-                                                        >property </em
-                                                    ><code
-                                                        class="sig-name descname"
-                                                        >is_managed</code
-                                                    ><a
-                                                        class="headerlink"
-                                                        href="#spokestack.context.SpeechContext.is_managed"
-                                                        title="Permalink to this definition"
-                                                        >¶</a
-                                                    >
-                                                </dt>
-                                                <dd>
-                                                    <p>
-                                                        Whether the context is
-                                                        being managed internally
-                                                    </p>
-                                                    <dl
-                                                        class="field-list simple"
-                                                    >
-                                                        <dt class="field-odd">
-                                                            Returns
-                                                        </dt>
-                                                        <dd class="field-odd">
-                                                            <p>
-                                                                ‘True’ if
-                                                                is_managed set
-                                                                to ‘True’,
-                                                                ‘False’
-                                                                otherwise
                                                             </p>
                                                         </dd>
                                                         <dt class="field-even">
@@ -900,9 +672,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with
