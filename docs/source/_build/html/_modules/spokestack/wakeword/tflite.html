@@ -214,6 +214,7 @@
 <span class="sd">This module contains the class for detecting</span>
 <span class="sd">the presence of keywords in an audio stream</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
@@ -221,6 +222,9 @@
 <span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
 <span class="kn">from</span> <span class="nn">spokestack.models.tensorflow</span> <span class="kn">import</span> <span class="n">TFLiteModel</span>
 <span class="kn">from</span> <span class="nn">spokestack.wakeword.ring_buffer</span> <span class="kn">import</span> <span class="n">RingBuffer</span>
+
+
+<span class="n">_LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="WakewordTrigger"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordTrigger">[docs]</a><span class="k">class</span> <span class="nc">WakewordTrigger</span><span class="p">:</span>
@@ -238,12 +242,13 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">pre_emphasis</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.97</span><span class="p">,</span>
+        <span class="n">pre_emphasis</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
         <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
         <span class="n">fft_window_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hann&quot;</span><span class="p">,</span>
         <span class="n">fft_hop_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
         <span class="n">model_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">posterior_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">pre_emphasis</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">pre_emphasis</span>
@@ -321,6 +326,8 @@
 
         <span class="c1"># reset on vad fall deactivation</span>
         <span class="k">if</span> <span class="n">vad_fall</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                <span class="n">_LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wake: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -388,11 +395,11 @@
         <span class="n">frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">posterior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_model</span><span class="p">(</span><span class="n">frame</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">posterior</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_threshold</span><span class="p">:</span>
-            <span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;activate&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">posterior</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span> <span class="o">=</span> <span class="n">posterior</span>
+        <span class="k">if</span> <span class="n">posterior</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_posterior_threshold</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">_LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wake: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_posterior_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="WakewordTrigger.reset"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.tflite.WakewordTrigger.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Resets the currect WakewordDetector state &quot;&quot;&quot;</span>
@@ -413,9 +420,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

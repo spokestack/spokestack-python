@@ -216,7 +216,12 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
-<span class="kn">import</span> <span class="nn">tflite_runtime.interpreter</span> <span class="k">as</span> <span class="nn">tflite</span>  <span class="c1"># type: ignore</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">tflite_runtime.interpreter</span> <span class="k">as</span> <span class="nn">tflite</span>  <span class="c1"># type: ignore</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">tensorflow.lite</span> <span class="k">as</span> <span class="nn">tflite</span>  <span class="c1"># type: ignore</span>
 
 
 <div class="viewcode-block" id="TFLiteModel"><a class="viewcode-back" href="../../../spokestack.models.html#spokestack.models.tensorflow.TFLiteModel">[docs]</a><span class="k">class</span> <span class="nc">TFLiteModel</span><span class="p">:</span>
@@ -238,7 +243,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">allocate_tensors</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot; Foward pass of the TFLite model</span>
+        <span class="sd">&quot;&quot;&quot; Forward pass of the TFLite model</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            inputs (Any): inputs to the TFLite model</span>
@@ -282,9 +287,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

@@ -210,6 +210,7 @@
 <span class="sd">This module contains the webrtc component for</span>
 <span class="sd">voice activity detection (vad)</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
 <span class="kn">import</span> <span class="nn">webrtcvad</span>  <span class="c1"># type: ignore</span>
@@ -221,6 +222,8 @@
 <span class="n">LOW_BITRATE</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">AGGRESSIVE</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">VERY_AGGRESSIVE</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">_LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="VoiceActivityDetector"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector">[docs]</a><span class="k">class</span> <span class="nc">VoiceActivityDetector</span><span class="p">:</span>
@@ -242,6 +245,7 @@
         <span class="n">vad_rise_delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">vad_fall_delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">QUALITY</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">sample_rate</span>
@@ -254,7 +258,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Processes a single frame of audio to detemine if voice is present</span>
+        <span class="sd">&quot;&quot;&quot; Processes a single frame of audio to determine if voice is present</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            context (SpeechContext): State based information that needs to be shared</span>
@@ -275,8 +279,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span> <span class="o">!=</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rise_length</span><span class="p">:</span>
                 <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">_LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;vad: true&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fall_length</span><span class="p">:</span>
                 <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">_LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;vad: false&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="VoiceActivityDetector.reset"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Resets the current state &quot;&quot;&quot;</span>
@@ -286,6 +292,33 @@
 <div class="viewcode-block" id="VoiceActivityDetector.close"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityDetector.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Close interface for use in pipeline &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="VoiceActivityTrigger"><a class="viewcode-back" href="../../../spokestack.vad.html#spokestack.vad.webrtc.VoiceActivityTrigger">[docs]</a><span class="k">class</span> <span class="nc">VoiceActivityTrigger</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Voice Activity Detector trigger pipeline component &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Activates speech context whenever speech is detected</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            context (SpeechContext): State based information that needs to be shared</span>
+<span class="sd">            between pieces of the pipeline</span>
+<span class="sd">            frame (np.ndarray): Single frame of PCM-16 audio from an input source</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">is_speech</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_speech</span> <span class="o">=</span> <span class="kc">False</span></div>
 </pre>
                                 </div>
                             </div>
@@ -294,9 +327,7 @@
                             <hr />
 
                             <div role="contentinfo">
-                                <p>
-                                    &copy; Copyright 2020, Spokestack
-                                </p>
+                                <p>&copy; Copyright 2020, Spokestack</p>
                             </div>
 
                             Built with

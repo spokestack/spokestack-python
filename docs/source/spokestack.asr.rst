@@ -1,15 +1,21 @@
 Automatic Speech Recognition (ASR)
 ===================================
 
-spokestack.asr.cloud_client module
------------------------------------
+spokestack.asr.spokestack.cloud_client module
+---------------------------------------------
 
-.. automodule:: spokestack.asr.cloud_client
+.. automodule:: spokestack.asr.spokestack.cloud_client
    :members:
 
 
-spokestack.asr.speech_recognizer module
-----------------------------------------
+spokestack.asr.spokestack.speech_recognizer module
+--------------------------------------------------
 
-.. automodule:: spokestack.asr.speech_recognizer
+.. automodule:: spokestack.asr.spokestack.speech_recognizer
+   :members:
+
+spokestack.asr.google.speech_recognizer module
+----------------------------------------------
+
+.. automodule:: spokestack.asr.google.speech_recognizer
    :members:
