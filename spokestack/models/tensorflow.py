@@ -13,7 +13,7 @@ except ModuleNotFoundError:
 
 
 class TFLiteModel:
-    """ TFLite model base class for managing multiple inputs/outputs
+    """TFLite model base class for managing multiple inputs/outputs
 
     Args:
         model_path (str): Path to .tflite model file
@@ -31,7 +31,7 @@ class TFLiteModel:
         self._interpreter.allocate_tensors()
 
     def __call__(self, *args) -> List[np.ndarray]:
-        """ Forward pass of the TFLite model
+        """Forward pass of the TFLite model
 
         Args:
             inputs (Any): inputs to the TFLite model
@@ -52,7 +52,7 @@ class TFLiteModel:
 
     @property
     def input_details(self) -> List[Any]:
-        """ Property for accesing the TFLite model input_details
+        """Property for accesing the TFLite model input_details
 
         Returns: Input details for the TFLite model
 
@@ -61,7 +61,7 @@ class TFLiteModel:
 
     @property
     def output_details(self) -> List[Any]:
-        """ Property for accesing the TFLite model output_details
+        """Property for accesing the TFLite model output_details
 
         Returns: Output details for the TFLite model
 

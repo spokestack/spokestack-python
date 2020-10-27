@@ -78,7 +78,7 @@ class PyAudioInput:
 
 
 class PyAudioOutput:
-    """ Outputs audio to the default system output
+    """Outputs audio to the default system output
 
     Args:
         num_channels (int): number of audio channels
@@ -97,7 +97,7 @@ class PyAudioOutput:
         )
 
     def write(self, frame: bytes) -> None:
-        """ Writes a single frame of audio to output
+        """Writes a single frame of audio to output
 
         Args:
             frame (bytes): a single frame of audio

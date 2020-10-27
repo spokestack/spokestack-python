@@ -40,7 +40,9 @@ def test_detect_vad_inactive(_mock):
 
     detector = WakewordTrigger(model_dir="wakeword_model")
 
-    test_frame = np.random.rand(160,).astype(np.float32)
+    test_frame = np.random.rand(
+        160,
+    ).astype(np.float32)
     context.is_speech = False
     detector(context, test_frame)
     assert not context.is_active
@@ -53,7 +55,9 @@ def test_detect_vad_active(_mock):
     detector = WakewordTrigger(model_dir="wakeword_model")
 
     for _ in range(1):
-        test_frame = np.random.rand(160,).astype(np.float32)
+        test_frame = np.random.rand(
+            160,
+        ).astype(np.float32)
         context.is_speech = True
         detector(context, test_frame)
         assert not context.is_active
@@ -67,7 +71,9 @@ def test_detect_inactive_vad_deactivate(_mock):
     detector = WakewordTrigger(model_dir="wakeword_model")
 
     for _ in range(3):
-        test_frame = np.random.rand(160,).astype(np.float32)
+        test_frame = np.random.rand(
+            160,
+        ).astype(np.float32)
         context.is_speech = True
         detector(context, test_frame)
         context.is_speech = False
@@ -81,7 +87,9 @@ def test_detect_activate(_mock):
     detector = WakewordTrigger(model_dir="wakeword_model")
     detector.detect_model.return_value[0][:] = 0.6
 
-    test_frame = np.random.rand(512,).astype(np.float32)
+    test_frame = np.random.rand(
+        512,
+    ).astype(np.float32)
     context.is_speech = True
     detector(context, test_frame)
     context.is_speech = False
@@ -93,7 +101,9 @@ def test_detect_active_min_delay(_mock):
     context = SpeechContext()
     detector = WakewordTrigger(model_dir="wakeword_model")
 
-    test_frame = np.random.rand(512,).astype(np.float32)
+    test_frame = np.random.rand(
+        512,
+    ).astype(np.float32)
     context.is_speech = True
     detector(context, test_frame)
 
@@ -113,7 +123,9 @@ def test_detect_manual_min_delay(_mock):
     detector.detect_model.return_value[0][:] = 1
 
     context.is_active = True
-    test_frame = np.random.rand(512,).astype(np.float32)
+    test_frame = np.random.rand(
+        512,
+    ).astype(np.float32)
     detector(context, test_frame)
     detector(context, test_frame)
     detector(context, test_frame)

@@ -7,11 +7,11 @@ from streamp3 import MP3Decoder  # type: ignore
 
 
 class TextToSpeechManager:
-    """ Manages tts client and io target.
+    """Manages tts client and io target.
 
-        Args:
-            client: Text to speech client that returns encoded mp3 audio
-            output: Audio io target
+    Args:
+        client: Text to speech client that returns encoded mp3 audio
+        output: Audio io target
     """
 
     def __init__(self, client, output) -> None:
@@ -19,7 +19,7 @@ class TextToSpeechManager:
         self._output = output
 
     def synthesize(self, utterance: str, mode: str, voice: str) -> None:
-        """ Synthesizes the given utterance with the voice and format provided.
+        """Synthesizes the given utterance with the voice and format provided.
 
         Args:
             utterance (str): string that needs to be rendered as speech.

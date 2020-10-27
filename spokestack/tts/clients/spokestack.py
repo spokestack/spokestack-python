@@ -18,7 +18,7 @@ _MODES = {
 
 
 class TextToSpeechClient:
-    """ Spokestack Text to Speech Client
+    """Spokestack Text to Speech Client
 
     Args:
         key_id (str): identity from spokestack api credentials
@@ -35,9 +35,12 @@ class TextToSpeechClient:
         self._url = url
 
     def synthesize(
-        self, utterance: str, mode: str = "text", voice: str = "demo-male",
+        self,
+        utterance: str,
+        mode: str = "text",
+        voice: str = "demo-male",
     ) -> Iterator[bytes]:
-        """ Converts the given utterance to speech
+        """Converts the given utterance to speech
 
         Args:
             utterance (str): string that needs to be rendered as speech.
@@ -57,9 +60,12 @@ class TextToSpeechClient:
         return response.iter_content(chunk_size=None)
 
     def synthesize_url(
-        self, utterance: str, mode: str = "text", voice: str = "demo-male",
+        self,
+        utterance: str,
+        mode: str = "text",
+        voice: str = "demo-male",
     ) -> str:
-        """ Converts the given uttrance to speech accessible by a URL.
+        """Converts the given uttrance to speech accessible by a URL.
 
         Args:
             utterance (str): string that needs to be rendered as speech.

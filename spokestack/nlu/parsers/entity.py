@@ -7,7 +7,7 @@ from typing import Any, Dict
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> str:
-    """ Entity Parser
+    """Entity Parser
 
     Args:
         metadata (Dict[str, Any]): metadata for entity slot

@@ -5,7 +5,7 @@ from spokestack.context import SpeechContext
 
 
 class ActivationTimeout:
-    """ Speech pipeline activation timeout
+    """Speech pipeline activation timeout
 
     Args:
         frame_width (int): frame width of the audio (ms)
@@ -23,7 +23,7 @@ class ActivationTimeout:
         self._active_length = 0
 
     def __call__(self, context: SpeechContext, frame=None) -> None:
-        """ Main entry point that manages timeout
+        """Main entry point that manages timeout
 
         Args:
             context (SpeechContext): the current state of the pipeline

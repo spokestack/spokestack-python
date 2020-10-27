@@ -16,7 +16,7 @@ from spokestack.nlu.parsers import DIGIT_SPLIT_RE, maps
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> str:
-    """ Digit Parser
+    """Digit Parser
 
     Args:
         metadata (Dict[str, Any]): digit slot metadata

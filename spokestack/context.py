@@ -20,7 +20,7 @@ class SpeechContext:
         self._handlers: dict = {}
 
     def add_handler(self, name: str, function: Callable) -> None:
-        """ Adds a handler to the context
+        """Adds a handler to the context
 
         Args:
             name (str): The name of the event handler
@@ -30,7 +30,7 @@ class SpeechContext:
         self._handlers[name] = function
 
     def event(self, name: str) -> None:
-        """ Calls the event handler
+        """Calls the event handler
 
         Args:
             name (str): The name of the event handler

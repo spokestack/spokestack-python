@@ -21,7 +21,7 @@ _LOG = logging.getLogger(__name__)
 
 
 class TFLiteNLU:
-    """ Abstraction for using TFLite NLU models
+    """Abstraction for using TFLite NLU models
 
     Args:
         model_dir (str): path to the model directory containing nlu.tflite,
@@ -47,7 +47,7 @@ class TFLiteNLU:
         self._warm_up()
 
     def __call__(self, utterance: str) -> Result:
-        """ Classifies a string utterance into an intent and identifies any associated
+        """Classifies a string utterance into an intent and identifies any associated
             slots contained in the utterance. The slots get parsed based on type and
             then returned along with the intent and its associated confidence value.
 

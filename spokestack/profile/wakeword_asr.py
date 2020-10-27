@@ -21,7 +21,7 @@ class WakewordSpokestackASR:
         model_dir: str = "",
         **kwargs,
     ) -> SpeechPipeline:
-        """ Creates a speech pipeline instance from profile
+        """Creates a speech pipeline instance from profile
 
         Args:
             spokestack_id (str): spokestack API id.
@@ -39,7 +39,9 @@ class WakewordSpokestackASR:
             ),
             stages=[
                 VoiceActivityDetector(
-                    frame_width=frame_width, sample_rate=sample_rate, **kwargs,
+                    frame_width=frame_width,
+                    sample_rate=sample_rate,
+                    **kwargs,
                 ),
                 WakewordTrigger(model_dir=model_dir, **kwargs),
                 ActivationTimeout(frame_width=frame_width, **kwargs),
