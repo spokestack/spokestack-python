@@ -233,7 +233,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Determines if buffer is empty</span>
+        <span class="sd">&quot;&quot;&quot;Determines if buffer is empty</span>
 
 <span class="sd">        Returns: True if empty, False otherwise</span>
 
@@ -242,7 +242,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_full</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Determines if the buffer is full</span>
+        <span class="sd">&quot;&quot;&quot;Determines if the buffer is full</span>
 
 <span class="sd">        Returns: True if full, False otherwise</span>
 
@@ -251,7 +251,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">capacity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; The capacity of the buffer</span>
+        <span class="sd">&quot;&quot;&quot;The capacity of the buffer</span>
 
 <span class="sd">        Returns: Max size of the buffer</span>
 
@@ -259,7 +259,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_length</span> <span class="o">-</span> <span class="mi">1</span>
 
 <div class="viewcode-block" id="RingBuffer.rewind"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.rewind">[docs]</a>    <span class="k">def</span> <span class="nf">rewind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Rewinds the read head of the buffer to the most recent start position</span>
+        <span class="sd">&quot;&quot;&quot;Rewinds the read head of the buffer to the most recent start position</span>
 
 <span class="sd">        Returns: self</span>
 
@@ -268,7 +268,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="RingBuffer.reset"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Empties the buffer</span>
+        <span class="sd">&quot;&quot;&quot;Empties the buffer</span>
 
 <span class="sd">        Returns: self</span>
 
@@ -277,7 +277,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="RingBuffer.fill"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.fill">[docs]</a>    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
-        <span class="sd">&quot;&quot;&quot; Fills the with a specific value</span>
+        <span class="sd">&quot;&quot;&quot;Fills the with a specific value</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value (int or float): Fill value for the buffer</span>
@@ -290,7 +290,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="RingBuffer.seek"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.seek">[docs]</a>    <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Moves the read head a specified number of steps</span>
+        <span class="sd">&quot;&quot;&quot;Moves the read head a specified number of steps</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            steps (int): desired step length</span>
@@ -302,7 +302,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="RingBuffer.write"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Writes to the buffer and advances write head</span>
+        <span class="sd">&quot;&quot;&quot;Writes to the buffer and advances write head</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            item (np.ndarray): Array to be written to the buffer. Can be n-dimensional</span>
@@ -317,7 +317,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_write</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_write</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_length</span></div>
 
 <div class="viewcode-block" id="RingBuffer.read"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Reads from the buffer and advances read head.</span>
+        <span class="sd">&quot;&quot;&quot;Reads from the buffer and advances read head.</span>
 
 <span class="sd">        Returns: Array at the current read position</span>
 
@@ -330,7 +330,7 @@
         <span class="k">return</span> <span class="n">item</span></div>
 
 <div class="viewcode-block" id="RingBuffer.read_all"><a class="viewcode-back" href="../../../spokestack.wakeword.html#spokestack.wakeword.ring_buffer.RingBuffer.read_all">[docs]</a>    <span class="k">def</span> <span class="nf">read_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Dumps the entire contents of the buffer to an array</span>
+        <span class="sd">&quot;&quot;&quot;Dumps the entire contents of the buffer to an array</span>
 
 <span class="sd">        Returns: Array with full contents of the buffer</span>
 

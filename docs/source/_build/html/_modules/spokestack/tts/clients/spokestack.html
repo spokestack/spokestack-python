@@ -233,7 +233,7 @@
 
 
 <div class="viewcode-block" id="TextToSpeechClient"><a class="viewcode-back" href="../../../../spokestack.tts.clients.html#spokestack.tts.clients.spokestack.TextToSpeechClient">[docs]</a><span class="k">class</span> <span class="nc">TextToSpeechClient</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Spokestack Text to Speech Client</span>
+    <span class="sd">&quot;&quot;&quot;Spokestack Text to Speech Client</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        key_id (str): identity from spokestack api credentials</span>
@@ -250,9 +250,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="n">url</span>
 
 <div class="viewcode-block" id="TextToSpeechClient.synthesize"><a class="viewcode-back" href="../../../../spokestack.tts.clients.html#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize">[docs]</a>    <span class="k">def</span> <span class="nf">synthesize</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;demo-male&quot;</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+        <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;demo-male&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot; Converts the given utterance to speech</span>
+        <span class="sd">&quot;&quot;&quot;Converts the given utterance to speech</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            utterance (str): string that needs to be rendered as speech.</span>
@@ -272,9 +275,12 @@
         <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TextToSpeechClient.synthesize_url"><a class="viewcode-back" href="../../../../spokestack.tts.clients.html#spokestack.tts.clients.spokestack.TextToSpeechClient.synthesize_url">[docs]</a>    <span class="k">def</span> <span class="nf">synthesize_url</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;demo-male&quot;</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+        <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;demo-male&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Converts the given uttrance to speech accessible by a URL.</span>
+        <span class="sd">&quot;&quot;&quot;Converts the given uttrance to speech accessible by a URL.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            utterance (str): string that needs to be rendered as speech.</span>

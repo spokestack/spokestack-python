@@ -215,11 +215,11 @@
 
 
 <div class="viewcode-block" id="TextToSpeechManager"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.TextToSpeechManager">[docs]</a><span class="k">class</span> <span class="nc">TextToSpeechManager</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Manages tts client and io target.</span>
+    <span class="sd">&quot;&quot;&quot;Manages tts client and io target.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            client: Text to speech client that returns encoded mp3 audio</span>
-<span class="sd">            output: Audio io target</span>
+<span class="sd">    Args:</span>
+<span class="sd">        client: Text to speech client that returns encoded mp3 audio</span>
+<span class="sd">        output: Audio io target</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -227,7 +227,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="TextToSpeechManager.synthesize"><a class="viewcode-back" href="../../../spokestack.tts.html#spokestack.tts.manager.TextToSpeechManager.synthesize">[docs]</a>    <span class="k">def</span> <span class="nf">synthesize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">utterance</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Synthesizes the given utterance with the voice and format provided.</span>
+        <span class="sd">&quot;&quot;&quot;Synthesizes the given utterance with the voice and format provided.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            utterance (str): string that needs to be rendered as speech.</span>

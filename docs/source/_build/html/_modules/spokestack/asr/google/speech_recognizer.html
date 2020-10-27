@@ -220,7 +220,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
 <span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">speech</span>  <span class="c1"># type: ignore</span>
@@ -236,22 +236,40 @@
     <span class="sd">&quot;&quot;&quot;Transforms speech into text using Google&#39;s ASR.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cred_path (str): path to google credentials</span>
-<span class="sd">        language (str): language of input audio</span>
+<span class="sd">        language (str): The language of given audio as a</span>
+<span class="sd">                        [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)</span>
+<span class="sd">                        language tag. Example: &quot;en-US&quot;</span>
+<span class="sd">        credentials (Union[None, str, dict]): Dictionary of Google API credentials</span>
+<span class="sd">                                              or path to credentials. if set to None</span>
+<span class="sd">                                              credentials will be pulled from the</span>
+<span class="sd">                                              environment variable:</span>
+<span class="sd">                                              GOOGLE_APPLICATION_CREDENTIALS</span>
 <span class="sd">        sample_rate (int): sample rate of the input audio (Hz)</span>
 <span class="sd">        **kwargs (optional): additional keyword arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">cred_path</span><span class="p">,</span>
-        <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
-        <span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">credentials</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span>
+                    <span class="n">credentials</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_info</span><span class="p">(</span>
+                    <span class="n">credentials</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid Credentials: Only dict, str, or None accepted&quot;</span>
+                <span class="p">)</span>
 
-        <span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span><span class="n">cred_path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">speech</span><span class="o">.</span><span class="n">SpeechClient</span><span class="p">(</span><span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">speech</span><span class="o">.</span><span class="n">SpeechClient</span><span class="p">(</span><span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">speech</span><span class="o">.</span><span class="n">StreamingRecognitionConfig</span><span class="p">(</span>
             <span class="n">config</span><span class="o">=</span><span class="n">speech</span><span class="o">.</span><span class="n">RecognitionConfig</span><span class="p">(</span>
                 <span class="n">encoding</span><span class="o">=</span><span class="n">speech</span><span class="o">.</span><span class="n">RecognitionConfig</span><span class="o">.</span><span class="n">AudioEncoding</span><span class="o">.</span><span class="n">LINEAR16</span><span class="p">,</span>
@@ -259,10 +277,8 @@
                 <span class="n">language_code</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
                 <span class="n">enable_automatic_punctuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">),</span>
-            <span class="n">interim_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">interim_results</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_language</span> <span class="o">=</span> <span class="n">language</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">:</span> <span class="n">Queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -273,7 +289,7 @@
 <span class="sd">            context (SpeechContext): current state of the speech pipeline</span>
 <span class="sd">            frame (np.ndarray): numpy array of PCM-16 audio.</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
@@ -291,17 +307,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-
         <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">streaming_recognize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drain</span><span class="p">()):</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">results</span><span class="p">[:</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="k">for</span> <span class="n">alternative</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">alternatives</span><span class="p">[:</span><span class="mi">1</span><span class="p">]:</span>
                     <span class="n">context</span><span class="o">.</span><span class="n">transcript</span> <span class="o">=</span> <span class="n">alternative</span><span class="o">.</span><span class="n">transcript</span>
                     <span class="n">context</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="n">alternative</span><span class="o">.</span><span class="n">confidence</span>
+                    <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">transcript</span><span class="p">:</span>
+                        <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;partial_recognize&quot;</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_final</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">transcript</span><span class="p">:</span>
                         <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;recognize&quot;</span><span class="p">)</span>
                         <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;recognize event&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">context</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
+                        <span class="n">_LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;timeout event&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_drain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">while</span> <span class="n">data</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
@@ -317,8 +337,8 @@
 
 <div class="viewcode-block" id="GoogleSpeechRecognizer.reset"><a class="viewcode-back" href="../../../../spokestack.asr.html#spokestack.asr.google.speech_recognizer.GoogleSpeechRecognizer.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; resets recognizer &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="kc">None</span></div>
 

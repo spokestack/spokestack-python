@@ -225,7 +225,7 @@
 
 
 <div class="viewcode-block" id="TFLiteModel"><a class="viewcode-back" href="../../../spokestack.models.html#spokestack.models.tensorflow.TFLiteModel">[docs]</a><span class="k">class</span> <span class="nc">TFLiteModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; TFLite model base class for managing multiple inputs/outputs</span>
+    <span class="sd">&quot;&quot;&quot;TFLite model base class for managing multiple inputs/outputs</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        model_path (str): Path to .tflite model file</span>
@@ -243,7 +243,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">allocate_tensors</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot; Forward pass of the TFLite model</span>
+        <span class="sd">&quot;&quot;&quot;Forward pass of the TFLite model</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            inputs (Any): inputs to the TFLite model</span>
@@ -264,7 +264,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">input_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot; Property for accesing the TFLite model input_details</span>
+        <span class="sd">&quot;&quot;&quot;Property for accesing the TFLite model input_details</span>
 
 <span class="sd">        Returns: Input details for the TFLite model</span>
 
@@ -273,7 +273,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">output_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot; Property for accesing the TFLite model output_details</span>
+        <span class="sd">&quot;&quot;&quot;Property for accesing the TFLite model output_details</span>
 
 <span class="sd">        Returns: Output details for the TFLite model</span>
 

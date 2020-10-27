@@ -1361,15 +1361,15 @@
                                                 ><span class="sig-paren">(</span
                                                 ><em class="sig-param"
                                                     ><span class="n"
-                                                        >cred_path</span
+                                                        >language</span
                                                     ></em
                                                 >,
                                                 <em class="sig-param"
                                                     ><span class="n"
-                                                        >language</span
+                                                        >credentials</span
                                                     ><span class="o">=</span
                                                     ><span class="default_value"
-                                                        >'en-US'</span
+                                                        >None</span
                                                     ></em
                                                 >,
                                                 <em class="sig-param"
@@ -1413,23 +1413,54 @@
                                                             <li>
                                                                 <p>
                                                                     <strong
-                                                                        >cred_path</strong
+                                                                        >language</strong
                                                                     >
                                                                     (<em>str</em>)
-                                                                    – path to
-                                                                    google
-                                                                    credentials
+                                                                    – The
+                                                                    language of
+                                                                    given audio
+                                                                    as a
+                                                                    [BCP-47](<a
+                                                                        class="reference external"
+                                                                        href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt"
+                                                                        >https://www.rfc-editor.org/rfc/bcp/bcp47.txt</a
+                                                                    >) language
+                                                                    tag.
+                                                                    Example:
+                                                                    “en-US”
                                                                 </p>
                                                             </li>
                                                             <li>
                                                                 <p>
                                                                     <strong
-                                                                        >language</strong
+                                                                        >credentials</strong
                                                                     >
-                                                                    (<em>str</em>)
-                                                                    – language
-                                                                    of input
-                                                                    audio
+                                                                    (<em
+                                                                        >Union</em
+                                                                    ><em>[</em
+                                                                    ><em
+                                                                        >None</em
+                                                                    ><em>, </em
+                                                                    ><em>str</em
+                                                                    ><em>, </em
+                                                                    ><em
+                                                                        >dict</em
+                                                                    ><em>]</em>)
+                                                                    – Dictionary
+                                                                    of Google
+                                                                    API
+                                                                    credentials
+                                                                    or path to
+                                                                    credentials.
+                                                                    if set to
+                                                                    None
+                                                                    credentials
+                                                                    will be
+                                                                    pulled from
+                                                                    the
+                                                                    environment
+                                                                    variable:
+                                                                    GOOGLE_APPLICATION_CREDENTIALS
                                                                 </p>
                                                             </li>
                                                             <li>
