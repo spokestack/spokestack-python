@@ -16,7 +16,7 @@ _LOG = logging.getLogger(__name__)
 
 
 class WakewordTrigger:
-    """ Detects the presence of a wakeword in the audio input
+    """Detects the presence of a wakeword in the audio input
 
     Args:
             pre_emphasis (float): The value of the pre-emmphasis filter
@@ -94,7 +94,7 @@ class WakewordTrigger:
         self._is_speech: bool = False
 
     def __call__(self, context: SpeechContext, frame) -> None:
-        """ Entry point of the trigger
+        """Entry point of the trigger
 
         Args:
             context (SpeechContext): current state of the speech pipeline

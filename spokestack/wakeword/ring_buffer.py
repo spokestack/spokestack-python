@@ -20,7 +20,7 @@ class RingBuffer:
 
     @property
     def is_empty(self) -> bool:
-        """ Determines if buffer is empty
+        """Determines if buffer is empty
 
         Returns: True if empty, False otherwise
 
@@ -29,7 +29,7 @@ class RingBuffer:
 
     @property
     def is_full(self) -> bool:
-        """ Determines if the buffer is full
+        """Determines if the buffer is full
 
         Returns: True if full, False otherwise
 
@@ -38,7 +38,7 @@ class RingBuffer:
 
     @property
     def capacity(self) -> int:
-        """ The capacity of the buffer
+        """The capacity of the buffer
 
         Returns: Max size of the buffer
 
@@ -46,7 +46,7 @@ class RingBuffer:
         return self._max_length - 1
 
     def rewind(self):
-        """ Rewinds the read head of the buffer to the most recent start position
+        """Rewinds the read head of the buffer to the most recent start position
 
         Returns: self
 
@@ -55,7 +55,7 @@ class RingBuffer:
         return self
 
     def reset(self):
-        """ Empties the buffer
+        """Empties the buffer
 
         Returns: self
 
@@ -64,7 +64,7 @@ class RingBuffer:
         return self
 
     def fill(self, value: Union[int, float]):
-        """ Fills the with a specific value
+        """Fills the with a specific value
 
         Args:
             value (int or float): Fill value for the buffer
@@ -77,7 +77,7 @@ class RingBuffer:
         return self
 
     def seek(self, steps: int):
-        """ Moves the read head a specified number of steps
+        """Moves the read head a specified number of steps
 
         Args:
             steps (int): desired step length
@@ -89,7 +89,7 @@ class RingBuffer:
         return self
 
     def write(self, item: np.ndarray) -> None:
-        """ Writes to the buffer and advances write head
+        """Writes to the buffer and advances write head
 
         Args:
             item (np.ndarray): Array to be written to the buffer. Can be n-dimensional
@@ -104,7 +104,7 @@ class RingBuffer:
         self._write = (self._write + 1) % self._max_length
 
     def read(self) -> np.ndarray:
-        """ Reads from the buffer and advances read head.
+        """Reads from the buffer and advances read head.
 
         Returns: Array at the current read position
 
@@ -117,7 +117,7 @@ class RingBuffer:
         return item
 
     def read_all(self) -> np.ndarray:
-        """ Dumps the entire contents of the buffer to an array
+        """Dumps the entire contents of the buffer to an array
 
         Returns: Array with full contents of the buffer
 

@@ -13,7 +13,7 @@ from spokestack.nlu.parsers import DIGIT_SPLIT_RE, maps
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> Union[int, None]:
-    """ Integer Parser
+    """Integer Parser
 
     Args:
         metadata (Dict[str, Any]): metadata for the integer slot

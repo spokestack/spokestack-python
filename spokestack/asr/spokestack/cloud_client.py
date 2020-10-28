@@ -13,17 +13,17 @@ from websocket import WebSocket  # type: ignore
 
 
 class CloudClient:
-    """ Spokestack client for cloud based speech to text
+    """Spokestack client for cloud based speech to text
 
-        Args:
-            key_id (str): identity from spokestack api credentials
-            key_secret (str): secret key from spokestack api credentials
-            socket_url (str): url for socket connection
-            audio_format (str): format of input audio
-            sample_rate (int): audio sample rate (kHz)
-            language (str): language for recognition
-            limit (int): Limit of messages per api response
-            idle_timeout (Any): Time before client timeout. Defaults to None
+    Args:
+        key_id (str): identity from spokestack api credentials
+        key_secret (str): secret key from spokestack api credentials
+        socket_url (str): url for socket connection
+        audio_format (str): format of input audio
+        sample_rate (int): audio sample rate (kHz)
+        language (str): language for recognition
+        limit (int): Limit of messages per api response
+        idle_timeout (Any): Time before client timeout. Defaults to None
     """
 
     def __init__(
@@ -66,7 +66,7 @@ class CloudClient:
         self._idle_count: int = 0
 
     def __call__(self, audio: Union[bytes, np.ndarray], limit: int = 1) -> List[str]:
-        """ Audio to text interface for the cloud client
+        """Audio to text interface for the cloud client
 
         Args:
             audio (bytes|np.ndarray): input audio can be in the form of
@@ -138,7 +138,7 @@ class CloudClient:
             self._socket = None
 
     def send(self, frame: np.ndarray):
-        """ sends a single frame of audio
+        """sends a single frame of audio
 
         Args:
             frame (np.ndarray): segment of PCM-16 encoded audio
@@ -197,7 +197,7 @@ class CloudClient:
 
 
 class APIError(Exception):
-    """ Spokestack api error pass through
+    """Spokestack api error pass through
 
     Args:
         response (dict): message from the api service

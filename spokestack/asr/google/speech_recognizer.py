@@ -84,7 +84,10 @@ class GoogleSpeechRecognizer:
             self._send(frame)
 
     def _begin(self, context) -> None:
-        self._thread = Thread(target=self._receive, args=(context,),)
+        self._thread = Thread(
+            target=self._receive,
+            args=(context,),
+        )
         self._thread.start()
 
     def _receive(self, context):

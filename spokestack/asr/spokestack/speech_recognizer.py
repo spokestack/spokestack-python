@@ -14,7 +14,7 @@ _LOG = logging.getLogger(__name__)
 
 
 class CloudSpeechRecognizer:
-    """ Speech recognizer for use in the speech pipeline
+    """Speech recognizer for use in the speech pipeline
 
     Args:
         spokestack_id (str): identity under spokestack api credentials
@@ -46,7 +46,7 @@ class CloudSpeechRecognizer:
         self._is_active = False
 
     def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
-        """ Entry point of the recognizer
+        """Entry point of the recognizer
 
         Args:
             context (SpeechContext): current state of the speech pipeline

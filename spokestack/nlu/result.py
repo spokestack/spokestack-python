@@ -5,14 +5,14 @@ from typing import Any, Dict
 
 
 class Result:
-    """ Convenience wrapper for NLU Results
+    """Convenience wrapper for NLU Results
 
-        Args:
-            utterance (str): original input string
-            intent (str): detected user intention
-            confidence (float): model confidence in intent prediction
-            slots (Dict[str, Any]): specific tokens needed by intent and
-                                    type information necessary for parsing
+    Args:
+        utterance (str): original input string
+        intent (str): detected user intention
+        confidence (float): model confidence in intent prediction
+        slots (Dict[str, Any]): specific tokens needed by intent and
+                                type information necessary for parsing
 
     """
 

@@ -50,7 +50,7 @@ class VoiceActivityDetector:
         self._run_length: int = 0
 
     def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
-        """ Processes a single frame of audio to determine if voice is present
+        """Processes a single frame of audio to determine if voice is present
 
         Args:
             context (SpeechContext): State based information that needs to be shared
@@ -93,7 +93,7 @@ class VoiceActivityTrigger:
         self._is_speech = False
 
     def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
-        """ Activates speech context whenever speech is detected
+        """Activates speech context whenever speech is detected
 
         Args:
             context (SpeechContext): State based information that needs to be shared

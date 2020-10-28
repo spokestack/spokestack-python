@@ -7,7 +7,7 @@ from spokestack.context import SpeechContext
 
 
 class SpeechPipeline:
-    """ Pipeline for managing speech components.
+    """Pipeline for managing speech components.
 
     Args:
         input_source: source of audio input
@@ -83,7 +83,7 @@ class SpeechPipeline:
         self._context.reset()
 
     def event(self, function=None, name=None):
-        """ Registers an event handler
+        """Registers an event handler
 
         Args:
             function: event handler

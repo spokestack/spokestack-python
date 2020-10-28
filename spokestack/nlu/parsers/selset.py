@@ -8,7 +8,7 @@ from typing import Any, Dict, Union
 
 
 def parse(metadata: Dict[str, Any], raw_value: str) -> Union[str, None]:
-    """ Selset Parser
+    """Selset Parser
 
     Args:
         metadata (Dict[str, Any]): slot metadata
