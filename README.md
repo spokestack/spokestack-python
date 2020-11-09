@@ -30,8 +30,9 @@ Add voice capability to your projects with one line.
 
 We use `pyenv` for virtual environments. Below you will find the step-by-step commands to install a virtual environment.
 
-    pyenv install 3.7.6
-    pyenv virtualenv 3.7.6 spokestack
+    pyenv install 3.8.6
+    pyenv virtualenv 3.8.6 spokestack
+    pyenv local spokestack
     pip install -r requirements.txt
 
 ### TFLite Interpreter
