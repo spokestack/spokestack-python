@@ -76,7 +76,7 @@ The full Tensorflow package is installed with the following:
 pip install tensorflow
 ```
 
-#### TFLite Iterpreter (Embedded Devices)
+#### TFLite Interpreter (Embedded Devices)
 
 In use cases where you require a small footprint, such as on a raspberry pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by following the instructions at [TFLite Interpreter](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
 
