@@ -51,7 +51,7 @@ Once system dependencies have been satisfied, you can install the library with t
 pip install spokestack
 ```
 
-## Development
+## Using the Library
 
 ### Setup
 
@@ -79,6 +79,36 @@ pip install tensorflow
 #### TFLite Interpreter (Embedded Devices)
 
 In use cases where you require a small footprint, such as on a raspberry pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by following the instructions at [TFLite Interpreter](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+
+### Speech Pipeline
+
+The Speech Pipeline is the component that ties together VAD, Wakeword, and ASR. Essentially, this component listens to a frame of audio to determine if speech is present. If speech is detected, the Wakeword model processes the subsequent frames of audio looking for the specific keyword. If the keyword is found, the pipeline is activated and converts the following audio into a transcript. The Speech Pipeline is established like this from the previous initialized components:
+
+```python
+from spokestack.io.pyaudio import PyAudioInput
+from spokestack.pipeline import SpeechPipeline
+from spokestack.vad.webrtc import VoiceActivityTrigger
+from spokestack.asr.spokestack.speech_recognizer import SpeechRecognizer
+
+mic = PyAudioInput()
+vad = VoiceActivityTrigger()
+asr = SpeechRecognizer("spokestack_id", "spokestack_secret")
+
+
+pipeline = SpeechPipeline(mic, [vad, wake, asr])
+pipeline.start()
+pipeline.run()
+```
+
+#### Pipeline Callbacks
+
+Pipeline callbacks allow additional code to be executed when a speech event is detected. For example, we can print when the pipeline is activated by registering a function with the `pipeline.event` decorator.
+
+```python
+@pipeline.event
+def on_activate(context):
+    print(context.is_active)
+```
 
 ### Audio Input
 
@@ -114,7 +144,7 @@ wake = WakewordDetector("path_to_tflite_model")
 
 ### Automatic Speech Recognition (ASR)
 
-Automatic Speech Recognition is a technique used to turn speech into a transcript. You can initialize our cloud ASR with:
+Automatic Speech Recognition is a technique used to turn speech into a transcript. For this part you will need to create an account [here](https://www.spokestack.io/create) if you already haven't. You can initialize our cloud ASR with:
 
 ```python
 from spokestack.asr.spokestack.speech_recognizer import SpeechRecognizer
@@ -122,41 +152,9 @@ from spokestack.asr.spokestack.speech_recognizer import SpeechRecognizer
 asr = SpeechRecognizer("spokestack_id", "spokestack_secret")
 ```
 
-### Speech Pipeline
-
-The Speech Pipeline is the component that ties together VAD, Wakeword, and ASR. Essentially, this component listens to a frame of audio to determine if speech is present. If speech is detected, the Wakeword model processes the subsequent frames of audio looking for the specific keyword. If the keyword is found, the pipeline is activated and converts the following audio into a transcript. The Speech Pipeline is established like this from the previous initialized components:
-
-```python
-from spokestack.pipeline import SpeechPipeline
-
-pipeline = SpeechPipeline(mic, [vad, wake, asr])
-pipeline.start()
-pipeline.run()
-```
-
-#### Speech Context
-
-Speech context manages the state of the pipeline. For example, when the an activation event is triggered, the `is_active` property in the Speech Context is set to `True`. The initialization of `SpeechContext` is handled by the pipeline, but if required elsewhere, can be initialized like this:
-
-```python
-from spokestack.context import SpeechContext
-
-context = SpeechContext()
-```
-
-#### Pipeline Callbacks
-
-Pipeline callbacks allow additional code to be executed when a speech event is detected. For example, we can print when the pipeline is activated by registering a function with the `pipeline.event` decorator.
-
-```python
-@pipeline.event
-def on_activate(context):
-    print(context.is_active)
-```
-
 ### Natural Language Understanding (NLU)
 
-Natural Language Understanding turns an utterance into a machine readable format. For our purposes, this is joint intent detection and slot filling. We like to think of intents as the action a user desires from an application, and slots as the optional arguments to fulfill the requested action. Our NLU model is initialized like this:
+Natural Language Understanding turns an utterance into a machine readable format. For our purposes, this is joint intent detection and slot filling. You can read more about the concepts [here](https://www.spokestack.io/docs/concepts/nlu). We like to think of intents as the action a user desires from an application, and slots as the optional arguments to fulfill the requested action. Our NLU model is initialized like this:
 
 ```python
 from spokestack.nlu.tflite import TFLiteNLU
