@@ -66,19 +66,16 @@ pip install -r requirements.txt
 
 ### Install Tensorflow
 
-This library requires a way to run [TFLite](https://www.tensorflow.org/lite) models. There are two primary ways to add this ability. The first, is installing the full [Tensorflow](https://www.tensorflow.org/) library. In most instances you should be able to install this with `pip`, but in the case of any installation issues follow the installation [guide](https://www.tensorflow.org/install).
-
-#### Tensorflow
+This library requires a way to run [TFLite](https://www.tensorflow.org/lite) models. There are two ways to add this ability. The first is installing the full [Tensorflow](https://www.tensorflow.org/) library.
 
 The full Tensorflow package is installed with the following:
 
 ```shell
 pip install tensorflow
-```
 
 #### TFLite Interpreter (Embedded Devices)
 
-In use cases where you require a small footprint, such as on a raspberry pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by following the instructions at [TFLite Interpreter](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+In use cases where you require a small footprint, such as on a raspberry pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by following [the instructions here](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
 
 ### Audio Input
 
@@ -104,7 +101,7 @@ vad = VoiceActivityTrigger()
 
 ### Wakeword Detection
 
-Also known as keyword spotting (kws), wakeword is the way to get your applications attention with voice. This is normally through a specific keyword or phrase. The default wakeword for this library is "Spokestack". Wakeword can be added like this:
+Also known as keyword spotting (kws), wakeword is the way to get your application's attention with voice. This is normally through a specific keyword or phrase. The default wakeword for this library is "Spokestack". Wakeword can be added like this:
 
 ```python
 from spokestack.wakeword.tflite import WakewordDetector
@@ -166,7 +163,7 @@ nlu = TFLiteNLU("path_to_tflite_model")
 
 ### Text To Speech (TTS)
 
-Text To Speech, as the name implies, converts a text into spoken audio. This the method for giving your application a voice. We have a default voice included when you sign up for a Spokestack account. However, you can contact us to set up a truly custom voice. The TTS API keys are the same as `SpeechRecognizer`. The basic TTS initialization is the following:
+Text To Speech, as the name implies, converts text into spoken audio. This the method for giving your application a voice. We provide one TTS voice for free when you sign up for a Spokestack account, but you can contact us to train a truly custom voice. The TTS API keys are the same as `SpeechRecognizer`. The basic TTS initialization is the following:
 
 ```python
 from spokestack.tts.manager import TextToSpeechManager
