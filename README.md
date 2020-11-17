@@ -79,7 +79,7 @@ In use cases where you require a small footprint, such as on a raspberry pi or s
 
 ### Speech Pipeline
 
-The Speech Pipeline is the component that ties together VAD, Wakeword, and ASR. Essentially, this component listens to a frame of audio to determine if speech is present. If speech is detected, the Wakeword model processes the subsequent frames of audio looking for the specific keyword. If the keyword is found, the pipeline is activated and converts the following audio into a transcript. The Speech Pipeline is established like this from the previous initialized components:
+The Speech Pipeline is the module that ties together VAD, Wakeword, and ASR. The VAD (voice activity detection) listens to a frame of audio captured by the input device to determine if speech is present. If it is, the Wakeword model processes subsequent frames of audio looking for its keyword. If the keyword is found, the pipeline is activated and converts the following audio into a transcript. The Speech Pipeline is initialized like this:
 
 ```python
 from spokestack.io.pyaudio import PyAudioInput
