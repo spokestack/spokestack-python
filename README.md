@@ -13,7 +13,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=social)
 
-Welcome to Spokestack Python! This library is intended for developing general purpose [voice interfaces](https://en.wikipedia.org/wiki/Voice_user_interface). What is a general purpose voice interface you ask? In our minds, a general purpose voice interface is a voice interface that can be easily integrated with virtually any application that uses [Python](https://www.python.org/). This includes [raspberrypi](https://www.raspberrypi.org/) applications such as a traditional smart speaker to a [Django](https://www.djangoproject.com/) web application. Literally, anything built in [Python](https://www.python.org/) can be given a voice interface.
+Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://en.wikipedia.org/wiki/Voice_user_interface) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. Literally anything built in [Python](https://www.python.org/) can be given a voice interface.
 
 ## Get Started
 
