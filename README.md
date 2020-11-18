@@ -51,8 +51,6 @@ Once system dependencies have been satisfied, you can install the library with t
 pip install spokestack
 ```
 
-## Usage
-
 ### Setup
 
 We use `pyenv` for virtual environments. Below you will find the step-by-step commands to install a virtual environment.
@@ -76,7 +74,9 @@ pip install tensorflow
 
 #### TFLite Interpreter (Embedded Devices)
 
-In use cases where you require a small footprint, such as on a raspberry pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by following [the instructions here](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+In use cases where you require a small footprint, such as on a Raspberry Pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by [following the instructions](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+
+## Usage
 
 ### Speech Pipeline
 
@@ -122,7 +122,7 @@ def on_recognize(context):
 
 ### Natural Language Understanding (NLU)
 
-Natural Language Understanding turns an utterance into a machine readable format. For our purposes, this is joint intent detection and slot filling. You can read more about the concepts [here](https://www.spokestack.io/docs/concepts/nlu). We like to think of intents as the action a user desires from an application, and slots as the optional arguments to fulfill the requested action. Our NLU model is initialized like this:
+Natural Language Understanding turns an utterance into structured data a machine can act on. For our purposes, this is joint intent detection and slot filling. You can read more about the concepts [here](https://www.spokestack.io/docs/concepts/nlu). We like to think of intents as the action a user desires from an application, and slots as the optional arguments to fulfill the requested action. Our NLU model is initialized like this:
 
 ```python
 from spokestack.nlu.tflite import TFLiteNLU
