@@ -13,7 +13,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=social)
 
-Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://en.wikipedia.org/wiki/Voice_user_interface) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. Literally anything built in [Python](https://www.python.org/) can be given a voice interface.
+Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://en.wikipedia.org/wiki/Voice_user_interface) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. _Anything_ built in [Python](https://www.python.org/) can be given a voice interface.
 
 ## Get Started
 
@@ -80,7 +80,7 @@ In use cases where you require a small footprint, such as on a Raspberry Pi or s
 
 ### Speech Pipeline
 
-The Speech Pipeline is the module that ties together VAD, Wakeword, and ASR. The VAD (voice activity detection) listens to a frame of audio captured by the input device to determine if speech is present. If it is, the Wakeword model processes subsequent frames of audio looking for its keyword. If the keyword is found, the pipeline is activated and converts the following audio into a transcript. The Speech Pipeline is initialized like this:
+The Speech Pipeline is the module that ties together VAD (voice activity detection), wakeword, and ASR (automated speech detection). The VAD listens to a frame of audio captured by the input device to determine if speech is present. If it is, the wakeword model processes subsequent frames of audio looking for the keyword it has been trained to recognize. If the keyword is found, the pipeline is activated and performs speech recognition, converting the subsequent audio into a transcript. The Speech Pipeline is initialized like this:
 
 ```python
 from spokestack.io.pyaudio import PyAudioInput
