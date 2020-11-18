@@ -76,7 +76,7 @@ pip install tensorflow
 
 In use cases where you require a small footprint, such as on a Raspberry Pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by [following the instructions](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
 
-In use cases where you require a small footprint, such as on a Raspberry Pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by [following the instructions](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
+## Usage
 
 ### Speech Pipeline
 
