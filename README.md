@@ -51,7 +51,7 @@ Once system dependencies have been satisfied, you can install the library with t
 pip install spokestack
 ```
 
-## Using the Library
+## Usage
 
 ### Setup
 
@@ -72,6 +72,7 @@ The full Tensorflow package is installed with the following:
 
 ```shell
 pip install tensorflow
+```
 
 #### TFLite Interpreter (Embedded Devices)
 
@@ -97,6 +98,8 @@ pipeline.start()
 pipeline.run()
 ```
 
+Now that the pipeline is running, it becomes important to access the results from processes at certain events. For example, when speech is recognized there is a `recognize` event. These events allow code to be executed outside the pipeline in response. The process of registering a response is done with a pipeline callback, which we will cover in the next section.
+
 #### Pipeline Callbacks
 
 Pipeline callbacks allow additional code to be executed when a speech event is detected. For example, we can print when the pipeline is activated by registering a function with the `pipeline.event` decorator.
@@ -107,46 +110,12 @@ def on_activate(context):
     print(context.is_active)
 ```
 
-### Audio Input
-
-We offer a [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) interface for audio input. You can initialize it like this:
+One of the most important use cases for a pipeline callback is accessing the ASR transcript for additional processing by the NLU. The transcript is accessed with the following:
 
 ```python
-from spokestack.io.pyaudio import PyAudioInput
-
-mic = PyAudioInput()
-mic.start()
-frame = mic.read()
-```
-
-### Voice Activity Detection (VAD)
-
-Voice activity detection listens to a frame of audio and determines if a voice is present. Our VAD uses [WebRTC](https://github.com/wiseman/py-webrtcvad). To initialize the VAD, add the following:
-
-```python
-from spokestack.vad.webrtc import VoiceActivityTrigger
-
-vad = VoiceActivityTrigger()
-```
-
-### Wakeword Detection
-
-Also known as keyword spotting (kws), wakeword is the way to get your application's attention with voice. This is normally through a specific keyword or phrase. The default wakeword for this library is "Spokestack". Wakeword can be added like this:
-
-```python
-from spokestack.wakeword.tflite import WakewordDetector
-
-wake = WakewordDetector("path_to_tflite_model")
-```
-
-### Automatic Speech Recognition (ASR)
-
-Automatic Speech Recognition is a technique used to turn speech into a transcript. For this part you will need to create an account [here](https://www.spokestack.io/create) if you already haven't. You can initialize our cloud ASR with:
-
-```python
-from spokestack.asr.spokestack.speech_recognizer import SpeechRecognizer
-
-asr = SpeechRecognizer("spokestack_id", "spokestack_secret")
+@pipeline.event
+def on_recognize(context):
+    print(context.transcript)
 ```
 
 ### Natural Language Understanding (NLU)
@@ -157,6 +126,14 @@ Natural Language Understanding turns an utterance into a machine readable format
 from spokestack.nlu.tflite import TFLiteNLU
 
 nlu = TFLiteNLU("path_to_tflite_model")
+```
+
+Now that the NLU is initialized we can go ahead and add that part to the callback.
+
+```python
+@pipeline.event
+def on_recognize(context):
+    results = nlu(context.transcript)
 ```
 
 ### Text To Speech (TTS)
@@ -172,6 +149,14 @@ client = TextToSpeechClient("spokestack_id", "spokestack_secret")
 output = PyAudioOutput()
 manager = TextToSpeechManager(client, output)
 manager.synthesize("welcome to spokestack")
+```
+
+To demonstrate a simple TTS callback let's set up something that reads back what the ASR recognized:
+
+```python
+@pipeline.event
+def on_recognize(context):
+    manager.synthesize(context.transcript)
 ```
 
 ## Documentation
