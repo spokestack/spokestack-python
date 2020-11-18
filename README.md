@@ -85,11 +85,13 @@ The Speech Pipeline is the module that ties together VAD, Wakeword, and ASR. The
 ```python
 from spokestack.io.pyaudio import PyAudioInput
 from spokestack.pipeline import SpeechPipeline
-from spokestack.vad.webrtc import VoiceActivityTrigger
+from spokestack.vad.webrtc import VoiceActivityDetector
+from spokestack.wakeword.tflite import WakewordTrigger
 from spokestack.asr.spokestack.speech_recognizer import SpeechRecognizer
 
 mic = PyAudioInput()
-vad = VoiceActivityTrigger()
+vad = VoiceActivityDetector()
+wake = WakewordTrigger("path_to_tflite_model")
 asr = SpeechRecognizer("spokestack_id", "spokestack_secret")
 
 
