@@ -9,6 +9,7 @@
 [![PyPI version](https://badge.fury.io/py/spokestack.svg)](https://badge.fury.io/py/spokestack)
 [![Coverage Status](https://coveralls.io/repos/github/spokestack/spokestack-python/badge.svg?branch=master)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack)
 [![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=social)](https://github.com/spokestack/spokestack-python/stargazers)
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=social)
