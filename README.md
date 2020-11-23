@@ -11,6 +11,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=social)](https://github.com/spokestack/spokestack-python/stargazers)
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=social)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack)
 ![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=social)
 
 Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://en.wikipedia.org/wiki/Voice_user_interface) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. _Anything_ built in [Python](https://www.python.org/) can be given a voice interface.
