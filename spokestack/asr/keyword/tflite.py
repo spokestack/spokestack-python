@@ -1,9 +1,9 @@
 """
-This module contains the class for detecting
-the presence of keywords in an audio stream
+This module contains the Spokestack KeywordRecognizer which identifies multiple keywords
+from an audio stream.
 """
-import logging
 import os
+from typing import List
 
 import numpy as np  # type: ignore
 
@@ -12,33 +12,32 @@ from spokestack.models.tensorflow import TFLiteModel
 from spokestack.ring_buffer import RingBuffer
 
 
-_LOG = logging.getLogger(__name__)
-
-
-class WakewordTrigger:
-    """Detects the presence of a wakeword in the audio input
+class KeywordRecognizer:
+    """Recognizes keywords in an audio stream.
 
     Args:
-            pre_emphasis (float): The value of the pre-emmphasis filter
-            sample_rate (int): The number of audio samples per second of audio (kHz)
-            fft_window_type (str): The type of fft window. (only support for hann)
-            fft_hop_length (int): Audio sliding window for STFT calculation (ms)
-            model_dir (str): Path to the directory containing .tflite models
-            posterior_threshold (float): Probability threshold for if a wakeword
-                                         was detected
+        classes (List[str]): Keyword labels
+        pre_emphasis (float): The value of the pre-emphasis filter
+        sample_rate (int): The number of audio samples per second of audio (kHz)
+        fft_window_type (str): The type of fft window. (only support for hann)
+        fft_hop_length (int): Audio sliding window for STFT calculation (ms)
+        model_dir (str): Path to the directory containing .tflite models
+        posterior_threshold (float): Probability threshold for detection
     """
 
     def __init__(
         self,
-        pre_emphasis: float = 0.0,
+        classes: List[str],
+        pre_emphasis: float = 0.97,
         sample_rate: int = 16000,
         fft_window_type: str = "hann",
         fft_hop_length: int = 10,
         model_dir: str = "",
         posterior_threshold: float = 0.5,
-        **kwargs,
+        **kwargs
     ) -> None:
 
+        self.classes = classes
         self.pre_emphasis: float = pre_emphasis
         self.hop_length: int = int(fft_hop_length * sample_rate / 1000)
 
@@ -55,6 +54,9 @@ class WakewordTrigger:
             model_path=os.path.join(model_dir, "detect.tflite")
         )
 
+        if len(classes) != self.detect_model.output_details[0]["shape"][-1]:
+            raise ValueError("Invalid number of classes")
+
         # window size calculated based on fft
         # the filter inputs are (fft_size - 1) / 2
         # which makes the window size (post_fft_size - 1) * 2
@@ -69,13 +71,15 @@ class WakewordTrigger:
         # initialize the first state input for autoregressive encoder model
         # retrieve the encode_length and encode_width from the model detect_model
         # metadata. We get the dimensions from the detect_model inputs because the
-        # encode_model runs autoregressively and outputs a single encoded sample.
+        # encode_model runs autoregressive and outputs a single encoded sample.
         # the detect_model input is a collection of these samples.
         self.state = np.zeros(self.encode_model.input_details[1]["shape"], np.float32)
         self.encode_length: int = self.detect_model.input_details[0]["shape"][1]
         self.encode_width: int = self.detect_model.input_details[0]["shape"][-1]
 
-        self.sample_window: RingBuffer = RingBuffer(shape=[self._window_size])
+        self.sample_window: RingBuffer = RingBuffer(
+            shape=[self._window_size],
+        )
         self.frame_window: RingBuffer = RingBuffer(
             shape=[self.mel_length, self.mel_width]
         )
@@ -89,34 +93,17 @@ class WakewordTrigger:
         self.encode_window.fill(-1.0)
 
         self._posterior_threshold: float = posterior_threshold
-        self._posterior_max: float = 0.0
         self._prev_sample: float = 0.0
-        self._is_speech: bool = False
+        self._is_active = False
 
     def __call__(self, context: SpeechContext, frame) -> None:
-        """Entry point of the trigger
 
-        Args:
-            context (SpeechContext): current state of the speech pipeline
-            frame (np.ndarray): a single frame of an audio signal
+        self._sample(context, frame)
 
-        Returns: None
+        if not context.is_active and self._is_active:
+            self._detect(context)
 
-        """
-
-        # detect vad edges for wakeword deactivation
-        vad_fall = self._is_speech and not context.is_speech
-        self._is_speech = context.is_speech
-
-        # sample frame to detect the presence of wakeword
-        if not context.is_active:
-            self._sample(context, frame)
-
-        # reset on vad fall deactivation
-        if vad_fall:
-            if not context.is_active:
-                _LOG.info(f"wake: {self._posterior_max}")
-            self.reset()
+        self._is_active = context.is_active
 
     def _sample(self, context: SpeechContext, frame) -> None:
         # convert the PCM-16 audio to float32 in (-1.0, 1.0)
@@ -136,7 +123,7 @@ class WakewordTrigger:
         for sample in frame:
             self.sample_window.write(sample)
             if self.sample_window.is_full:
-                if context.is_speech:
+                if context.is_active:
                     self._analyze(context)
                 self.sample_window.rewind().seek(self.hop_length)
 
@@ -173,30 +160,32 @@ class WakewordTrigger:
         # accumulate encoded samples until size of detection window
         self.encode_window.rewind().seek(1)
         self.encode_window.write(frame)
-        self._detect(context)
 
     def _detect(self, context: SpeechContext) -> None:
         # read the full contents of the encode window and add the batch dimension
-        # calculate a scalar probability of if the frame contains the wakeword
+        # calculate a scalar likelihood that the frame contains a keyword
         # with the detect model
         frame = self.encode_window.read_all()
         frame = np.expand_dims(frame, 0)
-        posterior = self.detect_model(frame)[0][0][0]
+        posterior = self.detect_model(frame)[0][0]
+        class_index = np.argmax(posterior)
+        confidence = posterior[class_index]
 
-        if posterior > self._posterior_max:
-            self._posterior_max = posterior
-        if posterior > self._posterior_threshold:
-            context.is_active = True
-            _LOG.info(f"wake: {self._posterior_max}")
+        if confidence >= self._posterior_threshold:
+            context.transcript = self.classes[class_index]
+            context.confidence = confidence
+            context.event("recognize")
+        else:
+            context.event("timeout")
+        self.reset()
 
     def reset(self) -> None:
-        """ Resets the currect WakewordDetector state """
+        """ Resets the current KeywordDetector state """
         self.sample_window.reset()
         self.frame_window.reset().fill(0.0)
         self.encode_window.reset().fill(-1.0)
         self.state[:] = 0.0
-        self._posterior_max = 0.0
 
     def close(self) -> None:
-        """ Close interface for use in the pipeline """
+        """ Close interface for use in the SpeechPipeline """
         self.reset()

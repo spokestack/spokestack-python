@@ -4,7 +4,7 @@ Tests for RingBuffer class
 import numpy as np
 import pytest
 
-from spokestack.wakeword.ring_buffer import RingBuffer
+from spokestack.ring_buffer import RingBuffer
 
 
 def test_ring_buffer():
