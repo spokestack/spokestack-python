@@ -3,7 +3,7 @@ This module contains tests for Voice Activity Detection
 """
 from unittest.mock import patch
 
-import numpy as np
+import numpy as np  # type: ignore
 
 from spokestack.context import SpeechContext
 from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger

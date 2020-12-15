@@ -3,7 +3,7 @@ This module contains the tests for the GoogleSpeechRecognizer class
 """
 from unittest import mock
 
-import numpy as np
+import numpy as np  # type: ignore
 
 from spokestack.asr.google.speech_recognizer import GoogleSpeechRecognizer
 from spokestack.context import SpeechContext

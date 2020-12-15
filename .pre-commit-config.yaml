@@ -35,6 +35,13 @@ repos:
             entry: python -m pytest --cov=spokestack --cov-report=term-missing --cov-fail-under=99
             pass_filenames: false
             always_run: true
+          - id: detect_print_statement
+            name: detect_print_statement
+            language: pygrep
+            types: [python]
+            exclude: "examples"
+            args: [-i, --multiline]
+            entry: "print(.*)"
     - repo: https://github.com/syntaqx/git-hooks
       rev: v0.0.16
       hooks:

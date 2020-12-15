@@ -5,7 +5,7 @@ import json
 from unittest import mock
 
 import numpy as np  # type: ignore
-import pytest
+import pytest  # type: ignore
 
 from spokestack.asr.spokestack.cloud_client import APIError, CloudClient
 
