@@ -1,8 +1,8 @@
 """
 Tests for RingBuffer class
 """
-import numpy as np
-import pytest
+import numpy as np  # type: ignore
+import pytest  # type: ignore
 
 from spokestack.ring_buffer import RingBuffer
 

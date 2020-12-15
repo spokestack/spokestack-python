@@ -28,10 +28,10 @@ jobs:
                   flake8
             - run: |
                   source ~/venv/bin/activate
-                  ls -1 */__init__.py | sed -E 's|/.*||' | xargs black
+                  black spokestack tests
             - run: |
                   source ~/venv/bin/activate
-                  ls -1 */__init__.py | sed -E 's|/.*||' | xargs mypy
+                  mypy spokestack tests
             - run: |
                   source ~/venv/bin/activate
                   python -m pytest --cov=spokestack
