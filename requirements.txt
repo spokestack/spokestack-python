@@ -76,7 +76,6 @@ urllib3==1.25.10          # via requests
 virtualenv==20.0.27       # via pre-commit
 watchdog==0.10.3          # via pytest-watch
 wcwidth==0.2.5            # via pytest
-webrtcvad==2.0.10         # via -r requirements.in
 websocket==0.2.1          # via -r requirements.in
 wheel==0.34.2             # via -r requirements.in
 zope.event==4.4           # via gevent

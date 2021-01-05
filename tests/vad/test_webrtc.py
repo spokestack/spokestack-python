@@ -1,34 +1,34 @@
 """
 This module contains tests for Voice Activity Detection
 """
-from unittest.mock import patch
 
 import numpy as np  # type: ignore
 
+from spokestack import utils
 from spokestack.context import SpeechContext
 from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
 
-@patch("webrtcvad.Vad.is_speech", return_value=True)
-def test_vad_is_triggered(mock_class):
+def test_vad_is_triggered():
     context = SpeechContext()
-    detector = VoiceActivityDetector(
-        sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=0
-    )
-    frame = np.zeros(160, np.int16)
+    detector = VoiceActivityDetector(frame_width=10)
+
+    frame = silence_frame()
+    detector(context, frame)
+    assert not context.is_speech
+
+    frame = voice_frame()
     detector(context, frame)
     assert context.is_speech
+
     detector.close()
 
 
-@patch("webrtcvad.Vad.is_speech", return_value=True)
-def test_vad_rise_delay(mock_class):
+def test_vad_rise_delay():
     context = SpeechContext()
-    detector = VoiceActivityDetector(
-        sample_rate=16000, frame_width=10, vad_rise_delay=30, vad_fall_delay=0
-    )
+    detector = VoiceActivityDetector(frame_width=10, vad_rise_delay=30)
     for i in range(3):
-        frame = np.zeros(160, np.int16)
+        frame = voice_frame()
         detector(context, frame)
         if i < 2:
             assert not context.is_speech
@@ -39,45 +39,39 @@ def test_vad_rise_delay(mock_class):
 
 def test_vad_fall_triggered():
     context = SpeechContext()
-    detector = VoiceActivityDetector(
-        sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=20
-    )
-    with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
-        assert context.is_speech
+    detector = VoiceActivityDetector(frame_width=10, vad_fall_delay=20)
 
-    with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
-        assert context.is_speech
+    frame = voice_frame()
+    detector(context, frame)
+    assert context.is_speech
 
-    with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
-        assert context.is_speech
+    frame = silence_frame()
+    detector(context, frame)
+    assert context.is_speech
+
+    frame = voice_frame()
+    detector(context, frame)
+    assert context.is_speech
+
     detector.close()
 
 
 def test_vad_fall_untriggered():
     context = SpeechContext()
-    detector = VoiceActivityDetector(
-        sample_rate=16000, frame_width=10, vad_rise_delay=0, vad_fall_delay=20
-    )
-    with patch("webrtcvad.Vad.is_speech", return_value=True):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
+    detector = VoiceActivityDetector(frame_width=10, vad_fall_delay=20)
+
+    voice = voice_frame()
+    silence = silence_frame()
+
+    detector(context, voice)
+    assert context.is_speech
+
+    for i in range(10):
+        detector(context, silence)
         assert context.is_speech
 
-    with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
-        assert context.is_speech
-
-    with patch("webrtcvad.Vad.is_speech", return_value=False):
-        frame = np.zeros(160, np.int16)
-        detector(context, frame)
-        assert not context.is_speech
+    detector(context, silence)
+    assert not context.is_speech
     detector.close()
 
 
@@ -85,7 +79,7 @@ def test_voice_activity_trigger():
     context = SpeechContext()
     trigger = VoiceActivityTrigger()
 
-    frame = np.zeros(160, np.int16)
+    frame = voice_frame()
 
     trigger(context, frame)
     assert not context.is_active
@@ -95,3 +89,15 @@ def test_voice_activity_trigger():
     assert context.is_active
 
     trigger.close()
+
+
+def voice_frame(sample_rate=16000, frequency=2000, frame_width=10):
+    frame_width = sample_rate * frame_width // 1000
+    x = 2 * np.pi * np.arange(sample_rate) / sample_rate
+    frame = np.sin(frequency * x)
+    frame = frame[:frame_width]
+    return utils.float_to_int16(frame)
+
+
+def silence_frame():
+    return np.zeros(160, np.int16)
