@@ -4,7 +4,6 @@ import numpy as np
 import setuptools
 from Cython.Build import cythonize  # type: ignore
 
-
 SOURCES = [
     os.path.join("spokestack/extensions/webrtc", source)
     for source in [
@@ -47,8 +46,8 @@ EXTENSIONS = [
         include_dirs=["filter_audio/agc/include/"],
     ),
     setuptools.Extension(
-        "spokestack.extensions.webrtc.ans",
-        ["spokestack/extensions/webrtc/ans.pyx"] + SOURCES,
+        "spokestack.extensions.webrtc.nsx",
+        ["spokestack/extensions/webrtc/nsx.pyx"] + SOURCES,
         include_dirs=["filter_audio/ns/include/"],
     ),
     setuptools.Extension(

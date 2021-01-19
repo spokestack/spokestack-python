@@ -6,58 +6,49 @@ This module contains the AutomaticGainControl class implemented in Cython
 cimport numpy as np
 cimport cagc
 
+from spokestack.extensions.webrtc import ProcessError
 
 MIC_MAX = 255
 MIC_TARGET = 180
 
-np.import_array()
 
-cdef class AutomaticGainControl:
-    cdef void*_agc
-    cdef int _sample_rate
-    cdef int _frame_width
-    cdef int _target_level_dbfs
-    cdef int _compression_gain_db
-    cdef int _limit_enable
-    cdef cagc.WebRtcAgc_config_t _config
+cdef class WebRtcAgc:
+    cdef void* _agc
 
     def __dealloc__(self):
         cagc.WebRtcAgc_Free(self._agc)
 
     def __init__(self,
-                 sample_rate=16000,
-                 frame_width=20,
-                 target_level_dbfs=0,
-                 compression_gain_db=0,
-                 limit_enable=True,
-                 **kwargs):
-
-        self._sample_rate = sample_rate
-        self._frame_width = frame_width
-        self._target_level_dbfs = target_level_dbfs
-        self._compression_gain_db = compression_gain_db
-        self._limit_enable = limit_enable
-
+                 sample_rate,
+                 frame_width,
+                 target_level_dbfs,
+                 compression_gain_db,
+                 limit_enable
+    ):
         self._agc = NULL
         result = cagc.WebRtcAgc_Create(&self._agc)
-        if result < 0:
-            raise ValueError
-        if result == 0:
-            result = cagc.WebRtcAgc_Init(self._agc,
-                                         minLevel=0,
-                                         maxLevel=MIC_MAX,
-                                         agcMode=2,
-                                         fs=self._sample_rate)
+        if result != 0:
+            raise ValueError("invalid_config")
 
-            if result == 0:
-                self._config.targetLevelDbfs = self._target_level_dbfs
-                self._config.limiterEnable = self._limit_enable
-                self._config.compressionGaindB = self._compression_gain_db
-                result = cagc.WebRtcAgc_set_config(self._agc, self._config)
-        if result < 0:
-            raise ValueError
+        result = cagc.WebRtcAgc_Init(self._agc,
+                                     minLevel=0,
+                                     maxLevel=MIC_MAX,
+                                     agcMode=2,
+                                     fs=sample_rate
+        )
+        if result != 0:
+            raise ValueError("invalid_config")
 
-    def __call__(self, context, frame):
+        cdef cagc.WebRtcAgc_config_t config
+        config.targetLevelDbfs = target_level_dbfs
+        config.limiterEnable = limit_enable
+        config.compressionGaindB = compression_gain_db
+
+        result = cagc.WebRtcAgc_set_config(self._agc, config)
+        if result != 0:
+            raise MemoryError
+
+    def __call__(self, frame):
         self._process(frame)
 
     cdef _process(self, frame):
@@ -71,8 +62,10 @@ cdef class AutomaticGainControl:
             micLevelIn=MIC_TARGET,
             micLevelOut=&mic_level
         )
-        if result == 0:
-            result = cagc.WebRtcAgc_Process(
+        if result != 0:
+            raise ProcessError("mic_failed")
+
+        result = cagc.WebRtcAgc_Process(
                 agcInst=self._agc,
                 inNear=<short*> np.PyArray_DATA(frame),
                 inNearH=NULL,
@@ -83,12 +76,6 @@ cdef class AutomaticGainControl:
                 outMicLevel=&mic_level,
                 echo=0,
                 saturationWarning=&saturated
-            )
-        if result < 0:
-            raise ValueError
-
-    def close(self):
-        pass
-
-    def reset(self):
-        pass
+        )
+        if result != 0:
+            raise ProcessError("invalid_input")

@@ -13,6 +13,7 @@ jobs:
                   keys:
                       - build-{{checksum "requirements.txt"}}
             - run: python3 -m venv ~/venv
+            - run: git submodule update --init
             - run: |
                   source ~/venv/bin/activate
                   pip install --upgrade pip pip-tools

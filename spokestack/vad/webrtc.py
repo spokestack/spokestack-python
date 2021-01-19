@@ -8,7 +8,6 @@ import numpy as np  # type: ignore
 from spokestack.context import SpeechContext
 from spokestack.extensions.webrtc.vad import WebRtcVad  # type: ignore
 
-
 QUALITY = 0
 LOW_BITRATE = 1
 AGGRESSIVE = 2
@@ -39,7 +38,15 @@ class VoiceActivityDetector:
         **kwargs
     ) -> None:
 
+        # validate sample rate
         self._sample_rate: int = sample_rate
+        if self._sample_rate not in {8000, 16000, 32000}:
+            raise ValueError("invalid_sample_rate")
+        self._frame_width: int = frame_width
+        # validate frame width
+        if self._frame_width not in {10, 20}:
+            raise ValueError("invalid_frame_width")
+
         self._rise_length: int = vad_rise_delay // frame_width
         self._fall_length: int = vad_fall_delay // frame_width
 
@@ -57,6 +64,10 @@ class VoiceActivityDetector:
             frame (np.ndarray): Single frame of PCM-16 audio from an input source
 
         """
+        # validate dtype
+        if not np.issubdtype(frame.dtype, np.signedinteger):
+            raise TypeError("invalid_dtype")
+
         result: bool = self._vad.is_speech(frame)
 
         raw = result > 0
