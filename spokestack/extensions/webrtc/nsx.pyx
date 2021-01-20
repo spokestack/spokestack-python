@@ -21,7 +21,7 @@ cdef class WebRtcNsx:
 
         result = cnsx.WebRtcNsx_Create(&self._ans)
         if result != 0:
-            raise ValueError("invalid_config")
+            raise MemoryError("out_of_memory")
 
         result = cnsx.WebRtcNsx_Init(self._ans, sample_rate)
         if result != 0:
@@ -29,7 +29,7 @@ cdef class WebRtcNsx:
 
         result = cnsx.WebRtcNsx_set_policy(self._ans, policy)
         if result != 0:
-            raise MemoryError
+            raise ValueError("invalid_config")
 
     def __call__(self, frame):
         self._process(frame)

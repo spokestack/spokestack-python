@@ -28,7 +28,7 @@ cdef class WebRtcAgc:
         self._agc = NULL
         result = cagc.WebRtcAgc_Create(&self._agc)
         if result != 0:
-            raise ValueError("invalid_config")
+            raise MemoryError("out_of_memory"")
 
         result = cagc.WebRtcAgc_Init(self._agc,
                                      minLevel=0,
@@ -46,7 +46,7 @@ cdef class WebRtcAgc:
 
         result = cagc.WebRtcAgc_set_config(self._agc, config)
         if result != 0:
-            raise MemoryError
+            raise ValueError("invalid_config")
 
     def __call__(self, frame):
         self._process(frame)

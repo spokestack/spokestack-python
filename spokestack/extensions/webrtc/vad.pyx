@@ -17,7 +17,7 @@ cdef class WebRtcVad:
 
         result = cvad.WebRtcVad_Create(&self._vad)
         if result != 0:
-            raise ValueError("invalid_config")
+            raise MemoryError("out_of_memory")
 
         result = cvad.WebRtcVad_Init(self._vad)
         if result != 0:
@@ -25,7 +25,7 @@ cdef class WebRtcVad:
 
         result = cvad.WebRtcVad_set_mode(self._vad, mode)
         if result != 0:
-            raise MemoryError
+            raise ValueError("invalid_config")
 
     def is_speech(self, frame):
         result = cvad.WebRtcVad_Process(

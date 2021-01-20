@@ -17,10 +17,14 @@ class AutomaticNoiseSuppression:
 
     Args:
         sample_rate (int): audio sample rate. (Hz)
-        policy (int): level of noise supression.
+        policy (int): aggressiveness of the noise suppression:
+                      - POLICY_MILD: mild suppression (6dB)
+                      - POLICY_MEDIUM: medium suppression (10dB)
+                      - POLICY_AGGRESSIVE: aggresive suppression (15dB)
+                      - POLICY_VERY_AGGRESSIVE: very aggressive suppression
     """
 
-    def __init__(self, sample_rate=16000, policy=POLICY_MEDIUM) -> None:
+    def __init__(self, sample_rate=16000, policy=POLICY_MEDIUM, **kwargs) -> None:
 
         # validate sample rate
         if sample_rate not in {8000, 16000, 32000}:
