@@ -1,14 +1,12 @@
 """
-This module contains the webrtc component for
-voice activity detection (vad)
+This module contains the webrtc component for voice activity detection (vad)
 """
 import logging
 
 import numpy as np  # type: ignore
-import webrtcvad  # type: ignore
 
 from spokestack.context import SpeechContext
-
+from spokestack.extensions.webrtc.vad import WebRtcVad  # type: ignore
 
 QUALITY = 0
 LOW_BITRATE = 1
@@ -40,11 +38,19 @@ class VoiceActivityDetector:
         **kwargs
     ) -> None:
 
+        # validate sample rate
         self._sample_rate: int = sample_rate
+        if self._sample_rate not in {8000, 16000, 32000}:
+            raise ValueError("invalid_sample_rate")
+        self._frame_width: int = frame_width
+        # validate frame width
+        if self._frame_width not in {10, 20}:
+            raise ValueError("invalid_frame_width")
+
         self._rise_length: int = vad_rise_delay // frame_width
         self._fall_length: int = vad_fall_delay // frame_width
 
-        self._vad = webrtcvad.Vad(mode)
+        self._vad = WebRtcVad(sample_rate=sample_rate, mode=mode)
 
         self._run_value: int = 0
         self._run_length: int = 0
@@ -58,8 +64,11 @@ class VoiceActivityDetector:
             frame (np.ndarray): Single frame of PCM-16 audio from an input source
 
         """
-        frame = frame.tobytes()
-        result: bool = self._vad.is_speech(frame, self._sample_rate)
+        # validate dtype
+        if not np.issubdtype(frame.dtype, np.signedinteger):
+            raise TypeError("invalid_dtype")
+
+        result: bool = self._vad.is_speech(frame)
 
         raw = result > 0
         if raw == self._run_value:

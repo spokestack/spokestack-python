@@ -27,7 +27,6 @@ pyfakefs
 coveralls
 # library
 pyaudio
-webrtcvad
 numpy
 websocket
 tokenizers

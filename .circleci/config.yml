@@ -13,6 +13,7 @@ jobs:
                   keys:
                       - build-{{checksum "requirements.txt"}}
             - run: python3 -m venv ~/venv
+            - run: git submodule update --init
             - run: |
                   source ~/venv/bin/activate
                   pip install --upgrade pip pip-tools
@@ -34,11 +35,12 @@ jobs:
                   mypy spokestack tests
             - run: |
                   source ~/venv/bin/activate
-                  python -m pytest --cov=spokestack
-                  python -m coveralls
+                  python setup.py build_ext -i
             - run: |
                   source ~/venv/bin/activate
-                  python setup.py build_ext -i
+                  python -m pytest --cov=spokestack
+                  python -m coveralls
+
 workflows:
     version: 2
 
