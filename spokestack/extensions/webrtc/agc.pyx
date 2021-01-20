@@ -28,7 +28,7 @@ cdef class WebRtcAgc:
         self._agc = NULL
         result = cagc.WebRtcAgc_Create(&self._agc)
         if result != 0:
-            raise MemoryError("out_of_memory"")
+            raise MemoryError("out_of_memory")
 
         result = cagc.WebRtcAgc_Init(self._agc,
                                      minLevel=0,
