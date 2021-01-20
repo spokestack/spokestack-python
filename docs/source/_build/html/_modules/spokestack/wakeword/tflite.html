@@ -160,6 +160,20 @@
                                     >Speech Pipeline</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.nsx.html"
+                                    >Automatic Noise Suppression</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.agc.html"
+                                    >Automatic Gain Control</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -221,7 +235,7 @@
 
 <span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
 <span class="kn">from</span> <span class="nn">spokestack.models.tensorflow</span> <span class="kn">import</span> <span class="n">TFLiteModel</span>
-<span class="kn">from</span> <span class="nn">spokestack.wakeword.ring_buffer</span> <span class="kn">import</span> <span class="n">RingBuffer</span>
+<span class="kn">from</span> <span class="nn">spokestack.ring_buffer</span> <span class="kn">import</span> <span class="n">RingBuffer</span>
 
 
 <span class="n">_LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>

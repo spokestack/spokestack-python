@@ -158,6 +158,20 @@
                                     >Speech Pipeline</a
                                 >
                             </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.nsx.html"
+                                    >Automatic Noise Suppression</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="../../../spokestack.agc.html"
+                                    >Automatic Gain Control</a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -207,16 +221,14 @@
                                 <div class="highlight">
                                     <pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This module contains the webrtc component for</span>
-<span class="sd">voice activity detection (vad)</span>
+<span class="sd">This module contains the webrtc component for voice activity detection (vad)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
-<span class="kn">import</span> <span class="nn">webrtcvad</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
-
+<span class="kn">from</span> <span class="nn">spokestack.extensions.webrtc.vad</span> <span class="kn">import</span> <span class="n">WebRtcVad</span>  <span class="c1"># type: ignore</span>
 
 <span class="n">QUALITY</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">LOW_BITRATE</span> <span class="o">=</span> <span class="mi">1</span>
@@ -248,11 +260,19 @@
         <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
+        <span class="c1"># validate sample rate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">8000</span><span class="p">,</span> <span class="mi">16000</span><span class="p">,</span> <span class="mi">32000</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid_sample_rate&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">frame_width</span>
+        <span class="c1"># validate frame width</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid_frame_width&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_rise_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">vad_rise_delay</span> <span class="o">//</span> <span class="n">frame_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fall_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">vad_fall_delay</span> <span class="o">//</span> <span class="n">frame_width</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_vad</span> <span class="o">=</span> <span class="n">webrtcvad</span><span class="o">.</span><span class="n">Vad</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vad</span> <span class="o">=</span> <span class="n">WebRtcVad</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
@@ -266,8 +286,11 @@
 <span class="sd">            frame (np.ndarray): Single frame of PCM-16 audio from an input source</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
-        <span class="n">result</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vad</span><span class="o">.</span><span class="n">is_speech</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">)</span>
+        <span class="c1"># validate dtype</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">signedinteger</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;invalid_dtype&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vad</span><span class="o">.</span><span class="n">is_speech</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
 
         <span class="n">raw</span> <span class="o">=</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">raw</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_value</span><span class="p">:</span>

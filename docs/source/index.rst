@@ -18,3 +18,5 @@ spokestack
    spokestack.nlu
    spokestack.activation_timeout
    spokestack.pipeline
+   spokestack.nsx
+   spokestack.agc
