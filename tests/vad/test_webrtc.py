@@ -1,13 +1,12 @@
 """
 This module contains tests for Voice Activity Detection
 """
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 
 from spokestack import utils
 from spokestack.context import SpeechContext
-from spokestack.vad.webrtc import VoiceActivityDetector  # type: ignore
-from spokestack.vad.webrtc import VoiceActivityTrigger  # type: ignore
+from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
 
 def test_invalid_frame_width():

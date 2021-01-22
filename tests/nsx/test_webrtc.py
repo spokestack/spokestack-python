@@ -1,12 +1,12 @@
 """
 This module contains the tests for the automatic noise suppression extension.
 """
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 
 from spokestack import utils
 from spokestack.context import SpeechContext
-from spokestack.nsx.webrtc import AutomaticNoiseSuppression  # type: ignore
+from spokestack.nsx.webrtc import AutomaticNoiseSuppression
 
 np.random.seed(42)
 

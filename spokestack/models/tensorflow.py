@@ -3,13 +3,12 @@ TFLite model base class
 """
 from typing import Any, List
 
-import numpy as np  # type: ignore
-
+import numpy as np
 
 try:
-    import tflite_runtime.interpreter as tflite  # type: ignore
+    import tflite_runtime.interpreter as tflite
 except ModuleNotFoundError:
-    import tensorflow.lite as tflite  # type: ignore
+    import tensorflow.lite as tflite
 
 
 class TFLiteModel:
@@ -30,7 +29,7 @@ class TFLiteModel:
         self._output_details = self._interpreter.get_output_details()
         self._interpreter.allocate_tensors()
 
-    def __call__(self, *args) -> List[np.ndarray]:
+    def __call__(self, *args: Any) -> List[np.ndarray]:
         """Forward pass of the TFLite model
 
         Args:

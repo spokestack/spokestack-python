@@ -1,6 +1,10 @@
 """
 This module manages the timeout for speech pipeline activation.
 """
+from typing import Any, Union
+
+import numpy as np
+
 from spokestack.context import SpeechContext
 
 
@@ -14,7 +18,11 @@ class ActivationTimeout:
     """
 
     def __init__(
-        self, frame_width=20, min_active=500, max_active=5000, **kwargs
+        self,
+        frame_width: int = 20,
+        min_active: int = 500,
+        max_active: int = 5000,
+        **kwargs: Any
     ) -> None:
 
         self._min_active = min_active / frame_width
@@ -22,7 +30,9 @@ class ActivationTimeout:
         self._is_speech = False
         self._active_length = 0
 
-    def __call__(self, context: SpeechContext, frame=None) -> None:
+    def __call__(
+        self, context: SpeechContext, frame: Union[np.ndarray, None] = None
+    ) -> None:
         """Main entry point that manages timeout
 
         Args:

@@ -3,7 +3,7 @@ Tests for TFLite model base class
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.models.tensorflow import TFLiteModel
 

@@ -4,7 +4,7 @@ This module tests the cloud speech recognizer
 import json
 from unittest import mock
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.context import SpeechContext

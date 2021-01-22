@@ -1,10 +1,12 @@
 """
 This module contains the class for webrtc's automatic gain control
 """
-import numpy as np  # type: ignore
+from typing import Any
+
+import numpy as np
 
 from spokestack.context import SpeechContext
-from spokestack.extensions.webrtc.agc import WebRtcAgc  # type: ignore
+from spokestack.extensions.webrtc.agc import WebRtcAgc
 
 
 class AutomaticGainControl:
@@ -20,12 +22,12 @@ class AutomaticGainControl:
 
     def __init__(
         self,
-        sample_rate=16000,
-        frame_width=20,
-        target_level_dbfs=3,
-        compression_gain_db=15,
-        limit_enable=True,
-        **kwargs
+        sample_rate: int = 16000,
+        frame_width: int = 20,
+        target_level_dbfs: int = 3,
+        compression_gain_db: int = 15,
+        limit_enable: bool = True,
+        **kwargs: Any
     ) -> None:
         # validate sample rate
         self._sample_rate = sample_rate

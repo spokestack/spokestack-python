@@ -16,7 +16,9 @@ class Result:
 
     """
 
-    def __init__(self, utterance, intent, confidence, slots) -> None:
+    def __init__(
+        self, utterance: str, intent: str, confidence: float, slots: Dict[str, Any]
+    ) -> None:
         self._utterance: str = utterance
         self._intent: str = intent
         self._confidence: float = confidence

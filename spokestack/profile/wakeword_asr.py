@@ -1,11 +1,13 @@
 """
 Pipeline profile for pyaudio input, vad, wakeword, and asr
 """
+from typing import Any
+
 from spokestack.activation_timeout import ActivationTimeout
 from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.io.pyaudio import PyAudioInput
 from spokestack.pipeline import SpeechPipeline
-from spokestack.vad.webrtc import VoiceActivityDetector  # type: ignore
+from spokestack.vad.webrtc import VoiceActivityDetector
 from spokestack.wakeword.tflite import WakewordTrigger
 
 
@@ -19,7 +21,7 @@ class WakewordSpokestackASR:
         sample_rate: int = 16000,
         frame_width: int = 20,
         model_dir: str = "",
-        **kwargs,
+        **kwargs: Any,
     ) -> SpeechPipeline:
         """Creates a speech pipeline instance from profile
 

@@ -4,7 +4,7 @@ This module contains tests for the TFLiteNLU class
 import json
 from unittest import mock
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.nlu.tflite import TFLiteNLU
 

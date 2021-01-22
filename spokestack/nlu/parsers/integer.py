@@ -41,7 +41,7 @@ def parse(metadata: Dict[str, Any], raw_value: str) -> Union[int, None]:
     return None
 
 
-def _parse_reduce(number, so_far):
+def _parse_reduce(number: Any, so_far: Any) -> Any:
     to_parse = number
     if to_parse.endswith("th"):
         to_parse = to_parse[: len(to_parse) - 2]
@@ -56,7 +56,7 @@ def _parse_reduce(number, so_far):
     return so_far
 
 
-def _collapse(multiplier, so_far):
+def _collapse(multiplier: int, so_far: Any) -> Any:
     collapsed = []
     total = 0
     for number in so_far:
@@ -69,5 +69,5 @@ def _collapse(multiplier, so_far):
     return collapsed
 
 
-def _is_in_range(value, interval):
+def _is_in_range(value: int, interval: Any) -> bool:
     return value in range(interval[0], interval[1])

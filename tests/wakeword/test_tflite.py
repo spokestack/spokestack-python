@@ -3,8 +3,8 @@ Tests for TFLite wakeword models
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 
 from spokestack.context import SpeechContext
 from spokestack.wakeword.tflite import WakewordTrigger

@@ -7,15 +7,14 @@ import json
 import logging
 import os
 from importlib import import_module
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 
-import numpy as np  # type: ignore
-from tokenizers import BertWordPieceTokenizer  # type: ignore
+import numpy as np
+from tokenizers import BertWordPieceTokenizer
 
 from spokestack import utils
 from spokestack.models.tensorflow import TFLiteModel
 from spokestack.nlu.result import Result
-
 
 _LOG = logging.getLogger(__name__)
 
@@ -124,7 +123,7 @@ class TFLiteNLU:
         inputs = np.expand_dims(inputs, 0)
         return inputs, input_ids
 
-    def _decode(self, outputs) -> Tuple[str, List[str], float]:
+    def _decode(self, outputs: list) -> Tuple[str, List[str], float]:
         # to get the index of the highest probability we
         # apply argmax to the posteriors which allows the
         # labels to be decoded with an integer to string mapping
@@ -137,18 +136,18 @@ class TFLiteNLU:
         _LOG.debug(f"confidence: {confidence}")
         return intents, tags, confidence
 
-    def _decode_tags(self, posterior):
+    def _decode_tags(self, posterior: np.ndarray) -> List[Any]:
         posterior = np.squeeze(posterior, 0)
         tags = np.argmax(posterior, -1)
         return [self._tag_decoder.get(tag) for tag in tags]
 
-    def _decode_intent(self, posterior):
+    def _decode_intent(self, posterior: np.ndarray) -> Any:
         posterior = np.squeeze(posterior, 0)
         intent = np.argmax(posterior, -1)
         return self._intent_decoder.get(intent), posterior[intent]
 
-    def _parse_slots(self, slot_meta, slots):
+    def _parse_slots(self, slot_meta: Dict[str, Any], slots: Dict[str, Any]) -> Any:
         slot_type = slot_meta["type"]
         parser = import_module(f"spokestack.nlu.parsers.{slot_type}")
         facets = json.loads(slot_meta["facets"])
-        return parser.parse(facets, slots)
+        return parser.parse(facets, slots)  # type: ignore

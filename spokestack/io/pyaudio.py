@@ -1,8 +1,10 @@
 """
 This module uses pyaudio for input and output processing
 """
-import numpy as np  # type: ignore
-import pyaudio  # type: ignore
+from typing import Any
+
+import numpy as np
+import pyaudio
 
 
 class PyAudioInput:
@@ -19,7 +21,7 @@ class PyAudioInput:
         sample_rate: int,
         frame_width: int,
         exception_on_overflow: bool = True,
-        **kwargs
+        **kwargs: Any
     ) -> None:
         self._frame_size = int(sample_rate / 1000 * frame_width)
         self._exception_on_overflow = exception_on_overflow

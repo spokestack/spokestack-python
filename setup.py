@@ -2,7 +2,7 @@ import os
 
 import numpy as np
 import setuptools
-from Cython.Build import cythonize  # type: ignore
+from Cython.Build import cythonize
 
 SOURCES = [
     os.path.join("spokestack/extensions/webrtc", source)
@@ -61,7 +61,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="spokestack",
-    version="0.0.9",
+    version="0.0.10",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",
@@ -75,14 +75,16 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
+    setup_requires=["setuptools", "cython", "numpy"],
     install_requires=[
+        "numpy",
         "pyaudio",
         "webrtcvad",
-        "numpy",
         "websocket_client",
         "tokenizers",
         "requests",
         "streamp3",
+        "cython",
     ],
     ext_modules=cythonize(EXTENSIONS),
     include_dirs=[np.get_include()],

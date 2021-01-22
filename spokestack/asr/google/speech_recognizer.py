@@ -4,14 +4,13 @@ This module contains the google asr speech recognizer
 import logging
 from queue import Queue
 from threading import Thread
-from typing import Any, Union
+from typing import Any, Generator, Union
 
-import numpy as np  # type: ignore
-from google.cloud import speech  # type: ignore
-from google.oauth2 import service_account  # type: ignore
+import numpy as np
+from google.cloud import speech
+from google.oauth2 import service_account
 
 from spokestack.context import SpeechContext
-
 
 _LOG = logging.getLogger(__name__)
 
@@ -37,7 +36,7 @@ class GoogleSpeechRecognizer:
         language: str,
         credentials: Union[None, str, dict] = None,
         sample_rate: int = 16000,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         if credentials:
             if isinstance(credentials, str):
@@ -83,14 +82,14 @@ class GoogleSpeechRecognizer:
         if context.is_active:
             self._send(frame)
 
-    def _begin(self, context) -> None:
+    def _begin(self, context: SpeechContext) -> None:
         self._thread = Thread(
             target=self._receive,
             args=(context,),
         )
         self._thread.start()
 
-    def _receive(self, context):
+    def _receive(self, context: SpeechContext) -> None:
         for response in self._client.streaming_recognize(self._config, self._drain()):
             for result in response.results[:1]:
                 for alternative in result.alternatives[:1]:
@@ -107,7 +106,7 @@ class GoogleSpeechRecognizer:
                         context.event("timeout")
                         _LOG.debug("timeout event")
 
-    def _drain(self):
+    def _drain(self) -> Generator:
         while data := self._queue.get():
             yield data
 
@@ -116,7 +115,7 @@ class GoogleSpeechRecognizer:
         self._thread.join()
         self._thread = None
 
-    def _send(self, frame) -> None:
+    def _send(self, frame: np.ndarray) -> None:
         self._queue.put(speech.StreamingRecognizeRequest(audio_content=frame.tobytes()))
 
     def reset(self) -> None:

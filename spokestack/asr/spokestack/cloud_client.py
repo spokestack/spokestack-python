@@ -8,8 +8,8 @@ import hmac
 import json
 from typing import Any, Dict, List, Union
 
-import numpy as np  # type: ignore
-from websocket import WebSocket  # type: ignore
+import numpy as np
+from websocket import WebSocket
 
 
 class CloudClient:
@@ -137,7 +137,7 @@ class CloudClient:
             self._socket.close()
             self._socket = None
 
-    def send(self, frame: np.ndarray):
+    def send(self, frame: np.ndarray) -> None:
         """sends a single frame of audio
 
         Args:
@@ -149,14 +149,14 @@ class CloudClient:
         else:
             raise ConnectionError("Not Connected")
 
-    def end(self):
+    def end(self) -> None:
         """ sends empty string in binary to indicate last frame """
         if self._socket:
             self._socket.send_binary(b"")
         else:
             raise ConnectionError("Not Connected")
 
-    def receive(self):
+    def receive(self) -> None:
         """ receives the api response """
         if self._socket:
             timeout = self._socket.timeout
@@ -191,7 +191,7 @@ class CloudClient:
         return self._idle_count
 
     @idle_count.setter
-    def idle_count(self, value: int):
+    def idle_count(self, value: int) -> None:
         """ sets the idle counter"""
         self._idle_count = value
 

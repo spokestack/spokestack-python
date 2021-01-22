@@ -9,7 +9,6 @@ from typing import Any, Iterator
 
 import requests
 
-
 _MODES = {
     "ssml": "synthesizeSSML",
     "markdown": "synthesizeMarkdown",
@@ -95,7 +94,7 @@ class TextToSpeechClient:
         return response["data"][_MODES[mode]]["url"]
 
     @staticmethod
-    def _build_body(message, mode, voice):
+    def _build_body(message: str, mode: str, voice: str) -> str:
         if mode == "ssml":
             return json.dumps(
                 {
@@ -141,6 +140,6 @@ class TextToSpeechClient:
 class TTSError(Exception):
     """ Text to speech error wrapper """
 
-    def __init__(self, response) -> None:
+    def __init__(self, response: Any) -> None:
         messages = [error["message"] for error in response]
         super().__init__(messages)

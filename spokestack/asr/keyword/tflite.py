@@ -3,9 +3,9 @@ This module contains the Spokestack KeywordRecognizer which identifies multiple 
 from an audio stream.
 """
 import os
-from typing import List
+from typing import Any, List
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.context import SpeechContext
 from spokestack.models.tensorflow import TFLiteModel
@@ -34,7 +34,7 @@ class KeywordRecognizer:
         fft_hop_length: int = 10,
         model_dir: str = "",
         posterior_threshold: float = 0.5,
-        **kwargs
+        **kwargs: Any
     ) -> None:
 
         self.classes = classes
@@ -96,7 +96,7 @@ class KeywordRecognizer:
         self._prev_sample: float = 0.0
         self._is_active = False
 
-    def __call__(self, context: SpeechContext, frame) -> None:
+    def __call__(self, context: SpeechContext, frame: np.ndarray) -> None:
 
         self._sample(context, frame)
 
@@ -105,7 +105,7 @@ class KeywordRecognizer:
 
         self._is_active = context.is_active
 
-    def _sample(self, context: SpeechContext, frame) -> None:
+    def _sample(self, context: SpeechContext, frame: np.ndarray) -> None:
         # convert the PCM-16 audio to float32 in (-1.0, 1.0)
         frame = frame.astype(np.float32) / (2 ** 15 - 1)
         frame = np.clip(frame, -1.0, 1.0)
@@ -138,7 +138,7 @@ class KeywordRecognizer:
         # compute mel spectrogram
         self._filter(context, frame)
 
-    def _filter(self, context: SpeechContext, frame) -> None:
+    def _filter(self, context: SpeechContext, frame: np.ndarray) -> None:
         # add the batch dimension and compute the mel spectrogram with filter model
         frame = np.expand_dims(frame, 0)
         frame = self.filter_model(frame)[0]

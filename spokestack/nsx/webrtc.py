@@ -1,10 +1,10 @@
 """
 This module contains the class for webrtc automatic noise suppression
 """
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.context import SpeechContext
-from spokestack.extensions.webrtc.nsx import WebRtcNsx  # type: ignore
+from spokestack.extensions.webrtc.nsx import WebRtcNsx
 
 POLICY_MILD = 0
 POLICY_MEDIUM = 1
@@ -24,7 +24,9 @@ class AutomaticNoiseSuppression:
                       - POLICY_VERY_AGGRESSIVE: very aggressive suppression
     """
 
-    def __init__(self, sample_rate=16000, policy=POLICY_MEDIUM, **kwargs) -> None:
+    def __init__(
+        self, sample_rate: int = 16000, policy: int = POLICY_MEDIUM, **kwargs: str
+    ) -> None:
 
         # validate sample rate
         if sample_rate not in {8000, 16000, 32000}:

@@ -2,11 +2,12 @@
 This module contains the webrtc component for voice activity detection (vad)
 """
 import logging
+from typing import Any
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.context import SpeechContext
-from spokestack.extensions.webrtc.vad import WebRtcVad  # type: ignore
+from spokestack.extensions.webrtc.vad import WebRtcVad
 
 QUALITY = 0
 LOW_BITRATE = 1
@@ -35,7 +36,7 @@ class VoiceActivityDetector:
         vad_rise_delay: int = 0,
         vad_fall_delay: int = 0,
         mode: int = QUALITY,
-        **kwargs
+        **kwargs: Any
     ) -> None:
 
         # validate sample rate
