@@ -2,10 +2,10 @@
 This module contains the tests for the AutomaticGainControl extension
 """
 
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 
-from spokestack.agc.webrtc import AutomaticGainControl  # type: ignore
+from spokestack.agc.webrtc import AutomaticGainControl
 from spokestack.context import SpeechContext
 
 

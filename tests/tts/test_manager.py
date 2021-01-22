@@ -3,7 +3,7 @@ This module contains the tests for the spokestack text to speech manager
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.tts.manager import SequenceIO, TextToSpeechManager
 

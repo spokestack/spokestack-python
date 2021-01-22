@@ -1,12 +1,13 @@
 """
 Pipeline profile with vad trigger and asr
 """
+from typing import Any
+
 from spokestack.activation_timeout import ActivationTimeout
 from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.io.pyaudio import PyAudioInput
 from spokestack.pipeline import SpeechPipeline
-from spokestack.vad.webrtc import VoiceActivityDetector  # type: ignore
-from spokestack.vad.webrtc import VoiceActivityTrigger  # type: ignore
+from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
 
 class VoiceActivityTriggerSpokestackASR:
@@ -18,7 +19,7 @@ class VoiceActivityTriggerSpokestackASR:
         spokestack_secret: str,
         sample_rate: int = 16000,
         frame_width: int = 20,
-        **kwargs
+        **kwargs: Any
     ) -> SpeechPipeline:
         """
 

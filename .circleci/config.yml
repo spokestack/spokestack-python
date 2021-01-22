@@ -32,7 +32,7 @@ jobs:
                   black spokestack tests
             - run: |
                   source ~/venv/bin/activate
-                  mypy spokestack tests
+                  mypy spokestack
             - run: |
                   source ~/venv/bin/activate
                   python setup.py build_ext -i

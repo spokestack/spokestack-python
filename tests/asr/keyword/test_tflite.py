@@ -3,8 +3,8 @@ This module contains tests for the keyword recognizer.
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 
 from spokestack.asr.keyword.tflite import KeywordRecognizer
 from spokestack.context import SpeechContext

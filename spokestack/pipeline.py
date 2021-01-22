@@ -2,6 +2,7 @@
 This module contains the speech pipeline which manages the components
 for processing speech.
 """
+from typing import Any, List, Union
 
 from spokestack.context import SpeechContext
 
@@ -15,7 +16,7 @@ class SpeechPipeline:
         **kwargs: additional keyword arguments
     """
 
-    def __init__(self, input_source, stages) -> None:
+    def __init__(self, input_source: Any, stages: List[Any]) -> None:
         self._context = SpeechContext()
         self._input_source = input_source
         self._stages: list = stages
@@ -82,7 +83,7 @@ class SpeechPipeline:
         self._input_source = None
         self._context.reset()
 
-    def event(self, function=None, name=None):
+    def event(self, function: Any = None, name: Union[str, None] = None) -> Any:
         """Registers an event handler
 
         Args:

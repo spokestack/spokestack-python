@@ -1,15 +1,15 @@
 """
 This module implements the RingBuffer class
 """
-from typing import Union
+from typing import Any, Union
 
-import numpy as np  # type: ignore
+import numpy as np
 
 
 class RingBuffer:
     """ ring buffer """
 
-    def __init__(self, shape: list, dtype=np.float32) -> None:
+    def __init__(self, shape: list, dtype: Any = np.float32) -> None:
         self._dtype = dtype
         self._shape = shape
         self._shape[0] += 1
@@ -45,7 +45,7 @@ class RingBuffer:
         """
         return self._max_length - 1
 
-    def rewind(self):
+    def rewind(self) -> Any:
         """Rewinds the read head of the buffer to the most recent start position
 
         Returns: self
@@ -54,7 +54,7 @@ class RingBuffer:
         self._read = (self._write + 1) % self._max_length
         return self
 
-    def reset(self):
+    def reset(self) -> Any:
         """Empties the buffer
 
         Returns: self
@@ -63,7 +63,7 @@ class RingBuffer:
         self._write = self._read
         return self
 
-    def fill(self, value: Union[int, float]):
+    def fill(self, value: Union[int, float]) -> Any:
         """Fills the with a specific value
 
         Args:
@@ -76,7 +76,7 @@ class RingBuffer:
         self._read = (self._write + 1) % self._max_length
         return self
 
-    def seek(self, steps: int):
+    def seek(self, steps: int) -> Any:
         """Moves the read head a specified number of steps
 
         Args:

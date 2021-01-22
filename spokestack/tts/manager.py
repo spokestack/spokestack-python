@@ -3,7 +3,9 @@ This module contains the Spokestack text to speech manager which handles a
 text to speech client, decodes the returned audio, and writes the audio to
 the specified output.
 """
-from streamp3 import MP3Decoder  # type: ignore
+from typing import Any
+
+from streamp3 import MP3Decoder
 
 
 class TextToSpeechManager:
@@ -14,7 +16,7 @@ class TextToSpeechManager:
         output: Audio io target
     """
 
-    def __init__(self, client, output) -> None:
+    def __init__(self, client: Any, output: Any) -> None:
         self._client = client
         self._output = output
 
@@ -41,10 +43,10 @@ class TextToSpeechManager:
 class SequenceIO:
     """ Wrapper that allows for incrementally received audio to be decoded. """
 
-    def __init__(self, sequence):
+    def __init__(self, sequence: Any) -> None:
         self._sequence = iter(sequence)
 
-    def read(self, size=None):
+    def read(self, size: Any = None) -> bytes:
         try:
             return next(self._sequence)
         except StopIteration:

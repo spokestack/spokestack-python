@@ -3,11 +3,11 @@ This module contains the tests for the TTSClient class
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
-import pytest  # type: ignore
+import numpy as np
+import pytest
 from requests import Response
 
-from spokestack.tts.clients.spokestack import TTSError, TextToSpeechClient
+from spokestack.tts.clients.spokestack import TextToSpeechClient, TTSError
 
 
 def test_synthesize_text():

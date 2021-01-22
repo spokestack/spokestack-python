@@ -3,7 +3,7 @@ This module contains the tests for pyaudio input/output
 """
 from unittest import mock
 
-import numpy as np  # type: ignore
+import numpy as np
 
 from spokestack.io import pyaudio
 
