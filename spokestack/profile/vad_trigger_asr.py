@@ -4,8 +4,10 @@ Pipeline profile with vad trigger and asr
 from typing import Any
 
 from spokestack.activation_timeout import ActivationTimeout
+from spokestack.agc.webrtc import AutomaticGainControl
 from spokestack.asr.spokestack.speech_recognizer import CloudSpeechRecognizer
 from spokestack.io.pyaudio import PyAudioInput
+from spokestack.nsx.webrtc import AutomaticNoiseSuppression
 from spokestack.pipeline import SpeechPipeline
 from spokestack.vad.webrtc import VoiceActivityDetector, VoiceActivityTrigger
 
@@ -38,6 +40,8 @@ class VoiceActivityTriggerSpokestackASR:
                 sample_rate=sample_rate, frame_width=frame_width, **kwargs
             ),
             stages=[
+                AutomaticGainControl(sample_rate=sample_rate, frame_width=frame_width),
+                AutomaticNoiseSuppression(sample_rate=sample_rate),
                 VoiceActivityDetector(
                     sample_rate=sample_rate, frame_width=frame_width, **kwargs
                 ),
