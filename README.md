@@ -1,8 +1,4 @@
-# Spokestack Python
-
-<p align="center">
-  <img width="100" height="100" src="images/spokestack.png">
-</p>
+<img src="images/spokestack-python.png" alt="Spokestack Python">
 
 [![GitHub license](https://img.shields.io/github/license/spokestack/spokestack-python)](https://github.com/spokestack/spokestack-python/blob/master/LICENSE.txt)
 [![CircleCI](https://circleci.com/gh/pylon/streamp3.svg?style=shield)](https://circleci.com/gh/spokestack/spokestack-python)
