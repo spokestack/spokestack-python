@@ -1,4 +1,4 @@
-<img src="images/spokestack-python.png" alt="Spokestack Python">
+<a href="https://www.spokestack.io/docs/python/getting-started" title="Getting Started with Spokestack + Python"><img src="images/spokestack-python.png" alt="Spokestack Python"></a>
 
 [![GitHub license](https://img.shields.io/github/license/spokestack/spokestack-python)](https://github.com/spokestack/spokestack-python/blob/master/LICENSE.txt)
 [![CircleCI](https://circleci.com/gh/pylon/streamp3.svg?style=shield)](https://circleci.com/gh/spokestack/spokestack-python)
