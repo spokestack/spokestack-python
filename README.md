@@ -1,14 +1,15 @@
 <a href="https://www.spokestack.io/docs/python/getting-started" title="Getting Started with Spokestack + Python"><img src="images/spokestack-python.png" alt="Spokestack Python"></a>
 
-[![GitHub license](https://img.shields.io/github/license/spokestack/spokestack-python)](https://github.com/spokestack/spokestack-python/blob/master/LICENSE.txt)
-[![CircleCI](https://circleci.com/gh/pylon/streamp3.svg?style=shield)](https://circleci.com/gh/spokestack/spokestack-python)
-[![PyPI version](https://badge.fury.io/py/spokestack.svg)](https://badge.fury.io/py/spokestack)
-[![Coverage Status](https://coveralls.io/repos/github/spokestack/spokestack-python/badge.svg?branch=master)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack)
-[![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=social)](https://github.com/spokestack/spokestack-python/stargazers)
-![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=social)
-![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=social)
+[![GitHub license](https://img.shields.io/github/license/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA)](https://github.com/spokestack/spokestack-python/blob/master/LICENSE.txt)
+[![CircleCI](https://img.shields.io/badge/circleci-passing-blue?style=for-the-badge&color=2F5BEA&logo=circleci)](https://circleci.com/gh/spokestack/spokestack-python)
+[![PyPI version](https://img.shields.io/pypi/v/:packageName?style=for-the-badge&color=2F5BEA&logo=pypi)](https://badge.fury.io/py/spokestack)
+[![Coverage Status](https://img.shields.io/coveralls/:vcsType/spokestack/spokestack-python/master?style=for-the-badge&color=2F5BEA&logo=coveralls)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&color=2F5BEA)](https://github.com/psf/black)
+
+![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack?style=for-the-badge&color=2F5BEA)
+[![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github)](https://github.com/spokestack/spokestack-python/stargazers)
+![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github)
+![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=for-the-badge&color=2F5BEA&logo=twitter)
 
 Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://www.spokestack.io/docs/concepts) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. _Anything_ built in [Python](https://www.python.org/) can be given a voice interface.
 
