@@ -5,7 +5,6 @@
 [![PyPI version](https://img.shields.io/pypi/v/:packageName?style=for-the-badge&color=2F5BEA&logo=pypi)](https://badge.fury.io/py/spokestack)
 [![Coverage Status](https://img.shields.io/coveralls/:vcsType/spokestack/spokestack-python/master?style=for-the-badge&color=2F5BEA&logo=coveralls)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&color=2F5BEA)](https://github.com/psf/black)
-
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack?style=for-the-badge&color=2F5BEA)
 [![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github)](https://github.com/spokestack/spokestack-python/stargazers)
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github)
