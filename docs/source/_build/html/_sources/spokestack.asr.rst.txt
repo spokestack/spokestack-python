@@ -19,3 +19,6 @@ spokestack.asr.google.speech_recognizer module
 
 .. automodule:: spokestack.asr.google.speech_recognizer
    :members:
+
+.. automodule:: spokestack.asr.keyword.tflite
+   :members:

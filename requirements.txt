@@ -15,7 +15,7 @@ click==7.1.2              # via black, pip-tools
 colorama==0.4.3           # via pytest-watch
 coverage==5.2             # via coveralls, pytest-cov
 coveralls==2.1.1          # via -r requirements.in
-cython==0.29.21           # via streamp3
+cython==0.29.21           # via -r requirements.in, streamp3
 distlib==0.3.1            # via virtualenv
 docopt==0.6.2             # via coveralls, pytest-watch
 filelock==3.0.12          # via virtualenv

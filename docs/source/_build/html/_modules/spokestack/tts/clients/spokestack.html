@@ -238,7 +238,6 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-
 <span class="n">_MODES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;ssml&quot;</span><span class="p">:</span> <span class="s2">&quot;synthesizeSSML&quot;</span><span class="p">,</span>
     <span class="s2">&quot;markdown&quot;</span><span class="p">:</span> <span class="s2">&quot;synthesizeMarkdown&quot;</span><span class="p">,</span>
@@ -324,7 +323,7 @@
         <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">]][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span></div>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_build_body</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">voice</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_build_body</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">voice</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;ssml&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
                 <span class="p">{</span>
@@ -370,7 +369,7 @@
 <div class="viewcode-block" id="TTSError"><a class="viewcode-back" href="../../../../spokestack.tts.clients.html#spokestack.tts.clients.spokestack.TTSError">[docs]</a><span class="k">class</span> <span class="nc">TTSError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Text to speech error wrapper &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">error</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">response</span><span class="p">]</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span></div>
 </pre>

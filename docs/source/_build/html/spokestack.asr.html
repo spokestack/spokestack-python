@@ -661,6 +661,28 @@
                                                             in binary to
                                                             indicate last frame
                                                         </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
                                                     </dd>
                                                 </dl>
 
@@ -934,6 +956,28 @@
                                                             receives the api
                                                             response
                                                         </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
                                                     </dd>
                                                 </dl>
 
@@ -1037,6 +1081,24 @@
                                                                     PCM-16
                                                                     encoded
                                                                     audio
+                                                                </p>
+                                                            </dd>
+                                                            <dt
+                                                                class="field-even"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-even"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
                                                                 </p>
                                                             </dd>
                                                         </dl>
@@ -1582,6 +1644,321 @@
                                                     </dt>
                                                     <dd>
                                                         <p>resets recognizer</p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </dl>
+
+                                        <span
+                                            class="target"
+                                            id="module-spokestack.asr.keyword.tflite"
+                                        ></span>
+                                        <p>
+                                            This module contains the Spokestack
+                                            KeywordRecognizer which identifies
+                                            multiple keywords from an audio
+                                            stream.
+                                        </p>
+                                        <dl class="py class">
+                                            <dt
+                                                id="spokestack.asr.keyword.tflite.KeywordRecognizer"
+                                            >
+                                                <em class="property">class </em
+                                                ><code
+                                                    class="sig-prename descclassname"
+                                                    >spokestack.asr.keyword.tflite.</code
+                                                ><code class="sig-name descname"
+                                                    >KeywordRecognizer</code
+                                                ><span class="sig-paren">(</span
+                                                ><em class="sig-param"
+                                                    ><span class="n"
+                                                        >classes</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >pre_emphasis</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >0.97</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >sample_rate</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >16000</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >fft_window_type</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >'hann'</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >fft_hop_length</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >10</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >model_dir</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >''</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="n"
+                                                        >posterior_threshold</span
+                                                    ><span class="o">=</span
+                                                    ><span class="default_value"
+                                                        >0.5</span
+                                                    ></em
+                                                >,
+                                                <em class="sig-param"
+                                                    ><span class="o">**</span
+                                                    ><span class="n"
+                                                        >kwargs</span
+                                                    ></em
+                                                ><span class="sig-paren">)</span
+                                                ><a
+                                                    class="reference internal"
+                                                    href="_modules/spokestack/asr/keyword/tflite.html#KeywordRecognizer"
+                                                    ><span class="viewcode-link"
+                                                        >[source]</span
+                                                    ></a
+                                                ><a
+                                                    class="headerlink"
+                                                    href="#spokestack.asr.keyword.tflite.KeywordRecognizer"
+                                                    title="Permalink to this definition"
+                                                    >¶</a
+                                                >
+                                            </dt>
+                                            <dd>
+                                                <p>
+                                                    Recognizes keywords in an
+                                                    audio stream.
+                                                </p>
+                                                <dl class="field-list simple">
+                                                    <dt class="field-odd">
+                                                        Parameters
+                                                    </dt>
+                                                    <dd class="field-odd">
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >classes</strong
+                                                                    >
+                                                                    (<em
+                                                                        >List</em
+                                                                    ><em>[</em
+                                                                    ><em>str</em
+                                                                    ><em>]</em>)
+                                                                    – Keyword
+                                                                    labels
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >pre_emphasis</strong
+                                                                    >
+                                                                    (<em>float</em>)
+                                                                    – The value
+                                                                    of the
+                                                                    pre-emphasis
+                                                                    filter
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >sample_rate</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – The number
+                                                                    of audio
+                                                                    samples per
+                                                                    second of
+                                                                    audio (kHz)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >fft_window_type</strong
+                                                                    >
+                                                                    (<em>str</em>)
+                                                                    – The type
+                                                                    of fft
+                                                                    window.
+                                                                    (only
+                                                                    support for
+                                                                    hann)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >fft_hop_length</strong
+                                                                    >
+                                                                    (<em>int</em>)
+                                                                    – Audio
+                                                                    sliding
+                                                                    window for
+                                                                    STFT
+                                                                    calculation
+                                                                    (ms)
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >model_dir</strong
+                                                                    >
+                                                                    (<em>str</em>)
+                                                                    – Path to
+                                                                    the
+                                                                    directory
+                                                                    containing
+                                                                    .tflite
+                                                                    models
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>
+                                                                    <strong
+                                                                        >posterior_threshold</strong
+                                                                    >
+                                                                    (<em>float</em>)
+                                                                    –
+                                                                    Probability
+                                                                    threshold
+                                                                    for
+                                                                    detection
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.asr.keyword.tflite.KeywordRecognizer.close"
+                                                    >
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >close</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/asr/keyword/tflite.html#KeywordRecognizer.close"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.asr.keyword.tflite.KeywordRecognizer.close"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>
+                                                            Close interface for
+                                                            use in the
+                                                            SpeechPipeline
+                                                        </p>
+                                                        <dl
+                                                            class="field-list simple"
+                                                        >
+                                                            <dt
+                                                                class="field-odd"
+                                                            >
+                                                                Return type
+                                                            </dt>
+                                                            <dd
+                                                                class="field-odd"
+                                                            >
+                                                                <p>
+                                                                    <code
+                                                                        class="docutils literal notranslate"
+                                                                        ><span
+                                                                            class="pre"
+                                                                            >None</span
+                                                                        ></code
+                                                                    >
+                                                                </p>
+                                                            </dd>
+                                                        </dl>
+                                                    </dd>
+                                                </dl>
+
+                                                <dl class="py method">
+                                                    <dt
+                                                        id="spokestack.asr.keyword.tflite.KeywordRecognizer.reset"
+                                                    >
+                                                        <code
+                                                            class="sig-name descname"
+                                                            >reset</code
+                                                        ><span class="sig-paren"
+                                                            >(</span
+                                                        ><span class="sig-paren"
+                                                            >)</span
+                                                        ><a
+                                                            class="reference internal"
+                                                            href="_modules/spokestack/asr/keyword/tflite.html#KeywordRecognizer.reset"
+                                                            ><span
+                                                                class="viewcode-link"
+                                                                >[source]</span
+                                                            ></a
+                                                        ><a
+                                                            class="headerlink"
+                                                            href="#spokestack.asr.keyword.tflite.KeywordRecognizer.reset"
+                                                            title="Permalink to this definition"
+                                                            >¶</a
+                                                        >
+                                                    </dt>
+                                                    <dd>
+                                                        <p>
+                                                            Resets the current
+                                                            KeywordDetector
+                                                            state
+                                                        </p>
                                                         <dl
                                                             class="field-list simple"
                                                         >

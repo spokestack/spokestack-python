@@ -221,6 +221,7 @@
 <span class="sd">This module contains the speech pipeline which manages the components</span>
 <span class="sd">for processing speech.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
 
@@ -234,7 +235,7 @@
 <span class="sd">        **kwargs: additional keyword arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_source</span><span class="p">,</span> <span class="n">stages</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">stages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">SpeechContext</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_input_source</span> <span class="o">=</span> <span class="n">input_source</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stages</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">stages</span>
@@ -301,7 +302,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_input_source</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SpeechPipeline.event"><a class="viewcode-back" href="../../spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.event">[docs]</a>    <span class="k">def</span> <span class="nf">event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SpeechPipeline.event"><a class="viewcode-back" href="../../spokestack.pipeline.html#spokestack.pipeline.SpeechPipeline.event">[docs]</a>    <span class="k">def</span> <span class="nf">event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Registers an event handler</span>
 
 <span class="sd">        Args:</span>
