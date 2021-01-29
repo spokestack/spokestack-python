@@ -2,10 +2,10 @@
 
 [![GitHub license](https://img.shields.io/github/license/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&label-color=2D2D2D)](https://github.com/spokestack/spokestack-python/blob/master/LICENSE.txt)
 [![CircleCI](https://img.shields.io/badge/circleci-passing-blue?style=for-the-badge&color=2F5BEA&logo=circleci&label-color=2D2D2D&logoColor=white)](https://circleci.com/gh/spokestack/spokestack-python)
-[![PyPI version](https://img.shields.io/pypi/v/:packageName?style=for-the-badge&color=2F5BEA&logo=pypi&label-color=2D2D2D&logoColor=white)](https://badge.fury.io/py/spokestack)
+[![PyPI version](https://img.shields.io/pypi/v/spokestack?style=for-the-badge&color=2F5BEA&logo=pypi&label-color=2D2D2D&logoColor=white)](https://badge.fury.io/py/spokestack)
 [![Coverage Status](https://img.shields.io/coveralls/github/spokestack/spokestack-python/master?style=for-the-badge&color=2F5BEA&logo=coveralls&label-color=2D2D2D&logoColor=white)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&color=2F5BEA)](https://github.com/psf/black)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack?style=for-the-badge&color=2F5BEA&label-color=2D2D2D)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack?style=for-the-badge&color=2F5BEA&logo=pypi&label-color=2D2D2D&logoColor=white)
 [![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github&label-color=2D2D2D&logoColor=white)](https://github.com/spokestack/spokestack-python/stargazers)
 ![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github&label-color=2D2D2D&logoColor=white)
 ![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=for-the-badge&color=2F5BEA&logo=twitter&label-color=2D2D2D&logoColor=white)
