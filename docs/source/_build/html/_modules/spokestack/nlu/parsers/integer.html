@@ -270,7 +270,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<span class="k">def</span> <span class="nf">_parse_reduce</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">so_far</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_parse_reduce</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">so_far</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="n">to_parse</span> <span class="o">=</span> <span class="n">number</span>
     <span class="k">if</span> <span class="n">to_parse</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">):</span>
         <span class="n">to_parse</span> <span class="o">=</span> <span class="n">to_parse</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_parse</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
@@ -285,7 +285,7 @@
     <span class="k">return</span> <span class="n">so_far</span>
 
 
-<span class="k">def</span> <span class="nf">_collapse</span><span class="p">(</span><span class="n">multiplier</span><span class="p">,</span> <span class="n">so_far</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_collapse</span><span class="p">(</span><span class="n">multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">so_far</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="n">collapsed</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">so_far</span><span class="p">:</span>
@@ -298,7 +298,7 @@
     <span class="k">return</span> <span class="n">collapsed</span>
 
 
-<span class="k">def</span> <span class="nf">_is_in_range</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_is_in_range</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre>
                                 </div>

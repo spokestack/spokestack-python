@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Automatic Gain Control &mdash; spokestack documentation</title>
+
+        <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+        <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+        <!--[if lt IE 9]>
+            <script src="_static/js/html5shiv.min.js"></script>
+        <![endif]-->
+
+        <script
+            type="text/javascript"
+            id="documentation_options"
+            data-url_root="./"
+            src="_static/documentation_options.js"
+        ></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+
+        <script type="text/javascript" src="_static/js/theme.js"></script>
+
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link
+            rel="prev"
+            title="Automatic Noise Suppression"
+            href="spokestack.nsx.html"
+        />
+    </head>
+
+    <body class="wy-body-for-nav">
+        <div class="wy-grid-for-nav">
+            <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+                <div class="wy-side-scroll">
+                    <div class="wy-side-nav-search">
+                        <a
+                            href="index.html"
+                            class="icon icon-home"
+                            alt="Documentation Home"
+                        >
+                            spokestack
+                        </a>
+
+                        <div role="search">
+                            <form
+                                id="rtd-search-form"
+                                class="wy-form"
+                                action="search.html"
+                                method="get"
+                            >
+                                <input
+                                    type="text"
+                                    name="q"
+                                    placeholder="Search docs"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="check_keywords"
+                                    value="yes"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="area"
+                                    value="default"
+                                />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div
+                        class="wy-menu wy-menu-vertical"
+                        data-spy="affix"
+                        role="navigation"
+                        aria-label="main navigation"
+                    >
+                        <ul class="current">
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.io.html"
+                                    >IO</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.vad.html"
+                                    >Voice Activity Detection (VAD)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.context.html"
+                                    >Speech Context</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.wakeword.html"
+                                    >Wakeword</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.models.html"
+                                    >Models</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.tts.html"
+                                    >Text to Speech (TTS)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.asr.html"
+                                    >Automatic Speech Recognition (ASR)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nlu.html"
+                                    >Natural Language Understanding (NLU)</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.activation_timeout.html"
+                                    >Activation Timeout</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.pipeline.html"
+                                    >Speech Pipeline</a
+                                >
+                            </li>
+                            <li class="toctree-l1">
+                                <a
+                                    class="reference internal"
+                                    href="spokestack.nsx.html"
+                                    >Automatic Noise Suppression</a
+                                >
+                            </li>
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#"
+                                    >Automatic Gain Control</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+                <nav class="wy-nav-top" aria-label="top navigation">
+                    <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                    <a href="index.html">spokestack</a>
+                </nav>
+
+                <div class="wy-nav-content">
+                    <div class="rst-content">
+                        <div
+                            role="navigation"
+                            aria-label="breadcrumbs navigation"
+                        >
+                            <ul class="wy-breadcrumbs">
+                                <li>
+                                    <a
+                                        href="index.html"
+                                        class="icon icon-home"
+                                    ></a>
+                                    &raquo;
+                                </li>
+
+                                <li>Automatic Gain Control</li>
+
+                                <li class="wy-breadcrumbs-aside">
+                                    <a
+                                        href="_sources/spokestack.agc.rst.txt"
+                                        rel="nofollow"
+                                    >
+                                        View page source</a
+                                    >
+                                </li>
+                            </ul>
+
+                            <hr />
+                        </div>
+                        <div
+                            role="main"
+                            class="document"
+                            itemscope="itemscope"
+                            itemtype="http://schema.org/Article"
+                        >
+                            <div itemprop="articleBody">
+                                <div
+                                    class="section"
+                                    id="module-spokestack.agc.webrtc"
+                                >
+                                    <span id="automatic-gain-control"></span>
+                                    <h1>
+                                        Automatic Gain Control<a
+                                            class="headerlink"
+                                            href="#module-spokestack.agc.webrtc"
+                                            title="Permalink to this headline"
+                                            >¶</a
+                                        >
+                                    </h1>
+                                    <p>
+                                        This module contains the class for
+                                        webrtc’s automatic gain control
+                                    </p>
+                                    <dl class="py class">
+                                        <dt
+                                            id="spokestack.agc.webrtc.AutomaticGainControl"
+                                        >
+                                            <em class="property">class </em
+                                            ><code
+                                                class="sig-prename descclassname"
+                                                >spokestack.agc.webrtc.</code
+                                            ><code class="sig-name descname"
+                                                >AutomaticGainControl</code
+                                            ><span class="sig-paren">(</span
+                                            ><em class="sig-param"
+                                                ><span class="n"
+                                                    >sample_rate</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >16000</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >frame_width</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >20</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >target_level_dbfs</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >3</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >compression_gain_db</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >15</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="n"
+                                                    >limit_enable</span
+                                                ><span class="o">=</span
+                                                ><span class="default_value"
+                                                    >True</span
+                                                ></em
+                                            >,
+                                            <em class="sig-param"
+                                                ><span class="o">**</span
+                                                ><span class="n"
+                                                    >kwargs</span
+                                                ></em
+                                            ><span class="sig-paren">)</span
+                                            ><a
+                                                class="reference internal"
+                                                href="_modules/spokestack/agc/webrtc.html#AutomaticGainControl"
+                                                ><span class="viewcode-link"
+                                                    >[source]</span
+                                                ></a
+                                            ><a
+                                                class="headerlink"
+                                                href="#spokestack.agc.webrtc.AutomaticGainControl"
+                                                title="Permalink to this definition"
+                                                >¶</a
+                                            >
+                                        </dt>
+                                        <dd>
+                                            <p>WebRTC Automatic Gain Control</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">
+                                                    Parameters
+                                                </dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >sample_rate</strong
+                                                                >
+                                                                (<em>int</em>) –
+                                                                audio
+                                                                sample_rate.
+                                                                (Hz)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >frame_width</strong
+                                                                >
+                                                                (<em>int</em>) –
+                                                                audio frame
+                                                                width. (Ms)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >target_level_dbfs</strong
+                                                                >
+                                                                (<em>int</em>) –
+                                                                target peak
+                                                                audio level.
+                                                                (dBFS)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >compression_gain_db</strong
+                                                                >
+                                                                (<em>int</em>) –
+                                                                dynamic range
+                                                                compression
+                                                                rate. (dB)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <strong
+                                                                    >limit_enable</strong
+                                                                >
+                                                                (<em>bool</em>)
+                                                                – enables
+                                                                limiter in
+                                                                compression.
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                            </dl>
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.agc.webrtc.AutomaticGainControl.close"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >close</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/agc/webrtc.html#AutomaticGainControl.close"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.agc.webrtc.AutomaticGainControl.close"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        method for pipeline
+                                                        compliance
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="py method">
+                                                <dt
+                                                    id="spokestack.agc.webrtc.AutomaticGainControl.reset"
+                                                >
+                                                    <code
+                                                        class="sig-name descname"
+                                                        >reset</code
+                                                    ><span class="sig-paren"
+                                                        >(</span
+                                                    ><span class="sig-paren"
+                                                        >)</span
+                                                    ><a
+                                                        class="reference internal"
+                                                        href="_modules/spokestack/agc/webrtc.html#AutomaticGainControl.reset"
+                                                        ><span
+                                                            class="viewcode-link"
+                                                            >[source]</span
+                                                        ></a
+                                                    ><a
+                                                        class="headerlink"
+                                                        href="#spokestack.agc.webrtc.AutomaticGainControl.reset"
+                                                        title="Permalink to this definition"
+                                                        >¶</a
+                                                    >
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        method for pipeline
+                                                        compliance
+                                                    </p>
+                                                    <dl
+                                                        class="field-list simple"
+                                                    >
+                                                        <dt class="field-odd">
+                                                            Return type
+                                                        </dt>
+                                                        <dd class="field-odd">
+                                                            <p>
+                                                                <code
+                                                                    class="docutils literal notranslate"
+                                                                    ><span
+                                                                        class="pre"
+                                                                        >None</span
+                                                                    ></code
+                                                                >
+                                                            </p>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <div
+                                class="rst-footer-buttons"
+                                role="navigation"
+                                aria-label="footer navigation"
+                            >
+                                <a
+                                    href="spokestack.nsx.html"
+                                    class="btn btn-neutral float-left"
+                                    title="Automatic Noise Suppression"
+                                    accesskey="p"
+                                    rel="prev"
+                                    ><span
+                                        class="fa fa-arrow-circle-left"
+                                    ></span>
+                                    Previous</a
+                                >
+                            </div>
+
+                            <hr />
+
+                            <div role="contentinfo">
+                                <p>&copy; Copyright 2020, Spokestack</p>
+                            </div>
+
+                            Built with
+                            <a href="http://sphinx-doc.org/">Sphinx</a> using a
+
+                            <a href="https://github.com/rtfd/sphinx_rtd_theme"
+                                >theme</a
+                            >
+
+                            provided by
+                            <a href="https://readthedocs.org">Read the Docs</a>.
+                        </footer>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script type="text/javascript">
+            jQuery(function () {
+                SphinxRtdTheme.Navigation.enable(true);
+            });
+        </script>
+    </body>
+</html>

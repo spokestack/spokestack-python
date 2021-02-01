@@ -5,9 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>
-            spokestack.models.tensorflow &mdash; spokestack documentation
-        </title>
+        <title>spokestack.agc.webrtc &mdash; spokestack documentation</title>
 
         <link
             rel="stylesheet"
@@ -205,7 +203,7 @@
                                     &raquo;
                                 </li>
 
-                                <li>spokestack.models.tensorflow</li>
+                                <li>spokestack.agc.webrtc</li>
 
                                 <li class="wy-breadcrumbs-aside"></li>
                             </ul>
@@ -219,79 +217,81 @@
                             itemtype="http://schema.org/Article"
                         >
                             <div itemprop="articleBody">
-                                <h1>
-                                    Source code for spokestack.models.tensorflow
-                                </h1>
+                                <h1>Source code for spokestack.agc.webrtc</h1>
                                 <div class="highlight">
                                     <pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">TFLite model base class</span>
+<span class="sd">This module contains the class for webrtc&#39;s automatic gain control</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">tflite_runtime.interpreter</span> <span class="k">as</span> <span class="nn">tflite</span>
-<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">tensorflow.lite</span> <span class="k">as</span> <span class="nn">tflite</span>
+<span class="kn">from</span> <span class="nn">spokestack.context</span> <span class="kn">import</span> <span class="n">SpeechContext</span>
+<span class="kn">from</span> <span class="nn">spokestack.extensions.webrtc.agc</span> <span class="kn">import</span> <span class="n">WebRtcAgc</span>
 
 
-<div class="viewcode-block" id="TFLiteModel"><a class="viewcode-back" href="../../../spokestack.models.html#spokestack.models.tensorflow.TFLiteModel">[docs]</a><span class="k">class</span> <span class="nc">TFLiteModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;TFLite model base class for managing multiple inputs/outputs</span>
+<div class="viewcode-block" id="AutomaticGainControl"><a class="viewcode-back" href="../../../spokestack.agc.html#spokestack.agc.webrtc.AutomaticGainControl">[docs]</a><span class="k">class</span> <span class="nc">AutomaticGainControl</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;WebRTC Automatic Gain Control</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        model_path (str): Path to .tflite model file</span>
-<span class="sd">        **kwargs (Any): Additional keywords arguments for the TFLite Interpreter.</span>
-<span class="sd">                        [https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter]</span>
+<span class="sd">            sample_rate (int): audio sample_rate. (Hz)</span>
+<span class="sd">            frame_width (int): audio frame width. (Ms)</span>
+<span class="sd">            target_level_dbfs (int): target peak audio level. (dBFS)</span>
+<span class="sd">            compression_gain_db (int): dynamic range compression rate. (dB)</span>
+<span class="sd">            limit_enable (bool): enables limiter in compression.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
+        <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="n">target_level_dbfs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">compression_gain_db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="n">limit_enable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># validate sample rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">8000</span><span class="p">,</span> <span class="mi">16000</span><span class="p">,</span> <span class="mi">32000</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid_sample_rate&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span> <span class="o">=</span> <span class="n">frame_width</span>
+        <span class="c1"># validate frame width</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid_frame_width&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="p">:</span> <span class="n">tflite</span><span class="o">.</span><span class="n">Interpreter</span> <span class="o">=</span> <span class="n">tflite</span><span class="o">.</span><span class="n">Interpreter</span><span class="p">(</span>
-            <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agc</span> <span class="o">=</span> <span class="n">WebRtcAgc</span><span class="p">(</span>
+            <span class="n">sample_rate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">,</span>
+            <span class="n">frame_width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span><span class="p">,</span>
+            <span class="n">target_level_dbfs</span><span class="o">=</span><span class="n">target_level_dbfs</span><span class="p">,</span>
+            <span class="n">compression_gain_db</span><span class="o">=</span><span class="n">compression_gain_db</span><span class="p">,</span>
+            <span class="n">limit_enable</span><span class="o">=</span><span class="n">limit_enable</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_input_details</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">get_input_details</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_output_details</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">get_output_details</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">allocate_tensors</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Forward pass of the TFLite model</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">SpeechContext</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Main Entry Point</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            inputs (Any): inputs to the TFLite model</span>
-
-<span class="sd">        Returns: outputs of TFLite model</span>
-
+<span class="sd">            context (SpeechContext): State based information that needs to be shared</span>
+<span class="sd">            between pieces of the pipeline</span>
+<span class="sd">            frame (np.array): PCM-16 audio.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># validate frame size</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_width</span> <span class="o">//</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid_frame_size&quot;</span><span class="p">)</span>
+        <span class="c1"># validate dtype</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">signedinteger</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;invalid_dtype&quot;</span><span class="p">)</span>
+        <span class="c1"># run automatic gain control on the frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agc</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">detail</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_details</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">set_tensor</span><span class="p">(</span><span class="n">detail</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">],</span> <span class="n">arg</span><span class="p">)</span>
+<div class="viewcode-block" id="AutomaticGainControl.close"><a class="viewcode-back" href="../../../spokestack.agc.html#spokestack.agc.webrtc.AutomaticGainControl.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;method for pipeline compliance&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">invoke</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_interpreter</span><span class="o">.</span><span class="n">get_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_details</span>
-        <span class="p">]</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">input_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Property for accesing the TFLite model input_details</span>
-
-<span class="sd">        Returns: Input details for the TFLite model</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_details</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">output_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Property for accesing the TFLite model output_details</span>
-
-<span class="sd">        Returns: Output details for the TFLite model</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_details</span></div>
+<div class="viewcode-block" id="AutomaticGainControl.reset"><a class="viewcode-back" href="../../../spokestack.agc.html#spokestack.agc.webrtc.AutomaticGainControl.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;method for pipeline compliance&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
 </pre>
                                 </div>
                             </div>

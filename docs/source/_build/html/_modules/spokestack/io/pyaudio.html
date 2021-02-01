@@ -223,8 +223,10 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module uses pyaudio for input and output processing</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># type: ignore</span>
-<span class="kn">import</span> <span class="nn">pyaudio</span>  <span class="c1"># type: ignore</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyaudio</span>
 
 
 <div class="viewcode-block" id="PyAudioInput"><a class="viewcode-back" href="../../../spokestack.io.html#spokestack.io.pyaudio.PyAudioInput">[docs]</a><span class="k">class</span> <span class="nc">PyAudioInput</span><span class="p">:</span>
@@ -241,7 +243,7 @@
         <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">frame_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">exception_on_overflow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_frame_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sample_rate</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">frame_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_exception_on_overflow</span> <span class="o">=</span> <span class="n">exception_on_overflow</span>
