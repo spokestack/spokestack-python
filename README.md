@@ -4,11 +4,6 @@
 [![CircleCI](https://img.shields.io/badge/circleci-passing-blue?style=for-the-badge&color=2F5BEA&logo=circleci&label-color=2D2D2D&logoColor=white)](https://circleci.com/gh/spokestack/spokestack-python)
 [![PyPI version](https://img.shields.io/pypi/v/spokestack?style=for-the-badge&color=2F5BEA&logo=pypi&label-color=2D2D2D&logoColor=white)](https://badge.fury.io/py/spokestack)
 [![Coverage Status](https://img.shields.io/coveralls/github/spokestack/spokestack-python/master?style=for-the-badge&color=2F5BEA&logo=coveralls&label-color=2D2D2D&logoColor=white)](https://coveralls.io/github/spokestack/spokestack-python?branch=master)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&color=2F5BEA)](https://github.com/psf/black)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/spokestack?style=for-the-badge&color=2F5BEA&logo=pypi&label-color=2D2D2D&logoColor=white)
-[![GitHub stars](https://img.shields.io/github/stars/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github&label-color=2D2D2D&logoColor=white)](https://github.com/spokestack/spokestack-python/stargazers)
-![GitHub watchers](https://img.shields.io/github/watchers/spokestack/spokestack-python?style=for-the-badge&color=2F5BEA&logo=github&label-color=2D2D2D&logoColor=white)
-![Twitter Follow](https://img.shields.io/twitter/follow/spokestack?style=for-the-badge&color=2F5BEA&logo=twitter&label-color=2D2D2D&logoColor=white)
 
 Welcome to Spokestack Python! This library is intended for developing [voice interfaces](https://www.spokestack.io/docs/concepts) in Python. This can include anything from [Raspberry Pi](https://www.raspberrypi.org/) applications like traditional smart speakers to [Django](https://www.djangoproject.com/) web applications. _Anything_ built in [Python](https://www.python.org/) can be given a voice interface.
 
@@ -32,7 +27,7 @@ sudo apt-get install portaudio19-dev libmp3lame-dev
 
 #### Windows
 
-We currently do not support Windows 10 natively, and recommend you install [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with the Debian dependencies. However, if you would like to work on native Windows support we will glady accept pull requests.
+We currently do not support Windows 10 natively, and recommend you install [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with the Debian dependencies. However, if you would like to work on native Windows support, we will gladly accept pull requests.
 
 Another potential avenue for using `spokestack` on Windows 10 is from [anaconda](https://www.anaconda.com/). This is without support for Text To Speech (TTS) though due to the Lame dependency. PortAudio, on the other hand, can be installed via `conda`.
 
