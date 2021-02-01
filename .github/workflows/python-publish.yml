@@ -19,6 +19,7 @@ jobs:
           python-version: "3.8"
       - name: Install dependencies
         run: |
+          git submodule update --init
           python -m pip install --upgrade pip
           pip install setuptools numpy Cython wheel twine
       - name: Build and publish
