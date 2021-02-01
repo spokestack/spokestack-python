@@ -61,7 +61,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="spokestack",
-    version="0.0.15",
+    version="0.0.16",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",
