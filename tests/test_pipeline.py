@@ -70,11 +70,6 @@ def test_cleanup():
     pipeline.stop()
     assert not pipeline.is_running
 
-    # run after stopped will trigger clean up
-    pipeline.run()
-    assert not pipeline._stages
-    assert not pipeline._input_source
-
 
 def test_events():
     stages = [
@@ -107,7 +102,6 @@ def test_run():
     def on_step(context):
         pipeline.stop()
 
-    pipeline.start()
     pipeline.run()
 
 
