@@ -19,8 +19,10 @@ def test_start_stop():
 
     pipeline.step()
 
-    pipeline.close()
+    pipeline.stop()
     assert not pipeline.is_running
+
+    pipeline.close()
 
 
 def test_dispatch():
@@ -69,6 +71,9 @@ def test_cleanup():
 
     pipeline.stop()
     assert not pipeline.is_running
+
+    pipeline.cleanup()
+    assert not pipeline._input_source
 
 
 def test_events():
