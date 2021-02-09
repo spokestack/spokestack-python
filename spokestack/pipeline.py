@@ -63,6 +63,9 @@ class SpeechPipeline:
 
     def run(self) -> None:
         """ Runs the pipeline to process speech and cleans up after stop is called """
+        if not self._is_running:
+            self.start()
+
         while self._is_running:
             self.step()
         self.cleanup()

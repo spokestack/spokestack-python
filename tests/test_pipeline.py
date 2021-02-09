@@ -19,8 +19,10 @@ def test_start_stop():
 
     pipeline.step()
 
-    pipeline.close()
+    pipeline.stop()
     assert not pipeline.is_running
+
+    pipeline.close()
 
 
 def test_dispatch():
@@ -32,10 +34,6 @@ def test_dispatch():
     pipeline = SpeechPipeline(mock.MagicMock(), stages=stages)
 
     pipeline.start()
-
-    pipeline._dispatch()
-
-    pipeline.is_managed = True
 
     pipeline._dispatch()
 
@@ -70,8 +68,7 @@ def test_cleanup():
     pipeline.stop()
     assert not pipeline.is_running
 
-    # run after stopped will trigger clean up
-    pipeline.run()
+    pipeline.cleanup()
     assert not pipeline._stages
     assert not pipeline._input_source
 
@@ -107,7 +104,6 @@ def test_run():
     def on_step(context):
         pipeline.stop()
 
-    pipeline.start()
     pipeline.run()
 
 
