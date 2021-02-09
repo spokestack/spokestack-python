@@ -37,10 +37,6 @@ def test_dispatch():
 
     pipeline._dispatch()
 
-    pipeline.is_managed = True
-
-    pipeline._dispatch()
-
 
 def test_activate_deactivate():
     stages = [
@@ -73,6 +69,7 @@ def test_cleanup():
     assert not pipeline.is_running
 
     pipeline.cleanup()
+    assert not pipeline._stages
     assert not pipeline._input_source
 
 
