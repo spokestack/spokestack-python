@@ -70,7 +70,6 @@ def test_cleanup():
 
     pipeline.cleanup()
     assert not pipeline._stages
-    assert not pipeline._input_source
 
 
 def test_events():
