@@ -26,6 +26,10 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        uses: RalfG/python-wheels-manylinux-build@v0.3.3
+        with:
+          python-versions: "cp38-cp38"
         run: |
           python setup.py sdist bdist_wheel
-          twine upload dist/*
+          twine upload dist/*-manylinux*.whl
+          twine upload dist/*.tar.gz
