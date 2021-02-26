@@ -22,14 +22,17 @@ jobs:
           git submodule update --init
           python -m pip install --upgrade pip
           pip install setuptools numpy Cython wheel twine
-      - name: Build and publish
-        env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      - name: Build manylinux Python wheels
         uses: RalfG/python-wheels-manylinux-build@v0.3.3
         with:
           python-versions: "cp38-cp38"
+          build-requirements: "Cython numpy"
+      - name: Publsih to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
-          python setup.py sdist bdist_wheel
+          sudo chown -R $USER dist/
+          python setup.py sdist
           twine upload dist/*-manylinux*.whl
           twine upload dist/*.tar.gz
