@@ -32,5 +32,7 @@ jobs:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
+          sudo chown -R $USER dist/
           python setup.py sdist
-          twine upload dist/*
+          twine upload dist/*-manylinux*.whl
+          twine upload dist/*.tar.gz
