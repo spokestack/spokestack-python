@@ -83,7 +83,6 @@ class SpeechPipeline:
 
         self._stages.clear()
         self._input_source.close()
-        self._input_source = None
         self._context.reset()
 
     def event(self, function: Any = None, name: Union[str, None] = None) -> Any:
