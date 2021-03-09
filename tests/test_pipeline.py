@@ -54,24 +54,6 @@ def test_activate_deactivate():
     assert not pipeline.context.is_active
 
 
-def test_cleanup():
-    stages = [
-        mock.MagicMock(),
-        mock.MagicMock(),
-        mock.MagicMock(),
-    ]
-    pipeline = SpeechPipeline(mock.MagicMock(), stages=stages)
-
-    pipeline.start()
-    assert pipeline.is_running
-
-    pipeline.stop()
-    assert not pipeline.is_running
-
-    pipeline.cleanup()
-    assert not pipeline._stages
-
-
 def test_events():
     stages = [
         mock.MagicMock(),

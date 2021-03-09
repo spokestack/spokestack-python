@@ -32,6 +32,12 @@ class SpeechPipeline:
         """ Closes the running pipeline """
         self.stop()
 
+        for stage in self._stages:
+            stage.close()
+
+        self._stages.clear()
+        self._input_source.close()
+
     def activate(self) -> None:
         """ Activates the pipeline """
         self._context.is_active = True
@@ -50,6 +56,7 @@ class SpeechPipeline:
         """ Halts the pipeline """
         self._is_running = False
         self._input_source.stop()
+        self._context.reset()
 
     def pause(self) -> None:
         """ Stops audio input until resume is called """
@@ -68,22 +75,12 @@ class SpeechPipeline:
 
         while self._is_running:
             self.step()
-        self.cleanup()
 
     def step(self) -> None:
         """ Process a single frame with the pipeline """
         self._context.event("step")
         if not self._is_paused:
             self._dispatch()
-
-    def cleanup(self) -> None:
-        """ Resets all attributes to default configuration """
-        for stage in self._stages:
-            stage.close()
-
-        self._stages.clear()
-        self._input_source.close()
-        self._context.reset()
 
     def event(self, function: Any = None, name: Union[str, None] = None) -> Any:
         """Registers an event handler
