@@ -1,8 +1,57 @@
 import os
+import subprocess
+import sys
 
-import numpy as np
-import setuptools
-from Cython.Build import cythonize
+from setuptools import Extension, find_packages, setup
+from setuptools.command.build_py import build_py
+
+
+try:
+    from numpy import get_include
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+    from numpy import get_include
+
+try:
+    from Cython.Build import cythonize
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "Cython"])
+    from Cython.Build import cythonize
+
+
+class CustomBuild(build_py):  # type: ignore
+    """Custom build command to build PortAudio."""
+
+    def run(self) -> None:
+        """Custom run function that builds and installs PortAudio/PyAudio."""
+
+        if sys.platform == "mingw":
+            # build with MinGW for windows
+            command = ["./configure && make && make install"]
+        elif sys.platform in ["win32", "win64"]:
+            # win32/64 users should install the PyAudio wheel or Conda package
+            command = None
+        else:
+            # macos or linux
+            command = ["./configure && make"]
+
+        if command:
+            # build PortAudio with system specific command
+            subprocess.run(
+                command,
+                shell=True,
+                check=True,
+                cwd="spokestack/extensions/portaudio",
+            )
+            # install PyAudio after PortAudio has been built
+            subprocess.run(
+                [sys.executable, "-m", "pip", "install", "pyaudio"],
+                shell=True,
+                check=True,
+            )
+        # run the normal build process
+        build_py.run(self)
+
 
 SOURCES = [
     os.path.join("spokestack/extensions/webrtc", source)
@@ -40,17 +89,17 @@ SOURCES = [
 ]
 
 EXTENSIONS = [
-    setuptools.Extension(
+    Extension(
         "spokestack.extensions.webrtc.agc",
         ["spokestack/extensions/webrtc/agc.pyx"] + SOURCES,
         include_dirs=["filter_audio/agc/include/"],
     ),
-    setuptools.Extension(
+    Extension(
         "spokestack.extensions.webrtc.nsx",
         ["spokestack/extensions/webrtc/nsx.pyx"] + SOURCES,
         include_dirs=["filter_audio/ns/include/"],
     ),
-    setuptools.Extension(
+    Extension(
         "spokestack.extensions.webrtc.vad",
         ["spokestack/extensions/webrtc/vad.pyx"] + SOURCES,
         include_dirs=["filter_audio/agc/include/"],
@@ -59,23 +108,23 @@ EXTENSIONS = [
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name="spokestack",
-    version="0.0.17",
+    version="0.0.18",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/spokestack/spokestack-python",
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    setup_requires=["setuptools", "numpy", "Cython"],
+    setup_requires=["setuptools", "wheel", "numpy", "Cython"],
     install_requires=[
         "numpy",
         "Cython",
@@ -84,6 +133,7 @@ setuptools.setup(
         "requests",
     ],
     ext_modules=cythonize(EXTENSIONS),
-    include_dirs=[np.get_include()],
+    include_dirs=[get_include()],
+    cmdclass={"build_py": CustomBuild},
     zip_safe=False,
 )

@@ -1,3 +1,6 @@
 [submodule "spokestack/extensions/webrtc/filter_audio"]
 path = spokestack/extensions/webrtc/filter_audio
 url = https://github.com/irungentoo/filter_audio.git
+[submodule "spokestack/extensions/portaudio"]
+path = spokestack/extensions/portaudio
+url = https://github.com/PortAudio/portaudio
