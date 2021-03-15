@@ -9,13 +9,13 @@ from setuptools.command.build_py import build_py
 try:
     from numpy import get_include
 except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy==1.19.2"])
     from numpy import get_include
 
 try:
     from Cython.Build import cythonize
 except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "Cython"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "Cython==0.29.22"])
     from Cython.Build import cythonize
 
 
@@ -124,10 +124,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    setup_requires=["setuptools", "wheel", "numpy", "Cython"],
+    setup_requires=["setuptools", "wheel", "numpy==1.19.2", "Cython>=0.29.22"],
     install_requires=[
-        "numpy",
-        "Cython",
+        "numpy==1.19.2",
+        "Cython>=0.29.22",
         "websocket_client",
         "tokenizers",
         "requests",

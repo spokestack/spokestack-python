@@ -31,6 +31,8 @@ jobs:
 
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
+        env:
+          CIBW_SKIP: cp39-macosx_x86_64
 
       - uses: actions/upload-artifact@v2
         with:
