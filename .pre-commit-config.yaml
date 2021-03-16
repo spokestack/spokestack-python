@@ -1,55 +1,55 @@
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v3.3.0
-      hooks:
-          - id: check-yaml
-          - id: check-ast
-          - id: end-of-file-fixer
-          - id: trailing-whitespace
-          - id: check-toml
-          - id: requirements-txt-fixer
-          - id: check-json
-          - id: check-merge-conflict
-    - repo: https://github.com/psf/black
-      rev: 20.8b1
-      hooks:
-          - id: black
-    - repo: https://gitlab.com/PyCQA/flake8
-      rev: 3.8.4
-      hooks:
-          - id: flake8
-            args: [--config=setup.cfg]
-    - repo: https://github.com/pre-commit/mirrors-mypy
-      rev: v0.790
-      hooks:
-          - id: mypy
-            exclude: ^tests/
-    - repo: https://github.com/asottile/blacken-docs
-      rev: v1.8.0
-      hooks:
-          - id: blacken-docs
-    - repo: local
-      hooks:
-          - id: pytest
-            name: pytest
-            language: system
-            entry: python -m pytest --cov=spokestack --cov-report=term-missing --cov-fail-under=99
-            pass_filenames: false
-            always_run: true
-          - id: detect_print_statement
-            name: detect_print_statement
-            language: pygrep
-            types: [python]
-            exclude: "examples"
-            args: [-i, --multiline]
-            entry: "print(.*)"
-    - repo: https://github.com/syntaqx/git-hooks
-      rev: v0.0.16
-      hooks:
-          - id: circleci-config-validate
-          - id: shellcheck
-          - id: shfmt
-    - repo: https://github.com/prettier/prettier
-      rev: "2.1.2"
-      hooks:
-          - id: prettier
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: check-yaml
+      - id: check-ast
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-toml
+      - id: requirements-txt-fixer
+      - id: check-json
+      - id: check-merge-conflict
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+  - repo: https://gitlab.com/PyCQA/flake8
+    rev: 3.8.4
+    hooks:
+      - id: flake8
+        args: [--config=setup.cfg]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.790
+    hooks:
+      - id: mypy
+        exclude: ^tests/
+  - repo: https://github.com/asottile/blacken-docs
+    rev: v1.8.0
+    hooks:
+      - id: blacken-docs
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        language: system
+        entry: python -m pytest --cov=spokestack --cov-report=term-missing --cov-fail-under=94
+        pass_filenames: false
+        always_run: true
+      - id: detect_print_statement
+        name: detect_print_statement
+        language: pygrep
+        types: [python]
+        exclude: "examples"
+        args: [-i, --multiline]
+        entry: "print(.*)"
+  - repo: https://github.com/syntaqx/git-hooks
+    rev: v0.0.16
+    hooks:
+      - id: circleci-config-validate
+      - id: shellcheck
+      - id: shfmt
+  - repo: https://github.com/prettier/prettier
+    rev: "2.1.2"
+    hooks:
+      - id: prettier

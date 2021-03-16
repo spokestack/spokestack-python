@@ -16,7 +16,7 @@ There are some system dependencies that need to be downloaded in order to instal
 #### macOS
 
 ```shell
-brew install lame portaudio
+brew install lame portaudio-19
 ```
 
 #### Debian/Ubuntu
@@ -32,7 +32,7 @@ We currently do not support Windows 10 natively, and recommend you install [Wind
 Another potential avenue for using `spokestack` on Windows 10 is from [anaconda](https://www.anaconda.com/). This is without support for Text To Speech (TTS) though due to the Lame dependency. PortAudio, on the other hand, can be installed via `conda`.
 
 ```shell
-conda install portaudio
+conda install portaudio-19
 ```
 
 ### Installation with pip

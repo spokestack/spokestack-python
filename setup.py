@@ -36,13 +36,6 @@ class CustomBuild(build_py):  # type: ignore
             command = ["./configure && make"]
 
         if command:
-            # build PortAudio with system specific command
-            subprocess.run(
-                command,
-                shell=True,
-                check=True,
-                cwd="spokestack/extensions/portaudio",
-            )
             # install PyAudio after PortAudio has been built
             subprocess.run(
                 ["python setup.py install"],

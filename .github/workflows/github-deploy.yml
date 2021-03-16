@@ -32,7 +32,9 @@ jobs:
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
         env:
-          CIBW_SKIP: cp39-macosx_x86_64
+          CIBW_SKIP: cp39-*
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: "pytest {project}/tests"
 
       - uses: actions/upload-artifact@v2
         with:
