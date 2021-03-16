@@ -37,7 +37,7 @@ more-itertools==8.4.0     # via pytest
 mypy==0.782               # via -r requirements.in, flake8-mypy
 mypy-extensions==0.4.3    # via mypy, typing-inspect
 nodeenv==1.4.0            # via pre-commit
-numpy==1.19.1             # via -r requirements.in
+numpy==1.19.2             # via -r requirements.in
 packaging==20.4           # via pytest
 pathspec==0.8.0           # via black
 pathtools==0.1.2          # via watchdog
