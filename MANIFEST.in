@@ -1,1 +1,1 @@
-recursive-include spokestack/extensions/ *
+recursive-include spokestack/extensions/portaudio/ *

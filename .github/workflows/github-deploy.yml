@@ -32,10 +32,7 @@ jobs:
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
         env:
-          CIBW_BUILD: cp38-*
-          CIBW_BEFORE_BUILD_LINUX: sudo apt-get install portaudio19-dev
-          CIBW_TEST_REQUIRES: pytest
-          CIBW_TEST_COMMAND: "pytest {spokestack}/tests"
+          CIBW_SKIP: cp39-macosx_x86_64
 
       - uses: actions/upload-artifact@v2
         with:

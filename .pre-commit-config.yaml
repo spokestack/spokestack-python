@@ -33,7 +33,7 @@ repos:
       - id: pytest
         name: pytest
         language: system
-        entry: python -m pytest --cov=spokestack --cov-report=term-missing --cov-fail-under=94
+        entry: python -m pytest --cov=spokestack --cov-report=term-missing --cov-fail-under=99
         pass_filenames: false
         always_run: true
       - id: detect_print_statement
