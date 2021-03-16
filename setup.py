@@ -45,9 +45,10 @@ class CustomBuild(build_py):  # type: ignore
             )
             # install PyAudio after PortAudio has been built
             subprocess.run(
-                [sys.executable, "-m", "pip", "install", "pyaudio"],
+                ["python setup.py install"],
                 shell=True,
                 check=True,
+                cwd="spokestack/extensions/pyaudio",
             )
         # run the normal build process
         build_py.run(self)
