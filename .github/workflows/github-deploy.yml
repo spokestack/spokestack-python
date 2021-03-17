@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-python@v2
         name: Install Python
         with:
-          python-version: "3.8"
+          python-version: 3.8
 
       - name: Install Visual C++ for Python 2.7
         if: runner.os == 'Windows'
@@ -33,6 +33,8 @@ jobs:
         uses: joerick/cibuildwheel@v1.10.0
         env:
           CIBW_SKIP: cp39-macosx_x86_64
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: pytest {package}/tests
 
       - uses: actions/upload-artifact@v2
         with:
@@ -49,7 +51,7 @@ jobs:
       - uses: actions/setup-python@v2
         name: Install Python
         with:
-          python-version: "3.8"
+          python-version: 3.8
 
       - name: Build sdist
         run: python setup.py sdist
