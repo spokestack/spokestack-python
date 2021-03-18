@@ -17,10 +17,7 @@ class SpokestackWakeword:
 
     @staticmethod
     def create(
-        sample_rate: int = 16000,
-        frame_width: int = 20,
-        model_dir: str = "",
-        **kwargs: Any,
+        model_dir: str, sample_rate: int = 16000, frame_width: int = 20, **kwargs: Any
     ) -> SpeechPipeline:
         """Creates a speech pipeline instance from profile
 

@@ -10,6 +10,6 @@ from spokestack.profile.wakeword import SpokestackWakeword
 @mock.patch("spokestack.profile.wakeword.WakewordTrigger")
 @mock.patch("spokestack.profile.wakeword.SpeechPipeline")
 def test_activate(*args):
-    pipeline = SpokestackWakeword.create()
+    pipeline = SpokestackWakeword.create("mock_model_dir")
     pipeline.start()
     pipeline.run()
