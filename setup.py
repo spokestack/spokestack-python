@@ -123,7 +123,7 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.6",
     setup_requires=["setuptools", "wheel", "numpy==1.19.2", "Cython>=0.29.22"],
     install_requires=[
         "numpy==1.19.2",

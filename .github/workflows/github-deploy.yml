@@ -29,10 +29,14 @@ jobs:
         if: runner.os == 'Windows'
         run: choco install vcpython27 -f -y
 
+      - name: Install openblas for macos
+        if: runner.os == 'macOS'
+        run: brew install openblas
+
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
         env:
-          CIBW_SKIP: cp39-macosx_x86_64
+          CIBW_ENVIRONMENT_MACOS: OPENBLAS="$(brew --prefix openblas)"
 
       - uses: actions/upload-artifact@v2
         with:

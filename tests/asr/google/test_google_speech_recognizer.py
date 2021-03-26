@@ -4,6 +4,7 @@ This module contains the tests for the GoogleSpeechRecognizer class
 from unittest import mock
 
 import numpy as np
+import pytest
 
 from spokestack.asr.google.speech_recognizer import GoogleSpeechRecognizer
 from spokestack.context import SpeechContext
@@ -61,3 +62,10 @@ def test_drain(*args):
     recognizer = GoogleSpeechRecognizer(language="en-US", credentials="")
     recognizer._queue.put([audio, audio, audio])
     next(recognizer._drain())
+
+
+@mock.patch("spokestack.asr.google.speech_recognizer.speech")
+@mock.patch("spokestack.asr.google.speech_recognizer.service_account")
+def test_invalid_creds(*args):
+    with pytest.raises(ValueError):
+        _ = GoogleSpeechRecognizer(language="en-US", credentials=1234)

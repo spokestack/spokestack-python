@@ -107,7 +107,10 @@ class GoogleSpeechRecognizer:
                         _LOG.debug("timeout event")
 
     def _drain(self) -> Generator:
-        while data := self._queue.get():
+        while True:
+            data = self._queue.get()
+            if not data:
+                break
             yield data
 
     def _commit(self) -> None:
