@@ -10,6 +10,18 @@ from requests import Response
 from spokestack.tts.clients.spokestack import TextToSpeechClient, TTSError
 
 
+def test_graphql():
+    client = TextToSpeechClient("", "", "")
+    voice = 'voice'
+    profile = 'test'
+
+    for mode in ['text', 'ssml', 'markdown']:
+        method = f'synthesize{mode[0].upper()}{mode[1:]}'
+        body = client._build_body("test", mode=mode, voice=voice, profile=profile)
+        assert f'{method}(' in body
+        assert profile.upper() in body
+
+
 def test_synthesize_text():
     client = TextToSpeechClient("", "", "")
 
@@ -23,6 +35,8 @@ def test_synthesize_text():
             iter_content=mock_iterable, status_code=200
         )
         response = client.synthesize("test utterance")
+        assert response == test
+        response = client.synthesize("test utterance", profile="alexa")
         assert response == test
 
 

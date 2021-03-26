@@ -16,7 +16,7 @@ def test_synthesize():
     with mock.patch("spokestack.tts.manager.MP3Decoder") as patched:
         patched.return_value = np.zeros(160).tobytes()
         manager = TextToSpeechManager(client, output)
-        manager.synthesize(utterance="test utterance", mode="text", voice="demo-male")
+        manager.synthesize(utterance="test utterance")
 
 
 def test_close():
