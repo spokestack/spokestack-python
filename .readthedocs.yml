@@ -6,23 +6,23 @@
 version: 2
 
 submodules:
-    include: all
-    recursive: True
+  include: all
+  recursive: True
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-    configuration: docs/source/conf.py
+  configuration: docs/source/conf.py
 
 formats:
-    - htmlzip
+  - htmlzip
 
 # Optionally set the version of Python and requirements required to build your docs
 python:
-    version: 3.8
-    install:
-        - requirements: docs/requirements.txt
-        - method: pip
-          path: .
-    system_packages: true
+  version: 3.8
+  install:
+    - requirements: docs/requirements.txt
+    - method: pip
+      path: .
+  system_packages: true
 
 build:
-    image: latest
+  image: latest
