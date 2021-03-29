@@ -9,9 +9,35 @@ Welcome to Spokestack Python! This library is intended for developing [voice int
 
 ## Get Started
 
-### System Dependencies
+### Installation with pip
 
-There are some system dependencies that need to be downloaded in order to install spokestack via pip.
+Once system dependencies have been satisfied, you can install the library with the following.
+
+```shell
+pip install spokestack
+```
+
+### Install Tensorflow
+
+This library requires a way to run [TFLite](https://www.tensorflow.org/lite) models. There are two ways to add this ability. The first is installing the full [Tensorflow](https://www.tensorflow.org/) library.
+
+The full Tensorflow package is installed with the following:
+
+```shell
+pip install tensorflow
+```
+
+#### TFLite Interpreter (Embedded Devices)
+
+In use cases where you require a small footprint, such as on a Raspberry Pi or similar embedded devices, you will want to install the TFLite Interpreter.
+
+```shell
+pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+```
+
+### System Dependencies (Optional)
+
+If you are unable to install the wheel, you may have to install some system dependencies for audio input and output.
 
 #### macOS
 
@@ -35,46 +61,27 @@ Another potential avenue for using `spokestack` on Windows 10 is from [anaconda]
 conda install portaudio
 ```
 
-### Installation with pip
-
-Once system dependencies have been satisfied, you can install the library with the following.
-
-```shell
-pip install spokestack
-```
-
-### Setup
-
-We use `pyenv` for virtual environments. Below you will find the step-by-step commands to install a virtual environment.
-
-```shell
-pyenv install 3.8.6
-pyenv virtualenv 3.8.6 spokestack
-pyenv local spokestack
-pip install -r requirements.txt
-```
-
-### Install Tensorflow
-
-This library requires a way to run [TFLite](https://www.tensorflow.org/lite) models. There are two ways to add this ability. The first is installing the full [Tensorflow](https://www.tensorflow.org/) library.
-
-The full Tensorflow package is installed with the following:
-
-```shell
-pip install tensorflow
-```
-
-#### TFLite Interpreter (Embedded Devices)
-
-In use cases where you require a small footprint, such as on a Raspberry Pi or similar embedded devices, you will want to install the TFLite Interpreter. You can install it for your platform by [following the instructions](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter).
-
 ## Usage
+
+### Profiles
+
+The quickest way to start using `spokestack` is by using one of the pre-configured pipeline instances. We offer several of these Profiles, which fit many general use cases.
+
+```python
+from spokestack.profile.wakeword_asr import WakewordSpokestackASR
+
+
+pipeline = WakewordSpokestackASR.create(
+    "spokestack_id", "spokestack_secret", model_dir="path_to_wakeword_model"
+)
+```
 
 ### Speech Pipeline
 
-The Speech Pipeline is the module that ties together VAD (voice activity detection), wakeword, and ASR (automated speech detection). The VAD listens to a frame of audio captured by the input device to determine if speech is present. If it is, the wakeword model processes subsequent frames of audio looking for the keyword it has been trained to recognize. If the keyword is found, the pipeline is activated and performs speech recognition, converting the subsequent audio into a transcript. The Speech Pipeline is initialized like this:
+If you would like fine-grained control over what is included in the pipeline, you can use `SpeechPipeline`. This is the module that ties together VAD (voice activity detection), wakeword, and ASR (automated speech detection). The VAD listens to a frame of audio captured by the input device to determine if speech is present. If it is, the wakeword model processes subsequent frames of audio looking for the keyword it has been trained to recognize. If the keyword is found, the pipeline is activated and performs speech recognition, converting the subsequent audio into a transcript. The `SpeechPipeline` is initialized like this:
 
 ```python
+from spokestack.activation_timeout import ActivationTimeout
 from spokestack.io.pyaudio import PyAudioInput
 from spokestack.pipeline import SpeechPipeline
 from spokestack.vad.webrtc import VoiceActivityDetector
@@ -85,10 +92,10 @@ mic = PyAudioInput()
 vad = VoiceActivityDetector()
 wake = WakewordTrigger("path_to_tflite_model")
 asr = SpeechRecognizer("spokestack_id", "spokestack_secret")
+timeout = ActivationTimeout()
 
 
-pipeline = SpeechPipeline(mic, [vad, wake, asr])
-pipeline.start()
+pipeline = SpeechPipeline(mic, [vad, wake, asr, timeout])
 pipeline.run()
 ```
 
