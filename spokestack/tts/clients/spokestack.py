@@ -10,7 +10,7 @@ from typing import Any, Iterator
 import requests
 
 _MODES = {
-    "ssml": "synthesizeSSML",
+    "ssml": "synthesizeSsml",
     "markdown": "synthesizeMarkdown",
     "text": "synthesizeText",
 }
@@ -38,19 +38,34 @@ class TextToSpeechClient:
         utterance: str,
         mode: str = "text",
         voice: str = "demo-male",
+        profile: str = "default",
     ) -> Iterator[bytes]:
-        """Converts the given utterance to speech
+        """Converts the given utterance to speech.
+
+        Text can be formatted as plain text (`mode="text"`),
+        SSML (`mode="ssml"`), or Speech Markdown (`mode="markdown"`).
+
+        This method also supports different formats for the synthesized
+        audio via the `profile` argument. The supported profiles and
+        their associated formats are:
+
+        - `default`: 24kHz, 64kbps mono MP3
+        - `alexa`: 24kHz, 48kbps mono MP3
+        - `discord`: 48kHz, 64kbpz stereo OPUS
+        - `twilio`: 8kHz, 64kbpz mono MP3
 
         Args:
             utterance (str): string that needs to be rendered as speech.
             mode (str): synthesis mode to use with utterance. text, ssml, markdown.
             voice (str): name of the tts voice.
+            profile (str): name of the audio profile used to create the
+                           resulting stream.
 
         Returns:
             (Iterator[bytes]): Encoded audio response in the form of a sequence of bytes
 
         """
-        audio_url = self.synthesize_url(utterance, mode, voice)
+        audio_url = self.synthesize_url(utterance, mode, voice, profile)
         response = requests.get(audio_url, stream=True)
 
         if response.status_code != 200:
@@ -63,18 +78,33 @@ class TextToSpeechClient:
         utterance: str,
         mode: str = "text",
         voice: str = "demo-male",
+        profile: str = "default",
     ) -> str:
-        """Converts the given uttrance to speech accessible by a URL.
+        """Converts the given utterance to speech accessible by a URL.
+
+        Text can be formatted as plain text (`mode="text"`),
+        SSML (`mode="ssml"`), or Speech Markdown (`mode="markdown"`).
+
+        This method also supports different formats for the synthesized
+        audio via the `profile` argument. The supported profiles and
+        their associated formats are:
+
+        - `default`: 24kHz, 64kbps mono MP3
+        - `alexa`: 24kHz, 48kbps mono MP3
+        - `discord`: 48kHz, 64kbpz stereo OPUS
+        - `twilio`: 8kHz, 64kbpz mono MP3
 
         Args:
             utterance (str): string that needs to be rendered as speech.
             mode (str): synthesis mode to use with utterance. text, ssml, markdown.
             voice (str): name of the tts voice.
+            profile (str): name of the audio profile used to create the
+                           resulting stream.
 
         Returns: URL of the audio clip
 
         """
-        body = self._build_body(utterance, mode, voice)
+        body = self._build_body(utterance, mode, voice, profile)
         signature = base64.b64encode(
             hmac.new(self._key, body.encode("utf-8"), hashlib.sha256).digest()
         ).decode("utf-8")
@@ -94,47 +124,26 @@ class TextToSpeechClient:
         return response["data"][_MODES[mode]]["url"]
 
     @staticmethod
-    def _build_body(message: str, mode: str, voice: str) -> str:
-        if mode == "ssml":
-            return json.dumps(
-                {
-                    "query": """
-               query synthesis($voice: String!, $ssml: String!) {
-                 synthesizeSSML(voice: $voice, ssml: $ssml) {url}
-               }
-               """,
-                    "variables": {"voice": voice, "ssml": message},
-                }
-            )
-        elif mode == "markdown":
-            return json.dumps(
-                {
-                    "query": """
-                           query synthesis($voice: String!, $markdown: String!) {
-                             synthesizeMarkdown(voice: $voice, markdown: $markdown) {
-                             url}
-                           }
-                           """,
-                    "variables": {
-                        "voice": voice,
-                        "markdown": message,
-                        "method": "synthesizeMarkdown",
-                    },
-                }
-            )
-        elif mode == "text":
-            return json.dumps(
-                {
-                    "query": """
-                           query synthesis($voice: String!, $text: String!) {
-                             synthesizeText(voice: $voice, text: $text) {url}
-                           }
-                           """,
-                    "variables": {"voice": voice, "text": message},
-                }
-            )
-        else:
+    def _build_body(message: str, mode: str, voice: str, profile: str) -> str:
+        if mode not in _MODES:
             raise ValueError("invalid_mode")
+
+        query = f"""
+        query PythonSynthesis(
+          $voice: String!, ${mode}: String!, $profile: SynthesisProfile) {{
+            {_MODES[mode]}(voice: $voice, {mode}: ${mode}, profile: $profile) {{url}}
+        }}
+        """
+        return json.dumps(
+            {
+                "query": query,
+                "variables": {
+                    "voice": voice,
+                    mode: message,
+                    "profile": profile.upper(),
+                },
+            }
+        )
 
 
 class TTSError(Exception):
