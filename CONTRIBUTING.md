@@ -2,6 +2,32 @@
 
 Would you like to contribute to Spokestack Python? We would love to have your contributions!
 
+## Installation
+
+### Clone
+
+```shell
+git clone --recursive https://github.com/spokestack/spokestack-python.git
+cd spokestack-python
+```
+
+### Install Requirements
+
+We use `pyenv` for virtual environments. Below you will find the step-by-step commands to install a virtual environment.
+
+```shell
+pyenv install 3.8.6
+pyenv virtualenv 3.8.6 spokestack
+pyenv local spokestack
+pip install -r requirements.txt
+```
+
+### Build Extensions
+
+```shell
+python setup.py build_ext --inplace
+```
+
 ## Pull Requests
 
 We gladly welcome pull requests.
