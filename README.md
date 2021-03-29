@@ -74,7 +74,7 @@ pipeline = WakewordSpokestackASR.create(
 
 ### Speech Pipeline
 
-If you would like fine-grained control over what is included in the pipeline, you can use `SpeechPipeline`.This is the module that ties together VAD (voice activity detection), wakeword, and ASR (automated speech detection). The VAD listens to a frame of audio captured by the input device to determine if speech is present. If it is, the wakeword model processes subsequent frames of audio looking for the keyword it has been trained to recognize. If the keyword is found, the pipeline is activated and performs speech recognition, converting the subsequent audio into a transcript. The `SpeechPipeline` is initialized like this:
+If you would like fine-grained control over what is included in the pipeline, you can use `SpeechPipeline`. This is the module that ties together VAD (voice activity detection), wakeword, and ASR (automated speech detection). The VAD listens to a frame of audio captured by the input device to determine if speech is present. If it is, the wakeword model processes subsequent frames of audio looking for the keyword it has been trained to recognize. If the keyword is found, the pipeline is activated and performs speech recognition, converting the subsequent audio into a transcript. The `SpeechPipeline` is initialized like this:
 
 ```python
 from spokestack.activation_timeout import ActivationTimeout
@@ -92,7 +92,6 @@ timeout = ActivationTimeout()
 
 
 pipeline = SpeechPipeline(mic, [vad, wake, asr, timeout])
-pipeline.start()
 pipeline.run()
 ```
 
