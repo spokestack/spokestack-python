@@ -54,6 +54,14 @@ pyenv local spokestack
 pip install -r requirements.txt
 ```
 
+### Build Extensions
+
+When installing from source, you will want to build the Cython extensions.
+
+```shell
+python setup.py build_ext --inplace
+```
+
 ### Install Tensorflow
 
 This library requires a way to run [TFLite](https://www.tensorflow.org/lite) models. There are two ways to add this ability. The first is installing the full [Tensorflow](https://www.tensorflow.org/) library.
