@@ -6,6 +6,8 @@
 
 # -- Path setup --------------------------------------------------------------
 
+import datetime
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -21,7 +23,7 @@ autodoc_mock_imports = ["pyaudio", "streamp3", "webrtc", "google", "tflite_runti
 # -- Project information -----------------------------------------------------
 
 project = "spokestack"
-copyright = "2020, Spokestack"
+copyright = f"{datetime.datetime.now().year}, Spokestack"
 author = "Spokestack"
 
 # -- General configuration ---------------------------------------------------
