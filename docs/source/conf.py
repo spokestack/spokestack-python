@@ -18,7 +18,16 @@ import sys
 sys.path.insert(0, os.path.abspath("../.."))
 sys.path.insert(0, os.path.abspath("../spokestack"))
 
-autodoc_mock_imports = ["pyaudio", "streamp3", "webrtc", "google", "tflite_runtime"]
+autodoc_mock_imports = [
+    "pyaudio",
+    "streamp3",
+    "webrtc",
+    "google",
+    "tflite_runtime",
+    "spokestack.extensions.webrtc.agc",
+    "spokestack.extensions.webrtc.nsx",
+    "spokestack.extensions.webrtc.vad",
+]
 
 # -- Project information -----------------------------------------------------
 
