@@ -110,7 +110,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="spokestack",
-    version="0.0.18",
+    version="0.0.19",
     author="Spokestack",
     author_email="support@spokestack.io",
     description="Spokestack Library for Python",
