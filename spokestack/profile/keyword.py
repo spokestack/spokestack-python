@@ -26,7 +26,7 @@ class SpokestackKeyword:
         """Create a speech pipeline instance from profile.
 
         Args:
-            model_dir (str): Directory containing the tflite wakeword models.
+            model_dir (str): Directory containing the tflite keyword models.
             classes: (List(str)): Classes for the keyword model to recognize
             sample_rate (int): sample rate of the audio (Hz).
             frame_width (int): width of the audio frame: 10, 20, or 30 (ms).

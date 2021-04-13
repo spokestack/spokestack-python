@@ -18,5 +18,4 @@ def test_activate(*args):
         ],
         model_dir="mock_model_dir",
     )
-    pipeline.start()
     pipeline.run()
