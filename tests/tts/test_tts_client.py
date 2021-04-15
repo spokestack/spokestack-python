@@ -12,13 +12,13 @@ from spokestack.tts.clients.spokestack import TextToSpeechClient, TTSError
 
 def test_graphql():
     client = TextToSpeechClient("", "", "")
-    voice = 'voice'
-    profile = 'test'
+    voice = "voice"
+    profile = "test"
 
-    for mode in ['text', 'ssml', 'markdown']:
-        method = f'synthesize{mode[0].upper()}{mode[1:]}'
+    for mode in ["text", "ssml", "markdown"]:
+        method = f"synthesize{mode[0].upper()}{mode[1:]}"
         body = client._build_body("test", mode=mode, voice=voice, profile=profile)
-        assert f'{method}(' in body
+        assert f"{method}(" in body
         assert profile.upper() in body
 
 
