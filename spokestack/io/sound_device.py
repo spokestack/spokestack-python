@@ -11,9 +11,9 @@ class SoundDeviceInput:
 
     Parameters
     ----------
-    sample_rate : int, optional
+    sample_rate (Hz): int, optional
         audio sample rate, by default 16000
-    frame_width : int, optional
+    frame_width (ms): int, optional
         size of the audio frame, by default 20
     """
 
