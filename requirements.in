@@ -34,3 +34,4 @@ requests
 streamp3
 google-cloud-speech
 cython
+sounddevice
