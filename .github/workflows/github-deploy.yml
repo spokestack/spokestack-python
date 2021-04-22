@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Visual C++ for Python 2.7
         if: runner.os == 'Windows'
-        run: choco install vcpython27 -f -y
+        run: choco install python3 -f -y
 
       - name: Install openblas for macos
         if: runner.os == 'macOS'
