@@ -42,7 +42,7 @@ pyparsing==2.4.7
     # via packaging
 pytz==2020.1
     # via babel
-pyyaml==5.3.1
+pyyaml==5.4
     # via sphinx-autobuild
 requests==2.24.0
     # via sphinx
