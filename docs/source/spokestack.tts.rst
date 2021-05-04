@@ -12,3 +12,9 @@ Manager
 
 .. automodule:: spokestack.tts.manager
    :members:
+
+TTS-Lite
+-----------------------------
+
+.. automodule:: spokestack.tts.lite
+   :members:
