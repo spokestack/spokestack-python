@@ -20,7 +20,7 @@ idna==2.10
     # via requests
 imagesize==1.2.0
     # via sphinx
-jinja2==2.11.2
+jinja2==2.11.3
     # via sphinx
 livereload==2.6.2
     # via sphinx-autobuild
@@ -36,7 +36,7 @@ pockets==0.9.1
     # via sphinxcontrib-napoleon
 port_for==0.3.1
     # via sphinx-autobuild
-pygments==2.6.1
+pygments==2.7.4
     # via sphinx
 pyparsing==2.4.7
     # via packaging

@@ -154,7 +154,7 @@ protobuf==3.13.0
     #   proto-plus
 py-cpuinfo==7.0.0
     # via pytest-benchmark
-py==1.9.0
+py==1.10.0
     # via pytest
 pyasn1-modules==0.2.8
     # via google-auth
