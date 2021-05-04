@@ -36,7 +36,7 @@ pockets==0.9.1
     # via sphinxcontrib-napoleon
 port_for==0.3.1
     # via sphinx-autobuild
-pygments==2.6.1
+pygments==2.7.4
     # via sphinx
 pyparsing==2.4.7
     # via packaging
