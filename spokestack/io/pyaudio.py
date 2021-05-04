@@ -85,9 +85,16 @@ class PyAudioOutput:
     Args:
         num_channels (int): number of audio channels
         sample_rate (int): sample rate of the audio (Hz)
+        frames_per_buffer (int): number of audio samples to buffer on
+            the output device
     """
 
-    def __init__(self, num_channels: int = 1, sample_rate: int = 24000) -> None:
+    def __init__(
+        self,
+        num_channels: int = 1,
+        sample_rate: int = 24000,
+        frames_per_buffer: int = 1024,
+    ) -> None:
         audio = pyaudio.PyAudio()
         device = audio.get_default_output_device_info()
         self._output = audio.open(
@@ -96,6 +103,7 @@ class PyAudioOutput:
             format=pyaudio.paInt16,
             channels=num_channels,
             rate=sample_rate,
+            frames_per_buffer=frames_per_buffer,
         )
 
     def write(self, frame: bytes) -> None:

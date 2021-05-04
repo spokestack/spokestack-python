@@ -66,3 +66,14 @@ class TFLiteModel:
 
         """
         return self._output_details
+
+    def resize(self, index: int, shape: List[int]) -> None:
+        """Resize and allocate an input tensor
+
+        Args:
+            index: index of the input tensor to resize
+            shape: new shape of the input tensor
+        """
+
+        self._interpreter.resize_tensor_input(index, shape, strict=True)
+        self._interpreter.allocate_tensors()
