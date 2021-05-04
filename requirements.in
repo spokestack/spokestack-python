@@ -13,7 +13,7 @@ mypy
 setuptools
 wheel
 # style
-black
+black==20.8b1
 isort
 flake8
 flake8-mypy
@@ -35,3 +35,6 @@ streamp3
 google-cloud-speech
 cython
 sounddevice
+inflect
+spacy
+unidecode

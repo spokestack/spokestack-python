@@ -8,17 +8,26 @@ from typing import Any
 from streamp3 import MP3Decoder
 
 
+FORMAT_MP3 = "mp3"
+FORMAT_PCM16 = "pcm-16"
+
+
 class TextToSpeechManager:
     """Manages tts client and io target.
 
     Args:
         client: Text to speech client that returns encoded mp3 audio
         output: Audio io target
+        format_: Audio format, one of FORMAT_MP3 or FORMAT_PCM16
     """
 
-    def __init__(self, client: Any, output: Any) -> None:
+    def __init__(self, client: Any, output: Any, format_: str = FORMAT_MP3) -> None:
+        if format_ != FORMAT_MP3 and format_ != FORMAT_PCM16:
+            raise ValueError("invalid_format")
+
         self._client = client
         self._output = output
+        self._format = format_
 
     def synthesize(
         self,
@@ -45,9 +54,16 @@ class TextToSpeechManager:
 
         """
         stream = self._client.synthesize(utterance, mode, voice, profile)
-        stream = SequenceIO(stream)
-        for frame in MP3Decoder(stream):
-            self._output.write(frame)
+
+        if self._format == FORMAT_MP3:
+            # decode the sequence of MP3 frames
+            stream = SequenceIO(stream)
+            for frame in MP3Decoder(stream):
+                self._output.write(frame)
+        elif self._format == FORMAT_PCM16:
+            # write the raw audio to the output
+            for frame in stream:
+                self._output.write(frame.tobytes())
 
     def close(self) -> None:
         """ Closes the client and output. """
