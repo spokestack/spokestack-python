@@ -20,7 +20,7 @@ idna==2.10
     # via requests
 imagesize==1.2.0
     # via sphinx
-jinja2==2.11.2
+jinja2==2.11.3
     # via sphinx
 livereload==2.6.2
     # via sphinx-autobuild
@@ -42,7 +42,7 @@ pyparsing==2.4.7
     # via packaging
 pytz==2020.1
     # via babel
-pyyaml==5.3.1
+pyyaml==5.4
     # via sphinx-autobuild
 requests==2.24.0
     # via sphinx
