@@ -19,6 +19,7 @@ jobs:
           pip install --upgrade pip pip-tools
           pip install -r requirements.txt
           pip install tensorflow
+          python -m spacy download en_core_web_sm
       - save_cache:
           key: build-{{checksum "requirements.txt"}}
           paths:
