@@ -55,14 +55,14 @@ six==1.15.0
 snowballstemmer==2.0.0
     # via sphinx
 sphinx-autobuild==0.7.1
-    # via -r requirements.in
+    # via -r docs/requirements.in
 sphinx-autodoc-typehints==1.11.0
-    # via -r requirements.in
+    # via -r docs/requirements.in
 sphinx-rtd-theme==0.5.0
-    # via -r requirements.in
+    # via -r docs/requirements.in
 sphinx==3.1.2
     # via
-    #   -r requirements.in
+    #   -r docs/requirements.in
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
 sphinxcontrib-applehelp==1.0.2
@@ -74,7 +74,7 @@ sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-napoleon==0.7
-    # via -r requirements.in
+    # via -r docs/requirements.in
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.4
