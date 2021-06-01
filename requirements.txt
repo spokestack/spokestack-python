@@ -168,7 +168,7 @@ pycodestyle==2.6.0
     # via flake8
 pycparser==2.20
     # via cffi
-pydantic==1.7.3
+pydantic==1.7.4
     # via
     #   spacy
     #   thinc
