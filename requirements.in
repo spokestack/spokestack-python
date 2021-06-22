@@ -30,7 +30,7 @@ pyaudio
 numpy
 websocket
 tokenizers
-requests
+requests>=2.25.1
 streamp3
 google-cloud-speech
 cython
