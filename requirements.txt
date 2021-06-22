@@ -63,12 +63,12 @@ docopt==0.6.2
     #   pytest-watch
 filelock==3.0.12
     # via virtualenv
+flake8-mypy==17.8.0
+    # via -r requirements.in
 flake8==3.8.3
     # via
     #   -r requirements.in
     #   flake8-mypy
-flake8-mypy==17.8.0
-    # via -r requirements.in
 gevent==20.6.2
     # via websocket
 google-api-core[grpc]==1.23.0
@@ -108,15 +108,15 @@ murmurhash==1.0.5
     #   preshed
     #   spacy
     #   thinc
-mypy==0.782
-    # via
-    #   -r requirements.in
-    #   flake8-mypy
 mypy-extensions==0.4.3
     # via
     #   black
     #   mypy
     #   typing-inspect
+mypy==0.782
+    # via
+    #   -r requirements.in
+    #   flake8-mypy
 nodeenv==1.4.0
     # via pre-commit
 numpy==1.19.1
@@ -152,23 +152,23 @@ protobuf==3.13.0
     #   google-api-core
     #   googleapis-common-protos
     #   proto-plus
-py==1.9.0
-    # via pytest
 py-cpuinfo==7.0.0
     # via pytest-benchmark
+py==1.9.0
+    # via pytest
+pyasn1-modules==0.2.8
+    # via google-auth
 pyasn1==0.4.8
     # via
     #   pyasn1-modules
     #   rsa
-pyasn1-modules==0.2.8
-    # via google-auth
 pyaudio==0.2.11
     # via -r requirements.in
 pycodestyle==2.6.0
     # via flake8
 pycparser==2.20
     # via cffi
-pydantic==1.7.3
+pydantic==1.7.4
     # via
     #   spacy
     #   thinc
@@ -178,13 +178,6 @@ pyflakes==2.2.0
     # via flake8
 pyparsing==2.4.7
     # via packaging
-pytest==5.4.3
-    # via
-    #   -r requirements.in
-    #   pytest-benchmark
-    #   pytest-cov
-    #   pytest-mock
-    #   pytest-watch
 pytest-benchmark==3.2.3
     # via -r requirements.in
 pytest-cov==2.10.0
@@ -193,6 +186,13 @@ pytest-mock==3.2.0
     # via -r requirements.in
 pytest-watch==4.2.0
     # via -r requirements.in
+pytest==5.4.3
+    # via
+    #   -r requirements.in
+    #   pytest-benchmark
+    #   pytest-cov
+    #   pytest-mock
+    #   pytest-watch
 pytz==2020.1
     # via google-api-core
 pyyaml==5.3.1
@@ -223,10 +223,10 @@ smart-open==3.0.0
     # via pathy
 sounddevice==0.4.1
     # via -r requirements.in
-spacy==3.0.6
-    # via -r requirements.in
 spacy-legacy==3.0.5
     # via spacy
+spacy==3.0.6
+    # via -r requirements.in
 srsly==2.4.1
     # via
     #   spacy
