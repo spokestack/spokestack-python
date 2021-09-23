@@ -27,13 +27,13 @@ pyfakefs
 coveralls
 # library
 pyaudio
-numpy
+numpy==1.19.2
 websocket
 tokenizers
 requests>=2.25.1
 streamp3
 google-cloud-speech
-cython
+cython==0.29.22
 sounddevice
 inflect
 spacy
