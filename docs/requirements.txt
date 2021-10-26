@@ -8,7 +8,7 @@ alabaster==0.7.12
     # via sphinx
 argh==0.26.2
     # via sphinx-autobuild
-babel==2.8.0
+babel==2.9.1
     # via sphinx
 certifi==2020.6.20
     # via requests
@@ -54,17 +54,17 @@ six==1.15.0
     #   sphinxcontrib-napoleon
 snowballstemmer==2.0.0
     # via sphinx
-sphinx-autobuild==0.7.1
-    # via -r docs/requirements.in
-sphinx-autodoc-typehints==1.11.0
-    # via -r docs/requirements.in
-sphinx-rtd-theme==0.5.0
-    # via -r docs/requirements.in
 sphinx==3.1.2
     # via
-    #   -r docs/requirements.in
+    #   -r requirements.in
     #   sphinx-autodoc-typehints
     #   sphinx-rtd-theme
+sphinx-autobuild==0.7.1
+    # via -r requirements.in
+sphinx-autodoc-typehints==1.11.0
+    # via -r requirements.in
+sphinx-rtd-theme==0.5.0
+    # via -r requirements.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -74,7 +74,7 @@ sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-napoleon==0.7
-    # via -r docs/requirements.in
+    # via -r requirements.in
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.4
